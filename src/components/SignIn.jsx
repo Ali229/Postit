@@ -18,7 +18,7 @@ class SignIn extends Component {
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleClick}>LOGIN</button>
       <p className="forgot" align="left" margin-top="10px">&#x25C8; Forgot&nbsp;
-        <a href="#/signup">Password?</a><br/>
+        <a href="#/forgotpass">Password?</a><br/>
         &#x25C8; Don't have an account?&nbsp;
         <a href="#/signup">Sign Up</a>
       </p>
