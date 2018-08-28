@@ -1,3 +1,3 @@
 # Ledger
-Ledger software application__
+Ledger software application<br />
 To start use command npm start
