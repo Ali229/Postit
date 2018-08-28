@@ -18,9 +18,9 @@ class SignIn extends Component {
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleClick}>LOGIN</button>
       <p className="forgot" align="left" margin-top="10px">&#x25C8; Forgot&nbsp;
-        <a href="https://www.w3schools.com/html/">Password?</a><br/>
+        <a href="#/signup">Password?</a><br/>
         &#x25C8; Don't have an account?&nbsp;
-        <a href="">Sign up</a>
+        <a href="#/signup">Sign Up</a>
       </p>
       <p className="mt-5 mb-3 text-muted">© 2018</p>
     </form>)
