@@ -16,7 +16,7 @@ class SignIn extends Component {
     document.body.classList.add("gradient");
     return (<form className="form-signin">
       <img className="i1" src="logo.png" alt="logo"/>
-      <h2>LOGIN</h2>
+      <h1>LOGIN</h1>
       <input type="email" id="inputEmail" className="form-control" placeholder="Email" required="" autoFocus=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleClick}>LOGIN</button>
