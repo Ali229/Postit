@@ -5,7 +5,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import ForgotPass from './components/ForgotPass';
 
-ReactDOM.render((<BrowserRouter>
+ReactDOM.render((<BrowserRouter basename={"/ledger"}>
   <Switch>
     <Route exact={true} path="/" component={SignIn}/>
     <Route path="/signup" component={SignUp}/>

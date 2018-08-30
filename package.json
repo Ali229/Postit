@@ -1,7 +1,6 @@
 {
   "name": "ledger",
   "version": "0.1.0",
-  "homepage": "/ledger",
   "private": true,
   "dependencies": {
     "firebase": "^5.4.0",

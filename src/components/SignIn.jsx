@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 
 class SignIn extends Component {
   handleClick() {
-    document.body.classList.remove("gradient");
     fetch('http://markzeagler.com/ledger-backend/login', {
       method: 'POST',
       headers: {
@@ -21,9 +21,9 @@ class SignIn extends Component {
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.handleClick}>LOGIN</button>
       <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
-        <a href="/forgot">Forgot password?</a><br/>
+        <Link to="/forgot">Forgot password?</Link><br/>
         &#x25C8;&nbsp;
-        <a href="/signup">Create account</a>
+        <Link to="/signup">Create account</Link>
       </p>
       <p className="mt-5 mb-3 text-muted" align="left">© 2018</p>
     </form>)
