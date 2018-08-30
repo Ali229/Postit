@@ -2,6 +2,7 @@
   "name": "ledger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/ledger",
   "dependencies": {
     "firebase": "^5.4.0",
     "react": "^16.4.2",
