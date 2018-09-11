@@ -8,7 +8,7 @@ class SignIn extends Component {
       username: document.getElementById("inputEmail").value || null,
       password: document.getElementById("inputPassword").value || null,
     };
-
+//
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => console.log("This is after function call", JSON.stringify(res)))
       .catch((err) => console.log("If err", err))
