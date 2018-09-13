@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+
 class SignIn extends Component {
 
   login() {
@@ -28,7 +29,9 @@ class SignIn extends Component {
 
   render() {
     document.body.classList.add("gradient");
-    return (<form className="form-signin">
+    return (
+      <div className="main-border">
+      <form className="form-signin">
       <img className="i1" src="logo.png" alt="logo"/>
       <h1>LOGIN</h1>
       <input type="email" id="inputEmail" className="form-control" placeholder="Email" required=""/>
@@ -40,7 +43,9 @@ class SignIn extends Component {
         <Link to="/signup">Create account</Link>
       </p>
       <p className="mt-5 mb-3 text-muted" align="left">© 2018</p>
-    </form>)
+    </form>
+    </div>
+  )
   }
 }
 
