@@ -32,7 +32,7 @@ class SignIn extends Component {
     return (
       <div className="main-border">
       <form className="form-signin">
-      <img className="i1" src="/logo.png" alt="logo"/>
+      <img className="i1" src="logo.png" alt="logo"/>
       <h1>LOGIN</h1>
       <input type="email" id="inputEmail" className="form-control" placeholder="Email" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
