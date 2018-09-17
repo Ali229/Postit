@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 class SignIn extends Component {
 
   login() {
-    console.log('running...');
     const userObject = {
       username: document.getElementById("inputEmail").value || null,
       password: document.getElementById("inputPassword").value || null,
