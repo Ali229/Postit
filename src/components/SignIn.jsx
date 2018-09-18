@@ -34,7 +34,10 @@ class SignIn extends Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(userObject)
-      }).then(response => response.json());
+      }).then(
+        console.log(response);
+        response => response.json();
+      );
     }
   }
 
