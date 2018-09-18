@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 
 class SignUp extends Component {
-
+  constuctor() {
+    this.routeChange = this.routeChange.bind(this);
+     }
   signup() {
     const userObject = {
       name: document.getElementById("inputEmail").value || null,
@@ -9,7 +11,19 @@ class SignUp extends Component {
       password: document.getElementById("inputPassword").value || null,
     };
     putData('http://markzeagler.com/ledger-backend/register', userObject)
-      .then((res) => console.log("This is after function call", JSON.stringify(res)))
+      .then((res) => {
+        const result = {
+          message: res.message,
+          status: res.status_code
+        };
+
+        if (!result.status || result.status !== 200) {
+          console.log('server threw an error');
+        }
+
+      let path = `/home`;
+      return this.props.history.push(path);
+      })
       .catch((err) => console.log("If err", err))
 
     function putData(url, data) {
