@@ -44,7 +44,7 @@ class SignUp extends Component {
     return (
       <div className="main-border">
       <form className="form-signin">
-      <img className="i1" src="signup.png" alt="logo"/>
+      <img className="i1" src="signup_logo.png" alt="logo"/>
       <h1>SIGN UP</h1>
       <input type="text" id="inputName" className="form-control" placeholder="Name" required=""/>
       <input type="text" id="inputEmail" className="form-control" placeholder="Username" required=""/>
