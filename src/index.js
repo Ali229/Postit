@@ -8,7 +8,7 @@ import ForgotPass from './components/ForgotPass';
 
 ReactDOM.render((<BrowserRouter basename="/ledger">
   <Switch>
-    <Redirect from='/' to='/signin'>
+    <Redirect from='/' to='/signin'/>
     <Route path='/home' component={Home}/>
     <Route path='/signup' component={SignUp}/>
     <Route path='/forgot' component={ForgotPass}/>
