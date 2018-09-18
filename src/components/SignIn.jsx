@@ -8,6 +8,9 @@ class SignIn extends Component {
       username: document.getElementById("inputEmail").value || null,
       password: document.getElementById("inputPassword").value || null,
     };
+    if (!userObject.username || !userObject.password) {
+      return console.log('Incorrect usernmae and password');
+    }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
       const result = {
@@ -17,6 +20,7 @@ class SignIn extends Component {
       console.log("result is ", result);
       if (!result.status || result.status !== 200) {
         console.log('server threw an error');
+        return;
       }
     return window.location = "/ledger/home";
     })

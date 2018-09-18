@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class ForgotPass extends Component {
   forgot() {
-    window.location = "/";
+    window.location = "/ledger";
   }
   render() {
     document.body.classList.add("gradient");

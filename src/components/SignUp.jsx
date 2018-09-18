@@ -19,6 +19,7 @@ class SignUp extends Component {
         console.log("result is ", result);
         if (!result.status || result.status !== 200) {
           console.log('server threw an error');
+          return;
         }
       return window.location = "/ledger/signin";
       })
