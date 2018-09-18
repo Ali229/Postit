@@ -24,7 +24,7 @@ class SignIn extends Component {
       }
     return window.location = "/ledger/home";
     })
-    .catch((err) => console.log("If err", err))
+    .catch((err) => console.log("Caught Error: ", err))
 
     function putData(url, data) {
       console.log("Makind sure data is passed", data);
