@@ -5,9 +5,10 @@ class SignIn extends Component {
 
   login() {
     const userObject = {
-      username: document.getElementById('inputEmail').value || null,
+      username: document.getElementById('inputUsername').value || null,
       password: document.getElementById('inputPassword').value || null,
     };
+    console.log('User object is: ', userObject);
     if (!userObject.username || !userObject.password) {
       return console.log('Username, password empty!');
     }
@@ -18,11 +19,10 @@ class SignIn extends Component {
         status: res.status_code
       };
       if (!result.status || result.status !== 200) {
-        console.log('Result status: ', result.status);
-        return;
+        return console.log('Result status: ', result.status);
       }
-    return window.location = '/ledger/home';
-    })
+      return window.location = '/ledger/home';
+      })
     .catch((err) => console.log('Caught Error: ', err))
 
     function putData(url, data) {
@@ -46,7 +46,7 @@ class SignIn extends Component {
       <form className="form-signin">
       <img className="i1" src="signin_logo.png" alt="logo"/>
       <h1>LOGIN</h1>
-      <input type="text" id="inputEmail" className="form-control" placeholder="Username" required=""/>
+      <input type="text" id="inputUsername" className="form-control" placeholder="Username" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
       <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
