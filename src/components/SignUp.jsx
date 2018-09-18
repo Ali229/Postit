@@ -20,7 +20,7 @@ class SignUp extends Component {
         if (!result.status || result.status !== 200) {
           console.log('server threw an error');
         }
-      return window.location = "/";
+      return window.location = "/signin";
       })
       .catch((err) => console.log("If err", err))
 

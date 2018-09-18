@@ -11,6 +11,7 @@ ReactDOM.render((<BrowserRouter basename="">
   <Route path="/home" component={Home}/>
     <Route path="/signup" component={SignUp}/>
     <Route path="/forgot" component={ForgotPass}/>
+    <Route path="/signin" component={SignIn}/>
     <Route path="/" component={SignIn}/>
   </Switch>
 </BrowserRouter>), document.getElementById('root'));
