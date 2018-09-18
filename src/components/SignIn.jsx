@@ -28,7 +28,7 @@ class SignIn extends Component {
     function putData(url, data) {
       console.log('Data Passed: ', data);
       return fetch(url,  {
-        method: 'PUT',
+        method: "PUT",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
