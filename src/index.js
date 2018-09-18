@@ -5,11 +5,11 @@ import Home from './components/Home';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import ForgotPass from './components/ForgotPass';
-//<Redirect from='/' to='/signin'/>
+//
 //    <Route path='/*' component={SignIn}/>
 ReactDOM.render((<BrowserRouter basename="/ledger">
   <Switch>
-
+    <Redirect from='/' to='/signin'/>
     <Route path='/home' component={Home}/>
     <Route path='/signup' component={SignUp}/>
     <Route path='/forgot' component={ForgotPass}/>
