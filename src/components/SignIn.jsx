@@ -5,8 +5,8 @@ class SignIn extends Component {
 
   login() {
     const userObject = {
-      username: document.getElementById("inputEmail").value || null,
-      password: document.getElementById("inputPassword").value || null,
+      username: document.getElementById('inputEmail').value || null,
+      password: document.getElementById('inputPassword').value || null,
     };
     if (!userObject.username || !userObject.password) {
       return console.log('Incorrect username and password');
@@ -17,19 +17,19 @@ class SignIn extends Component {
         message: res.message,
         status: res.status_code
       };
-      console.log("result is ", result);
+      console.log('result is ', result);
       if (!result.status || result.status !== 200) {
         console.log('server threw an error');
         return;
       }
-    return window.location = "/ledger/home";
+    return window.location = '/ledger/home';
     })
-    .catch((err) => console.log("Caught Error: ", err))
+    .catch((err) => console.log('Caught Error: ', err))
 
     function putData(url, data) {
-      console.log("Makind sure data is passed", data);
+      console.log('Makind sure data is passed', data);
       return fetch(url,  {
-        method: "PUT",
+        method: 'PUT',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ class SignIn extends Component {
 
 
   render() {
-    document.body.classList.add("gradient");
+    document.body.classList.add('gradient');
     return (
       <div className="main-border">
       <form className="form-signin">
