@@ -9,8 +9,18 @@ class SignIn extends Component {
       password: document.getElementById("inputPassword").value || null,
     };
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
-      .then((res) => console.log("This is after function call", JSON.stringify(res)))
-      .catch((err) => console.log("If err", err))
+    .then((res) => {
+      const result = {
+        message: res.message,
+        status: res.status_code
+      };
+      console.log("result is ", result);
+      if (!result.status || result.status !== 200) {
+        console.log('server threw an error');
+      }
+    return window.location = "/ledger/home";
+    })
+    .catch((err) => console.log("If err", err))
 
     function putData(url, data) {
       console.log("Makind sure data is passed", data);
