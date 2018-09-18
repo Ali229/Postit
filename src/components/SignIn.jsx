@@ -45,7 +45,7 @@ class SignIn extends Component {
       <h1>LOGIN</h1>
       <input type="email" id="inputEmail" className="form-control" placeholder="Email" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
-      <button className="sb btn btn-lg btn-primary btn-block" type="button" onClick={this.login}>LOGIN</button>
+      <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
       <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
         <Link to="/forgot">Forgot password?</Link><br/>
         &#x25C8;&nbsp;
