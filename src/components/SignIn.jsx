@@ -9,7 +9,7 @@ class SignIn extends Component {
       password: document.getElementById('inputPassword').value || null,
     };
     if (!userObject.username || !userObject.password) {
-      return console.log('Incorrect username and password');
+      return console.log('Username, password empty!');
     }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
@@ -17,9 +17,8 @@ class SignIn extends Component {
         message: res.message,
         status: res.status_code
       };
-      console.log('result is ', result);
       if (!result.status || result.status !== 200) {
-        console.log('server threw an error');
+        console.log('Result status: ', result.status);
         return;
       }
     return window.location = '/ledger/home';
@@ -27,7 +26,7 @@ class SignIn extends Component {
     .catch((err) => console.log('Caught Error: ', err))
 
     function putData(url, data) {
-      console.log('Makind sure data is passed', data);
+      console.log('Data Passed: ', data);
       return fetch(url,  {
         method: 'PUT',
         headers: {
