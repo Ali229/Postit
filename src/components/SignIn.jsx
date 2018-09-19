@@ -19,7 +19,7 @@ class SignIn extends Component {
 
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
-        const result = JSON.stringify(res);
+        const result = JSON.stringify('Result: ', res);
         console.log(result);
       });
   }
@@ -36,7 +36,7 @@ class SignIn extends Component {
     .then(response => {
        response.json()
         .then(data => {
-          console.log(data);
+          console.log('Data: ', data);
         });
     });
   }
