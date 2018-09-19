@@ -4,14 +4,14 @@ import {Link} from 'react-router-dom';
 class SignIn extends Component {
 
   login() {
-    const userObject = {
-      username: document.getElementById('inputUsername').value || null,
-      password: document.getElementById('inputPassword').value || null,
-    };
-    console.log('User object is: ', userObject);
-    if (!userObject.username || !userObject.password) {
-      return console.log('Username, password empty!');
-    }
+  const userObject = {
+    username: document.getElementById('inputUsername').value || null,
+    password: document.getElementById('inputPassword').value || null
+  };
+  console.log('User object is: ', userObject);
+  if (!userObject.username || !userObject.password) {
+    return console.log('Username, password empty!');
+  }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
       const result = {
@@ -25,28 +25,27 @@ class SignIn extends Component {
       })
     .catch((err) => console.log('Caught Error: ', err))
 
-    function putData(url, data) {
-      console.log('Data Passed: ', data);
-      return fetch(url,  {
-        method: "PUT",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userObject)
-      }).then(
-        response => response.json())
-        .then(
-          res => console.log(JSON.stringify(res)));
-    }
+function putData(url, data) {
+  console.log('Data Passed: ', data);
+  return fetch(url, {
+    method: "PUT",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userObject)
+  }).then(response => response.json())
+  .catch((error) => {
+    console.log('Fetching Error: ' + error);
+  });
+}
   }
 
 
   render() {
-    document.body.classList.add('gradient');
-    return (
-      <div className="main-border">
-      <form className="form-signin">
+  document.body.classList.add('gradient');
+  return (<div className="main-border">
+    <form className="form-signin">
       <img className="i1" src="signin_logo.png" alt="logo"/>
       <h1>LOGIN</h1>
       <input type="text" id="inputUsername" className="form-control" placeholder="Username" required=""/>
@@ -59,9 +58,8 @@ class SignIn extends Component {
       </p>
       <p className="mt-5 mb-3 text-muted" align="left">© 2018</p>
     </form>
-    </div>
-  )
-  }
+  </div>)
+}
 }
 
 export default SignIn;

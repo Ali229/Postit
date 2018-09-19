@@ -13,6 +13,5 @@ ReactDOM.render((<BrowserRouter basename="/ledger">
     <Route path='/forgot' component={ForgotPass}/>
     <Route path='/signin' component={SignIn}/>
     <Route path='/' component={SignIn}/>
-
   </Switch>
 </BrowserRouter>), document.getElementById('root'));
