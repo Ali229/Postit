@@ -19,16 +19,41 @@ for (var i = 1; i < 5; i++) {
 }
 
 class Home extends React.Component {
-  componentDidMount() {
-    return fetch('http://markzeagler.com/ledger-backend/account/all',  {
-      method: "GET",
-      headers: new Headers({
-        'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      })
-    }).then(response => console.log(JSON.stringify(response)))
-    .catch (err => console.log(err));
+  // componentDidMount() {
+  //   return fetch('http://markzeagler.com/ledger-backend/account/all',  {
+  //     method: "GET",
+  //     headers: {
+  //       'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //       'Cache-Control': 'no-cache'
+  //     }
+  //   }).then(response => console.log(JSON.stringify(response)))
+  //   .catch (err => console.log(err));
+  //   }
+    async componentDidMount() {
+      try {
+        console.log('here');
+        let response = await fetch('http://markzeagler.com/ledger-backend/account/all', {
+          method: "GET",
+          headers: {
+            'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+          }
+        });
+        if (!response) {
+          throw new Error('no response');
+        }
+        let resJSON = await response.json();
+        if (!resJSON) {
+          throw new Error('no respinse from resJSON');
+        }
+        console.log(resJSON);
+      } catch(err) {
+        console.log(err);
+      }
     }
   render() {
     document.body.appendChild(table);
