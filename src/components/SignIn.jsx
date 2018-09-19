@@ -31,7 +31,7 @@ class SignIn extends Component {
       body: JSON.stringify(data)
     })
       .then((response) => {
-        return responseObject.json();
+        return response.json();
       })
       // .catch(err => console.log('Error from backend ', err));
   }
