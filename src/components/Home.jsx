@@ -23,7 +23,7 @@ class Home extends React.Component {
     return fetch('http://markzeagler.com/ledger-backend/account/all',  {
       method: "GET",
       headers: {
-        'Token': 'GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
+        'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
