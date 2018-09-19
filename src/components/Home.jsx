@@ -26,7 +26,7 @@ class Home extends React.Component {
         'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      )},
+      })
     }).then(response => console.log(JSON.stringify(response)))
     .catch (err => console.log(err));
     }
