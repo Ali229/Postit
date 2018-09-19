@@ -20,7 +20,7 @@ for (var i = 1; i < 5; i++) {
 
 class Home extends React.Component {
   componentDidMount() {
-    return fetch(url,  {
+    return fetch('http://markzeagler.com/ledger-backend/account/all',  {
       method: "GET",
       headers: {
         'Token': 'GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw'
