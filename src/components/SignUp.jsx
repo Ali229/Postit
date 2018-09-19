@@ -7,7 +7,7 @@ class SignUp extends Component {
   }
   signup() {
     //
-    return window.location = "/ledger/signin";
+    window.location = "/ledger/signin";
     // const userObject = {
     //   name: document.getElementById("inputEmail").value || null,
     //   username: document.getElementById("inputEmail").value || null,
