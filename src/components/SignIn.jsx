@@ -33,7 +33,8 @@ class SignIn extends Component {
         },
         body: JSON.stringify(data)
       }).then((response) => {
-          console.log(response.headers.get('Content-Type'));
+          console.log(response.status);
+          console.log(response.status_code);
           response.json();
       });
     }
