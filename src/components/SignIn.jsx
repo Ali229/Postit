@@ -41,7 +41,7 @@ class SignIn extends Component {
     })
     .then(response => {
       if (!response || !response.status === 200) {
-        throw new Error('Error: ', response.status);
+        return Promise.reject('Error: ', response.status);
       }
       return response.json();
     })
@@ -51,7 +51,13 @@ class SignIn extends Component {
     })
   }
 
+  state = { showError: true }
 
+   toggleError = () => {
+     this.setState((prevState, props) => {
+       return { showError: !prevState.showError }
+     })
+   };
 
   render() {
     document.body.classList.add('gradient');
@@ -60,6 +66,7 @@ class SignIn extends Component {
       <form className="form-signin">
       <img className="i1" src="signin_logo.png" alt="logo"/>
       <h1>LOGIN</h1>
+      <div showError={this.state.showError}
       <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
