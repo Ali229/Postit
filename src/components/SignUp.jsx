@@ -5,6 +5,7 @@ class SignUp extends Component {
     this.routeChange = this.routeChange.bind(this);
      }
   signup() {
+    //
     return window.location = "/ledger/signin";
     const userObject = {
       name: document.getElementById("inputEmail").value || null,
