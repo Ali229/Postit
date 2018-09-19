@@ -1,22 +1,4 @@
 import React from 'react';
-
-var table = document.createElement('table');
-for (var i = 1; i < 2; i++) {
-  var tr = document.createElement('tr');
-
-  var td1 = document.createElement('td');
-  var td2 = document.createElement('td');
-
-  var text1 = document.createTextNode('admin');
-  var text2 = document.createTextNode('mark');
-
-  td1.appendChild(text1);
-  td2.appendChild(text2);
-  tr.appendChild(td1);
-  tr.appendChild(td2);
-
-  table.appendChild(tr);
-}
 class Home extends React.Component {
   // componentDidMount() {
   //   return fetch('http://markzeagler.com/ledger-backend/account/all',  {
@@ -57,7 +39,6 @@ class Home extends React.Component {
       }
     }
   render() {
-    document.body.appendChild(table);
     return (
     /*<nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">Navbar</a>
@@ -89,6 +70,30 @@ class Home extends React.Component {
       </nav>*/
       <div>
     <h1>Users:</h1>
+
+
+    <table>
+  <tr>
+  	<th>Name</th>
+    <th>Username</th>
+    <th>Type</th>
+  </tr>
+  <tr>
+    <td>Mamo</td>
+    <td>admin</td>
+    <td>admin</td>
+  </tr>
+  <tr>
+    <td>Ali</td>
+    <td>ali</td>
+    <td>new</td>
+  </tr>
+  <tr>
+    <td>Mark</td>
+    <td>mark</td>
+    <td>new</td>
+  </tr>
+</table>
   </div>)
   }
 }

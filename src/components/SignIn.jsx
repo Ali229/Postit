@@ -8,7 +8,7 @@ class SignIn extends Component {
       this.login = this.login.bind(this);
   }
 
-  login() {
+  async login() {
     const userObject = {
       username: document.getElementById('inputUsername').value || null,
       password: document.getElementById('inputPassword').value || null,
@@ -17,12 +17,9 @@ class SignIn extends Component {
       return console.log('Incorrect username and password');
     }
 
-    this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
+    await putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
         const result = JSON.stringify(res);
-
-        // if result.message blalala
-
         console.log('Result', result);
       })
       .catch((err) => {
@@ -30,26 +27,48 @@ class SignIn extends Component {
       })
   }
 
-  putData(url, data) {
-    return fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => {
-      if (!response || !response.status === 200) {
-        throw new Error('Error: ', response.status);
+  async putData(url, data) {
+    try {
+      let response = fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      if (!response) {
+        throw new Error('no response');
       }
-      return response.json();
-    })
-    .catch((err) => {
-      console.log('err here: ', err);
-      return Promise.reject(err);
-    })
+      let resJSON = await response.json();
+      // if (!resJSON) {
+      //   throw new Error('no respinse from resJSON');
+      // }
+      console.log(JSON.stringify(resJSON));
+    } catch(err) {
+      console.log(err);
+    }
   }
+
+  //   return fetch(url, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(response => {
+  //     if (!response || !response.status === 200) {
+  //       throw new Error('Error: ', response.status);
+  //     }
+  //     return response.json();
+  //   })
+  //   .catch((err) => {
+  //     console.log('err here: ', err);
+  //     return Promise.reject(err);
+  //   })
+  // }
 
   state = { showError: true }
 
