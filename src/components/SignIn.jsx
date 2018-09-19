@@ -14,12 +14,12 @@ class SignIn extends Component {
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
       if (!res) {
-        throw new Error('Forbidden: 403');
+        return throw new Error('Forbidden: 403');
       }
       const result = {
-        message: res,
+        msg: res,
       };
-      console.log('Success: ', result.message);
+      console.log('Success: ', result.msg);
 
       return window.location = '/ledger/home';
     })
