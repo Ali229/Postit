@@ -33,14 +33,8 @@ class SignIn extends Component {
       },
       body: JSON.stringify(data)
     })
-    .then((response) => {
+    .then(response => {
        response.json()
-        .then((data) => {
-          const responseObject = {
-              status: response.data
-          };
-          return responseObject;
-        });
     });
   }
 
