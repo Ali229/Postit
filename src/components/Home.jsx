@@ -45,11 +45,11 @@ class Home extends React.Component {
         if (!response) {
           throw new Error('no response');
         }
-        let resJSON = await JSON.stringify(response);
-        if (!resJSON) {
-          throw new Error('no respinse from resJSON');
-        }
-        console.log(resJSON);
+        // let resJSON = await JSON.stringify(response);
+        // if (!resJSON) {
+        //   throw new Error('no respinse from resJSON');
+        // }
+        console.log(response);
       } catch(err) {
         console.log(err);
       }
