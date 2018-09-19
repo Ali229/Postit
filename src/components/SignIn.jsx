@@ -43,6 +43,7 @@ class SignIn extends Component {
       if (!response || !response.status === 200) {
         return Promise.reject('Error: ', response.status);
       }
+      console.log(response.status);
       return response.json();
     })
     .catch(err => {
