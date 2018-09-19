@@ -15,12 +15,11 @@ class SignIn extends Component {
     .then((res) => {
       const result = {
         message: res.message.auth_token,
-        status: res.status_code
+        status: res.body.status_code
       };
-      console.log('result is ', result.status);
-      if (!result.status || result.status !== 200) {
-        console.log('Status Error: ', result.status);
-        return;
+      console.log('result is ', result.body.status);
+      if (!result.body.status || result.body.status !== 200) {
+        return console.log('Status Error: ', result.body.status);
       }
     return window.location = '/ledger/home';
     })
