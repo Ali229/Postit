@@ -17,8 +17,16 @@ for (var i = 1; i < 5; i++) {
 
   table.appendChild(tr);
 }
-class Home extends React.Component {
 
+class Home extends React.Component {
+  componentDidMount() {
+      fetch('http://markzeagler.com/ledger-backend/account/all')
+        //.then(response => response.json())
+        .then((response) => {
+          console.log('Result', response);
+        })
+        .then(data => this.setState({ data }));
+    }
   render() {
     document.body.appendChild(table);
     return (
