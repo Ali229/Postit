@@ -14,10 +14,12 @@ class SignIn extends Component {
   }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
+      console.log('Res: ', res);
       const result = {
         //message: res.message,
         status: res.status_code
       };
+
       console.log('Result status first: ', result.status);
       if (!result.status || result.status !== 200) {
         return console.log('Result status: ', result.status);
