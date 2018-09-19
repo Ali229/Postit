@@ -38,7 +38,7 @@ function putData(url, data) {
     headers: {
       'Content-Type': 'application/json'
     }
-  }).then(response => response.json())
+  }).then(response => console.log(response))
   .catch((error) => {
     console.log('Fetching Error: ', error);
   });
