@@ -39,7 +39,7 @@ class SignIn extends Component {
       <form className="form-signin">
       <img className="i1" src="signin_logo.png" alt="logo"/>
       <h1>LOGIN</h1>
-      <input type="text" id="inputUsername" className="form-control" placeholder="Email" required=""/>
+      <input type="email" id="inputUsername" className="form-control" placeholder="Email" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
       <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
