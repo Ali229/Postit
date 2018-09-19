@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 class SignIn extends Component {
+  //
+  // constructor() {
+  //   super();
+  //   this.login = this.login.bind(this);
+  // }
 
   login() {
     const userObject = {
@@ -11,6 +16,7 @@ class SignIn extends Component {
     if (!userObject.username || !userObject.password) {
       return console.log('Incorrect username and password');
     }
+    console.log(this);
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
         console.log(res);
