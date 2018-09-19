@@ -28,6 +28,7 @@ class SignIn extends Component {
 
 function putData(url, data) {
   console.log('Data Passed: ', data);
+  console.log(JSON.stringify(userObject));
   return fetch(url, {
     method: "PUT",
     headers: {
