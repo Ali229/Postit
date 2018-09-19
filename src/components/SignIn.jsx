@@ -41,12 +41,11 @@ class SignIn extends Component {
     })
     .then(response => {
       if (!response || !response.status === 200) {
-        return Promise.reject('Error: ', response.status);
+        throw new Error('Error: ', response.status);
       }
-      console.log(response.status);
       return response.json();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('err here: ', err);
       return Promise.reject(err);
     })
