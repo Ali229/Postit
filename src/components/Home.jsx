@@ -22,11 +22,11 @@ class Home extends React.Component {
   componentDidMount() {
     return fetch('http://markzeagler.com/ledger-backend/account/all',  {
       method: "GET",
-      headers: {
+      headers: new Headers({
         'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
+      )},
     }).then(response => console.log(JSON.stringify(response)))
     .catch (err => console.log(err));
     }
