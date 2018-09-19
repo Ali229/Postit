@@ -44,7 +44,10 @@ class SignIn extends Component {
         throw new Error('Error ', response.status);
       }
       return response.json();
-    });
+    })
+    .catch(err => {
+      Promise.reject(err);
+    })
   }
 
 
