@@ -9050,7 +9050,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .gradient {
 
-  background: linear-gradient(to top, #33ccff 0%, #ff99cc 100%);
+  background: linear-gradient(to top, #33ccff 0%, #ffcc99 100%);
   padding: 15px;
   background-repeat: no-repeat;
   background-position: center;
@@ -9083,6 +9083,7 @@ h2 {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
 
 /*
 //******************************************************************* My Additions *******************************************************************
