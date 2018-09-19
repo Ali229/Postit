@@ -13,21 +13,14 @@ class SignIn extends Component {
     }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
-      if (!res) {
-        return console.log('Forbidden: 403');
-      }
       const result = {
         msg: JSON.stringify(res),
         code: res.status_code,
-        code01: res.message.status_code,
         code1: JSON.stringify(res.status_code),
-        code2: JSON.stringify(res.message.status_code),
       };
       console.log('Success: ', result.msg);
       console.log(result.code);
-      console.log(result.code01);
       console.log(result.code1);
-      console.log(result.code2);
       return window.location = '/ledger/home';
     })
     .catch((err) => console.log('Caught Error: ', err))
