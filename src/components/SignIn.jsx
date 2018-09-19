@@ -17,7 +17,7 @@ class SignIn extends Component {
         throw new Error('Forbidden: 403');
       }
       const result = {
-        message: res.message.auth_token,
+        message: res,
       };
       console.log('Success: ', result.message);
 
