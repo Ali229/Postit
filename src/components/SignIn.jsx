@@ -19,11 +19,15 @@ class SignIn extends Component {
 
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
-        console.log('Status from res', res.status);
-        console.log('Status from res', JSON.stringify(res.status));
         const result = JSON.stringify(res);
+
+        // if result.message blalala
+
         console.log('Result', result);
-      });
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
+      })
   }
 
   putData(url, data) {
@@ -36,7 +40,10 @@ class SignIn extends Component {
       body: JSON.stringify(data)
     })
     .then(response => {
-       return response.json();
+      if (!response || !response.status === 200) {
+        throw new Error('Error ', response.status);
+      }
+      return response.json();
     });
   }
 
