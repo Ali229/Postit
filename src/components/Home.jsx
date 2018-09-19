@@ -39,14 +39,13 @@ class Home extends React.Component {
           headers: {
             'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
             'Cache-Control': 'no-cache'
           }
         });
         if (!response) {
           throw new Error('no response');
         }
-        let resJSON = await response.json();
+        let resJSON = await JSON.stringify(response);
         if (!resJSON) {
           throw new Error('no respinse from resJSON');
         }
