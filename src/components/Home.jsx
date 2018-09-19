@@ -40,7 +40,7 @@ class Home extends React.Component {
         let response = await fetch('http://markzeagler.com/ledger-backend/account/all', {
           method: "GET",
           headers: {
-            'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
+            'Authorization': 'Bearer MqMILbviXxyiB9a_BFFPgFsNY8D01KJohhdcwq74lAU',
             'Accept': 'application/json',
             'Cache-Control': 'no-cache'
           }
