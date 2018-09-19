@@ -15,7 +15,6 @@ class SignIn extends Component {
     .then((res) => {
       const result = {
         msg: JSON.stringify(res),
-        code: res.headers.get('Content-Type'),
         code1: res.status,
       };
       console.log('Success: ', result.msg);
@@ -33,7 +32,10 @@ class SignIn extends Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-      }).then(response => response.json());
+      }).then((response) => {
+          console.log(response.headers.get('Content-Type'));
+          response.json();
+      });
     }
   }
 
