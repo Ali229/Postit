@@ -29,10 +29,10 @@ class SignIn extends Component {
 function putData(url, data) {
   console.log('Data Passed: ', data);
   console.log(JSON.stringify(userObject));
+  console.log(url);
   return fetch(url, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userObject)
