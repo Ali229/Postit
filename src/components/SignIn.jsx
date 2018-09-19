@@ -11,33 +11,31 @@ class SignIn extends Component {
     if (!userObject.username || !userObject.password) {
       return console.log('Incorrect username and password');
     }
-    putData('http://markzeagler.com/ledger-backend/signin', userObject)
-    .then((res) => {
-      const result = {
-        msg: JSON.stringify(res)
-      };
-      console.log('Success: ', result.msg);
-      return window.location = '/ledger/home';
-    })
-    .catch((err) => console.log('Caught Error: ', err))
-
-    function putData(url, data) {
-      return fetch(url,  {
-        method: 'PUT',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }).then((response) => {
-          if (!response.status || !response.status === 200) {
-            throw new Error('Forbidden');
-          }
-          return response.json();
-      });
-    }
+    this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
+      .then((res) => {
+        const result = {
+          message: JSON.stringify(res)
+        };
+        console.log('Success: ', result.message);
+        return window.location = '/ledger/home';
+      })
+      .catch((err) => console.log('Caught Error: ', err));
   }
 
+  putData(url, data) {
+    return fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => console.log('Error from backend ', err));
+  }
 
   render() {
     document.body.classList.add('gradient');
