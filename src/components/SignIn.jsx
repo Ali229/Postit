@@ -5,7 +5,7 @@ class SignIn extends Component {
 
   constructor() {
     super();
-    this.login = this.login.bind(this);
+      this.login = this.login.bind(this);
   }
 
   login() {
@@ -16,13 +16,12 @@ class SignIn extends Component {
     if (!userObject.username || !userObject.password) {
       return console.log('Incorrect username and password');
     }
+
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
         const result = JSON.stringify(res);
         console.log(result);
-        return window.location = '/ledger/home';
-      })
-      .catch((err) => console.log('Caught Error: ', err));
+      });
   }
 
   putData(url, data) {
@@ -35,7 +34,13 @@ class SignIn extends Component {
       body: JSON.stringify(data)
     })
     .then((response) => {
-      return response.json()
+       response.json()
+        .then((data) => {
+          const responseObject = {
+              status: response.data
+          };
+          return responseObject;
+        });
     });
   }
 
