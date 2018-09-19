@@ -8,20 +8,27 @@ class SignIn extends Component {
       username: document.getElementById('inputUsername').value || null,
       password: document.getElementById('inputPassword').value || null,
     };
+    if (!userObject.username || !userObject.password) {
+      return console.log('Incorrect username and password');
+    }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
-    .then((data) => {
+    .then((res) => {
       const result = {
-        message: data.message.auth_token
+        message: res.message.auth_token,
+        status: res.status_code
       };
-      console.log("result is ", result);
-    return window.location = "/ledger/home";
+      console.log('result is ', result.status);
+      if (!result.status || result.status !== 200) {
+        console.log('Status Error: ', result.status);
+        return;
+      }
+    return window.location = '/ledger/home';
     })
-    .catch((err) => console.log("If err", err))
+    .catch((err) => console.log('Caught Error: ', err))
 
     function putData(url, data) {
-      console.log("Makind sure data is passed", data);
       return fetch(url,  {
-        method: "PUT",
+        method: 'PUT',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -33,13 +40,13 @@ class SignIn extends Component {
 
 
   render() {
-    document.body.classList.add("gradient");
+    document.body.classList.add('gradient');
     return (
       <div className="main-border">
       <form className="form-signin">
       <img className="i1" src="signin_logo.png" alt="logo"/>
       <h1>LOGIN</h1>
-      <input type="password" id="inputUsername" className="form-control" placeholder="Email" required=""/>
+      <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
       <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
