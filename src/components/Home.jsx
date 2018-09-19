@@ -27,7 +27,8 @@ class Home extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-    }).then(response => response.json());
+    }).then(response => console.log(JSON.stringify(response)))
+    .catch (err => console.log(err));
     }
   render() {
     document.body.appendChild(table);
