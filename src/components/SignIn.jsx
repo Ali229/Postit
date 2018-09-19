@@ -9,9 +9,9 @@ class SignIn extends Component {
       password: document.getElementById("inputPassword").value || null,
     };
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
-    .then((res) => {
+    .then((data) => {
       const result = {
-        message: res.message.auth_token
+        message: data.message.auth_token
       };
       console.log("result is ", result);
     return window.location = "/ledger/home";
