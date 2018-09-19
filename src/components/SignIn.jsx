@@ -16,15 +16,14 @@ class SignIn extends Component {
     if (!userObject.username || !userObject.password) {
       return console.log('Incorrect username and password');
     }
-
-    await putData('http://markzeagler.com/ledger-backend/signin', userObject)
-      .then((res) => {
-        const result = JSON.stringify(res);
-        console.log('Result', result);
-      })
-      .catch((err) => {
-        console.log('Error: ', err);
-      })
+    try {
+      const result = await this.putData('http://markzeagler.com/ledger-backend/signin', userObject);
+      if (!result) {
+        console.log('Error');
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async putData(url, data) {
