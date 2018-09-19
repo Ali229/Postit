@@ -5,8 +5,8 @@ class SignIn extends Component {
 
   login() {
     const userObject = {
-      username: document.getElementById("inputEmail").value || null,
-      password: document.getElementById("inputPassword").value || null,
+      username: document.getElementById('inputEmail').value || null,
+      password: document.getElementById('inputPassword').value || null,
     };
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((data) => {
