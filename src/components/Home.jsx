@@ -49,7 +49,8 @@ class Home extends React.Component {
         // if (!resJSON) {
         //   throw new Error('no respinse from resJSON');
         // }
-        console.log(response);
+        console.log(response.message);
+        console.log(JSON.stringify(response.message));
       } catch(err) {
         console.log(err);
       }
