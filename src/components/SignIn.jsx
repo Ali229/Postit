@@ -26,7 +26,7 @@ class SignIn extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userObject)
+        body: JSON.stringify(data)
       }).then(response => response.json());
     }
   }
