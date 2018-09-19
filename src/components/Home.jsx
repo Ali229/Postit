@@ -49,10 +49,7 @@ class Home extends React.Component {
         // if (!resJSON) {
         //   throw new Error('no respinse from resJSON');
         // }
-        console.log(JSON.stringify(response));
         console.log(JSON.stringify(resJSON));
-        console.log(JSON.stringify(JSON.stringify(resJSON)));
-        console.log(JSON.stringify(response.message));
       } catch(err) {
         console.log(err);
       }
@@ -88,7 +85,10 @@ class Home extends React.Component {
           </ul>
         </div>
       </nav>*/
-    <h1>Users:</h1>)
+      <div>
+    <h1>Users:</h1>
+    <button className="sb btn btn-lg btn-primary btn-block" type="button" onClick={this.componentDidMount}>LOGIN</button>
+  </div>)
   }
 }
 
