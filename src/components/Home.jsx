@@ -20,12 +20,14 @@ for (var i = 1; i < 5; i++) {
 
 class Home extends React.Component {
   componentDidMount() {
-      fetch('http://markzeagler.com/ledger-backend/account/all')
-        //.then(response => response.json())
-        .then((response) => {
-          console.log('Result', response);
-        })
-        .then(data => this.setState({ data }));
+    return fetch(url,  {
+      method: "GET",
+      headers: {
+        'Token': 'GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    }).then(response => response.json());
     }
   render() {
     document.body.appendChild(table);
