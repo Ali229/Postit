@@ -40,9 +40,6 @@ class SignIn extends Component {
         throw new Error('no response');
       }
       let resJSON = await response.json();
-      // if (!resJSON) {
-      //   throw new Error('no respinse from resJSON');
-      // }
       console.log(JSON.stringify(resJSON));
     } catch(err) {
       console.log(err);
