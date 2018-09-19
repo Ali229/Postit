@@ -33,6 +33,8 @@ function putData(url, data) {
   return fetch(url, {
     method: 'PUT',
     headers: {
+      'Authorization': "",
+      cache: "no-cache",
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userObject)
