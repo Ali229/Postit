@@ -19,6 +19,8 @@ class SignIn extends Component {
 
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
+        console.log('Status from res', res.status);
+        console.log('Status from res', JSON.stringify(res.status));
         const result = JSON.stringify(res);
         console.log('Result', result);
       });
