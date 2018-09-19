@@ -1,14 +1,14 @@
 import React from 'react';
 
 var table = document.createElement('table');
-for (var i = 1; i < 5; i++) {
+for (var i = 1; i < 2; i++) {
   var tr = document.createElement('tr');
 
   var td1 = document.createElement('td');
   var td2 = document.createElement('td');
 
-  var text1 = document.createTextNode('Text1');
-  var text2 = document.createTextNode('Text2');
+  var text1 = document.createTextNode('admin');
+  var text2 = document.createTextNode('mark');
 
   td1.appendChild(text1);
   td2.appendChild(text2);
@@ -17,7 +17,6 @@ for (var i = 1; i < 5; i++) {
 
   table.appendChild(tr);
 }
-let users = [];
 class Home extends React.Component {
   // componentDidMount() {
   //   return fetch('http://markzeagler.com/ledger-backend/account/all',  {
@@ -49,11 +48,6 @@ class Home extends React.Component {
           throw new Error('no response');
         }
         let resJSON = await response.json();
-        for (let i = 0; resJSON.message.length; i++) {
-          users.push(resJSON[i]);
-        }
-        console.log(users);
-
         // if (!resJSON) {
         //   throw new Error('no respinse from resJSON');
         // }
@@ -95,7 +89,6 @@ class Home extends React.Component {
       </nav>*/
       <div>
     <h1>Users:</h1>
-    <button className="sb btn btn-lg btn-primary btn-block" type="button" onClick={this.componentDidMount}>Get Accounts</button>
   </div>)
   }
 }
