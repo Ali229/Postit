@@ -13,7 +13,7 @@ class SignIn extends Component {
     }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
-      console.log(res);
+      console.log(res.response);
       const result = {
         message: res.message.auth_token,
         status: res.body.status_code
