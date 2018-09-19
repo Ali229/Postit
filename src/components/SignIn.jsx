@@ -15,7 +15,7 @@ class SignIn extends Component {
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
       const result = {
-        message: res.message,
+        //message: res.message,
         status: res.status_code
       };
       if (!result.status || result.status !== 200) {
