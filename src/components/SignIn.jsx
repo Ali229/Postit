@@ -13,16 +13,13 @@ class SignIn extends Component {
     }
     putData('http://markzeagler.com/ledger-backend/signin', userObject)
     .then((res) => {
-      console.log(res.response);
       const result = {
         message: res.message.auth_token,
-        status: res.body.status_code
       };
-      console.log('result is ', result.body.status);
-      if (!result.body.status || result.body.status !== 200) {
-        return console.log('Status Error: ', result.body.status);
-      }
-    return window.location = '/ledger/home';
+
+      console.log('Success: ', result.message);
+
+      return window.location = '/ledger/home';
     })
     .catch((err) => console.log('Caught Error: ', err))
 
