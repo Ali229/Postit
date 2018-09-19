@@ -18,6 +18,7 @@ class SignIn extends Component {
         //message: res.message,
         status: res.status_code
       };
+      console.log('Result status first: ', result.status);
       if (!result.status || result.status !== 200) {
         return console.log('Result status: ', result.status);
       }
@@ -36,7 +37,7 @@ function putData(url, data) {
     body: JSON.stringify(userObject)
   }).then(response => response.json())
   .catch((error) => {
-    console.log('Fetching Error: ' + error);
+    console.log('Fetching Error: ', error);
   });
 }
   }
