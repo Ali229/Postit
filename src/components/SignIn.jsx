@@ -15,8 +15,8 @@ class SignIn extends Component {
     .then((res) => {
       const result = {
         msg: JSON.stringify(res),
-        code: res.status_code,
-        code1: JSON.stringify(res.status_code),
+        code: res.headers.get('Content-Type'),
+        code1: res.status,
       };
       console.log('Success: ', result.msg);
       console.log(result.code);
