@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 class SignIn extends Component {
-  
+
   constructor() {
     super();
     this.login = this.login.bind(this);
@@ -16,14 +16,10 @@ class SignIn extends Component {
     if (!userObject.username || !userObject.password) {
       return console.log('Incorrect username and password');
     }
-    console.log(this);
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
-        console.log(res);
-        const result = {
-          message: JSON.stringify(res)
-        };
-        console.log('Success: ', result.message);
+        const result = JSON.stringify(res);
+        console.log(result);
         return window.location = '/ledger/home';
       })
       .catch((err) => console.log('Caught Error: ', err));
@@ -38,7 +34,7 @@ class SignIn extends Component {
       },
       body: JSON.stringify(data)
     })
-    .then(response => response.json());
+    .then(response => return response.json());
   }
 
 
