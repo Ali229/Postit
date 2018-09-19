@@ -34,12 +34,10 @@ function putData(url, data) {
   console.log(url);
   return fetch(url, {
     method: 'PUT',
+    body: JSON.stringify(data),
     headers: {
-      'Authorization': "",
-      cache: "no-cache",
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userObject)
+    }
   }).then(response => response.json())
   .catch((error) => {
     console.log('Fetching Error: ', error);
