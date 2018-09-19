@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 class SignIn extends Component {
-  //
-  // constructor() {
-  //   super();
-  //   this.login = this.login.bind(this);
-  // }
+  
+  constructor() {
+    super();
+    this.login = this.login.bind(this);
+  }
 
   login() {
     const userObject = {
