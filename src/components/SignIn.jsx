@@ -13,6 +13,7 @@ class SignIn extends Component {
     }
     this.putData('http://markzeagler.com/ledger-backend/signin', userObject)
       .then((res) => {
+        console.log(res);
         const result = {
           message: JSON.stringify(res)
         };
@@ -32,9 +33,13 @@ class SignIn extends Component {
       body: JSON.stringify(data)
     })
       .then(response => {
-        return response.json();
+        const responseObject = {
+          status: response.status,
+        };
+        console.log(responseObject);
+        return responseObject.json();
       })
-      .catch(err => console.log('Error from backend ', err));
+      // .catch(err => console.log('Error from backend ', err));
   }
 
   render() {
