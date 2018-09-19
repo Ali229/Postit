@@ -34,7 +34,9 @@ class SignIn extends Component {
       },
       body: JSON.stringify(data)
     })
-    .then(response => return response.json());
+    .then((response) => {
+      return response.json()
+    });
   }
 
 
