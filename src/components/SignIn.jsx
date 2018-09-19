@@ -32,15 +32,10 @@ class SignIn extends Component {
       },
       body: JSON.stringify(data)
     })
-      .then(response => {
-        const responseObject = {
-          status: response.status,
-        };
-        console.log(responseObject);
-        return responseObject.json();
-      })
-      // .catch(err => console.log('Error from backend ', err));
+    .then(response => response.json());
   }
+
+
 
   render() {
     document.body.classList.add('gradient');
