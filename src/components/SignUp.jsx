@@ -1,43 +1,44 @@
 import React, {Component} from 'react';
 
 class SignUp extends Component {
-  constuctor() {
-    this.routeChange = this.routeChange.bind(this);
-     }
+  constructor() {
+    super();
+      this.signup = this.signup.bind(this);
+  }
   signup() {
     //
     return window.location = "/ledger/signin";
-    const userObject = {
-      name: document.getElementById("inputEmail").value || null,
-      username: document.getElementById("inputEmail").value || null,
-      password: document.getElementById("inputPassword").value || null,
-    };
-    putData('http://markzeagler.com/ledger-backend/register', userObject)
-      .then((res) => {
-        const result = {
-          message: res.message,
-          status: res.status_code
-        };
-        console.log("result is ", result);
-        if (!result.status || result.status !== 200) {
-          console.log('server threw an error');
-          return;
-        }
-      return window.location = "/ledger/signin";
-      })
-      .catch((err) => console.log("If err", err))
-
-    function putData(url, data) {
-      console.log("Makind sure data is passed", data);
-      return fetch(url,  {
-        method: "PUT",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userObject)
-      }).then(response => response.json());
-    }
+    // const userObject = {
+    //   name: document.getElementById("inputEmail").value || null,
+    //   username: document.getElementById("inputEmail").value || null,
+    //   password: document.getElementById("inputPassword").value || null,
+    // };
+    // putData('http://markzeagler.com/ledger-backend/register', userObject)
+    //   .then((res) => {
+    //     const result = {
+    //       message: res.message,
+    //       status: res.status_code
+    //     };
+    //     console.log("result is ", result);
+    //     if (!result.status || result.status !== 200) {
+    //       console.log('server threw an error');
+    //       return;
+    //     }
+    //   return window.location = "/ledger/signin";
+    //   })
+    //   .catch((err) => console.log("If err", err))
+    //
+    // function putData(url, data) {
+    //   console.log("Makind sure data is passed", data);
+    //   return fetch(url,  {
+    //     method: "PUT",
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(userObject)
+    //   }).then(response => response.json());
+    // }
   }
 
 
