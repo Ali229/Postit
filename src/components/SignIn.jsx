@@ -66,7 +66,6 @@ class SignIn extends Component {
       <form className="form-signin">
       <img className="i1" src="signin_logo.png" alt="logo"/>
       <h1>LOGIN</h1>
-      <div showError={this.state.showError}
       <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
       <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
       <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
