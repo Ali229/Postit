@@ -20,7 +20,7 @@ class SignIn extends Component {
   }
   handleErrors(response) {
     if (!response.ok) {
-      throw Error(response.statusText);
+      throw Error('login error');
     }
     return response;
   }
@@ -38,7 +38,6 @@ class SignIn extends Component {
       let resJSON = await response.json();
       console.info(JSON.stringify(resJSON));
     } catch (err) {
-
       console.error('Error: ', err);
     }
   }
