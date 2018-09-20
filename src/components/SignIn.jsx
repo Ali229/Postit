@@ -32,6 +32,9 @@ class SignIn extends Component {
         throw new Error('cannot get response back');
       }
       let resJSON = await response.json();
+      if (!resJSON) {
+        throw new Error('cannot fetch response')
+      }
       console.info(JSON.stringify(resJSON));
     } catch (err) {
       console.error('Error: ', err);
