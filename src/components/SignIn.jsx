@@ -14,15 +14,9 @@ class SignIn extends Component {
       password: document.getElementById('inputPassword').value || null
     };
     if (!userObject.username || !userObject.password) {
-      return console.error('Username or password is empty');
+      return console.error('Username or Password is empty!');
     }
     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
-  }
-  handleErrors(response) {
-    if (!response.ok) {
-      throw Error('login error');
-    }
-    return response;
   }
   async connect(url, userObject) {
     try {
@@ -34,11 +28,13 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
-      this.handleErrors(response);
+      if (!response.ok) {
+        throw Error('Login error!');
+      }
       let resJSON = await response.json();
       console.info(JSON.stringify(resJSON));
-    } catch (err) {
-      console.error('Error: ', err);
+    } catch (e) {
+      console.error(e);
     }
   }
 
