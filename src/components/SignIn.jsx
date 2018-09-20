@@ -25,7 +25,7 @@ class SignIn extends Component {
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-          }
+          },
           body: JSON.stringify(userObject)
         });
         let resJSON = await response.json();
