@@ -35,16 +35,21 @@ class SignIn extends Component {
       console.info(JSON.stringify(resJSON));
     } catch (e) {
       console.error(e);
+      this.toggleError();
     }
   }
 
-  // state = { showError: true }
-  //
-  //  toggleError = () => {
-  //    this.setState((prevState, props) => {
-  //      return { showError: !prevState.showError }
-  //    })
-  //  };
+  state = {
+    showError: true
+  }
+
+  toggleError = () => {
+    this.setState((prevState, props) => {
+      return {
+        showError: !prevState.showError
+      }
+    })
+  };
 
   render() {
     document.body.classList.add('gradient');
@@ -52,7 +57,9 @@ class SignIn extends Component {
       <form className="form-signin">
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
-        <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
+        <div showError={this.state.showError}>
+          <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
+        </div>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
         <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
         <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
