@@ -28,6 +28,9 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
       if (response.error) {
         throw new Error(response.error);
       }
