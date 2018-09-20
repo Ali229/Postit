@@ -18,6 +18,12 @@ class SignIn extends Component {
     }
     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
   }
+  handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
   async connect(url, userObject) {
     try {
       let response = await fetch((url), {
@@ -28,19 +34,8 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      if (response.error) {
-        throw new Error(response.error);
-      }
-      if (!response || !response.status === 200) {
-        throw new Error('cannot get response back');
-      }
+      this.handleErrors(response);
       let resJSON = await response.json();
-      if (!resJSON) {
-        throw new Error('cannot fetch response')
-      }
       console.info(JSON.stringify(resJSON));
     } catch (err) {
 
