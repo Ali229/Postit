@@ -28,6 +28,9 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
+      if (!response || !response.status === 200) {
+        throw new Error('cannot get response back');
+      }
       let resJSON = await response.json();
       console.info(JSON.stringify(resJSON));
     } catch (err) {
