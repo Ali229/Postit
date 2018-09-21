@@ -26,21 +26,15 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
+
+      let resJSON = await response.json();
       if (!response.ok) {
-        console.log('00', response.message);
-        console.log('0', JSON.stringify(response.message));
+        console.log('00', resJSON.message);
+        console.log('0', JSON.stringify(resJSON.message));
         throw Error('Login error!');
       }
-      let resJSON = await response.json();
-      console.log('1', resJSON.headers);
-      console.log('2', resJSON.status);
-      console.log('3', resJSON.statusText);
-      console.log('4', resJSON.body);
-      console.log('5', resJSON.message);
-      console.log('6', JSON.stringify(resJSON.message));
-      console.info('7', JSON.stringify(resJSON));
-      console.info('8', JSON.stringify(resJSON.message.auth_token));
-      console.info('9', resJSON.message.auth_token);
+      console.log(resJSON.message);
+      console.info(resJSON.message.auth_token);
       window.location = "/ledger/home";
     } catch (e) {
       console.error(e);
