@@ -18,8 +18,8 @@ class SignIn extends Component {
 
   async connect(url, userObject) {
     try {
-      if (userObject.username || userObject.password) {
-        throw Error('The username/password is empty.')
+      if (!userObject.username || !userObject.password) {
+        throw Error('The username/password is empty.');
       }
       let response = await fetch((url), {
         method: "PUT",
