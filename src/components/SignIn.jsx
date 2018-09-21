@@ -18,6 +18,9 @@ class SignIn extends Component {
 
   async connect(url, userObject) {
     try {
+      if (userObject.username || userObject.password) {
+        throw Error('The username/password is empty.')
+      }
       let response = await fetch((url), {
         method: "PUT",
         headers: {
@@ -29,6 +32,8 @@ class SignIn extends Component {
 
       let resJSON = await response.json();
       if (!response.ok) {
+        console.log(resJSON.message);
+        console.log(JSON.stringify(resJSON.message))
         throw Error(resJSON.message);
       }
       console.info(resJSON.message);
@@ -50,7 +55,7 @@ class SignIn extends Component {
         <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
         <div id="errorDiv"></div>
-        <button className="sb btn btn-lg btn-primary btn-block" type="button" onClick={this.login}>LOGIN</button>
+        <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
         <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
           <Link to="/forgot">Forgot password?</Link><br/>
           &#x25C8;&nbsp;
