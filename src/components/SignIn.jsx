@@ -15,8 +15,7 @@ class SignIn extends Component {
     };
     if (!userObject.username || !userObject.password) {
       document.getElementById("errorDiv").style.display = 'block';
-      document.getElementById("errorDiv").innerHTML = 'Username and Password cannot be empty!';
-      return;
+      return document.getElementById("errorDiv").innerHTML = 'Username and Password cannot be empty!';
     }
     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
   }
