@@ -27,7 +27,6 @@ class SignIn extends Component {
         body: JSON.stringify(userObject)
       });
       if (!response.ok) {
-
         throw Error('Login error!');
       }
       let resJSON = await response.json();
@@ -37,7 +36,6 @@ class SignIn extends Component {
       console.log('4', resJSON.body);
       console.log('5', resJSON.message);
       console.log('6', JSON.stringify(resJSON.message));
-
       console.info('7', JSON.stringify(resJSON));
       window.location = "/ledger/home";
     } catch (e) {
