@@ -30,7 +30,10 @@ class SignIn extends Component {
         console.log(response.headers);
         console.log(response.status);
         console.log(response.statusText);
-        throw Error('response.header');
+        console.log(response.body);
+        console.log(response.message);
+        console.log(JSON.stringify(response.message));
+        throw Error('Login error!');
       }
       let resJSON = await response.json();
       console.info(JSON.stringify(resJSON));
