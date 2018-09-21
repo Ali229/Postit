@@ -29,17 +29,15 @@ class SignIn extends Component {
 
       let resJSON = await response.json();
       if (!response.ok) {
-        console.log('00', resJSON.message);
-        console.log('0', JSON.stringify(resJSON.message));
-        throw Error('Login error!');
+        throw Error(resJSON.message);
       }
-      console.log(resJSON.message);
+      console.info(resJSON.message);
       console.info(resJSON.message.auth_token);
       window.location = "/ledger/home";
     } catch (e) {
       console.error(e);
       document.getElementById("errorDiv").style.display = 'block';
-      document.getElementById("errorDiv").innerHTML = "Invalid login details!";
+      document.getElementById("errorDiv").innerHTML = e;
     }
   }
 
