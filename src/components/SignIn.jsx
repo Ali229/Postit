@@ -36,7 +36,7 @@ class SignIn extends Component {
       console.log(resJSON.statusText);
       console.log(resJSON.body);
       console.log(resJSON.message);
-      console.log(resJSON.stringify(response.message));
+      console.log(JSON.stringify(resJSON.message));
 
       console.info(JSON.stringify(resJSON));
       window.location = "/ledger/home";
