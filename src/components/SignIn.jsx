@@ -27,8 +27,8 @@ class SignIn extends Component {
         body: JSON.stringify(userObject)
       });
       if (!response.ok) {
-        console.log('00', response);
-        console.log('0', JSON.stringify(response));
+        console.log('00', response.message);
+        console.log('0', JSON.stringify(response.message));
         throw Error('Login error!');
       }
       let resJSON = await response.json();
@@ -39,7 +39,8 @@ class SignIn extends Component {
       console.log('5', resJSON.message);
       console.log('6', JSON.stringify(resJSON.message));
       console.info('7', JSON.stringify(resJSON));
-      console.info('7', JSON.stringify(resJSON.message.auth_token));
+      console.info('8', JSON.stringify(resJSON.message.auth_token));
+      console.info('9', resJSON.message.auth_token);
       window.location = "/ledger/home";
     } catch (e) {
       console.error(e);
