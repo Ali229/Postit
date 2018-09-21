@@ -14,10 +14,13 @@ class SignIn extends Component {
       password: document.getElementById('inputPassword').value || null
     };
     if (!userObject.username || !userObject.password) {
-      return console.error('Username or Password is empty!');
+      document.getElementById("errorDiv").style.display = 'block';
+      document.getElementById("errorDiv").innerHTML = 'Username and Password cannot be empty!';
+      return;
     }
     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
   }
+
   async connect(url, userObject) {
     try {
       let response = await fetch((url), {
@@ -35,21 +38,10 @@ class SignIn extends Component {
       console.info(JSON.stringify(resJSON));
     } catch (e) {
       console.error(e);
-      this.toggleError();
+      document.getElementById("errorDiv").style.display = 'block';
+      document.getElementById("errorDiv").innerHTML = e;
     }
   }
-
-  state = {
-    showError: true
-  }
-
-  toggleError = () => {
-    this.setState((prevState, props) => {
-      return {
-        showError: !prevState.showError
-      }
-    })
-  };
 
   render() {
     document.body.classList.add('gradient');
@@ -57,10 +49,9 @@ class SignIn extends Component {
       <form className="form-signin">
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
-        <div showError={this.state.showError}>
-          <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
-        </div>
+        <input type="email" id="inputUsername" className="form-control" placeholder="Username" required=""/>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
+        <div id="errorDiv"></div>
         <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
         <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
           <Link to="/forgot">Forgot password?</Link><br/>
