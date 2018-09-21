@@ -67,7 +67,7 @@ class SignIn extends Component {
       <form className="form-signin" onSubmit={this.handleSubmit}>
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
-        <input type="text" id="inputUsername" className="form-control" placeholder="Username" required="" onChange={this.UserNameChange}/>
+        <input type="email" id="inputUsername" className="form-control" placeholder="Username" required="" onChange={this.UserNameChange}/>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" onChange={this.PasswordChange}/>
         <div id="errorDiv"></div>
         <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
