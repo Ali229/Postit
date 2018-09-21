@@ -2,31 +2,16 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 class SignIn extends Component {
-  constructor(props) {
-    super(props);
+
+  constructor() {
+    super();
     this.login = this.login.bind(this);
-    this.state = {
-      userName: null,
-      password: null
-    }
-    this.UserNameChange = this.UserNameChange.bind(this);
-    this.PasswordChange = this.PasswordChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  UserNameChange(event) {
-    this.setState({userName: event.target.value});
-  }
-  PasswordChange(event) {
-    this.setState({password: event.target.value});
-  }
-  handleSubmit(event) {
-    this.login(event);
-    event.preventDefault();
-  }
-  login(event) {
+
+  login() {
     const userObject = {
-      username: this.state.userName,
-      password: this.state.password
+      username: document.getElementById('inputUsername').value || null,
+      password: document.getElementById('inputPassword').value || null
     };
     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
   }
@@ -64,11 +49,11 @@ class SignIn extends Component {
   render() {
     document.body.classList.add('gradient');
     return (<div className="main-border">
-      <form className="form-signin" onSubmit={this.handleSubmit}>
+      <form className="form-signin">
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
-        <input type="text" id="inputUsername" className="form-control" placeholder="Username" required="" onChange={this.UserNameChange}/>
-        <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" onChange={this.PasswordChange}/>
+        <input type="text" id="inputUsername" className="form-control" placeholder="Username" required=""/>
+        <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
         <div id="errorDiv"></div>
         <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
         <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
