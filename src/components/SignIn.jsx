@@ -27,7 +27,10 @@ class SignIn extends Component {
         body: JSON.stringify(userObject)
       });
       if (!response.ok) {
-        throw Error('Login error!');
+        console.log(response.headers);
+        console.log(response.status);
+        console.log(response.statusText);
+        throw Error('response.header');
       }
       let resJSON = await response.json();
       console.info(JSON.stringify(resJSON));
