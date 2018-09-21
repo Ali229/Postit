@@ -31,14 +31,14 @@ class SignIn extends Component {
         throw Error('Login error!');
       }
       let resJSON = await response.json();
-      console.log(resJSON.headers);
-      console.log(resJSON.status);
-      console.log(resJSON.statusText);
-      console.log(resJSON.body);
-      console.log(resJSON.message);
-      console.log(JSON.stringify(resJSON.message));
+      console.log('1', resJSON.headers);
+      console.log('2', resJSON.status);
+      console.log('3', resJSON.statusText);
+      console.log('4', resJSON.body);
+      console.log('5', resJSON.message);
+      console.log('6', JSON.stringify(resJSON.message));
 
-      console.info(JSON.stringify(resJSON));
+      console.info('7', JSON.stringify(resJSON));
       window.location = "/ledger/home";
     } catch (e) {
       console.error(e);
