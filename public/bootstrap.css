@@ -9035,7 +9035,6 @@ a.text-dark:hover, a.text-dark:focus {
   margin-bottom: 10px;
 }
 .main-border {
-
   display: flex;
 }
 .form-signin {
@@ -9088,7 +9087,7 @@ h2 {
   display:none;
   background-color: #ff7272;
   color: white;
-  padding: 1em;
+  padding: 0.5em;
 }
 
 /*
