@@ -1,100 +1,30 @@
 import React from 'react';
 class Home extends React.Component {
-  // componentDidMount() {
-  //   return fetch('http://markzeagler.com/ledger-backend/account/all',  {
-  //     method: "GET",
-  //     headers: {
-  //       'Authorization': 'Bearer GRUjAPU69duU9i43ANtpC1mYAfGg2xNTBDAalHy5Tuw',
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json',
-  //       'Cache-Control': 'no-cache'
+  // async componentDidMount() {
+  //   try {
+  //     console.log('here');
+  //     let response = await fetch('http://markzeagler.com/ledger-backend/account/all', {
+  //       method: "GET",
+  //       headers: {
+  //         'Authorization': 'Bearer MqMILbviXxyiB9a_BFFPgFsNY8D01KJohhdcwq74lAU',
+  //         'Accept': 'application/json',
+  //         'Cache-Control': 'no-cache'
+  //       }
+  //     });
+  //     if (!response) {
+  //       throw new Error('no response');
   //     }
-  //   }).then(response => console.log(JSON.stringify(response)))
-  //   .catch (err => console.log(err));
+  //     let resJSON = await response.json();
+  //      if (!resJSON) {
+  //        throw new Error('no respinse from resJSON');
+  //      }
+  //     console.log(JSON.stringify(resJSON));
+  //   } catch(err) {
+  //     console.log(err);
   //   }
-  createTable(response) {
-
-  }
-    async componentDidMount() {
-      try {
-        console.log('here');
-        let response = await fetch('http://markzeagler.com/ledger-backend/account/all', {
-          method: "GET",
-          headers: {
-            'Authorization': 'Bearer MqMILbviXxyiB9a_BFFPgFsNY8D01KJohhdcwq74lAU',
-            'Accept': 'application/json',
-            'Cache-Control': 'no-cache'
-          }
-        });
-        if (!response) {
-          throw new Error('no response');
-        }
-        let resJSON = await response.json();
-        // if (!resJSON) {
-        //   throw new Error('no respinse from resJSON');
-        // }
-        console.log(JSON.stringify(resJSON));
-      } catch(err) {
-        console.log(err);
-      }
-    }
+  // }
   render() {
-    return (
-    /*<nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">Navbar</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/">Link</a>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="/">Action</a>
-                <a className="dropdown-item" href="/">Another action</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="/">Something else here</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>*/
-      <div>
-    <h1>Users:</h1>
-
-
-    <table>
-  <tr>
-  	<th>Name</th>
-    <th>Username</th>
-    <th>Type</th>
-  </tr>
-  <tr>
-    <td>Mamo</td>
-    <td>admin</td>
-    <td>admin</td>
-  </tr>
-  <tr>
-    <td>Ali</td>
-    <td>ali</td>
-    <td>new</td>
-  </tr>
-  <tr>
-    <td>Mark</td>
-    <td>mark</td>
-    <td>new</td>
-  </tr>
-</table>
-  </div>)
+    return (<div></div>)
   }
 }
 
