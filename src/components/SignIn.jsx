@@ -49,7 +49,7 @@ class SignIn extends Component {
   render() {
     document.body.classList.add('gradient');
     return (<div className="main-border">
-      <form className="form-signin">
+      <form className="form-signin" novalidate="novalidate">
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
         <input type="text" id="inputUsername" className="form-control" placeholder="Username" required=""/>
