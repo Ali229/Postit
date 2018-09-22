@@ -62,7 +62,7 @@ class SignIn extends Component {
   render() {
     document.body.classList.add('gradient');
     return (<div className="main-border">
-      <form className="form-signin" onSubmit={this.handleSubmit} novalidate="novalidate">
+      <form className="form-signin" onSubmit={this.handleSubmit}>
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
         <input type="email" id="inputUsername" className="form-control" placeholder="Username" onChange={this.UserNameChange}/>
