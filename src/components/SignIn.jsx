@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom';
 class SignIn extends Component {
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
+    //this.login = this.login.bind(this);
+    this.connect = this.connect.bind(this);
     this.state = {
       userName: null,
       password: null
