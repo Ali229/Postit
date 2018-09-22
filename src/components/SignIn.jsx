@@ -78,7 +78,7 @@ class SignIn extends Component {
         document.getElementById("errorDiv").style.display = 'block';
         document.getElementById("errorDiv").innerHTML = e;
       })
-    } catch (e) {}
+    } finally {}
   }
 
   render() {
