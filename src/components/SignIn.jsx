@@ -24,35 +24,6 @@ class SignIn extends Component {
     event.preventDefault();
   }
 
-  // async connect(event) {
-  //   try {
-  //     const userObject = {
-  //       username: this.state.userName,
-  //       password: this.state.password
-  //     };
-  //     if (!userObject.username || !userObject.password) {
-  //       throw Error('The username/password is empty.');
-  //     }
-  //     let response = await fetch(('http://markzeagler.com/ledger-backend/signin'), {
-  //       method: "PUT",
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(userObject)
-  //     });
-  //     let resJSON = await response.json();
-  //     if (!response.ok) {
-  //       throw Error(resJSON.message);
-  //     }
-  //     console.info(resJSON.message);
-  //     console.info(resJSON.message.auth_token);
-  //     window.location = "/ledger/home";
-  //   } catch (e) {
-  //     document.getElementById("errorDiv").style.display = 'block';
-  //     document.getElementById("errorDiv").innerHTML = e;
-  //   }
-  // }
   async connect(event) {
     try {
       const userObject = {
@@ -62,25 +33,26 @@ class SignIn extends Component {
       if (!userObject.username || !userObject.password) {
         throw Error('The username/password is empty.');
       }
-      let response = await fetch(('someurl.com'), {
+      let response = await fetch(('http://markzeagler.com/ledger-backend/signin'), {
         method: "PUT",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(userObject)
-      }).then(response => {
-        response.json();
-        console.info(response.message);
-        console.info(response.message.auth_token);
-        window.location = "/ledger/home";
-      }).catch(e => {
-        document.getElementById("errorDiv").style.display = 'block';
-        document.getElementById("errorDiv").innerHTML = e;
-      })
-    } finally {}
+      });
+      let resJSON = await response.json();
+      if (!response.ok) {
+        throw Error(resJSON.message);
+      }
+      console.info(resJSON.message);
+      console.info(resJSON.message.auth_token);
+      window.location = "/ledger/home";
+    } catch (e) {
+      document.getElementById("errorDiv").style.display = 'block';
+      document.getElementById("errorDiv").innerHTML = e;
+    }
   }
-
   render() {
     document.body.classList.add('gradient');
     return (<div className="main-border">
