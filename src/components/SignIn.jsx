@@ -30,7 +30,7 @@ class SignIn extends Component {
       username: this.state.userName,
       password: this.state.password
     };
-    //this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
+    this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
   }
 
   async connect(url, userObject) {
