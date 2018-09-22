@@ -65,7 +65,6 @@ class SignIn extends Component {
       console.info(resJSON.message.auth_token);
       window.location = "/ledger/home";
     } catch (e) {
-      console.error(e);
       document.getElementById("errorDiv").style.display = 'block';
       document.getElementById("errorDiv").innerHTML = e;
     }
