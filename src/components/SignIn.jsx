@@ -25,11 +25,17 @@ class SignIn extends Component {
   }
 
   login(event) {
-    const userObject = {
-      username: this.state.userName,
-      password: this.state.password
-    };
-    this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
+    try {
+      const userObject = {
+        username: this.state.userName,
+        password: this.state.password
+      };
+      this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
+    } catch (e) {
+      console.error(e);
+      document.getElementById("errorDiv").style.display = 'block';
+      document.getElementById("errorDiv").innerHTML = e;
+    }
   }
 
   async connect(url, userObject) {
