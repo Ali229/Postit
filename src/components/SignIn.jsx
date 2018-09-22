@@ -21,7 +21,7 @@ class SignIn extends Component {
     this.setState({password: event.target.value});
   }
   handleSubmit(event) {
-    this.login(event);
+    this.connect(event);
     event.preventDefault();
   }
 
