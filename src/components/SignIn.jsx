@@ -24,26 +24,30 @@ class SignIn extends Component {
     event.preventDefault();
   }
 
-  login(event) {
+  // login(event) {
+  //   try {
+  //     const userObject = {
+  //       username: this.state.userName,
+  //       password: this.state.password
+  //     };
+  //     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
+  //   } catch (e) {
+  //     console.error(e);
+  //     document.getElementById("errorDiv").style.display = 'block';
+  //     document.getElementById("errorDiv").innerHTML = e;
+  //   }
+  // }
+
+  async connect(event) {
     try {
       const userObject = {
         username: this.state.userName,
         password: this.state.password
       };
-      this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
-    } catch (e) {
-      console.error(e);
-      document.getElementById("errorDiv").style.display = 'block';
-      document.getElementById("errorDiv").innerHTML = e;
-    }
-  }
-
-  async connect(url, userObject) {
-    try {
       if (!userObject.username || !userObject.password) {
         throw Error('The username/password is empty.');
       }
-      let response = await fetch((url), {
+      let response = await fetch(('http://markzeagler.com/ledger-backend/signin'), {
         method: "PUT",
         headers: {
           'Accept': 'application/json',
@@ -74,7 +78,7 @@ class SignIn extends Component {
         <input type="email" id="inputUsername" className="form-control" placeholder="Username" onChange={this.UserNameChange}/>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" onChange={this.PasswordChange}/>
         <div id="errorDiv"></div>
-        <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
+        <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.connect}>LOGIN</button>
         <p className="links" align="left" margin-top="10px">&#x25C8;&nbsp;
           <Link to="/forgot">Forgot password?</Link><br/>
           &#x25C8;&nbsp;
