@@ -24,11 +24,13 @@ class SignIn extends Component {
     event.preventDefault();
   }
   login(event) {
+    console.log('1', typeof this.state.userName);
+    console.log(typeof this.state.password);
     const userObject = {
       username: this.state.userName,
       password: this.state.password
     };
-    this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
+    //this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
   }
 
   async connect(url, userObject) {
@@ -64,10 +66,10 @@ class SignIn extends Component {
   render() {
     document.body.classList.add('gradient');
     return (<div className="main-border">
-      <form className="form-signin" onSubmit={this.handleSubmit}>
+      <form className="form-signin" onSubmit={this.handleSubmit} novalidate="novalidate">
         <img className="i1" src="signin_logo.png" alt="logo"/>
         <h1>LOGIN</h1>
-        <input pattern="*" type="email" id="inputUsername" className="form-control" placeholder="Username" required="" onChange={this.UserNameChange}/>
+        <input type="email" id="inputUsername" className="form-control" placeholder="Username" onChange={this.UserNameChange}/>
         <input type="password" id="inputPassword" className="form-control" placeholder="Password" required="" onChange={this.PasswordChange}/>
         <div id="errorDiv"></div>
         <button className="sb btn btn-lg btn-primary btn-block" type="submit" onClick={this.login}>LOGIN</button>
