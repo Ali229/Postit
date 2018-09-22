@@ -56,10 +56,11 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
-      let resJSON = await response.json();
       if (!response.ok) {
         throw Error(resJSON.message);
       }
+      let resJSON = await response.json();
+
       console.info(resJSON.message);
       console.info(resJSON.message.auth_token);
       window.location = "/ledger/home";
