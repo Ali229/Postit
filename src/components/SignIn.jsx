@@ -69,10 +69,10 @@ class SignIn extends Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(userObject)
-      }).then(resJSON => {
+      }).then(response => {
         response.json();
-        console.info(resJSON.message);
-        console.info(resJSON.message.auth_token);
+        console.info(response.message);
+        console.info(response.message.auth_token);
         window.location = "/ledger/home";
       }).catch(e => {
         document.getElementById("errorDiv").style.display = 'block';
