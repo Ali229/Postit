@@ -39,24 +39,30 @@ class SignIn extends Component {
   }
 
   async connect(url, userObject) {
-    if (!userObject.username || !userObject.password) {
-      throw Error('The username/password is empty.');
+    try {
+      if (!userObject.username || !userObject.password) {
+        throw Error('The username/password is empty.');
+      }
+      let response = await fetch((url), {
+        method: "PUT",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userObject)
+      });
+      let resJSON = await response.json();
+      if (!response.ok) {
+        throw Error(resJSON.message);
+      }
+      console.info(resJSON.message);
+      console.info(resJSON.message.auth_token);
+      window.location = "/ledger/home";
+    } catch (e) {
+      console.error(e);
+      document.getElementById("errorDiv").style.display = 'block';
+      document.getElementById("errorDiv").innerHTML = e;
     }
-    let response = await fetch((url), {
-      method: "PUT",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userObject)
-    });
-    let resJSON = await response.json();
-    if (!response.ok) {
-      throw Error(resJSON.message);
-    }
-    console.info(resJSON.message);
-    console.info(resJSON.message.auth_token);
-    window.location = "/ledger/home";
   }
 
   render() {
