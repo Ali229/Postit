@@ -23,9 +23,8 @@ class SignIn extends Component {
     this.login(event);
     event.preventDefault();
   }
-  login(event) {
-    console.log('1', typeof this.state.userName);
-    console.log(typeof this.state.password);
+
+  login() {
     const userObject = {
       username: this.state.userName,
       password: this.state.password
@@ -46,11 +45,8 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
-
       let resJSON = await response.json();
       if (!response.ok) {
-        console.log(resJSON.message);
-        console.log(JSON.stringify(resJSON.message))
         throw Error(resJSON.message);
       }
       console.info(resJSON.message);
