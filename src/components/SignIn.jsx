@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 class SignIn extends Component {
   constructor(props) {
     super(props);
-    //this.login = this.login.bind(this);
     this.connect = this.connect.bind(this);
     this.state = {
       userName: null,
@@ -25,29 +24,15 @@ class SignIn extends Component {
     event.preventDefault();
   }
 
-  // login(event) {
-  //   try {
-  //     const userObject = {
-  //       username: this.state.userName,
-  //       password: this.state.password
-  //     };
-  //     this.connect('http://markzeagler.com/ledger-backend/signin', userObject);
-  //   } catch (e) {
-  //     console.error(e);
-  //     document.getElementById("errorDiv").style.display = 'block';
-  //     document.getElementById("errorDiv").innerHTML = e;
-  //   }
-  // }
-
   async connect(event) {
     try {
       const userObject = {
         username: this.state.userName,
         password: this.state.password
       };
-      if (!userObject.username || !userObject.password) {
-        throw Error('The username/password is empty.');
-      }
+      // if (!userObject.username || !userObject.password) {
+      //   throw Error('The username/password is empty.');
+      // }
       let response = await fetch(('http://markzeagler.com/ledger-backend/signin'), {
         method: "PUT",
         headers: {
@@ -56,7 +41,6 @@ class SignIn extends Component {
         },
         body: JSON.stringify(userObject)
       });
-
       let resJSON = await response.json();
       if (!response.ok) {
         throw Error(resJSON.message);
