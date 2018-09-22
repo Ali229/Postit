@@ -51,6 +51,7 @@ class SignIn extends Component {
     } catch (e) {
       document.getElementById("errorDiv").style.display = 'block';
       document.getElementById("errorDiv").innerHTML = e;
+      throw e;
     }
   }
 
