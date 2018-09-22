@@ -24,7 +24,7 @@ class SignIn extends Component {
     event.preventDefault();
   }
 
-  login() {
+  login(event) {
     const userObject = {
       username: this.state.userName,
       password: this.state.password
