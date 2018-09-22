@@ -30,9 +30,9 @@ class SignIn extends Component {
         username: this.state.userName,
         password: this.state.password
       };
-      // if (!userObject.username || !userObject.password) {
-      //   throw Error('The username/password is empty.');
-      // }
+      if (!userObject.username || !userObject.password) {
+        throw Error('The username/password is empty.');
+      }
       let response = await fetch(('http://markzeagler.com/ledger-backend/signin'), {
         method: "PUT",
         headers: {
