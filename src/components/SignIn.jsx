@@ -34,6 +34,7 @@ class SignIn extends Component {
         throw Error('The username/password is empty.');
       }
       let response = await fetch(('http://markzeagler.com/ledger-backend/signin'), {
+        method: "PUT",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
