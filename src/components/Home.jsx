@@ -1,30 +1,22 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import NavB from './NavB'
+////import SignIn from './SignIn';
+
 class Home extends React.Component {
-  // async componentDidMount() {
-  //   try {
-  //     console.log('here');
-  //     let response = await fetch('http://markzeagler.com/ledger-backend/account/all', {
-  //       method: "GET",
-  //       headers: {
-  //         'Authorization': 'Bearer MqMILbviXxyiB9a_BFFPgFsNY8D01KJohhdcwq74lAU',
-  //         'Accept': 'application/json',
-  //         'Cache-Control': 'no-cache'
-  //       }
-  //     });
-  //     if (!response) {
-  //       throw new Error('no response');
-  //     }
-  //     let resJSON = await response.json();
-  //      if (!resJSON) {
-  //        throw new Error('no respinse from resJSON');
-  //      }
-  //     console.log(JSON.stringify(resJSON));
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-  // }
   render() {
-    return (<div></div>)
+    console.log('Authen: ', localStorage.getItem('auth'));
+    console.log('UserName: ', localStorage.getItem('currentUser'));
+    //var token = getToken();
+    // console.log(this.props.state.userName);
+    // console.log(this.props.userName);
+    document.body.classList.remove('gradient');
+    return (<div>
+      <NavB/>
+      <h1>HOME</h1>
+      <Link to="/journalize">Journalize</Link><br/>
+      <Link to="/charts">Charts of Accounts</Link><br/>
+    </div>)
   }
 }
 
