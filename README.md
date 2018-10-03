@@ -1,5 +1,21 @@
-# angular-6-basic-authentication-example
+# Postit
 
-Angular 6 - Basic HTTP Authentication Tutorial & Example
+Postit - Easy Accounting
 
-To see a demo and further details go to http://jasonwatmore.com/post/2018/09/07/angular-6-basic-http-authentication-tutorial-example
+## Get started
+
+### Clone the repo
+
+```shell
+git clone https://github.com/ali229/postit
+cd postit
+```
+
+### Install npm packages
+
+Install the `npm` packages described in the `package.json` and verify that it works:
+
+```shell
+npm install
+npm start
+```
