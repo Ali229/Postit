@@ -7,7 +7,7 @@ import { AuthenticationService } from '../_services';
 
 @Component({
     templateUrl: 'login.component.html',
-    styleUrls: ['./style.css']
+    styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
