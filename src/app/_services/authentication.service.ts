@@ -21,7 +21,7 @@ export class AuthenticationService {
     login(username: string, password: string) {
         this.username = username;
         console.log("Sending request");
-        const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/ledger-backend/signin', {
+        const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
             username: username,
             password: password
         });
