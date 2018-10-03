@@ -1,6 +1,7 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
+import {first} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +27,7 @@ export class AuthenticationService {
             password: password
         });
 
-        requestResponse.subscribe((response: LoginData) => {
+        requestResponse.pipe(first()).subscribe((response: LoginData) => {
                 if (response['status_code'] == 200) {
                     this.user_id = response['user_id'];
                     this.auth_token = response['auth_token'];
