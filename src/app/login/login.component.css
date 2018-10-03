@@ -1,38 +1,46 @@
-/*Input types*/
+/**************************************** Input Boxes ****************************************/
 .form-control {
     display: unset;
     width: 200px;
-    height:40px;
+    height: 40px;
 }
-/*Heading*/
+/**************************************** Heading ********************************************/
 .lg-h1 {
     margin-bottom: 20px;
  }
-/*Button*/
+/**************************************** Submit Button **************************************/
 .btn {
     margin-top: 20px;
     width: 200px;
     height:40px;
 }
-/*Logo*/
+/**************************************** Logo ***********************************************/
 .i1 {
     margin-bottom: 20px;
     width: 273px;
     height: 100px;
 }
+/**************************************** Parent Container ***********************************/
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-/*Form*/
+/**************************************** Loading Animation **********************************/
+.loading-gif {
+    height: 20px;
+    width: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+/**************************************** Main Form ******************************************/
 .lg-form {
-    height: 600px;
+    min-height: 500px;
     width: 500px;
     margin: auto;
     text-align: center!important;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
-    padding: 30px 10px 30px 10px;
+    padding: 30px 20px 10px 10px;
 }
