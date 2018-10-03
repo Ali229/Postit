@@ -3,6 +3,7 @@ logs
 *.log
 npm-debug.log*
 
+.idea/
 .idea/*
 
 # Runtime data
@@ -57,3 +58,5 @@ dist
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+
+package-lock.json

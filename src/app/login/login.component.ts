@@ -56,11 +56,6 @@ export class LoginComponent implements OnInit {
                     // this.router.navigateByUrl('');
                     console.log("User ID: " + data['user_id']);
 
-                    // Here's where you can retrieve the login data. I'll eventually get them set up as observables, but
-                    // they're fine for now. No need to save them, they're stored in the authentication service. Just
-                    // make sure you import the service in each component that needs to communicate with the backend
-                    // console.log("User ID: " + this.authenticationService.getUserID());
-                    // console.log("Auth Token: " + this.authenticationService.getAuthToken());
                 },
                 error => {
 
