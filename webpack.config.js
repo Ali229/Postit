@@ -28,7 +28,7 @@ module.exports = {
   },
 
   plugins: [
-      new webpack.ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './src')),
+      new webpack.ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)fesm5/, path.join(__dirname, './app')),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
