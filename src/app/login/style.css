@@ -1,34 +1,39 @@
-.lg-form {
-    max-width: 500px;
-    top: 50%;
-    margin: auto;
-    text-align: center!important;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 15px;
-    /*overflow: hidden;*/
-    /*justify-content: space-between;*/
-    /*margin-top: 100px;*/
-    padding-top: 30px;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 30px;
-}
+/*Input types*/
 .form-control {
     display: unset;
     width: 200px;
     height:40px;
 }
+/*Heading*/
 .lg-h1 {
     margin-bottom: 20px;
  }
-
+/*Button*/
 .btn {
     margin-top: 20px;
     width: 200px;
     height:40px;
 }
+/*Logo*/
 .i1 {
     margin-bottom: 20px;
-    width: 150px;
-    height:150px;
+    width: 273px;
+    height: 100px;
+}
+/*Form*/
+.lg-form {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 550px;
+    margin: auto;
+
+    text-align: center!important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+    padding: 30px 10px 30px 10px;
 }
