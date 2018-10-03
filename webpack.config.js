@@ -1,6 +1,6 @@
 ﻿const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+var path = require('path');
 module.exports = {
   entry: './src/main.ts',
   module: {
@@ -28,6 +28,7 @@ module.exports = {
   },
 
   plugins: [
+      new webpack.ContextReplacementPlugin(/\@angular(\\|\/)core(\\|\/)esm5/, path.join(__dirname, './src')),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
