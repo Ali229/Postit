@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -53,9 +53,6 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate(['./home']);
-                    // this.router.navigateByUrl('');
-                    console.log("User ID: " + data['user_id']);
-
                 },
                 error => {
 
