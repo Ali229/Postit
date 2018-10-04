@@ -2,7 +2,9 @@
 <p>You're logged in Postit</p>
 <div>
     <ul>
-        <li *ngFor="let user of users">{{user_id}} {{user.lastName}}</li>
+        <li *ngFor="let user of users">{{user.user_id}} {{user.username}} {{user.firstName}} {{user.lastName}}
+            {{user.email}} {{user.last_login}} {{user.password_time_remaining}} {{user.user_type}}
+        </li>
     </ul>
 </div>
-<p><a [routerLink]="['/login']">Logout</a></p>
+<p><a [routerLink]="['/login']">Logout</a></p> <!-- TODO How do we call AuthenticationService.logout() from here? -->
