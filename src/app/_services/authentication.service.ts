@@ -1,4 +1,4 @@
-﻿import {Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {first} from "rxjs/operators";
@@ -41,7 +41,10 @@ export class AuthenticationService {
     }
 
     logout() {
-        sessionStorage.removeItem('currentUser')
+        this.last_login = null;
+        this.passwd_time_remaining = null;
+        this.auth_token = null;
+        this.user_id = null;
     }
 
     getAuthToken() {
