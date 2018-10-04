@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {first} from "rxjs/operators";
+import {LoginData} from "../_models/login_data";
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthenticationService {
     login(username: string, password: string) {
         this.username = username;
         console.log("Sending request");
-        const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
+        const requestResponse: Observable<any> = this.http.put<any>(`${config.apiUrl}/signin`, {
             username: username,
             password: password
         });
@@ -73,7 +74,6 @@ export class AuthenticationService {
             'Authorization': this.auth_token
         })
     }
-}
 
     encryptPassword(password: string) {
         return password; // TODO Actually do something here later. Encode/encrypt it... do something that's lossy
