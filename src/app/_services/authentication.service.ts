@@ -75,9 +75,7 @@ export class AuthenticationService {
     }
 }
 
-export interface LoginData {
-    auth_token: string;
-    user_id: number;
-    passwd_time_remaining: number;
-    last_login: string;
+    encryptPassword(password: string) {
+        return password; // TODO Actually do something here later. Encode/encrypt it... do something that's lossy
+    }
 }
