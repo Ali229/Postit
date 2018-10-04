@@ -52,7 +52,8 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate(['./home']); // FIXME There's an error in the routing
+
+                    this.router.navigate(['./home']);
                 },
                 error => {
 

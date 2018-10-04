@@ -12,8 +12,9 @@ import { routing }        from './app.routing';
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import {AuthenticationService} from "./_services";;
-import { NavbarComponent } from './navbar/navbar.component';
+import {AuthenticationService, UserService} from "./_services";;
+import { NavbarComponent } from './navbar/navbar.component'
+;
 import { AccountComponent } from './account/account.component'
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AccountComponent } from './account/account.component'
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent,
+        LoginComponent
+,
         NavbarComponent
 ,
         AccountComponent    ],
@@ -36,7 +38,8 @@ import { AccountComponent } from './account/account.component'
 
         // provider used to create fake backend
         fakeBackendProvider,
-        AuthenticationService
+        AuthenticationService,
+        UserService
     ],
     bootstrap: [AppComponent]
 })
