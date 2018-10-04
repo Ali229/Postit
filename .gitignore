@@ -61,3 +61,7 @@ dist
 .idea/**/dbnavigator.xml
 
 package-lock.json
+
+# Compiled sources
+*.js
+*.js.*
