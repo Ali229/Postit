@@ -9,12 +9,16 @@ export class HomeComponent implements OnInit {
     users: User[] = [];
     private user_id: number;
 
-    constructor(private userService: UserService, private authService: AuthenticationService) {}
+    // constructor(private userService: UserService, private authService: AuthenticationService) {}
+    //
+    // ngOnInit() {
+    //     this.user_id = this.authService.getUserID();
+    //     this.userService.getAll().pipe(first()).subscribe(users => {
+    //         this.users = users;
+    //     });
+    // }
+    constructor() { }
 
     ngOnInit() {
-        this.user_id = this.authService.getUserID();
-        this.userService.getAll().pipe(first()).subscribe(users => { 
-            this.users = users; 
-        });
     }
 }

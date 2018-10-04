@@ -13,7 +13,8 @@ import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import {AuthenticationService} from "./_services";;
-import { NavbarComponent } from './navbar/navbar.component'
+import { NavbarComponent } from './navbar/navbar.component';
+import { AccountComponent } from './account/account.component'
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { NavbarComponent } from './navbar/navbar.component'
         HomeComponent,
         LoginComponent,
         NavbarComponent
-    ],
+,
+        AccountComponent    ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
