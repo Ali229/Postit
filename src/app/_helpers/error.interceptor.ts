@@ -21,6 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         // auto logout if 401 response returned from api
         this.authenticationService.logout();
         console.log("User is not logged in, routing back to /login");
+        // TODO Instead have a pop-up message that routes to /login when closed?
         this.router.navigate(['./login']);
       }
 
