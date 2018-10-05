@@ -1,16 +1,15 @@
 /**************************************** Input Boxes ****************************************/
 .form-control {
     display: unset;
-    width: 200px;
-    height: 40px;
+    width: 200px !important;
+    height: 40px !important;;
 }
 /**************************************** Heading ********************************************/
 .lg-h1 {
     margin-bottom: 20px;
  }
 /**************************************** Submit Button **************************************/
-.btn {
-    margin-top: 20px;
+.lg-btn {
     width: 200px;
     height:40px;
 }

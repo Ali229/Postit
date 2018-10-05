@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -12,8 +12,10 @@ import {AuthenticationService, UserService} from './_services';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AccountComponent } from './account/account.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 @NgModule({
     imports: [
+        FormsModule,
         MDBBootstrapModule.forRoot(),
         BrowserModule,
         ReactiveFormsModule,
