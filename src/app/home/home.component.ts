@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-      // this.authService.verifyLoggedIn(); // This should automatically route if it fails
+      this.authService.verifyLoggedIn(); // This should automatically route if it fails
       this.userService.getAll().subscribe( response => {
         this.users = response.users;
       })

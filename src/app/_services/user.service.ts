@@ -20,9 +20,7 @@ export class UserService {
   }
 
   getAll() { // Should only be callable by admins (and perhaps managers)
-    const requestResponse: Observable<any> = this.http.get<User[]>('http://markzeagler.com/postit-backend/user/all', {
-      headers: this.authService.getGETHeaders()
-    });
+    const requestResponse: Observable<any> = this.http.get<User[]>('http://markzeagler.com/postit-backend/user/all');
 
     requestResponse.subscribe(response => {
       this.users = response.users;
@@ -32,7 +30,7 @@ export class UserService {
   }
 
   register(username: string, first_name: string, last_name: string, email: string, password: string) {
-    return this.http.put( 'http://markzeagler.com/postit-backend/register', {
+    return this.http.put('http://markzeagler.com/postit-backend/register', {
       'username': username,
       'password': password,
       'first_name': first_name,

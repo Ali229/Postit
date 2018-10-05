@@ -29,7 +29,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         NavbarComponent,
         AccountComponent],
     providers: [
-        // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         AuthenticationService,

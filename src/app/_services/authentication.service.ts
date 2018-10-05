@@ -15,7 +15,6 @@ export class AuthenticationService {
   private passwd_time_remaining: number;
   private last_login: string;
   private username: string;
-
   // Don't save passwords
 
   constructor(private http: HttpClient,
@@ -32,12 +31,11 @@ export class AuthenticationService {
     });
 
     requestResponse.pipe(first()).subscribe((response: LoginData) => {
-        if (response['status_code'] == 200) {
           this.user_id = response['user_id'];
           this.auth_token = response['auth_token'];
           this.passwd_time_remaining = response['passwd_time_remaining'];
           this.last_login = response['last_login'];
-        }
+          this.router.navigate(['./home']);
       }
     );
 
@@ -72,18 +70,18 @@ export class AuthenticationService {
   }
 
   getGETHeaders() {
-    return new HttpHeaders({
+    return {
       'Cache-Control': 'no-cache',
       'Authorization': "Bearer " + this.auth_token
-    })
+    }
   }
 
   getPOSTPUTHeaders() {
-    return new HttpHeaders({
+    return {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
       'Authorization': "Bearer " + this.auth_token
-    })
+    }
   }
 
   encryptPassword(password: string) {
