@@ -18,9 +18,9 @@ export class HomeComponent implements OnInit {
     //     });
     // }
     constructor(private authService: AuthenticationService, private userService: UserService) {
-        userService.getUsersObservable().subscribe( () => {
-
-        })
+        // userService.getUsersObservable().subscribe( () => {
+        //
+        // })
     }
 
     ngOnInit() {

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {first} from "rxjs/operators";
-import {LoginData} from "../_models/login_data";
+import {LoginData} from "../_models";
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +23,7 @@ export class AuthenticationService {
     login(username: string, password: string) {
         this.username = username;
         console.log("Sending request");
-        const requestResponse: Observable<any> = this.http.put<any>(`${config.apiUrl}/signin`, {
+        const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
             username: username,
             password: password
         });

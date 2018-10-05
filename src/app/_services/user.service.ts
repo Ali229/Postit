@@ -1,4 +1,4 @@
-﻿import {Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {User} from '../_models';
@@ -20,11 +20,11 @@ export class UserService {
     }
 
     getAll() { // Should only be callable by admins (and perhaps managers)
-        return this.http.get<User[]>(`${config.apiUrl}/users`, {headers: this.authService.getHeaders()});
+        return this.http.get<User[]>('http://markzeagler.com/postit-backend/users', {headers: this.authService.getHeaders()});
     }
 
     register(username: string, first_name: string, last_name: string, email: string, password: string) {
-        return this.http.put(`${config.apiUrl}/register`, {
+        return this.http.put( 'http://markzeagler.com/postit-backend/register', {
             "username": username,
             "password": password,
             "first_name": first_name,
