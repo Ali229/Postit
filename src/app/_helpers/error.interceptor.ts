@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.authenticationService.logout();
         console.log('User is not logged in, routing back to /login');
         // TODO Instead have a pop-up message that routes to /login when closed?
-        this.router.navigate(['./login']);
+        // this.router.navigate(['./login']);
       }
 
       const error = err.error.message || err.statusText;
