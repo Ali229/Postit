@@ -20,7 +20,7 @@ export class UserService {
     }
 
     getAll() { // Should only be callable by admins (and perhaps managers)
-        return this.http.get<User[]>('http://markzeagler.com/postit-backend/users', {headers: this.authService.getHeaders()});
+        return this.http.get<User[]>('http://markzeagler.com/postit-backend/users');
     }
 
     register(username: string, first_name: string, last_name: string, email: string, password: string) {
