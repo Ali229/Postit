@@ -7,7 +7,7 @@ import { AuthenticationService } from '../_services';
 
 @Component({
     templateUrl: 'login.component.html',
-    styleUrls: ['login.component.css']
+    styleUrls: ['login.component.scss']
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
             return;
         }
 
-        //Routing to home
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
