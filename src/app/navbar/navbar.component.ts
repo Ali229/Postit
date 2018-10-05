@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
 
   select(page: string) {
     this.active = page;
-    console.log("Navigating to ./" + page.toLowerCase());
     this.router.navigate(['./' + page.toLowerCase()]);
   }
 }
