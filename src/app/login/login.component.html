@@ -1,4 +1,4 @@
-﻿<!-- Default form login -->
+<!-- Default form login -->
 <div class="container">
 <form [formGroup]="loginForm" class="text-center border border-light p-5 lg-form" (ngSubmit)="onSubmit()">
   <img class="i1" src="./src/assets/logo.png" alt="logo"/>
@@ -6,7 +6,7 @@
 
   <!-- Email -->
   <div class="form-group">
-  <input type="email" formControlName="username" id="defaultLoginFormEmail" class="form-control" placeholder="E-mail">
+  <input type="email" formControlName="username" id="defaultLoginFormEmail" class="form-control" placeholder="Username">
     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
       <div *ngIf="f.username.errors.required">Username is required</div>
     </div>
