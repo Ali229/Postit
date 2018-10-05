@@ -13,8 +13,7 @@ import { LoginComponent } from './login';
 import {AuthenticationService, UserService} from './_services';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AccountComponent } from './account/account.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';;
-import { LogComponent } from './log/log.component'
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 @NgModule({
     imports: [
         MDBBootstrapModule.forRoot(),
@@ -29,7 +28,6 @@ import { LogComponent } from './log/log.component'
         LoginComponent,
         NavbarComponent,
         AccountComponent],
-        LogComponent,
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
