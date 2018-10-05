@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
-              private router: Router,) {
+              private router: Router) {
   }
 
   login(username: string, password: string) {
@@ -43,6 +43,7 @@ export class AuthenticationService {
     localStorage.setItem('auth_token', null);
     localStorage.setItem('passwd_time_remaining', null);
     localStorage.setItem('last_login', null);
+    this.router.navigate(['./login']);
   }
 
   getAuthToken() {

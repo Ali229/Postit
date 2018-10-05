@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
     // userService.getUsersObservable().subscribe( () => {
     //
     // })
-    console.log('Auth Token: ' + authService.getAuthToken());
-    console.log('User ID: ' + authService.getUserID());
   }
 
   ngOnInit() {
@@ -27,10 +25,10 @@ export class HomeComponent implements OnInit {
   }
 
   sortBy(value: string) {
-
+    // TODO Sort items
   }
 
-  logout() {
-    this.authService.logout();
+  updateUser(user: User) {
+    // TODO Sort items
   }
 }

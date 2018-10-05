@@ -10,7 +10,7 @@ import {HomeComponent} from './home';
 import {LoginComponent} from './login';
 import {AuthenticationService, UserService} from './_services';
 import {NavbarComponent} from './navbar/navbar.component';
-import {AccountComponent} from './account/account.component';
+import {AccountsComponent} from './account/accounts.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {LoginData, User} from "./_models";
 import {CommonModule} from "@angular/common";
@@ -30,7 +30,7 @@ import {CommonModule} from "@angular/common";
     HomeComponent,
     LoginComponent,
     NavbarComponent,
-    AccountComponent],
+    AccountsComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
