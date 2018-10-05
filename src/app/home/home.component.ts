@@ -1,32 +1,36 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import {Component, OnInit} from '@angular/core';
 // import { first } from 'rxjs/operators';
-import { User } from '../_models';
+import {User} from '../_models';
 import {AuthenticationService, UserService, /*UserService*/} from '../_services';
-@Component({templateUrl: 'home.component.html'})
+
+@Component({
+  selector: 'table-sort',
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.scss']
+})
 export class HomeComponent implements OnInit {
-    users: User[] = [];
-    // private user_id: number;
+  users: User[] = [];
 
-    // constructor(private userService: UserService, private authService: AuthenticationService) {}
+  constructor(private authService: AuthenticationService, private userService: UserService) {
+    // userService.getUsersObservable().subscribe( () => {
     //
-    // ngOnInit() {
-    //     this.user_id = this.authService.getUserID();
-    //     this.userService.getAll().pipe(first()).subscribe(users => {
-    //         this.users = users;
-    //     });
-    // }
-    constructor(private authService: AuthenticationService, private userService: UserService) {
-        // userService.getUsersObservable().subscribe( () => {
-        //
-        // })
-      console.log('Auth Token: ' + authService.getAuthToken());
-      console.log('User ID: ' + authService.getUserID());
-    }
+    // })
+    console.log('Auth Token: ' + authService.getAuthToken());
+    console.log('User ID: ' + authService.getUserID());
+  }
 
-    ngOnInit() {
-      this.authService.verifyLoggedIn(); // This should automatically route if it fails
-      this.userService.getAll().subscribe( response => {
-        this.users = response.users;
-      })
-    }
+  ngOnInit() {
+    this.authService.verifyLoggedIn(); // This should automatically route if it fails
+    this.userService.getAll().subscribe(response => {
+      this.users = response.users;
+    })
+  }
+
+  sortBy(value: string) {
+
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }
