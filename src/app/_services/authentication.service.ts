@@ -10,11 +10,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 export class AuthenticationService {
 
-  private auth_token: string;
-  private user_id: number;
-  private passwd_time_remaining: number;
-  private last_login: string;
-  private username: string;
   // Don't save passwords
 
   constructor(private http: HttpClient,
@@ -23,7 +18,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    this.username = username;
+    localStorage.setItem('username', username);
     console.log('Sending request');
     const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
       username: username,
@@ -31,11 +26,11 @@ export class AuthenticationService {
     });
 
     requestResponse.pipe(first()).subscribe((response: LoginData) => {
-          this.user_id = response['user_id'];
-          this.auth_token = response['auth_token'];
-          this.passwd_time_remaining = response['passwd_time_remaining'];
-          this.last_login = response['last_login'];
-          this.router.navigate(['./home']);
+        localStorage.setItem('user_id', response['user_id'].toString());
+        localStorage.setItem('auth_token', response['auth_token']);
+        localStorage.setItem('passwd_time_remaining', response['passwd_time_remaining'].toString());
+        localStorage.setItem('last_login', response['last_login']);
+        this.router.navigate(['./home']);
       }
     );
 
@@ -43,36 +38,37 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.last_login = null;
-    this.passwd_time_remaining = null;
-    this.auth_token = null;
-    this.user_id = null;
+    localStorage.setItem('username', null);
+    localStorage.setItem('user_id', null);
+    localStorage.setItem('auth_token', null);
+    localStorage.setItem('passwd_time_remaining', null);
+    localStorage.setItem('last_login', null);
   }
 
   getAuthToken() {
-    return this.auth_token;
+    return localStorage.getItem('auth_token');
   }
 
   getUserID() {
-    return this.user_id;
+    return localStorage.getItem('user_id');
   }
 
   getUserName() {
-    return this.username;
+    return localStorage.getItem('username');
   }
 
   getPasswdDaysRemaining() {
-    return this.passwd_time_remaining;
+    return localStorage.getItem('passwd_time_remaining');
   }
 
   getLastLogin() {
-    return this.last_login;
+    return localStorage.getItem('last_login');
   }
 
   getGETHeaders() {
     return {
       'Cache-Control': 'no-cache',
-      'Authorization': "Bearer " + this.auth_token
+      'Authorization': "Bearer " + this.getAuthToken()
     }
   }
 
@@ -80,7 +76,7 @@ export class AuthenticationService {
     return {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + this.auth_token
+      'Authorization': "Bearer " + this.getAuthToken()
     }
   }
 
