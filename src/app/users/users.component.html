@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+
+<table class="table table-striped table-bordered table-responsive-md">
+  <thead>
+  <tr>
+    <th>User ID
+      <mdb-icon icon="sort" (click)="sortBy('user_id')"></mdb-icon>
+    </th>
+    <th>Username
+      <mdb-icon icon="sort" (click)="sortBy('username')"></mdb-icon>
+    </th>
+    <th>First Name
+      <mdb-icon icon="sort" (click)="sortBy('first_name')"></mdb-icon>
+    </th>
+    <th>Last Name
+      <mdb-icon icon="sort" (click)="sortBy('last_name')"></mdb-icon>
+    </th>
+    <th>Email
+      <mdb-icon icon="sort" (click)="sortBy('email')"></mdb-icon>
+    </th>
+    <th>Last Login
+      <mdb-icon icon="sort" (click)="sortBy('last_login')"></mdb-icon>
+    </th>
+    <th>Password Expiration Date
+      <mdb-icon icon="sort" (click)="sortBy('password_expiration_date')"></mdb-icon>
+    </th>
+    <th>User Type
+      <mdb-icon icon="sort" (click)="sortBy('user_type')"></mdb-icon>
+    </th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <th>User ID</th>
+    <th>Username</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Last Login</th>
+    <th>Password Expiration Date</th>
+    <th>User Type</th>
+  </tr>
+  </tfoot>
+  <tbody>
+  <tr *ngFor="let user of users" (click)="updateUser(user)">
+    <td>{{user.user_id}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.first_name}}</td>
+    <td>{{user.last_name}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.last_login}}</td>
+    <td>{{user.password_expiration_date}}</td>
+    <td>{{user.user_type}}</td>
+  </tr>
+  </tbody>
+</table>

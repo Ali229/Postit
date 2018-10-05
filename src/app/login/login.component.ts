@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     onSubmit() {
+        localStorage.setItem('active_page', 'Home'); // Gotta do this before we get into the navbar, or else it's a mess
 
         this.submitted = true;
         // stop here if form is invalid

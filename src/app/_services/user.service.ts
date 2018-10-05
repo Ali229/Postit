@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class UserService {
 
-  private users: User[];
+  private users: User[] = [];
   private usersObservable: Observable<User[]>;
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {

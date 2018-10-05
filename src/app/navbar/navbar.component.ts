@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.authService.getUserName();
+    this.active = localStorage.getItem('active_page')
   }
 
   logout() {
@@ -27,7 +28,7 @@ export class NavbarComponent implements OnInit {
   }
 
   select(page: string) {
-    this.active = page;
+    localStorage.setItem('active_page', page);
     this.router.navigate(['./' + page.toLowerCase()]);
   }
 }

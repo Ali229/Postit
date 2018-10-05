@@ -15,6 +15,11 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {LoginData, User} from "./_models";
 import {CommonModule} from "@angular/common";
 
+;
+import {UsersComponent} from './users/users.component'
+import {Account} from "./_models/account";
+import {AccountService} from "./_services/account.service";
+
 @NgModule({
   imports: [
     FormsModule,
@@ -30,14 +35,17 @@ import {CommonModule} from "@angular/common";
     HomeComponent,
     LoginComponent,
     NavbarComponent,
-    AccountsComponent],
+    AccountsComponent,
+    UsersComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
 
     AuthenticationService,
     UserService,
-    User
+    AccountService,
+    User,
+    Account
   ],
   bootstrap: [AppComponent]
 })

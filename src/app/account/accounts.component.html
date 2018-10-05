@@ -1,4 +1,66 @@
 <app-navbar></app-navbar>
-<p>
-  account works!
-</p>
+
+<table class="table table-striped table-bordered table-responsive-md">
+  <thead>
+  <tr>
+    <th>Account ID
+      <mdb-icon icon="sort" (click)="sortBy('account_id')"></mdb-icon>
+    </th>
+    <th>Account Title
+      <mdb-icon icon="sort" (click)="sortBy('account_title')"></mdb-icon>
+    </th>
+    <th>Balance
+      <mdb-icon icon="sort" (click)="sortBy('balance')"></mdb-icon>
+    </th>
+    <th>Normal Side
+      <mdb-icon icon="sort" (click)="sortBy('normal_side')"></mdb-icon>
+    </th>
+    <th>Description
+      <mdb-icon icon="sort" (click)="sortBy('description')"></mdb-icon>
+    </th>
+    <th>Date Created
+      <mdb-icon icon="sort" (click)="sortBy('date_created')"></mdb-icon>
+    </th>
+    <th>Created By (User ID)
+      <mdb-icon icon="sort" (click)="sortBy('created_by')"></mdb-icon>
+    </th>
+    <th>Last Edited
+      <mdb-icon icon="sort" (click)="sortBy('last_edited_date')"></mdb-icon>
+    </th>
+    <th>Last Edited By
+      <mdb-icon icon="sort" (click)="sortBy('last_edited_by')"></mdb-icon>
+    </th>
+    <th>Is Active
+      <mdb-icon icon="sort" (click)="sortBy('is_active')"></mdb-icon>
+    </th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <th>Account ID</th>
+    <th>Account Title</th>
+    <th>Balance</th>
+    <th>Normal Side</th>
+    <th>Description</th>
+    <th>Date Created</th>
+    <th>Created By (User ID)</th>
+    <th>Last Edited</th>
+    <th>Last Edited By</th>
+    <th>Is Active</th>
+  </tr>
+  </tfoot>
+  <tbody>
+  <tr *ngFor="let account of accounts" (click)="updateAccount(account)">
+    <td>{{account.account_id}}</td>
+    <td>{{account.account_title}}</td>
+    <td>${{account.balance.toFixed(2)}}</td>
+    <td>{{account.normal_side}}</td>
+    <td>{{account.description}}</td>
+    <td>{{account.date_created}}</td>
+    <td>{{account.created_by}}</td>
+    <td>{{account.last_edited_date}}</td>
+    <td>{{account.last_edited_by}}</td>
+    <td>{{account.is_active}}</td>
+  </tr>
+  </tbody>
+</table>

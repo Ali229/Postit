@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, AccountService} from "../_services";
-import {Account} from "../_models";
+import { Component, OnInit } from '@angular/core';
+import {User} from "../_models";
+import {AuthenticationService, UserService} from "../_services";
+import {AccountService} from "../_services/account.service";
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.scss']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class AccountsComponent implements OnInit {
+export class UsersComponent implements OnInit {
 
-  accounts: Account[] = [];
+  users: User[] = [];
   sortValue: string;
   sortReverse: boolean = false;
 
-  constructor(private authService: AuthenticationService, private accountService: AccountService) {
+  constructor(private authService: AuthenticationService, private userService: UserService) {
     // userService.getUsersObservable().subscribe( () => {
     //
     // })
@@ -21,8 +22,8 @@ export class AccountsComponent implements OnInit {
 
   ngOnInit() {
     this.authService.verifyLoggedIn(); // This should automatically route if it fails
-    this.sortBy("account_id");
-    this.updateAccountList();
+    this.sortBy("user_id");
+    this.updateUserList();
   }
 
   sortBy(value: string) {
@@ -32,7 +33,7 @@ export class AccountsComponent implements OnInit {
       this.sortReverse = false;
     }
     this.sortValue = value;
-    this.updateAccountList();
+    this.updateUserList();
     console.log("Sorting by: " + value + (this.sortReverse ? " regular" : " reversed"));
   }
 
@@ -40,10 +41,10 @@ export class AccountsComponent implements OnInit {
 
   }
 
-  updateAccountList() {
-    this.accountService.getAll().subscribe(response => {
-      this.accounts = response.accounts;
-      this.accounts.sort((a, b) => {
+  updateUserList() {
+    this.userService.getAll().subscribe(response => {
+      this.users = response.users;
+      this.users.sort((a, b) => {
         if (!this.sortReverse) {
           return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
         } else {
@@ -53,8 +54,7 @@ export class AccountsComponent implements OnInit {
     });
   }
 
-  updateAccount(account: Account) {
+  updateUser(user: User) {
     // TODO Sort items
   }
-
 }
