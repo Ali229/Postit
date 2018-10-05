@@ -60,8 +60,6 @@ dist
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-package-lock.json
-
 # Compiled sources
 *.js
 *.js.*
