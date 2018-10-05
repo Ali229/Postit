@@ -5,83 +5,89 @@ import {first} from "rxjs/operators";
 import {LoginData} from "../_models";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthenticationService {
 
-    private auth_token: string;
-    private user_id: number;
-    private passwd_time_remaining: number;
-    private last_login: string;
-    private username: string;
+  private auth_token: string;
+  private user_id: number;
+  private passwd_time_remaining: number;
+  private last_login: string;
+  private username: string;
 
-    // Don't save passwords
+  // Don't save passwords
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {
+  }
 
-    login(username: string, password: string) {
-        this.username = username;
-        console.log("Sending request");
-        const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
-            username: username,
-            password: password
-        });
+  login(username: string, password: string) {
+    this.username = username;
+    console.log("Sending request");
+    const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
+      username: username,
+      password: password
+    });
 
-        requestResponse.pipe(first()).subscribe((response: LoginData) => {
-                if (response['status_code'] == 200) {
-                    this.user_id = response['user_id'];
-                    this.auth_token = response['auth_token'];
-                    this.passwd_time_remaining = response['passwd_time_remaining'];
-                    this.last_login = response['last_login'];
-                }
-            }
-        );
+    requestResponse.pipe(first()).subscribe((response: LoginData) => {
+        if (response['status_code'] == 200) {
+          this.user_id = response['user_id'];
+          this.auth_token = response['auth_token'];
+          this.passwd_time_remaining = response['passwd_time_remaining'];
+          this.last_login = response['last_login'];
+        }
+      }
+    );
 
-        return requestResponse;
-    }
+    return requestResponse;
+  }
 
-    logout() {
-        this.last_login = null;
-        this.passwd_time_remaining = null;
-        this.auth_token = null;
-        this.user_id = null;
-    }
+  logout() {
+    this.last_login = null;
+    this.passwd_time_remaining = null;
+    this.auth_token = null;
+    this.user_id = null;
+  }
 
-    getAuthToken() {
-        return this.auth_token;
-    }
+  getAuthToken() {
+    return this.auth_token;
+  }
 
-    getUserID() {
-        return this.user_id;
-    }
+  getUserID() {
+    return this.user_id;
+  }
 
-    getUserName() {
-        return this.username;
-    }
+  getUserName() {
+    return this.username;
+  }
 
-    getPasswdDaysRemaining() {
-        return this.passwd_time_remaining;
-    }
+  getPasswdDaysRemaining() {
+    return this.passwd_time_remaining;
+  }
 
-    getLastLogin() {
-        return this.last_login;
-    }
+  getLastLogin() {
+    return this.last_login;
+  }
 
-    getHeaders() {
-        return new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': this.auth_token
-        })
-    }
+  getHeaders() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.auth_token
+    })
+  }
 
-    encryptPassword(password: string) {
-        return password; // TODO Actually do something here later. Encode/encrypt it... do something that's lossy
-    }
+  encryptPassword(password: string) {
+    return password; // TODO Actually do something here later. Encode/encrypt it... do something that's lossy
+  }
 
-    verifyLoggedIn() {
-      console.log("Verifying that user is still logged in");
+  verifyLoggedIn() {
+    console.log("Verifying that user is still logged in");
 
-      return this.http.get<any>("http://postit.markzeagler.com/postit-backend/verify_logged_in");
-    }
+    const requestResponse: Observable<any> = this.http.get<any>("http://postit.markzeagler.com/postit-backend/verify_logged_in");
+
+    requestResponse.subscribe(response => {
+      console.log(response['message']);
+    });
+
+    return requestResponse;
+  }
 }
