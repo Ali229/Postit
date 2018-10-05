@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
         // userService.getUsersObservable().subscribe( () => {
         //
         // })
+      console.log("Auth Token: " + authService.getAuthToken());
+      console.log("User ID: " + authService.getUserID());
     }
 
     ngOnInit() {
