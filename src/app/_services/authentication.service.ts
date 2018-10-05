@@ -78,4 +78,10 @@ export class AuthenticationService {
     encryptPassword(password: string) {
         return password; // TODO Actually do something here later. Encode/encrypt it... do something that's lossy
     }
+
+    verifyLoggedIn() {
+      console.log("Verifying that user is still logged in");
+
+      return this.http.get<any>("http://postit.markzeagler.com/postit-backend/verify_logged_in");
+    }
 }
