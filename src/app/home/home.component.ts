@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-
 import { User } from '../_models';
 import {AuthenticationService, UserService} from '../_services';
 
@@ -21,8 +20,8 @@ export class HomeComponent implements OnInit {
         // userService.getUsersObservable().subscribe( () => {
         //
         // })
-      console.log("Auth Token: " + authService.getAuthToken());
-      console.log("User ID: " + authService.getUserID());
+      console.log('Auth Token: ' + authService.getAuthToken());
+      console.log('User ID: ' + authService.getUserID());
     }
 
     ngOnInit() {

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {User} from '../_models';
-import {AuthenticationService} from "./authentication.service";
-import {Observable} from "rxjs";
+import {AuthenticationService} from './authentication.service';
+import {Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -25,12 +25,12 @@ export class UserService {
 
     register(username: string, first_name: string, last_name: string, email: string, password: string) {
         return this.http.put( 'http://markzeagler.com/postit-backend/register', {
-            "username": username,
-            "password": password,
-            "first_name": first_name,
-            "last_name": last_name,
-            "email": email
-        })
+            'username': username,
+            'password': password,
+            'first_name': first_name,
+            'last_name': last_name,
+            'email': email
+        });
     }
 
 

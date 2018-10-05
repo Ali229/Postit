@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {first} from "rxjs/operators";
-import {LoginData} from "../_models";
+import {Observable} from 'rxjs';
+import {first} from 'rxjs/operators';
+import {LoginData} from '../_models';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +22,14 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     this.username = username;
-    console.log("Sending request");
+    console.log('Sending request');
     const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
       username: username,
       password: password
     });
 
     requestResponse.pipe(first()).subscribe((response: LoginData) => {
-        if (response['status_code'] == 200) {
+        if (response['status_code'] === 200) {
           this.user_id = response['user_id'];
           this.auth_token = response['auth_token'];
           this.passwd_time_remaining = response['passwd_time_remaining'];
@@ -80,9 +80,9 @@ export class AuthenticationService {
   }
 
   verifyLoggedIn() {
-    console.log("Verifying that user is still logged in");
+    console.log('Verifying that user is still logged in');
 
-    const requestResponse: Observable<any> = this.http.get<any>("http://postit.markzeagler.com/postit-backend/verify_logged_in");
+    const requestResponse: Observable<any> = this.http.get<any>('http://postit.markzeagler.com/postit-backend/verify_logged_in');
 
     requestResponse.subscribe(response => {
       console.log(response['message']);

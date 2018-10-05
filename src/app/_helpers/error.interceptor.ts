@@ -3,7 +3,6 @@ import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/com
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router, ActivatedRoute} from '@angular/router';
-
 import {AuthenticationService} from '../_services';
 
 @Injectable()
@@ -15,12 +14,12 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
-      console.log("Error status: " + err.status);
-      console.log("Message: " + err.error.message);
+      console.log('Error status: ' + err.status);
+      console.log('Message: ' + err.error.message);
       if (err.status === 401) {
         // auto logout if 401 response returned from api
         this.authenticationService.logout();
-        console.log("User is not logged in, routing back to /login");
+        console.log('User is not logged in, routing back to /login');
         // TODO Instead have a pop-up message that routes to /login when closed?
         this.router.navigate(['./login']);
       }
