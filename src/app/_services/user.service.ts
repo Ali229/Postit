@@ -21,7 +21,14 @@ export class UserService {
     });
     this.authService.getUserID().subscribe(response => {
       this.userID = response;
-    })
+      this.updateUser();
+    });
+    const user_id = localStorage.getItem('user_id');
+    if (user_id) {
+      console.log("Setting user_id manually in user.service... Clean this up!");
+      this.userID = user_id;
+      this.updateUser();
+    }
   }
 
   getCurrUser() {

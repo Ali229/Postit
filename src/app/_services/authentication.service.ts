@@ -27,6 +27,10 @@ export class AuthenticationService implements OnInit {
     this.authTokenSubject = new Subject();
     this.passwdTimeRemainingSubject = new Subject();
     this.lastLoginSubject = new Subject();
+    let user_id = localStorage.getItem('user_id');
+    if (user_id) {
+      this.userIdSubject.next(user_id);
+    }
   }
 
   ngOnInit() {
@@ -81,22 +85,27 @@ export class AuthenticationService implements OnInit {
   }
 
   getAuthToken() {
+    this.authTokenSubject.next(localStorage.getItem('auth_token'));
     return this.authTokenSubject;
   }
 
   getUserID() {
+    this.userIdSubject.next(localStorage.getItem('user_id'));
     return this.userIdSubject;
   }
 
   getUserName() {
+    this.usernameSubject.next(localStorage.getItem('username'));
     return this.usernameSubject;
   }
 
   getPasswdDaysRemaining() {
+    this.passwdTimeRemainingSubject.next(localStorage.getItem('passwd_time_remaining'));
     return this.passwdTimeRemainingSubject;
   }
 
   getLastLogin() {
+    this.lastLoginSubject.next(localStorage.getItem('last_login'));
     return this.lastLoginSubject;
   }
 
