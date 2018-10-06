@@ -14,13 +14,20 @@ export class AccountsComponent implements OnInit {
   sortReverse = false;
 
   constructor(private authService: AuthenticationService, private accountService: AccountService) {
-    // userService.getUsersObservable().subscribe( () => {
-    //
-    // })
+    this.accountService.getAccountsSubject().subscribe( (response: Account[]) => {
+      this.accounts = response;
+      this.accounts.sort((a, b) => {
+        if (!this.sortReverse) {
+          return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
+        } else {
+          return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
+        }
+      });
+    });
   }
 
   ngOnInit() {
-    this.authService.verifyLoggedIn(); // This should automatically route if it fails
+    this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.sortBy('account_id');
     this.updateAccountList();
   }
@@ -33,7 +40,6 @@ export class AccountsComponent implements OnInit {
     }
     this.sortValue = value;
     this.updateAccountList();
-    console.log('Sorting by: ' + value + (this.sortReverse ? ' regular' : ' reversed'));
   }
 
   filterBy(value: string) {
@@ -41,19 +47,10 @@ export class AccountsComponent implements OnInit {
   }
 
   updateAccountList() {
-    this.accountService.getAll().subscribe(response => {
-      this.accounts = response.accounts;
-      this.accounts.sort((a, b) => {
-        if (!this.sortReverse) {
-          return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
-        } else {
-          return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
-        }
-      });
-    });
+      this.accountService.updateAccounts();
   }
 
-  updateAccount(account: Account) {
+  editAccount(account: Account) {
     // TODO Sort items
   }
 

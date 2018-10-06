@@ -3,22 +3,50 @@ import {HttpClient} from '@angular/common/http';
 
 import {User} from '../_models';
 import {AuthenticationService} from './authentication.service';
-import {Observable} from 'rxjs';
+import {Subject} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
 
+  userSubject: Subject<User>;
+  userArraySubject: Subject<User[]>;
+  loggedIn: boolean;
+  userID: string = "";
+
   constructor(private http: HttpClient, private authService: AuthenticationService) {
+    this.userSubject = new Subject();
+    this.userArraySubject = new Subject();
+    this.authService.getVerifiedLoggedIn().subscribe(response => {
+      this.loggedIn = response;
+    });
+    this.authService.getUserID().subscribe(response => {
+      this.userID = response;
+    })
   }
 
   getCurrUser() {
-    const requestResponse: Observable<any> = this.http.get<User>(`http://markzeagler.com/postit-backend/user/` + this.authService.getUserID());
-    return requestResponse;
+    this.updateUser();
+    return this.userSubject;
   }
 
-  getAll() { // Should only be callable by admins (and perhaps managers)
-    const requestResponse: Observable<any> = this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`);
-    return requestResponse;
+  updateUser() {
+    if (this.loggedIn && this.userID != "") {
+      this.http.get<User>(`http://markzeagler.com/postit-backend/user/` + this.userID).subscribe((response: User) => {
+        this.userSubject.next(response);
+      });
+    }
+  }
+
+  getUserArray() { // Should only be callable by admins (and perhaps managers)
+    this.updateUser();
+    return this.userArraySubject;
+  }
+
+  updateUserArray() {
+    this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`).subscribe((response: User[]) => {
+        this.userArraySubject.next(response['users']);
+      }
+    )
   }
 
   register(username: string, first_name: string, last_name: string, email: string, password: string) {

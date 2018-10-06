@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppComponent} from './app.component';
-import {routing} from './app.routing';
+import {AppRoutingModule} from './app.routing';
 import {BasicAuthInterceptor, ErrorInterceptor} from './_helpers';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
@@ -23,7 +23,7 @@ import {UsersComponent} from './users/users.component';
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    routing
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService, UserService} from '../_services';
-import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-navbar',
@@ -16,16 +16,21 @@ export class NavbarComponent implements OnInit {
   private managerPages: string[] = ['Home', 'Users', 'Accounts'];
   private userPages: string[] = ['Home', 'Accounts'];
   public username: string;
+  public loggedIn: boolean = false;
+  public loggedInSubscription: Subscription;
 
   constructor(private authService: AuthenticationService,
               private userService: UserService,
               private route: ActivatedRoute,
               private router: Router) {
     this.availablePages = this.userPages;
+    this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
+      this.loggedIn = value;
+      this.userService.updateUser();
+    });
 
     this.userService.getCurrUser().subscribe(response => {
       let user_type = response['user_type'];
-      console.log("User Type: " + user_type);
       if (user_type == 'admin') {
         this.availablePages = this.adminPages;
       } else if (user_type == 'manager') {
@@ -38,16 +43,20 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.username = this.authService.getUserName();
+    this.authService.getUserName().subscribe(data => {
+      this.username = data;
+    });
     this.active = localStorage.getItem('active_page');
   }
 
   logout() {
     this.authService.logout();
+    this.loggedIn = false;
   }
 
   select(page: string) {
     localStorage.setItem('active_page', page);
     this.router.navigate(['./' + page.toLowerCase()]);
+    this.loggedIn = true;
   }
 }

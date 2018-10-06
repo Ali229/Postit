@@ -1,5 +1,3 @@
-<app-navbar></app-navbar>
-
 <table class="table table-striped table-bordered table-responsive-md">
   <thead>
   <tr>
@@ -50,7 +48,7 @@
   </tr>
   </tfoot>
   <tbody>
-  <tr *ngFor="let account of accounts" (click)="updateAccount(account)">
+  <tr *ngFor="let account of accounts" (click)="editAccount(account)">
     <td>{{account.account_id}}</td>
     <td>{{account.account_title}}</td>
     <td>${{account.balance.toFixed(2)}}</td>

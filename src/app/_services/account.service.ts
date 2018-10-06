@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
+import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {AuthenticationService} from "./authentication.service";
 import {Account} from "../_models";
 
 @Injectable({
@@ -9,27 +8,41 @@ import {Account} from "../_models";
 })
 export class AccountService {
 
-  private accounts: Account[] = [];
+  private accountArraySubject: Subject<Account[]>;
+  private accountSubject: Subject<Account>;
 
-  constructor(private http: HttpClient, private authService: AuthenticationService) {
-    // TODO Initialize usersObservable
+  constructor(private http: HttpClient) {
+    this.accountArraySubject = new Subject();
+    this.accountSubject = new Subject();
   }
 
-  getAll() { // Should only be callable by admins (and perhaps managers)
-    const requestResponse: Observable<any> = this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all');
-
-    requestResponse.subscribe(response => {
-      this.accounts = response.accounts;
+  updateAccounts() {
+    this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all').subscribe(response => {
+      this.accountArraySubject.next(response['accounts']);
     });
-
-    return requestResponse;
   }
 
-  create(account_id: number, account_title: string, normal_side: string, description: string) {
+  getAccountsSubject() { // Should only be callable by admins (and perhaps managers)
+    this.updateAccounts();
+    return this.accountArraySubject;
+  }
+
+  createAccount(account_id: number, account_title: string, normal_side: string, description: string) {
     return this.http.post('http://markzeagler.com/postit-backend/account/' + account_id, {
       'account_title': account_title,
       'normal_side': normal_side,
       'description': description
     });
+  }
+
+  updateAccount(accout_id) {
+    this.http.get<Account>('http://markzeagler.com/postit-backend/account/' + accout_id.toString()).subscribe(response => {
+      this.accountSubject.next(response['account']);
+    });
+  }
+
+  getAccount(account_id: number) {
+    this.updateAccount(account_id);
+    return this.accountSubject;
   }
 }

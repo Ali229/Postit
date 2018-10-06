@@ -1,5 +1,5 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-dark indigo" [containerInside]="false">
+<mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-dark indigo" [containerInside]="false" *ngIf="loggedIn">
   <!-- Navbar brand -->
   <mdb-navbar-brand class="logo">
     <a class="navbar-brand pull-left" (click)="select('Home')"><img class="logo-image" src="./src/assets/nav-logo.png" alt="logo"/></a>
