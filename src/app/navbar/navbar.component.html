@@ -10,18 +10,18 @@
   <links>
     <!-- Links -->
     <ul class="navbar-nav mr-auto pull-right">
-      <li class="nav-item active">
+      <li [className]="active == 'Home' ? 'active' : ''" class="nav-item">
         <a class="nav-link waves-light" (click)="select('Home')" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li [className]="active == 'Accounts' ? 'active' : ''" class="nav-item ng-app ng-controller">
         <a class="nav-link waves-light" (click)="select('Accounts')" mdbWavesEffect>Accounts<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li [className]="active == 'Users' ? 'active' : ''" class="nav-item ng-app ng-controller">
         <a class="nav-link waves-light" (click)="select('Users')" mdbWavesEffect>Users<span class="sr-only">(current)</span></a>
       </li>
     </ul>
 
-    <ul class="navbar-nav nav-flex-icons">
+    <ul class="navbar-nav pull-xs-right nav-flex-icons">
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">
           <img class="user_icon" src="./src/assets/user_icon_white.png" alt="user_icon">&nbsp;&nbsp;&nbsp;{{username}}<span
