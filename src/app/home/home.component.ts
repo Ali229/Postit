@@ -1,4 +1,5 @@
 ﻿import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from '../_services';
 // import { first } from 'rxjs/operators';
 
 @Component({
@@ -7,9 +8,11 @@
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  constructor() {
+  public username: string;
+  constructor(private authService: AuthenticationService) {
   }
 
   ngOnInit() {
+    this.username = this.authService.getUserName();
   }
 }
