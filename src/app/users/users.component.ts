@@ -13,10 +13,7 @@ export class UsersComponent implements OnInit {
   sortValue: string;
   sortReverse: boolean = false;
 
-  constructor(private authService: AuthenticationService, private userService: UserService) {
-    // userService.getUsersObservable().subscribe( () => {
-    //
-    // })
+  constructor(private authService: AuthenticationService, public userService: UserService) {
   }
 
   ngOnInit() {

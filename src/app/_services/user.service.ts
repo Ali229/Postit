@@ -8,24 +8,16 @@ import {Observable} from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class UserService {
 
-  private users: User[] = [];
-  private usersObservable: Observable<User[]>;
-
   constructor(private http: HttpClient, private authService: AuthenticationService) {
-    // TODO Initialize usersObservable
   }
 
-  getUsersObservable() {
-    return this.usersObservable;
+  getCurrUser() {
+    const requestResponse: Observable<any> = this.http.get<User>(`http://markzeagler.com/postit-backend/user/` + this.authService.getUserID());
+    return requestResponse;
   }
 
   getAll() { // Should only be callable by admins (and perhaps managers)
-    const requestResponse: Observable<any> = this.http.get<User[]>('http://markzeagler.com/postit-backend/user/all');
-
-    requestResponse.subscribe(response => {
-      this.users = response.users;
-    });
-
+    const requestResponse: Observable<any> = this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`);
     return requestResponse;
   }
 
