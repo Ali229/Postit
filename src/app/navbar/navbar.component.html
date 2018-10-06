@@ -1,35 +1,30 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-dark bg-primary" [containerInside]="false">
-
+<mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-dark indigo" [containerInside]="false">
   <!-- Navbar brand -->
   <mdb-navbar-brand class="logo">
-    <a class="navbar-brand pull-left" (click)="select('Home')"><img class="logo-image" src="./src/assets/nav-logo.png"
-                                                              alt="logo"/></a>
-    <!--<div class="pull-left nav-link logo-page navbar-brand"><h3>: {{active}}</h3></div>-->
+    <a class="navbar-brand pull-left" (click)="select('Home')"><img class="logo-image" src="./src/assets/nav-logo.png" alt="logo"/></a>
+
   </mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
     <!-- Links -->
     <ul class="navbar-nav mr-auto pull-right">
-      <li class="nav-item">
-        <a class="nav-link waves-light" (click)="select('Home')" mdbWavesEffect>Home<span
-          class="sr-only">(current)</span></a>
+      <li class="nav-item active">
+        <a class="nav-link waves-light" (click)="select('Home')" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" (click)="select('Accounts')" mdbWavesEffect>Accounts<span
-          class="sr-only">(current)</span></a>
+        <a class="nav-link waves-light" (click)="select('Accounts')" mdbWavesEffect>Accounts<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" (click)="select('Users')" mdbWavesEffect>Users<span
-          class="sr-only">(current)</span></a>
+        <a class="nav-link waves-light" (click)="select('Users')" mdbWavesEffect>Users<span class="sr-only">(current)</span></a>
       </li>
     </ul>
 
     <ul class="navbar-nav nav-flex-icons">
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">
-          <img class="user_icon" src="./src/assets/user_icon.png" alt="user_icon">&nbsp;&nbsp;&nbsp;{{username}}<span
+          <img class="user_icon" src="./src/assets/user_icon_white.png" alt="user_icon">&nbsp;&nbsp;&nbsp;{{username}}<span
           class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Update Account</a>

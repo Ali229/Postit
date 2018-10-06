@@ -19,8 +19,12 @@
   </div>
   </div>
   <div class="form-group">
-  <button mdbBtn color="primary" class="waves-light lg-btn" mdbWavesEffect>LOGIN</button>
+  <button [disabled]="loading" mdbBtn color="indigo" class="waves-light lg-btn" mdbWavesEffect>LOGIN</button>
   </div>
+
+
+
+  <div *ngIf="error" class="alert alert-danger">{{error}}</div>
   <div class="d-flex justify-content-around">
     <div>
       <!-- Forgot password -->
