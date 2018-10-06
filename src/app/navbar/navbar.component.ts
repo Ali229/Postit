@@ -56,6 +56,7 @@ export class NavbarComponent implements OnInit {
 
   select(page: string) {
     localStorage.setItem('active_page', page);
+    this.active = page;
     this.router.navigate(['./' + page.toLowerCase()]);
     this.loggedIn = true;
   }
