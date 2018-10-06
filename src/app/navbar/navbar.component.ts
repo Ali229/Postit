@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "../_services";
-import {HttpClient} from "../../../node_modules/@angular/common/http";
-import {ActivatedRoute, Router} from "@angular/router";
+import {AuthenticationService} from '../_services';
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',

@@ -1,9 +1,8 @@
 ﻿import {Routes, RouterModule} from '@angular/router';
-
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
 import {AccountsComponent} from './account/accounts.component';
-import {UsersComponent} from "./users/users.component";
+import {UsersComponent} from './users/users.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},

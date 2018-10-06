@@ -2,23 +2,18 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-
 import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {BasicAuthInterceptor, ErrorInterceptor} from './_helpers';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
-import {AuthenticationService, UserService} from './_services';
+import {AuthenticationService, UserService, AccountService} from './_services';
 import {NavbarComponent} from './navbar/navbar.component';
 import {AccountsComponent} from './account/accounts.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
-import {LoginData, User} from "./_models";
-import {CommonModule} from "@angular/common";
-
-;
-import {UsersComponent} from './users/users.component'
-import {Account} from "./_models/account";
-import {AccountService} from "./_services/account.service";
+import {LoginData, User, Account} from './_models';
+import {CommonModule} from '@angular/common';
+import {UsersComponent} from './users/users.component';
 
 @NgModule({
   imports: [

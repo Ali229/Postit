@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../_models";
-import {AuthenticationService, UserService} from "../_services";
-import {AccountService} from "../_services/account.service";
+import {User} from '../_models';
+import {AuthenticationService, UserService, AccountService} from '../_services';
 
 @Component({
   selector: 'app-users',
@@ -22,7 +21,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.authService.verifyLoggedIn(); // This should automatically route if it fails
-    this.sortBy("user_id");
+    this.sortBy('user_id');
     this.updateUserList();
   }
 
@@ -34,7 +33,7 @@ export class UsersComponent implements OnInit {
     }
     this.sortValue = value;
     this.updateUserList();
-    console.log("Sorting by: " + value + (this.sortReverse ? " regular" : " reversed"));
+    console.log('Sorting by: ' + value + (this.sortReverse ? ' regular' : ' reversed'));
   }
 
   filterBy(value: string) {

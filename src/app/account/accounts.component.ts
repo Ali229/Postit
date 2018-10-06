@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, AccountService} from "../_services";
-import {Account} from "../_models";
+import {AuthenticationService, AccountService} from '../_services';
+import {Account} from '../_models';
 
 @Component({
   selector: 'app-account',
@@ -11,7 +11,7 @@ export class AccountsComponent implements OnInit {
 
   accounts: Account[] = [];
   sortValue: string;
-  sortReverse: boolean = false;
+  sortReverse = false;
 
   constructor(private authService: AuthenticationService, private accountService: AccountService) {
     // userService.getUsersObservable().subscribe( () => {
@@ -21,7 +21,7 @@ export class AccountsComponent implements OnInit {
 
   ngOnInit() {
     this.authService.verifyLoggedIn(); // This should automatically route if it fails
-    this.sortBy("account_id");
+    this.sortBy('account_id');
     this.updateAccountList();
   }
 
@@ -33,7 +33,7 @@ export class AccountsComponent implements OnInit {
     }
     this.sortValue = value;
     this.updateAccountList();
-    console.log("Sorting by: " + value + (this.sortReverse ? " regular" : " reversed"));
+    console.log('Sorting by: ' + value + (this.sortReverse ? ' regular' : ' reversed'));
   }
 
   filterBy(value: string) {
