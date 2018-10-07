@@ -56,6 +56,10 @@ export class UserService {
     )
   }
 
+  getUserTypes() {
+    return this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/info`);
+  }
+
   register(username: string, first_name: string, last_name: string, email: string, password: string) {
     return this.http.put('http://markzeagler.com/postit-backend/register', {
       'username': username,
@@ -63,6 +67,13 @@ export class UserService {
       'first_name': first_name,
       'last_name': last_name,
       'email': email
+    });
+  }
+
+  editUser(user_id, category, value) {
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, {
+      'category': category,
+      'value': value
     });
   }
 }
