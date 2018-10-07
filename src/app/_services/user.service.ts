@@ -17,6 +17,7 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthenticationService, private appService: AppService) {
     this.userSubject = new Subject();
     this.userArraySubject = new Subject();
+
     this.authService.getVerifiedLoggedIn().subscribe(response => {
       this.loggedIn = response;
     });
@@ -24,6 +25,7 @@ export class UserService {
       this.userID = response;
       this.updateUser();
     });
+
     const user_id = localStorage.getItem('user_id');
     if (user_id) {
       console.log("Setting user_id manually in user.service... Clean this up!");
@@ -56,10 +58,11 @@ export class UserService {
   }
 
   updateUserArray() {
-    this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`).subscribe((response: User[]) => {
+    if (this.loggedIn) {
+      this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`).subscribe((response: User[]) => {
         this.userArraySubject.next(response['users']);
-      }
-    )
+      });
+    }
   }
 
   getUserTypes() {

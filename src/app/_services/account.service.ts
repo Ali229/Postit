@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Account} from "../_models";
 import {AppService} from "./app.service";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class AccountService {
   private accountArraySubject: Subject<Account[]>;
   private accountSubject: Subject<Account>;
   private account: Account;
+  private loggedIn: boolean = false;
 
-  constructor(private http: HttpClient, private appService: AppService) {
+  constructor(private http: HttpClient, private appService: AppService, private authService: AuthenticationService) {
     this.accountArraySubject = new Subject();
     this.accountSubject = new Subject();
 
@@ -23,12 +25,18 @@ export class AccountService {
         this.updateAccount(this.account.account_id);
       }
     });
+
+    this.authService.getVerifiedLoggedIn().subscribe( response => {
+      this.loggedIn = response;
+    })
   }
 
   updateAccounts() {
-    this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all').subscribe(response => {
-      this.accountArraySubject.next(response['accounts']);
-    });
+    if (this.loggedIn) {
+      this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all').subscribe(response => {
+        this.accountArraySubject.next(response['accounts']);
+      });
+    }
   }
 
   getAccountsSubject() { // Should only be callable by admins (and perhaps managers)
@@ -45,10 +53,12 @@ export class AccountService {
   }
 
   updateAccount(accout_id) {
-    this.http.get<Account>('http://markzeagler.com/postit-backend/account/' + accout_id.toString()).subscribe(response => {
-      this.account = response['account'];
-      this.accountSubject.next(response['account']);
-    });
+    if (this.loggedIn) {
+      this.http.get<Account>('http://markzeagler.com/postit-backend/account/' + accout_id.toString()).subscribe(response => {
+        this.account = response['account'];
+        this.accountSubject.next(response['account']);
+      });
+    }
   }
 
   getAccount(account_id: number) {
