@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.availablePages = this.userPages;
+    this.active = localStorage.getItem('active_page');
     this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
       this.loggedIn = value;
       this.userService.updateUser();
@@ -46,7 +47,6 @@ export class NavbarComponent implements OnInit {
     this.authService.getUserName().subscribe(data => {
       this.username = data;
     });
-    this.active = localStorage.getItem('active_page');
   }
 
   logout() {
@@ -58,6 +58,5 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('active_page', page);
     this.active = page;
     this.router.navigate(['./' + page.toLowerCase()]);
-    this.loggedIn = true;
   }
 }
