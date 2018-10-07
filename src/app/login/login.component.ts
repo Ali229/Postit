@@ -21,11 +21,13 @@ export class LoginComponent implements OnInit {
   @ViewChild('forgotPasswordModal') public forgotPasswordModal: ModalDirective;
   forgotPasswordForm: FormGroup;
   forgotPasswordError: string;
+  forgotPasswordMessage: string;
 
   // Register Modal
   @ViewChild('registerModal') public registerModal: ModalDirective;
   registerForm: FormGroup;
   registerError: string;
+  registerMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -89,9 +91,9 @@ export class LoginComponent implements OnInit {
 
   forgotPasswordSubmit() {
     this.userService.forgotPassword(this.forgotPasswordForm.controls.username.value).subscribe(response => {
-      this.forgotPasswordModal.hide();
+      this.forgotPasswordMessage = response['message'];
     }, error => {
-      this.forgotPasswordError = error;
+      this.forgotPasswordError = error['message'];
     });
   }
 
@@ -105,9 +107,9 @@ export class LoginComponent implements OnInit {
       this.registerForm.controls.first_name.value,
       this.registerForm.controls.last_name.value,
       this.registerForm.controls.email.value).subscribe(response => {
-      this.registerModal.hide();
+      this.registerMessage = response['message'];
     }, error => {
-      this.registerError = error;
+      this.registerError = error['message'];
     })
   }
 }
