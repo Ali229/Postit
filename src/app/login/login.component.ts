@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService, UserService} from '../_services';
 import {NavbarComponent} from "../navbar/navbar.component";
+import {ModalDirective} from "angular-bootstrap-md";
 
 @Component({
   templateUrl: 'login.component.html',
@@ -16,11 +17,22 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error = '';
 
+  // Forgot Password Modal
+  @ViewChild('forgotPasswordModal') public forgotPasswordModal: ModalDirective;
+  forgotPasswordForm: FormGroup;
+  forgotPasswordError: string;
+
+  // Register Modal
+  @ViewChild('registerModal') public registerModal: ModalDirective;
+  registerForm: FormGroup;
+  registerError: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) {
+    private authenticationService: AuthenticationService,
+    private userService: UserService) {
   }
 
   ngOnInit() {
@@ -34,6 +46,18 @@ export class LoginComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.forgotPasswordForm = this.formBuilder.group({
+      username: ['', Validators.required]
+    });
+
+    this.registerForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', Validators.required]
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -57,5 +81,29 @@ export class LoginComponent implements OnInit {
             this.loading = false;
           }
         });
+  }
+
+  forgotPasswordShow() {
+    this.forgotPasswordModal.show();
+  }
+
+  forgotPasswordSubmit() {
+    this.userService.forgotPassword(this.forgotPasswordForm.controls.username.value).subscribe(response => {
+      this.forgotPasswordModal.hide();
+    }, error => {
+      this.forgotPasswordError = error;
+    });
+  }
+
+  registerShow() {
+    this.registerModal.show();
+  }
+
+  submitRegister() {
+    this.userService.register(this.forgotPasswordForm.controls.username.value,
+      this.forgotPasswordForm.controls.password.value,
+      this.forgotPasswordForm.controls.first_name.value,
+      this.forgotPasswordForm.controls.last_name.value,
+      this.forgotPasswordForm.controls.email.value)
   }
 }

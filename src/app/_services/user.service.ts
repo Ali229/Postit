@@ -82,4 +82,10 @@ export class UserService {
       'value': value
     });
   }
+
+  forgotPassword(username: string) {
+    return this.http.put('http://markzeagler.com/postit-backend/forgotpassword', {
+      'username': username
+    });
+  }
 }

@@ -29,40 +29,122 @@
     <div class="d-flex justify-content-around">
       <div>
         <!-- Forgot password -->
-        <a href="">Forgot password?</a>
+        <a (click)="forgotPasswordShow()">Forgot password?</a>
       </div>
     </div>
     <!-- Register -->
     <p>
-      <a href="">Create Account</a>
+      <a (click)="registerShow()">Create Account</a>
     </p>
   </form>
 </div>
-<!-- Default form login -->
-<!--<div class="container">-->
-<!--<form [formGroup]="loginForm" class="lg-form" (ngSubmit)="onSubmit()">-->
-<!--<img class="i1" src="./src/assets/logo.png" alt="logo"/>-->
-<!--<h1 class="lg-h1">LOGIN</h1>-->
-<!--<div class="form-group">-->
-<!--<input type="text" placeholder="Username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />-->
-<!--<div *ngIf="submitted && f.username.errors" class="invalid-feedback">-->
-<!--<div *ngIf="f.username.errors.required">Username is required</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<input type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />-->
-<!--<div *ngIf="submitted && f.password.errors" class="invalid-feedback">-->
-<!--<div *ngIf="f.password.errors.required">Password is required</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--<button [disabled]="loading" mdbBtn color="primary" class="waves-light" mdbWavesEffect>LOGIN</button>-->
-<!--<img class="loading-gif" *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />-->
-<!--</div>-->
-<!--<div *ngIf="error" class="alert alert-danger">{{error}}</div>-->
-<!--<div class="form-group">-->
-<!--<div>Forgot password?</div>-->
-<!--<div>Create account</div>-->
-<!--</div>-->
-<!--</form>-->
-<!--</div>-->
+
+<div mdbModal #forgotPasswordModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Forgot Password" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="forgotPasswordModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Forgot Password</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="forgotPasswordForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="forgotPasswordSubmit()">
+          <!-- Username -->
+          <div class="form-group">
+            <label for="forgotPasswordFormUsername">Username</label>
+            <input type="text" formControlName="username" id="forgotPasswordFormUsername" class="form-control"
+                   placeholder="Username">
+            <div *ngIf="submitted && forgotPasswordForm.controls.username.errors" class="invalid-feedback">
+              <div *ngIf="forgotPasswordForm.controls.username.errors.required">Username is required</div>
+            </div>
+            <div *ngIf="forgotPasswordError" class="alert alert-danger">{{forgotPasswordError}}</div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="forgotPasswordModal.hide()" mdbWavesEffect>Close
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="forgotPasswordSubmit()">Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mdbModal #registerModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Register" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="registerModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="registerModalLabel">Register</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="registerForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="submitRegister()">
+          <!-- Username -->
+          <div class="form-group">
+            <label for="registerFormUsername">Username</label>
+            <input type="text" formControlName="username" id="registerFormUsername" class="form-control"
+                   placeholder="Username">
+            <div *ngIf="submitted && registerForm.controls.username.errors" class="invalid-feedback">
+              <div *ngIf="registerForm.controls.username.errors.required">Username is required</div>
+            </div>
+          </div>
+          <!-- Password -->
+          <div class="form-group">
+            <label for="registerFormPassword">Password</label>
+            <input type="password" formControlName="password" id="registerFormPassword" class="form-control"
+                   placeholder="Password">
+            <div *ngIf="submitted && registerForm.controls.password.errors" class="invalid-feedback">
+              <div *ngIf="registerForm.controls.password.errors.required">Password is required</div>
+            </div>
+          </div>
+          <!-- First Name -->
+          <div class="form-group">
+            <label for="registerFormFirstName">First Name</label>
+            <input type="text" formControlName="first_name" id="registerFormFirstName" class="form-control"
+                   placeholder="First Name">
+            <div *ngIf="submitted && registerForm.controls.first_name.errors" class="invalid-feedback">
+              <div *ngIf="registerForm.controls.first_name.errors.required">First Name is required</div>
+            </div>
+          </div>
+          <!-- Last Name -->
+          <div class="form-group">
+            <label for="registerFormLastName">Last Name</label>
+            <input type="text" formControlName="last_name" id="registerFormLastName" class="form-control"
+                   placeholder="Last Name">
+            <div *ngIf="submitted && registerForm.controls.last_name.errors" class="invalid-feedback">
+              <div *ngIf="registerForm.controls.last_name.errors.required">Last Name is required</div>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="form-group">
+            <label for="registerFormEmail">Email</label>
+            <input type="email" formControlName="email" id="registerFormEmail" class="form-control"
+                   placeholder="Email">
+            <div *ngIf="submitted && registerForm.controls.email.errors" class="invalid-feedback">
+              <div *ngIf="registerForm.controls.email.errors.required">Email is required</div>
+            </div>
+            <div *ngIf="registerError" class="alert alert-danger">{{registerError}}</div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="registerModal.hide()" mdbWavesEffect>Close
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitRegister()">Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
