@@ -47,7 +47,6 @@ export class AccountsComponent implements OnInit {
     if (!this.filterValue) {
       return this.accounts;
     } else {
-      console.log("Sort Value: \"" + this.filterValue + "\"");
       let returnList: Account[] = [];
       this.accounts.forEach(account => {
         if (account.account_id.toString().includes(this.filterValue)) {

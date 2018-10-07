@@ -59,7 +59,6 @@ export class UsersComponent implements OnInit {
     if (!this.filterValue) {
       return this.users;
     } else {
-      console.log("Sort Value: \"" + this.filterValue + "\"");
       let returnList: User[] = [];
       this.users.forEach(user => {
         if (user.user_type.includes(this.filterValue)) {
