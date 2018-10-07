@@ -100,10 +100,14 @@ export class LoginComponent implements OnInit {
   }
 
   submitRegister() {
-    this.userService.register(this.forgotPasswordForm.controls.username.value,
-      this.forgotPasswordForm.controls.password.value,
-      this.forgotPasswordForm.controls.first_name.value,
-      this.forgotPasswordForm.controls.last_name.value,
-      this.forgotPasswordForm.controls.email.value)
+    this.userService.register(this.registerForm.controls.username.value,
+      this.registerForm.controls.password.value,
+      this.registerForm.controls.first_name.value,
+      this.registerForm.controls.last_name.value,
+      this.registerForm.controls.email.value).subscribe(response => {
+      this.registerModal.hide();
+    }, error => {
+      this.registerError = error;
+    })
   }
 }
