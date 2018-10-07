@@ -13,7 +13,8 @@ import {AccountsComponent} from './account/accounts.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {LoginData, User, Account} from './_models';
 import {CommonModule} from '@angular/common';
-import {UsersComponent} from './users/users.component';
+import {UsersComponent} from './users/users.component';;
+import { RegisterModalComponent } from './register-modal/register-modal.component'
 
 @NgModule({
   imports: [
@@ -31,7 +32,9 @@ import {UsersComponent} from './users/users.component';
     LoginComponent,
     NavbarComponent,
     AccountsComponent,
-    UsersComponent],
+    UsersComponent,
+    RegisterModalComponent
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

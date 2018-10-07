@@ -9,36 +9,36 @@
   <thead>
   <tr>
     <th class="th-sm">Account ID
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('account_id')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('account_id')"></i>
     </th>
     <th class="th-sm">Account Title
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('account_title')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('account_title')"></i>
     </th>
     <th class="th-sm">Balance
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('balance')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('balance')"></i>
     </th>
     <th class="th-sm">Normal Side
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('normal_side')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('normal_side')"></i>
     </th>
     <th class="th-sm">Description
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('description')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('description')"></i>
     </th>
     <th class="th-sm">Date Created
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('date_created')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('date_created')"></i>
     </th>
     <th class="th-sm">Created By (User ID)
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('created_by')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('created_by')"></i>
     </th>
     <th class="th-sm">Last Edited
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('last_edited_date')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('last_edited_date')"></i>
     </th>
     <th class="th-sm">Last Edited By
       <mdb-icon icon="sort" (click)="sortBy('last_edited_by')"></mdb-icon>
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('user_id')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('user_id')"></i>
     </th>
     <th class="th-sm">Is Active
       <mdb-icon icon="sort" (click)="sortBy('is_active')"></mdb-icon>
-      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('user_id')"></i>
+      <i class="fa fa-sort float-right clickable" aria-hidden="true" (click)="sortBy('user_id')"></i>
     </th>
   </tr>
   </thead>
@@ -57,7 +57,7 @@
   </tr>
   </tfoot>
   <tbody>
-  <tr *ngFor="let account of accounts" (click)="editAccount(account)">
+  <tr class="clickable" *ngFor="let account of accounts" (click)="editAccount(account)">
     <td>{{account.account_id}}</td>
     <td>{{account.account_title}}</td>
     <td>${{account.balance.toFixed(2)}}</td>
