@@ -52,7 +52,7 @@ export class AuthenticationService implements OnInit {
       password: this.encryptPassword(password)
     });
 
-    const loginSubject = new Subject();
+    const loginResponseSubject = new Subject();
 
     requestResponse.pipe(first()).subscribe((response: LoginData) => {
         localStorage.setItem('user_id', response['user_id'].toString());
@@ -65,14 +65,14 @@ export class AuthenticationService implements OnInit {
         this.passwdTimeRemainingSubject.next(['passwd_time_remaining'].toString());
         this.lastLoginSubject.next(response['last_login']);
         this.loggedInSubject.next(true);
-        loginSubject.next(true);
+        loginResponseSubject.next([true, ""]);
       }, error => {
         this.loggedInSubject.next(false);
-        loginSubject.next(false);
+        loginResponseSubject.next([false, error.error.message]);
       }
     );
 
-    return loginSubject;
+    return loginResponseSubject;
   }
 
   logout() {

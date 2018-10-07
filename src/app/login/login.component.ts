@@ -77,12 +77,17 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.f.username.value, this.f.password.value)
       .subscribe(
         data => {
-          if (data) {
+          if (data[0]) {
             this.router.navigate(['./home']);
           } else {
             this.loading = false;
+            this.error = data[1];
           }
         });
+  }
+
+  clearError() {
+    this.error = null;
   }
 
   forgotPasswordShow() {
@@ -95,6 +100,14 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.forgotPasswordError = error['message'];
     });
+  }
+
+  clearForgotPasswordMessage() {
+    this.forgotPasswordMessage = null;
+  }
+
+  clearForgotPasswordError() {
+    this.forgotPasswordError = null;
   }
 
   registerShow() {
@@ -111,5 +124,13 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.registerError = error['message'];
     })
+  }
+
+  clearRegisterMessage() {
+    this.registerMessage = null;
+  }
+
+  clearRegisterError() {
+    this.registerError = null;
   }
 }

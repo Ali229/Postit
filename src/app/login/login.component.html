@@ -25,7 +25,11 @@
     </div>
 
 
-    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+              (click)="clearError()">
+        <span aria-hidden="true">&times;</span>
+      </button></div>
     <div class="d-flex justify-content-around">
       <div>
         <!-- Forgot password -->
@@ -60,8 +64,17 @@
             <div *ngIf="submitted && forgotPasswordForm.controls.username.errors" class="invalid-feedback">
               <div *ngIf="forgotPasswordForm.controls.username.errors.required">Username is required</div>
             </div>
-            <div *ngIf="forgotPasswordError" class="alert alert-danger">{{forgotPasswordError}}</div>
-            <div *ngIf="forgotPasswordMessage" class="alert alert-success" role="alert">{{forgotPasswordMessage}}
+            <div *ngIf="forgotPasswordError" class="alert alert-danger">{{forgotPasswordError}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                      (click)="clearForgotPasswordError()">
+                <span aria-hidden="true">&times;</span>
+              </button></div>
+            <div *ngIf="forgotPasswordMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+              {{forgotPasswordMessage}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                      (click)="clearForgotPasswordMessage()">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
           </div>
         </form>
@@ -135,8 +148,16 @@
             <div *ngIf="submitted && registerForm.controls.email.errors" class="invalid-feedback">
               <div *ngIf="registerForm.controls.email.errors.required">Email is required</div>
             </div>
-            <div *ngIf="registerError" class="alert alert-danger">{{registerError}}</div>
-            <div *ngIf="registerMessage" class="alert alert-success" role="alert">{{registerMessage}}</div>
+            <div *ngIf="registerError" class="alert alert-danger">{{registerError}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                      (click)="clearRegisterError()">
+                <span aria-hidden="true">&times;</span>
+              </button></div>
+            <div *ngIf="registerMessage" class="alert alert-success" role="alert">{{registerMessage}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                      (click)="clearRegisterMessage()">
+                <span aria-hidden="true">&times;</span>
+              </button></div>
           </div>
         </form>
         <div class="modal-footer">
