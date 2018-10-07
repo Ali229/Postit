@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService, AccountService} from '../_services';
-import {Account} from '../_models';
+import {Account, User} from '../_models';
 
 @Component({
   selector: 'app-account',
@@ -12,6 +12,7 @@ export class AccountsComponent implements OnInit {
   accounts: Account[] = [];
   sortValue: string;
   sortReverse = false;
+  filterValue: string;
 
   constructor(private authService: AuthenticationService, private accountService: AccountService) {
     this.accountService.getAccountsSubject().subscribe( (response: Account[]) => {
@@ -42,8 +43,37 @@ export class AccountsComponent implements OnInit {
     this.updateAccountList();
   }
 
-  filterBy(value: string) {
-
+  filterBy() {
+    if (!this.filterValue) {
+      return this.accounts;
+    } else {
+      console.log("Sort Value: \"" + this.filterValue + "\"");
+      let returnList: Account[] = [];
+      this.accounts.forEach(account => {
+        if (account.account_id.toString().includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.account_title.includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.normal_side.includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.description.includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.balance.toString().includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.date_created.includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.created_by.toString().includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.last_edited_date.includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.last_edited_by.toString().includes(this.filterValue)) {
+          returnList.push(account);
+        } else if (account.is_active.includes(this.filterValue)) {
+          returnList.push(account);
+        }
+      });
+      return returnList;
+    }
   }
 
   updateAccountList() {
