@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../_models';
 import {AuthenticationService, UserService} from '../_services';
 
@@ -12,6 +12,7 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   sortValue: string;
   sortReverse: boolean = false;
+  filterValue: string;
 
   constructor(private authService: AuthenticationService, public userService: UserService) {
     this.userService.getUserArray().subscribe(response => {
@@ -42,8 +43,31 @@ export class UsersComponent implements OnInit {
     this.updateUserList();
   }
 
-  filterBy(value: string) {
-
+  filterBy() {
+    if (!this.filterValue) {
+      return this.users;
+    } else {
+      console.log("Sort Value: \"" + this.filterValue + "\"");
+      let returnList: User[] = [];
+      this.users.forEach(user => {
+        if (user.user_type.includes(this.filterValue)) {
+          returnList.push(user);
+        } else if (user.username.includes(this.filterValue)) {
+          returnList.push(user);
+        } else if (user.first_name.includes(this.filterValue)) {
+          returnList.push(user);
+        } else if (user.last_name.includes(this.filterValue)) {
+          returnList.push(user);
+        } else if (user.email.includes(this.filterValue)) {
+          returnList.push(user);
+        } else if (user.last_login.includes(this.filterValue)) {
+          returnList.push(user);
+        } else if (user.password_expiration_date.includes(this.filterValue)) {
+          returnList.push(user);
+        }
+      });
+      return returnList;
+    }
   }
 
   updateUserList() {

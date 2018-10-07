@@ -1,29 +1,36 @@
-<table class="table table-striped table-bordered table-responsive-md">
+<div class="col-md-12">
+  <div class="md-form">
+    <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective [mdbValidate]="false">
+    <label for="search">Search data</label>
+  </div>
+</div>
+
+<table class="table table-striped table-bordered table-responsive-md table-sm">
   <thead>
   <tr>
-    <th>User ID
-      <mdb-icon icon="sort" (click)="sortBy('user_id')"></mdb-icon>
+    <th class="th-sm">User ID
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('user_id')"></i>
     </th>
-    <th>Username
-      <mdb-icon icon="sort" (click)="sortBy('username')"></mdb-icon>
+    <th class="th-sm">Username
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('username')"></i>
     </th>
-    <th>First Name
-      <mdb-icon icon="sort" (click)="sortBy('first_name')"></mdb-icon>
+    <th class="th-sm">First Name
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('first_name')"></i>
     </th>
-    <th>Last Name
-      <mdb-icon icon="sort" (click)="sortBy('last_name')"></mdb-icon>
+    <th class="th-sm">Last Name
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('last_name')"></i>
     </th>
-    <th>Email
-      <mdb-icon icon="sort" (click)="sortBy('email')"></mdb-icon>
+    <th class="th-sm">Email
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('email')"></i>
     </th>
-    <th>Last Login
-      <mdb-icon icon="sort" (click)="sortBy('last_login')"></mdb-icon>
+    <th class="th-sm">Last Login
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('last_login')"></i>
     </th>
-    <th>Password Expiration Date
-      <mdb-icon icon="sort" (click)="sortBy('password_expiration_date')"></mdb-icon>
+    <th class="th-sm">Password Expiration Date
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('password_expiration_date')"></i>
     </th>
-    <th>User Type
-      <mdb-icon icon="sort" (click)="sortBy('user_type')"></mdb-icon>
+    <th class="th-sm">User Type
+      <i class="fa fa-sort float-right" aria-hidden="true" (click)="sortBy('user_type')"></i>
     </th>
   </tr>
   </thead>
@@ -40,7 +47,7 @@
   </tr>
   </tfoot>
   <tbody>
-  <tr *ngFor="let user of users" (click)="editUser(user)">
+  <tr class="slide" *ngFor="let user of filterBy()" (click)="editUser(user)">
     <td>{{user.user_id}}</td>
     <td>{{user.username}}</td>
     <td>{{user.first_name}}</td>
