@@ -14,6 +14,7 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {LoginData, User, Account} from './_models';
 import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
+import {AppService} from "./_services/app.service";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import {UsersComponent} from './users/users.component';
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
 
     AuthenticationService,
+    AppService,
     UserService,
     AccountService,
     User,

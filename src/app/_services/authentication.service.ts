@@ -4,6 +4,7 @@ import {Observable, Subject} from 'rxjs';
 import {first} from 'rxjs/operators';
 import {LoginData} from '../_models';
 import {Router, ActivatedRoute} from '@angular/router';
+import {AppService} from "./app.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class AuthenticationService implements OnInit {
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private appService: AppService) {
     this.loggedInSubject = new Subject();
     this.usernameSubject = new Subject();
     this.userIdSubject = new Subject();
@@ -31,6 +33,10 @@ export class AuthenticationService implements OnInit {
     if (user_id) {
       this.userIdSubject.next(user_id);
     }
+
+    this.appService.getTimer().subscribe(() => {
+      this.updateLoggedInVerification();
+    });
   }
 
   ngOnInit() {

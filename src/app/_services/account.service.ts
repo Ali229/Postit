@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Account} from "../_models";
+import {AppService} from "./app.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,18 @@ export class AccountService {
 
   private accountArraySubject: Subject<Account[]>;
   private accountSubject: Subject<Account>;
+  private account: Account;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private appService: AppService) {
     this.accountArraySubject = new Subject();
     this.accountSubject = new Subject();
+
+    this.appService.getTimer().subscribe(() => {
+      this.updateAccounts();
+      if (this.account) {
+        this.updateAccount(this.account.account_id);
+      }
+    });
   }
 
   updateAccounts() {
@@ -37,6 +46,7 @@ export class AccountService {
 
   updateAccount(accout_id) {
     this.http.get<Account>('http://markzeagler.com/postit-backend/account/' + accout_id.toString()).subscribe(response => {
+      this.account = response['account'];
       this.accountSubject.next(response['account']);
     });
   }

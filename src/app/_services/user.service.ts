@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../_models';
 import {AuthenticationService} from './authentication.service';
 import {Subject} from 'rxjs';
+import {AppService} from "./app.service";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -13,7 +14,7 @@ export class UserService {
   loggedIn: boolean;
   userID: string = "";
 
-  constructor(private http: HttpClient, private authService: AuthenticationService) {
+  constructor(private http: HttpClient, private authService: AuthenticationService, private appService: AppService) {
     this.userSubject = new Subject();
     this.userArraySubject = new Subject();
     this.authService.getVerifiedLoggedIn().subscribe(response => {
@@ -29,6 +30,11 @@ export class UserService {
       this.userID = user_id;
       this.updateUser();
     }
+
+    this.appService.getTimer().subscribe(() => {
+      this.updateUserArray();
+      this.updateUser();
+    });
   }
 
   getCurrUser() {
