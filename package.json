@@ -27,6 +27,7 @@
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
+    "karma-firefox-launcher": "^1.1.0",
     "rxjs": "~6.2.0",
     "webpack": "^4.20.2",
     "zone.js": "~0.8.26"
