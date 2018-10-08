@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService, UserService} from '../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from "rxjs";
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +23,8 @@ export class NavbarComponent implements OnInit {
   constructor(private authService: AuthenticationService,
               private userService: UserService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private app: AppComponent) {
     this.availablePages = this.userPages;
     this.active = localStorage.getItem('active_page');
     this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
@@ -50,6 +52,8 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    localStorage.setItem('active_page', 'Login');
+    this.app.checkpage();
     this.authService.logout();
     this.loggedIn = false;
   }

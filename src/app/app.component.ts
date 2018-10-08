@@ -7,12 +7,21 @@ import {AuthenticationService} from './_services';
     styleUrls: ['app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent{
+  padding: boolean;
   constructor() {
-
+    localStorage.setItem('active_page', 'Login');
   }
-
-  checkpage(page: string) {
-    console.log(localStorage.getItem("active_page"));
+  ngOnInit() {
+    this.checkpage()
+  }
+  checkpage() {
+    if(localStorage.getItem('active_page') === 'Login') {
+      this.padding = false;
+    }
+    else {
+      this.padding = true;
+    }
+    console.log(localStorage.getItem('active_page'));
   }
 }

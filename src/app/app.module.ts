@@ -14,7 +14,7 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {LoginData, User, Account} from './_models';
 import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
-import {AppService} from "./_services/app.service";;
+import {AppService} from "./_services/app.service";
 import { AccountComponent } from './account/account.component'
 
 @NgModule({

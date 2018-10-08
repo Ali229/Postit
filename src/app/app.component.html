@@ -1,5 +1,11 @@
 ﻿<app-navbar></app-navbar>
 
-<div id="app">
-    <router-outlet></router-outlet>
+<div *ngIf="padding; else loggedOut">
+  <div style="padding: 50px;">
+    <router-outlet (activate)="checkpage()"></router-outlet>
+  </div>
 </div>
+<ng-template #loggedOut>
+  <router-outlet (activate)="checkpage()"></router-outlet>
+</ng-template>
+
