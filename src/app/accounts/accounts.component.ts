@@ -10,7 +10,6 @@ import {AppService} from "../_services/app.service";
   styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent implements OnInit {
-
   accounts: Account[] = [];
   sortValue: string;
   sortReverse = false;

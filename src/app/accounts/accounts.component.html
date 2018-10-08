@@ -4,7 +4,7 @@
     <label for="search">Search Accounts</label>
   </div>
 </div>
-
+<img *ngIf="accounts.length === 0" class="centered" src="./src/assets/table_loading.gif">
 <table class="table table-hover table-striped table-bordered table-responsive-md">
   <thead>
   <tr>
