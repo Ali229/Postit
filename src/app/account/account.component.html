@@ -1,1 +1,7 @@
-<h1>Account {{account_id}}</h1>
+<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect routerLink="/accounts">
+  << Back to Chart of Accounts
+</button>
+
+<span></span>
+
+<h1 *ngIf="account">Account {{account_id}}, {{account.account_title}}</h1>

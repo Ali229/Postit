@@ -11,8 +11,8 @@ import {AccountService, AuthenticationService} from "../_services";
 })
 export class AccountComponent implements OnInit {
 
-  account_id: string;
-  private account: Account;
+  account_id: number;
+  account: Account;
 
   constructor(private activatedRoute: ActivatedRoute,
               private appService: AppService,
@@ -22,7 +22,12 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.authService.updateLoggedInVerification();
+    this.account_id = parseInt(this.activatedRoute.snapshot.params.account_id);
     this.appService.setActivePage('account/' + this.account_id);
+    this.accountService.getAccount(this.account_id).subscribe((response: Account) => {
+      this.account = response;
+    });
+    this.accountService.updateAccount(this.account_id)
   }
 
 }
