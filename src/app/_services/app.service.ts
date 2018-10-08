@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {interval} from '../../../node_modules/rxjs';
+import {Injectable} from '@angular/core';
+import {interval, Subject} from '../../../node_modules/rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +7,31 @@ import {interval} from '../../../node_modules/rxjs';
 export class AppService {
 
   timer = interval(5000);
+  activePageSubject: Subject<string>;
+  private activePageStorageName: string = 'active_page';
 
-  constructor() { }
+  constructor() {
+    this.activePageSubject = new Subject();
+    let activePage = localStorage.getItem(this.activePageStorageName);
+    if (activePage) {
+      this.activePageSubject.next(activePage);
+    }
+  }
 
   getTimer() {
     return this.timer;
   }
 
   setActivePage(activePage: string) {
-    localStorage.setItem('active_page', activePage);
+    localStorage.setItem(this.activePageStorageName, activePage);
+    this.activePageSubject.next(activePage);
   }
 
   getActivePAge() {
-    return localStorage.getItem('active_page');
+    return localStorage.getItem(this.activePageStorageName);
+  }
+
+  getActivePageSubject() {
+    return this.activePageSubject;
   }
 }

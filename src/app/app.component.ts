@@ -9,17 +9,16 @@ import {AppService} from './_services/app.service';
 })
 
 export class AppComponent {
+
   padding:boolean;
+
   constructor(private appService: AppService) {
-    this.appService.setActivePage('home');
+    this.appService.getActivePageSubject().subscribe( active_page => {
+      this.checkpage();
+    });
   }
 
   checkpage() {
-    if (this.appService.getActivePAge() === 'login') {
-      this.padding = false;
-    }
-    else {
-      this.padding = true;
-    }
+    this.padding = this.appService.getActivePAge() !== 'login';
   }
 }
