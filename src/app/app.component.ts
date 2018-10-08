@@ -19,6 +19,6 @@ export class AppComponent {
   }
 
   checkpage() {
-    this.padding = this.appService.getActivePAge() !== 'login';
+    this.padding = this.appService.getActivePage() !== 'login';
   }
 }

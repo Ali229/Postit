@@ -3,6 +3,7 @@ import {AuthenticationService, UserService} from '../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from "rxjs";
 import {AppComponent} from '../app.component';
+import {AppService} from '../_services/app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,9 +25,11 @@ export class NavbarComponent implements OnInit {
               private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
-              private app: AppComponent) {
+              private app: AppComponent,
+              private appService: AppService
+              ) {
     this.availablePages = this.userPages;
-    this.active = localStorage.getItem('active_page');
+    this.active = appService.getActivePage();
     this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
       this.loggedIn = value;
       this.userService.updateUser();
@@ -52,14 +55,12 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    localStorage.setItem('active_page', 'Login');
     this.app.checkpage();
     this.authService.logout();
     this.loggedIn = false;
   }
 
   select(page: string) {
-    localStorage.setItem('active_page', page);
     this.active = page;
     this.router.navigate(['./' + page.toLowerCase()]);
   }

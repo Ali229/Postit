@@ -27,7 +27,7 @@ export class AppService {
     this.activePageSubject.next(activePage);
   }
 
-  getActivePAge() {
+  getActivePage() {
     return localStorage.getItem(this.activePageStorageName);
   }
 
