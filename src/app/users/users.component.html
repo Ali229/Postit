@@ -35,18 +35,6 @@
     </th>
   </tr>
   </thead>
-  <tfoot>
-  <tr>
-    <th>User ID</th>
-    <th>Username</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Last Login</th>
-    <th>Password Expiration Date</th>
-    <th>User Type</th>
-  </tr>
-  </tfoot>
   <tbody>
   <tr class="clickable-row clickable waves-light" *ngFor="let user of filterBy()" data-toggle="modal"
       data-target="#register-modal" (click)="editUser(user)">

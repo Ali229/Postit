@@ -40,20 +40,6 @@
     </th>
   </tr>
   </thead>
-  <tfoot>
-  <tr>
-    <th>Account ID</th>
-    <th>Account Title</th>
-    <th>Balance</th>
-    <th>Normal Side</th>
-    <th>Description</th>
-    <th>Date Created</th>
-    <th>Created By (User ID)</th>
-    <th>Last Edited</th>
-    <th>Last Edited By</th>
-    <th>Is Active</th>
-  </tr>
-  </tfoot>
   <tbody>
   <tr class="clickable" *ngFor="let account of accounts" (click)="editAccount(account)">
     <td>{{account.account_id}}</td>
