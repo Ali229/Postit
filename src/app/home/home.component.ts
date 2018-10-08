@@ -1,5 +1,5 @@
 ﻿import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../_services';
+import {AuthenticationService, UserService} from '../_services';
 import {AppComponent} from '../app.component';
 import {AppService} from "../_services/app.service";
 
@@ -11,18 +11,23 @@ import {AppService} from "../_services/app.service";
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public username: string;
+  public userFirstName: string;
 
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
-              private appService: AppService) {
+              private appService: AppService,
+              private userService: UserService) {
+    this.authService.getVerifiedLoggedIn().subscribe( loggedIn => {
+      this.authService.getUserName().subscribe(data => {
+        this.userService.getCurrUser().subscribe( user => {
+          this.userFirstName = user['first_name']
+        })
+      });
+    })
   }
 
   ngOnInit() {
     this.appService.setActivePage('home');
     this.authService.updateLoggedInVerification();
-    this.authService.getUserName().subscribe(data => {
-      this.username = data;
-    });
   }
 }

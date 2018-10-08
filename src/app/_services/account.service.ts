@@ -52,11 +52,11 @@ export class AccountService {
     });
   }
 
-  updateAccount(accout_id) {
+  updateAccount(account_id) {
     if (this.loggedIn) {
-      this.http.get<Account>('http://markzeagler.com/postit-backend/account/' + accout_id.toString()).subscribe(response => {
-        this.account = response['account'];
-        this.accountSubject.next(response['account']);
+      this.http.get<any>('http://markzeagler.com/postit-backend/account/' + account_id.toString()).subscribe(response => {
+        this.account = response['account'][0];
+        this.accountSubject.next(response['account'][0]);
       });
     }
   }
