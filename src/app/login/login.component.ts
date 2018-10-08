@@ -5,6 +5,7 @@ import {first} from 'rxjs/operators';
 import {AuthenticationService, UserService} from '../_services';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {ModalDirective} from "angular-bootstrap-md";
+import {AppService} from "../_services/app.service";
 
 @Component({
   templateUrl: 'login.component.html',
@@ -34,10 +35,13 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService) {
+    private userService: UserService,
+    private appService: AppService) {
   }
 
   ngOnInit() {
+    this.appService.setActivePage('login');
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

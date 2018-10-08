@@ -13,4 +13,12 @@ export class AppService {
   getTimer() {
     return this.timer;
   }
+
+  setActivePage(activePage: string) {
+    localStorage.setItem('active_page', activePage);
+  }
+
+  getActivePAge() {
+    return localStorage.getItem('active_page');
+  }
 }

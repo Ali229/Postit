@@ -1,22 +1,25 @@
-﻿import { Component } from '@angular/core';
+﻿import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './_services';
 
 @Component({
-    selector: 'app',
-    templateUrl: 'app.component.html',
-    styleUrls: ['app.component.scss']
+  selector: 'app',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 
-export class AppComponent{
+export class AppComponent implements OnInit {
   padding: boolean;
+
   constructor() {
     localStorage.setItem('active_page', 'Login');
   }
+
   ngOnInit() {
     this.checkpage()
   }
+
   checkpage() {
-    if(localStorage.getItem('active_page') === 'Login') {
+    if (localStorage.getItem('active_page') === 'Login') {
       this.padding = false;
     }
     else {

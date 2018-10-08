@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService, AccountService} from '../_services';
 import {Account} from '../_models';
 import {ActivatedRoute, Router} from "@angular/router";
+import {AppService} from "../_services/app.service";
 
 @Component({
   selector: 'app-account',
@@ -18,7 +19,8 @@ export class AccountsComponent implements OnInit {
   constructor(private authService: AuthenticationService,
               private accountService: AccountService,
               private route: ActivatedRoute,
-              private router: Router,) {
+              private router: Router,
+              private appService: AppService) {
     this.accountService.getAccountsSubject().subscribe((response: Account[]) => {
       this.accounts = response;
       this.accounts.sort((a, b) => {
@@ -32,6 +34,7 @@ export class AccountsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appService.setActivePage('accounts');
     this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.sortBy('account_id');
     this.updateAccountList();

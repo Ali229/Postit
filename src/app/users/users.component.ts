@@ -3,6 +3,7 @@ import {User} from '../_models';
 import {AuthenticationService, UserService} from '../_services';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalDirective} from 'angular-bootstrap-md';
+import {AppService} from "../_services/app.service";
 
 @Component({
   selector: 'app-users',
@@ -24,7 +25,10 @@ export class UsersComponent implements OnInit {
   error: string = '';
   userTypes: string[];
 
-  constructor(private authService: AuthenticationService, public userService: UserService, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthenticationService,
+              public userService: UserService,
+              private formBuilder: FormBuilder,
+              private appService: AppService) {
     this.userService.getUserArray().subscribe(response => {
       this.users = response;
       this.users.sort((a, b) => {
@@ -38,6 +42,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appService.setActivePage('users');
     this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.sortBy('user_id');
     this.updateUserList();

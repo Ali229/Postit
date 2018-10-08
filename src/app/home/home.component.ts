@@ -1,6 +1,8 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../_services';
 import {AppComponent} from '../app.component';
+import {AppService} from "../_services/app.service";
+
 // import { first } from 'rxjs/operators';
 
 @Component({
@@ -10,15 +12,17 @@ import {AppComponent} from '../app.component';
 })
 export class HomeComponent implements OnInit {
   public username: string;
+
   constructor(private authService: AuthenticationService,
-  private app: AppComponent) {
+              private app: AppComponent,
+              private appService: AppService) {
   }
 
   ngOnInit() {
-    localStorage.setItem('active_page', 'Home');
+    this.appService.setActivePage('home');
     this.app.checkpage();
     this.authService.updateLoggedInVerification();
-    this.authService.getUserName().subscribe( data => {
+    this.authService.getUserName().subscribe(data => {
       this.username = data;
     });
   }
