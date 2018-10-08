@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService, AccountService} from '../_services';
-import {Account, User} from '../_models';
+import {Account} from '../_models';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-account',
@@ -14,8 +15,11 @@ export class AccountsComponent implements OnInit {
   sortReverse = false;
   filterValue: string;
 
-  constructor(private authService: AuthenticationService, private accountService: AccountService) {
-    this.accountService.getAccountsSubject().subscribe( (response: Account[]) => {
+  constructor(private authService: AuthenticationService,
+              private accountService: AccountService,
+              private route: ActivatedRoute,
+              private router: Router,) {
+    this.accountService.getAccountsSubject().subscribe((response: Account[]) => {
       this.accounts = response;
       this.accounts.sort((a, b) => {
         if (!this.sortReverse) {
@@ -76,11 +80,10 @@ export class AccountsComponent implements OnInit {
   }
 
   updateAccountList() {
-      this.accountService.updateAccounts();
+    this.accountService.updateAccounts();
   }
 
   editAccount(account: Account) {
-    // TODO Sort items
+    this.router.navigate(['./account/' + account.account_id]);
   }
-
 }

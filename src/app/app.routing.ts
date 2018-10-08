@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'accounts', component: AccountsComponent},
   {path: 'users', component: UsersComponent},
-  {path: 'accounts/account/:account_id', component: AccountComponent},
+  {path: 'account/:account_id', component: AccountComponent},
 
   // otherwise redirect to home
   {path: '**', redirectTo: '/login'}
