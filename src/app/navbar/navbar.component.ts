@@ -33,6 +33,10 @@ export class NavbarComponent implements OnInit {
     this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
       this.loggedIn = value;
       this.userService.updateUser();
+      // Kinda messy like this, update later
+      this.authService.getUserName().subscribe(data => {
+        this.username = data;
+      });
     });
 
     this.userService.getCurrUser().subscribe(response => {
@@ -49,9 +53,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getUserName().subscribe(data => {
-      this.username = data;
-    });
+
   }
 
   logout() {
