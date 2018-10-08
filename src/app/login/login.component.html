@@ -58,9 +58,8 @@
               (ngSubmit)="forgotPasswordSubmit()">
           <!-- Username -->
           <div class="form-group">
-            <label for="forgotPasswordFormUsername">Username: </label>
-            <input type="text" formControlName="username" id="forgotPasswordFormUsername" class="form-control"
-                   placeholder="Username">
+            <input type="text" formControlName="username" id="forgotPasswordFormUsername" class="form-control fc"
+                   placeholder="Username" style="margin-left: 5px">
             <div *ngIf="submitted && forgotPasswordForm.controls.username.errors" class="invalid-feedback">
               <div *ngIf="forgotPasswordForm.controls.username.errors.required">Username is required</div>
             </div>
@@ -102,49 +101,44 @@
         <h4 class="modal-title w-100" id="registerModalLabel">Register</h4>
       </div>
       <div class="modal-body">
-        <form [formGroup]="registerForm" class="text-center border border-light p-5"
-              (ngSubmit)="submitRegister()">
+        <form [formGroup]="registerForm" class="border border-light p-5 text-center"
+              (ngSubmit)="submitRegister()" autocomplete="off">
           <!-- Username -->
           <div class="form-group">
-            <label for="registerFormUsername">Username: </label>
-            <input type="text" formControlName="username" id="registerFormUsername" class="form-control"
-                   placeholder="Username">
+            <input type="text" formControlName="username" id="Password" class="form-control fc"
+                   placeholder="Username" style="margin-left: 5px">
             <div *ngIf="submitted && registerForm.controls.username.errors" class="invalid-feedback">
               <div *ngIf="registerForm.controls.username.errors.required">Username is required</div>
             </div>
           </div>
           <!-- Password -->
           <div class="form-group">
-            <label for="registerFormPassword">Password: </label>
-            <input type="password" formControlName="password" id="registerFormPassword" class="form-control"
-                   placeholder="Password">
+            <input type="password" formControlName="password" id="password2" class="form-control fc"
+                   placeholder="Password" style="margin-left: 5px">
             <div *ngIf="submitted && registerForm.controls.password.errors" class="invalid-feedback">
               <div *ngIf="registerForm.controls.password.errors.required">Password is required</div>
             </div>
           </div>
           <!-- First Name -->
           <div class="form-group">
-            <label for="registerFormFirstName">First Name: </label>
-            <input type="text" formControlName="first_name" id="registerFormFirstName" class="form-control"
-                   placeholder="First Name">
+            <input type="text" formControlName="first_name" id="passwor3" class="form-control fc"
+                   placeholder="First Name" style="margin-left: 5px">
             <div *ngIf="submitted && registerForm.controls.first_name.errors" class="invalid-feedback">
               <div *ngIf="registerForm.controls.first_name.errors.required">First Name is required</div>
             </div>
           </div>
           <!-- Last Name -->
           <div class="form-group">
-            <label for="registerFormLastName">Last Name: </label>
-            <input type="text" formControlName="last_name" id="registerFormLastName" class="form-control"
-                   placeholder="Last Name">
+            <input type="text" formControlName="last_name" id="password4" class="form-control fc"
+                   placeholder="Last Name" style="margin-left: 5px">
             <div *ngIf="submitted && registerForm.controls.last_name.errors" class="invalid-feedback">
               <div *ngIf="registerForm.controls.last_name.errors.required">Last Name is required</div>
             </div>
           </div>
           <!-- Email -->
           <div class="form-group">
-            <label for="registerFormEmail">Email: </label>
-            <input type="email" formControlName="email" id="registerFormEmail" class="form-control"
-                   placeholder="Email">
+            <input type="email" formControlName="email" id="password5" class="form-control fc"
+                   placeholder="Email" style="margin-left: 5px">
             <div *ngIf="submitted && registerForm.controls.email.errors" class="invalid-feedback">
               <div *ngIf="registerForm.controls.email.errors.required">Email is required</div>
             </div>
