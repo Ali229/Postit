@@ -8,14 +8,18 @@ import {AppService} from './_services/app.service';
   styleUrls: ['app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   padding:boolean;
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private authService: AuthenticationService) {
     this.appService.getActivePageSubject().subscribe( active_page => {
       this.checkpage();
     });
+  }
+
+  ngOnInit() {
+    this.authService.updateLoggedInVerification();
   }
 
   checkpage() {
