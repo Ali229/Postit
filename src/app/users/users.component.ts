@@ -42,7 +42,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appService.setActivePage('Users');
+    this.appService.setActivePage('users');
     this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.sortBy('user_id');
     this.updateUserList();
