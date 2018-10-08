@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import {AuthenticationService} from './_services';
 
 @Component({
     selector: 'app',
@@ -6,4 +7,12 @@
     styleUrls: ['app.component.scss']
 })
 
-export class AppComponent { }
+export class AppComponent {
+  constructor() {
+
+  }
+
+  checkpage(page: string) {
+    console.log(localStorage.getItem("active_page"));
+  }
+}

@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../_models';
 import {AuthenticationService, UserService} from '../_services';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ModalDirective} from "angular-bootstrap-md";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ModalDirective} from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-users',
@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   @ViewChild('editUserModal') public editUserModal: ModalDirective;
   editUserForm: FormGroup;
   editingUser: User;
-  error: string = "";
+  error: string = '';
   userTypes: string[];
 
   constructor(private authService: AuthenticationService, public userService: UserService, private formBuilder: FormBuilder) {
@@ -59,7 +59,7 @@ export class UsersComponent implements OnInit {
     if (!this.filterValue) {
       return this.users;
     } else {
-      let returnList: User[] = [];
+      const returnList: User[] = [];
       this.users.forEach(user => {
         if (user.user_type.includes(this.filterValue)) {
           returnList.push(user);

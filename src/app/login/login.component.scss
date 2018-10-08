@@ -2,7 +2,11 @@
 .form-control {
     display: unset;
     width: 200px !important;
-    height: 40px !important;;
+    height: 40px !important;
+}
+/**************************************** Input Boxes ****************************************/
+.fc {
+  width: 100% !important;
 }
 /**************************************** Heading ********************************************/
 .lg-h1 {
@@ -40,4 +44,15 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 15px;
     padding: 30px 20px 10px 10px;
+}
+.element {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: #eee;
 }
