@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../_models';
 import {AuthenticationService, UserService} from '../_services';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalDirective} from 'angular-bootstrap-md';
 import {AppService} from "../_services/app.service";
 
