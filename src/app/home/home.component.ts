@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.appService.setActivePage('home');
-    this.app.checkpage();
     this.authService.updateLoggedInVerification();
     this.authService.getUserName().subscribe(data => {
       this.username = data;

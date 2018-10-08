@@ -1,5 +1,6 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './_services';
+import {AppService} from './_services/app.service';
 
 @Component({
   selector: 'app',
@@ -7,24 +8,18 @@ import {AuthenticationService} from './_services';
   styleUrls: ['app.component.scss']
 })
 
-export class AppComponent implements OnInit {
-  padding: boolean;
-
-  constructor() {
-    localStorage.setItem('active_page', 'Login');
-  }
-
-  ngOnInit() {
-    this.checkpage()
+export class AppComponent {
+  padding:boolean;
+  constructor(private appService: AppService) {
+    this.appService.setActivePage('home');
   }
 
   checkpage() {
-    if (localStorage.getItem('active_page') === 'Login') {
+    if (this.appService.getActivePAge() === 'login') {
       this.padding = false;
     }
     else {
       this.padding = true;
     }
-    console.log(localStorage.getItem('active_page'));
   }
 }
