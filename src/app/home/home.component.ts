@@ -11,16 +11,21 @@ import {AppService} from "../_services/app.service";
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  private loggedIn: boolean;
   public userFirstName: string;
 
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
               private appService: AppService,
               private userService: UserService) {
+
     this.authService.getVerifiedLoggedIn().subscribe(loggedIn => {
-      this.userService.getCurrUser().subscribe(user => {
-        this.userFirstName = user['first_name']
-      });
+      this.loggedIn = loggedIn;
+    });
+
+    this.userService.getCurrUser().subscribe(user => {
+      this.userFirstName = user['first_name']
     });
   }
 
