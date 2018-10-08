@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
     this.userService.forgotPassword(this.forgotPasswordForm.controls.username.value).subscribe(response => {
       this.forgotPasswordMessage = response['message'];
     }, error => {
-      this.forgotPasswordError = error['message'];
+      this.forgotPasswordError = error.error.message;
     });
   }
 
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
       this.registerForm.controls.email.value).subscribe(response => {
       this.registerMessage = response['message'];
     }, error => {
-      this.registerError = error['message'];
+      this.registerError = error.error.message;
     })
   }
 
