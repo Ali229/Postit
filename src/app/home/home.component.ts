@@ -17,13 +17,11 @@ export class HomeComponent implements OnInit {
               private app: AppComponent,
               private appService: AppService,
               private userService: UserService) {
-    this.authService.getVerifiedLoggedIn().subscribe( loggedIn => {
-      this.authService.getUserName().subscribe(data => {
-        this.userService.getCurrUser().subscribe( user => {
-          this.userFirstName = user['first_name']
-        })
+    this.authService.getVerifiedLoggedIn().subscribe(loggedIn => {
+      this.userService.getCurrUser().subscribe(user => {
+        this.userFirstName = user['first_name']
       });
-    })
+    });
   }
 
   ngOnInit() {
