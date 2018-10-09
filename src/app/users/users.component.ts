@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../_models';
 import {AuthenticationService, UserService} from '../_services';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalDirective} from 'angular-bootstrap-md';
 import {AppService} from "../_services/app.service";
 
@@ -17,13 +17,18 @@ export class UsersComponent implements OnInit {
   sortValue: string;
   sortReverse: boolean = false;
   filterValue: string;
+  userTypes: string[];
 
   // Edit User data
   @ViewChild('editUserModal') public editUserModal: ModalDirective;
   editUserForm: FormGroup;
   editingUser: User;
-  error: string = '';
-  userTypes: string[];
+  editUserError: string = '';
+
+  // Add User
+  @ViewChild('addUserModal') public addUserModal: ModalDirective;
+  addUserForm: FormGroup;
+  addUserError: string = '';
 
   constructor(private authService: AuthenticationService,
               public userService: UserService,
@@ -38,6 +43,15 @@ export class UsersComponent implements OnInit {
           return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
         }
       });
+    });
+
+    this.addUserForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', Validators.required],
+      user_type: ['', Validators.required]
     });
   }
 
@@ -110,7 +124,7 @@ export class UsersComponent implements OnInit {
         console.log("The username was successfully updated");
         this.updateUserList();
       }, error => {
-        console.log("There was an error while updating the username");
+        console.log("There was an editUserError while updating the username");
       })
     }
     if (this.form().first_name.value != this.editingUser.first_name) {
@@ -118,7 +132,7 @@ export class UsersComponent implements OnInit {
         console.log("The first_name was successfully updated");
         this.updateUserList();
       }, error => {
-        console.log("There was an error while updating the first_name");
+        console.log("There was an editUserError while updating the first_name");
       })
     }
     if (this.form().last_name.value != this.editingUser.last_name) {
@@ -126,7 +140,7 @@ export class UsersComponent implements OnInit {
         console.log("The last_name was successfully updated");
         this.updateUserList();
       }, error => {
-        console.log("There was an error while updating the last_name");
+        console.log("There was an editUserError while updating the last_name");
       })
     }
     if (this.form().email.value != this.editingUser.email) {
@@ -134,7 +148,7 @@ export class UsersComponent implements OnInit {
         console.log("The email was successfully updated");
         this.updateUserList();
       }, error => {
-        console.log("There was an error while updating the email");
+        console.log("There was an editUserError while updating the email");
       })
     }
     if (this.form().user_type.value != this.editingUser.username) {
@@ -142,7 +156,7 @@ export class UsersComponent implements OnInit {
         console.log("The user_type was successfully updated");
         this.updateUserList();
       }, error => {
-        console.log("There was an error while updating the user_type");
+        console.log("There was an editUserError while updating the user_type");
       })
     }
 
@@ -159,6 +173,19 @@ export class UsersComponent implements OnInit {
   updateUserTypes() {
     this.userService.getUserTypes().subscribe(response => {
       this.userTypes = response['user_types'];
+    });
+  }
+
+  showAddUser() {
+    this.addUserModal.show();
+  }
+
+  addUser() {
+    // TODO Validate fields
+    let controls = this.addUserForm.controls;
+    this.userService.addUser(controls.username.value, controls.first_name.value, controls.last_name.value,
+      controls.email.value, controls.password.value, controls.user_type.value).subscribe( response => {
+        console.log("Added")
     });
   }
 }

@@ -79,6 +79,17 @@ export class UserService {
     });
   }
 
+  addUser(username: string, first_name: string, last_name: string, email: string, password: string, user_type: string) {
+    return this.http.post('http://markzeagler.com/postit-backend/user/new', {
+      'username': username,
+      'password': password,
+      'first_name': first_name,
+      'last_name': last_name,
+      'email': email,
+      'user_type': user_type
+    });
+  }
+
   editUser(user_id, category, value) {
     return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, {
       'category': category,
