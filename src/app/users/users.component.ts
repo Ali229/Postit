@@ -125,6 +125,7 @@ export class UsersComponent implements OnInit {
         this.updateUserList();
       }, error => {
         console.log("There was an editUserError while updating the username");
+        this.editUserError = error;
       })
     }
     if (this.form().first_name.value != this.editingUser.first_name) {
@@ -161,6 +162,10 @@ export class UsersComponent implements OnInit {
     }
 
     this.editUserModal.hide();
+  }
+
+  clearError(){
+    this.editUserError = null;
   }
 
   editUser(user: User) {

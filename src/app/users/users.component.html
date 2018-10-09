@@ -12,6 +12,7 @@
     <th class="th-sm clickable" (click)="sortBy('user_id')">User ID
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
+
     <th class="th-sm clickable" (click)="sortBy('username')">Username
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
@@ -73,6 +74,13 @@
             <input type="text" formControlName="username" id="editUserFormUsername" class="form-control"
                    placeholder="Username">
           </div>
+          <div *ngIf="editUserError" class="alert alert-danger">{{editUserError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button></div>
+
+
           <!-- First Name -->
           <div class="form-group">
             <label for="editUserFormFirstName">First Name</label>
