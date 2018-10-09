@@ -16,7 +16,8 @@ import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
 import {AppService} from "./_services/app.service";
 import {AccountComponent} from './account/account.component'
-import {Transaction} from "./_models/transaction";
+import {Transaction} from "./_models/transaction";;
+import { JournalComponent } from './journal/journal.component'
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {Transaction} from "./_models/transaction";
     AccountsComponent,
     UsersComponent
     ,
-    AccountComponent
+    AccountComponent,
+    JournalComponent
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},

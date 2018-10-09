@@ -15,8 +15,8 @@ export class NavbarComponent implements OnInit {
   public active: string = 'Home';
   public availablePages: string[];
   private adminPages: string[] = ['Home', 'Users', 'Accounts'];
-  private managerPages: string[] = ['Home', 'Users', 'Accounts'];
-  private userPages: string[] = ['Home', 'Accounts'];
+  private managerPages: string[] = ['Home', 'Users', 'Accounts', 'Journal'];
+  private userPages: string[] = ['Home', 'Accounts', 'Journal'];
   public username: string;
   public loggedIn: boolean = false;
   public loggedInSubscription: Subscription;
