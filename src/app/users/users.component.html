@@ -39,15 +39,21 @@
   <tbody>
   <tr
     [className]="user.forgot_password ? 'forgot_password clickable-row clickable waves-light' : 'clickable-row clickable waves-light'"
-    *ngFor="let user of filterBy()" data-toggle="modal" data-target="#register-modal" (click)="editUser(user)">
-    <td>{{user.user_id}}</td>
-    <td>{{user.username}}</td>
-    <td>{{user.first_name}}</td>
-    <td>{{user.last_name}}</td>
-    <td>{{user.email}}</td>
-    <td>{{user.last_login}}</td>
-    <td>{{user.password_expiration_date}}</td>
-    <td>{{user.user_type}}</td>
+    *ngFor="let user of filterBy()" data-toggle="modal" data-target="#register-modal">
+    <td (click)="editUser(user)">{{user.user_id}}</td>
+    <td (click)="editUser(user)">{{user.username}}</td>
+    <td (click)="editUser(user)">{{user.first_name}}</td>
+    <td (click)="editUser(user)">{{user.last_name}}</td>
+    <td (click)="editUser(user)">{{user.email}}</td>
+    <td (click)="editUser(user)">{{user.last_login}}</td>
+    <td (click)="editUser(user)">{{user.password_expiration_date}}</td>
+    <td (click)="editUser(user)">{{user.user_type}}</td>
+    <td>
+      <button type="button" mdbBtn color="danger" class="relative waves-light" mdbWavesEffect
+              (click)="showResetPassword(user)">
+        Reset Password
+      </button>
+    </td>
   </tr>
   </tbody>
 </table>
@@ -78,7 +84,8 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"
                     (click)="clearError()">
               <span aria-hidden="true">&times;</span>
-            </button></div>
+            </button>
+          </div>
 
 
           <!-- First Name -->
@@ -180,6 +187,41 @@
           </button>
           <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
                   (click)="addUser()">Add User
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mdbModal #resetPasswordModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Reset Password" aria-hidden="true" style="overflow-y: auto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="resetPasswordModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="resetPasswordModal">Reset
+          {{resetPasswordUser.first_name}}'s Password</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="resetPasswordForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="addUser()">
+          <!-- Password -->
+          <div class="form-group">
+            <label for="editUserFormUsername">New Password</label>
+            <input type="password" formControlName="password" id="resetPassword" class="form-control"
+                   placeholder="Password">
+          </div>
+          <div *ngIf="resetPasswordError" class="alert alert-danger">{{resetPasswordError}}</div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="resetPasswordModal.hide()" mdbWavesEffect>Close
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitNewPassword()">Reset Password
           </button>
         </div>
       </div>

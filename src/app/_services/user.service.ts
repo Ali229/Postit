@@ -46,7 +46,8 @@ export class UserService {
 
   updateUser() {
     if (this.loggedIn && this.userID != "") {
-      this.http.get<User>(`http://markzeagler.com/postit-backend/user/` + this.userID).subscribe((response: User) => {
+      this.http.get<User>(`http://markzeagler.com/postit-backend/user/` + this.userID,
+        this.authService.getGETHeaders()).subscribe((response: User) => {
         this.userSubject.next(response);
       });
     }
@@ -59,7 +60,8 @@ export class UserService {
 
   updateUserArray() {
     if (this.loggedIn) {
-      this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`).subscribe((response: User[]) => {
+      this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`,
+        this.authService.getGETHeaders()).subscribe((response: User[]) => {
         this.userArraySubject.next(response['users']);
       });
     }
@@ -80,26 +82,39 @@ export class UserService {
   }
 
   addUser(username: string, first_name: string, last_name: string, email: string, password: string, user_type: string) {
-    return this.http.post('http://markzeagler.com/postit-backend/user/new', {
+    let body = {
       'username': username,
       'password': password,
       'first_name': first_name,
       'last_name': last_name,
       'email': email,
       'user_type': user_type
-    });
+    };
+    return this.http.post('http://markzeagler.com/postit-backend/user/new', body,
+      this.authService.getPOSTPUTHeaders(body));
   }
 
   editUser(user_id, category, value) {
-    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, {
+    let body = {
       'category': category,
       'value': value
-    });
+    };
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, body,
+      this.authService.getPOSTPUTHeaders(body));
   }
 
   forgotPassword(username: string) {
     return this.http.put('http://markzeagler.com/postit-backend/forgotpassword', {
       'username': username
     });
+  }
+
+  resetPassword(user_id: number, newPassword: string) {
+    let body = {
+      'category': 'password',
+      'value': newPassword
+    };
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, body,
+      this.authService.getPOSTPUTHeaders(body));
   }
 }

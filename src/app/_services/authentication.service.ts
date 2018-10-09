@@ -1,5 +1,5 @@
 import {Injectable, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {first} from 'rxjs/operators';
 import {LoginData} from '../_models';
@@ -117,17 +117,23 @@ export class AuthenticationService implements OnInit {
 
   getGETHeaders() {
     return {
-      'Cache-Control': 'no-cache',
-      'Authorization': "Bearer " + localStorage.getItem('auth_token')
-    }
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+      })
+    };
   }
 
-  getPOSTPUTHeaders() {
+  getPOSTPUTHeaders(body) {
     return {
-      'Cache-Control': 'no-cache',
-      'Content-Type': 'application/json',
-      'Authorization': "Bearer " + localStorage.getItem('auth_token')
-    }
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
+        'Content-Length': body.toString().length,
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
   }
 
   encryptPassword(password: string) {
@@ -135,7 +141,8 @@ export class AuthenticationService implements OnInit {
   }
 
   updateLoggedInVerification() {
-    this.http.get<any>('http://postit.markzeagler.com/postit-backend/verify_logged_in').subscribe(response => {
+    this.http.get<any>('http://postit.markzeagler.com/postit-backend/verify_logged_in',
+      this.getGETHeaders()).subscribe(response => {
       this.loggedInSubject.next(response);
     });
   }

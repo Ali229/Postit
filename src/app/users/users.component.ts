@@ -30,6 +30,12 @@ export class UsersComponent implements OnInit {
   addUserForm: FormGroup;
   addUserError: string = '';
 
+  // Reset Password
+  @ViewChild('resetPasswordModal') public resetPasswordModal: ModalDirective;
+  resetPasswordForm: FormGroup;
+  resetPasswordUser: User = new User();
+  resetPasswordError: string = '';
+
   constructor(private authService: AuthenticationService,
               public userService: UserService,
               private formBuilder: FormBuilder,
@@ -52,6 +58,11 @@ export class UsersComponent implements OnInit {
       last_name: ['', Validators.required],
       email: ['', Validators.required],
       user_type: ['', Validators.required]
+    });
+
+
+    this.resetPasswordForm = this.formBuilder.group({
+      password: ['', Validators.required]
     });
   }
 
@@ -192,5 +203,20 @@ export class UsersComponent implements OnInit {
       controls.email.value, controls.password.value, controls.user_type.value).subscribe( response => {
         console.log("Added")
     });
+  }
+
+  showResetPassword(user: User) {
+    this.resetPasswordUser = user;
+    this.resetPasswordModal.show();
+  }
+
+  submitNewPassword() {
+    let newPassword = this.resetPasswordForm.controls.password.value;
+    this.userService.resetPassword(this.resetPasswordUser.user_id, newPassword).subscribe( response => {
+      console.log(response['message']);
+      this.resetPasswordModal.hide();
+    }, error => {
+      console.log(error['message'])
+    })
   }
 }
