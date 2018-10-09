@@ -7,5 +7,6 @@
   user_type: string;
   last_login: string;
   password_expiration_date: string;
+  forgot_password: boolean;
 }
 

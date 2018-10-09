@@ -1,10 +1,23 @@
 .clickable:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
+
 .centered {
   position: fixed;
   top: 50%;
   left: 50%;
   margin-top: -100px;
   margin-left: -100px;
+}
+
+.table-striped > tbody > tr:nth-child(even).forgot_password > td,
+.table-striped > tbody > tr:nth-child(even).forgot_password > th {
+  background-color: darkorange; // Choose your own color here
+  color: white;
+}
+
+.table-striped > tbody > tr:nth-child(odd).forgot_password > td,
+.table-striped > tbody > tr:nth-child(odd).forgot_password > th {
+  background-color: darkorange; // Choose your own color here
+  color: white;
 }
