@@ -41,7 +41,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="clickable" *ngFor="let account of accounts" (click)="editAccount(account)">
+  <tr class="clickable" *ngFor="let account of filterBy()" (click)="editAccount(account)">
     <td>{{account.account_id}}</td>
     <td>{{account.account_title}}</td>
     <td>${{account.balance.toFixed(2)}}</td>
