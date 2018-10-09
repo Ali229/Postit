@@ -15,7 +15,8 @@ import {LoginData, User, Account} from './_models';
 import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
 import {AppService} from "./_services/app.service";
-import { AccountComponent } from './account/account.component'
+import {AccountComponent} from './account/account.component'
+import {Transaction} from "./_models/transaction";
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { AccountComponent } from './account/account.component'
     NavbarComponent,
     AccountsComponent,
     UsersComponent
-,
+    ,
     AccountComponent
   ],
   providers: [
@@ -46,7 +47,8 @@ import { AccountComponent } from './account/account.component'
     UserService,
     AccountService,
     User,
-    Account
+    Account,
+    Transaction
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,51 @@
-<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect routerLink="/accounts">
+<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+        routerLink="/accounts">
   << Back to Chart of Accounts
 </button>
 
 <span></span>
 
-<h1 *ngIf="account">Account {{account_id}}, {{account.account_title}}</h1>
+<div class="col-md-12">
+  <div class="md-form">
+    <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective
+           [mdbValidate]="false">
+    <label for="search">Search Transactions</label>
+  </div>
+</div>
+<h1 *ngIf="account">{{account.account_title}}</h1>
+<h3>Account No. {{account_id}}</h3>
+<!-- <img *ngIf="transactions.length === 0" class="centered" src="./src/assets/table_loading.svg"> -->
+<table class="table table-hover table-striped table-bordered table-responsive-md">
+  <thead>
+  <tr>
+    <th class="th-sm clickable" (click)="sortBy('date')">Date
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th class="th-sm clickable" (click)="sortBy('description')">Description
+      <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
+    </th>
+    <th class="th-sm clickable" (click)="sortBy('posting_reference')">P.R.
+      <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
+    </th>
+    <th class="th-sm clickable" (click)="sortBy('debit_amount')">Dr.
+      <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
+    </th>
+    <th class="th-sm clickable" (click)="sortBy('credit_amount')">Cr.
+      <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
+    </th>
+    <th class="th-sm clickable" (click)="sortBy('balance')">Balance
+      <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="clickable" *ngFor="let transaction of transactions">
+    <td>{{transaction.date}}</td>
+    <td>{{transaction.description}}</td>
+    <td>{{transaction.posting_reference}}</td>
+    <td>${{transaction.debit_amount.toFixed(2)}}</td>
+    <td>${{transaction.credit_amount.toFixed(2)}}</td>
+    <td>${{transaction.balance.toFixed(2)}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Account} from "../_models";
 import {AppService} from "../_services/app.service";
 import {AccountService, AuthenticationService} from "../_services";
+import {Transaction} from "../_models/transaction";
 
 @Component({
   selector: 'app-account',
@@ -13,6 +14,8 @@ export class AccountComponent implements OnInit {
 
   account_id: number;
   account: Account;
+  transactions: Transaction[];
+  filterValue: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private appService: AppService,
@@ -28,6 +31,10 @@ export class AccountComponent implements OnInit {
       this.account = response;
     });
     this.accountService.updateAccount(this.account_id)
+  }
+
+  sortBy(value: string) {
+
   }
 
 }
