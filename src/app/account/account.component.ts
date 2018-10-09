@@ -24,13 +24,12 @@ export class AccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.updateLoggedInVerification();
+    this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.account_id = parseInt(this.activatedRoute.snapshot.params.account_id);
     this.appService.setActivePage('account/' + this.account_id);
     this.accountService.getAccount(this.account_id).subscribe((response: Account) => {
       this.account = response;
     });
-    this.accountService.updateAccount(this.account_id)
   }
 
   sortBy(value: string) {

@@ -135,7 +135,6 @@ export class AuthenticationService implements OnInit {
   }
 
   updateLoggedInVerification() {
-
     this.http.get<any>('http://postit.markzeagler.com/postit-backend/verify_logged_in').subscribe(response => {
       this.loggedInSubject.next(response);
     });

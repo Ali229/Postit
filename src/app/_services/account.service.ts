@@ -53,12 +53,10 @@ export class AccountService {
   }
 
   updateAccount(account_id) {
-    if (this.loggedIn) {
       this.http.get<any>('http://markzeagler.com/postit-backend/account/' + account_id.toString()).subscribe(response => {
         this.account = response['account'][0];
         this.accountSubject.next(response['account'][0]);
       });
-    }
   }
 
   getAccount(account_id: number) {
