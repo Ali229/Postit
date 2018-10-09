@@ -53,7 +53,7 @@
       <td (click)="editUser(user)">{{user.last_login}}</td>
       <td (click)="editUser(user)">{{user.password_expiration_date}}</td>
       <td (click)="editUser(user)">{{user.user_type}}</td>
-      <td>
+      <td *ngIf="user.forgot_password">
         <button type="button" mdbBtn color="danger" class="relative waves-light" mdbWavesEffect
                 (click)="showResetPassword(user)">
           Reset Password
