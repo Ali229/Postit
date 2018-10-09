@@ -48,12 +48,16 @@ export class NavbarComponent implements OnInit {
       } else if (user_type == 'user') {
         this.availablePages = this.userPages;
       }
-    })
+    });
+
+    if(!localStorage.getItem('selected')) {
+      localStorage.setItem('selected', 'Home')
+    }
 
   }
 
   ngOnInit() {
-
+    this.select(localStorage.getItem('selected'))
   }
 
   logout() {
@@ -64,6 +68,7 @@ export class NavbarComponent implements OnInit {
 
   select(page: string) {
     this.active = page;
+    localStorage.setItem('selected', page);
     this.router.navigate(['./' + page.toLowerCase()]);
   }
 }
