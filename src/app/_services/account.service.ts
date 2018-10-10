@@ -26,14 +26,15 @@ export class AccountService {
       }
     });
 
-    this.authService.getVerifiedLoggedIn().subscribe( response => {
+    this.authService.getVerifiedLoggedIn().subscribe(response => {
       this.loggedIn = response;
     })
   }
 
   updateAccounts() {
     if (this.loggedIn) {
-      this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all').subscribe(response => {
+      this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all',
+        this.authService.getGETHeaders()).subscribe(response => {
         this.accountArraySubject.next(response['accounts']);
       });
     }
@@ -45,18 +46,21 @@ export class AccountService {
   }
 
   createAccount(account_id: number, account_title: string, normal_side: string, description: string) {
-    return this.http.post('http://markzeagler.com/postit-backend/account/' + account_id, {
+    let body = {
       'account_title': account_title,
       'normal_side': normal_side,
       'description': description
-    });
+    };
+    return this.http.post('http://markzeagler.com/postit-backend/account/' + account_id, body,
+      this.authService.getPOSTPUTHeaders(body));
   }
 
   updateAccount(account_id) {
-      this.http.get<any>('http://markzeagler.com/postit-backend/account/' + account_id.toString()).subscribe(response => {
-        this.account = response['account'][0];
-        this.accountSubject.next(response['account'][0]);
-      });
+    this.http.get<any>('http://markzeagler.com/postit-backend/account/' + account_id.toString(),
+      this.authService.getGETHeaders()).subscribe(response => {
+      this.account = response['account'][0];
+      this.accountSubject.next(response['account'][0]);
+    });
   }
 
   getAccount(account_id: number) {

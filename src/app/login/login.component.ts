@@ -1,12 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthenticationService, UserService} from '../_services';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {ModalDirective} from "angular-bootstrap-md";
 import {AppService} from "../_services/app.service";
-
 @Component({
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.scss']
@@ -17,7 +16,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
-
+  emailFormEx: FormControl;
+  passwordFormEx: FormControl;
   // Forgot Password Modal
   @ViewChild('forgotPasswordModal') public forgotPasswordModal: ModalDirective;
   forgotPasswordForm: FormGroup;
@@ -37,11 +37,12 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private appService: AppService) {
+    this.emailFormEx = new FormControl('', Validators.email);
+    this.passwordFormEx = new FormControl('', Validators.required);
   }
 
   ngOnInit() {
     this.appService.setActivePage('login');
-
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -66,21 +67,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.loginForm.controls;
-  }
-
   onSubmit() {
+    console.log("this ran");
     this.submitted = true;
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login(this.emailFormEx.value, this.passwordFormEx.value)
       .subscribe(
         data => {
+          console.log("came here");
           if (data[0]) {
             this.router.navigate(['./home']);
           } else {

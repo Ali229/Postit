@@ -1,188 +1,234 @@
-<div class="col-md-12">
-  <div class="md-form">
-    <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective
-           [mdbValidate]="false">
-    <label for="search">Search Users</label>
+<img *ngIf="users.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
+<ng-template #showTable>
+  <h1>Users</h1>
+  <div class="col-md-12">
+    <div class="md-form">
+      <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective
+             [mdbValidate]="false">
+      <label for="search">Search Users</label>
+    </div>
   </div>
-</div>
-<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">
-<table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
-  <thead>
-  <tr>
-    <th class="th-sm clickable" (click)="sortBy('user_id')">User ID
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
 
-    <th class="th-sm clickable" (click)="sortBy('username')">Username
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="th-sm clickable" (click)="sortBy('first_name')">First Name
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="th-sm clickable" (click)="sortBy('last_name')">Last Name
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="th-sm clickable" (click)="sortBy('email')">Email
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="th-sm clickable" (click)="sortBy('last_login')">Last Login
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="th-sm clickable" (click)="sortBy('password_expiration_date')">Password Expiration Date
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="th-sm clickable" (click)="sortBy('user_type')">User Type
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr
-    [className]="user.forgot_password ? 'forgot_password clickable-row clickable waves-light' : 'clickable-row clickable waves-light'"
-    *ngFor="let user of filterBy()" data-toggle="modal" data-target="#register-modal" (click)="editUser(user)">
-    <td>{{user.user_id}}</td>
-    <td>{{user.username}}</td>
-    <td>{{user.first_name}}</td>
-    <td>{{user.last_name}}</td>
-    <td>{{user.email}}</td>
-    <td>{{user.last_login}}</td>
-    <td>{{user.password_expiration_date}}</td>
-    <td>{{user.user_type}}</td>
-  </tr>
-  </tbody>
-</table>
+  <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
+    <thead>
+    <tr>
+      <th class="th-sm clickable" (click)="sortBy('user_id')">User ID
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
 
-<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="showAddUser()">
-  + Add User +
-</button>
-
-<div mdbModal #editUserModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="Edit User" aria-hidden="true" style="overflow-y: auto">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="editUserModal.hide()">
-          <span aria-hidden="true">×</span>
+      <th class="th-sm clickable" (click)="sortBy('username')">Username
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('first_name')">First Name
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('last_name')">Last Name
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('email')">Email
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('last_login')">Last Login
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('password_expiration_date')">Password Expiration Date
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('user_type')">User Type
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      [className]="user.forgot_password ? 'forgot_password clickable-row clickable waves-light' : 'clickable-row clickable waves-light'"
+      *ngFor="let user of filterBy()" data-toggle="modal" data-target="#register-modal">
+      <td (click)="editUser(user)">{{user.user_id}}</td>
+      <td (click)="editUser(user)">{{user.username}}</td>
+      <td (click)="editUser(user)">{{user.first_name}}</td>
+      <td (click)="editUser(user)">{{user.last_name}}</td>
+      <td (click)="editUser(user)">{{user.email}}</td>
+      <td (click)="editUser(user)">{{user.last_login}}</td>
+      <td (click)="editUser(user)">{{user.password_expiration_date}}</td>
+      <td (click)="editUser(user)">{{user.user_type}}</td>
+      <td *ngIf="user.forgot_password">
+        <button type="button" mdbBtn color="danger" class="relative waves-light" mdbWavesEffect
+                (click)="showResetPassword(user)">
+          Reset Password
         </button>
-        <h4 class="modal-title w-100" id="editUserModal">Edit User</h4>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="editUserForm" class="text-center border border-light p-5 lg-form" (ngSubmit)="submitEdits()">
-          <!-- Username -->
-          <div class="form-group">
-            <label for="editUserFormUsername">Username</label>
-            <input type="text" formControlName="username" id="editUserFormUsername" class="form-control"
-                   placeholder="Username">
-          </div>
-          <div *ngIf="editUserError" class="alert alert-danger">{{editUserError}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
-                    (click)="clearError()">
-              <span aria-hidden="true">&times;</span>
-            </button></div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
+  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="showAddUser()">
+    + Add User +
+  </button>
 
-          <!-- First Name -->
-          <div class="form-group">
-            <label for="editUserFormFirstName">First Name</label>
-            <input type="text" formControlName="first_name" id="editUserFormFirstName" class="form-control"
-                   placeholder="first_name">
-          </div>
-          <!-- Last Name -->
-          <div class="form-group">
-            <label for="editUserFormLastName">Last Name</label>
-            <input type="text" formControlName="last_name" id="editUserFormLastName" class="form-control"
-                   placeholder="first_name">
-          </div>
-          <!-- Email -->
-          <div class="form-group">
-            <label for="editUserFormEmail">Email</label>
-            <input type="email" formControlName="email" id="editUserFormEmail" class="form-control"
-                   placeholder="email">
-          </div>
-
-          <!-- User Type -->
-          <div class="form-group">
-            <label for="editUserFormType">User Type</label>
-            <select class="form-control" formControlName="user_type" id="editUserFormType">
-              <option *ngFor="let user_type of userTypes" [value]="user_type">{{user_type}}</option>
-            </select>
-          </div>
-          <div *ngIf="editUserError" class="alert alert-danger">{{editUserError}}</div>
-        </form>
-        <div class="modal-footer">
-          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                  (click)="editUserModal.hide()" mdbWavesEffect>Close
+  <div mdbModal #editUserModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+       aria-labelledby="Edit User" aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="editUserModal.hide()">
+            <span aria-hidden="true">×</span>
           </button>
-          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                  (click)="submitEdits()">Save changes
-          </button>
+          <h4 class="modal-title w-100" id="editUserModal">Edit User</h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editUserForm" class="text-center border border-light p-5 lg-form"
+                (ngSubmit)="submitEdits()">
+            <!-- Username -->
+            <div class="form-group">
+              <label for="editUserFormUsername">Username</label>
+              <input type="text" formControlName="username" id="editUserFormUsername" class="form-control"
+                     placeholder="Username">
+            </div>
+            <div *ngIf="editUserError" class="alert alert-danger">{{editUserError}}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                      (click)="clearError()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+
+            <!-- First Name -->
+            <div class="form-group">
+              <label for="editUserFormFirstName">First Name</label>
+              <input type="text" formControlName="first_name" id="editUserFormFirstName" class="form-control"
+                     placeholder="first_name">
+            </div>
+            <!-- Last Name -->
+            <div class="form-group">
+              <label for="editUserFormLastName">Last Name</label>
+              <input type="text" formControlName="last_name" id="editUserFormLastName" class="form-control"
+                     placeholder="first_name">
+            </div>
+            <!-- Email -->
+            <div class="form-group">
+              <label for="editUserFormEmail">Email</label>
+              <input type="email" formControlName="email" id="editUserFormEmail" class="form-control"
+                     placeholder="email">
+            </div>
+
+            <!-- User Type -->
+            <div class="form-group">
+              <label for="editUserFormType">User Type</label>
+              <select class="form-control" formControlName="user_type" id="editUserFormType">
+                <option *ngFor="let user_type of userTypes" [value]="user_type">{{user_type}}</option>
+              </select>
+            </div>
+            <div *ngIf="editUserError" class="alert alert-danger">{{editUserError}}</div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                    (click)="editUserModal.hide()" mdbWavesEffect>Close
+            </button>
+            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                    (click)="submitEdits()">Save changes
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div mdbModal #addUserModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
-     aria-labelledby="Edit User" aria-hidden="true" style="overflow-y: auto">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="addUserModal.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title w-100" id="addUserModal">Add New User</h4>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="addUserForm" class="text-center border border-light p-5 lg-form" (ngSubmit)="addUser()">
-          <!-- Username -->
-          <div class="form-group">
-            <label for="editUserFormUsername">Username</label>
-            <input type="text" formControlName="username" id="addUserFormUsername" class="form-control"
-                   placeholder="Username">
-          </div>
-          <!-- Password -->
-          <div class="form-group">
-            <label for="editUserFormUsername">Password</label>
-            <input type="password" formControlName="username" id="addUserFormPassword" class="form-control"
-                   placeholder="Password">
-          </div>
-          <!-- First Name -->
-          <div class="form-group">
-            <label for="editUserFormFirstName">First Name</label>
-            <input type="text" formControlName="first_name" id="addUserFormFirstName" class="form-control"
-                   placeholder="first_name">
-          </div>
-          <!-- Last Name -->
-          <div class="form-group">
-            <label for="editUserFormLastName">Last Name</label>
-            <input type="text" formControlName="last_name" id="addUserFormLastName" class="form-control"
-                   placeholder="first_name">
-          </div>
-          <!-- Email -->
-          <div class="form-group">
-            <label for="editUserFormEmail">Email</label>
-            <input type="email" formControlName="email" id="addUserFormEmail" class="form-control"
-                   placeholder="email">
-          </div>
+  <div mdbModal #addUserModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+       aria-labelledby="Edit User" aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="addUserModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="addUserModal">Add New User</h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addUserForm" class="text-center border border-light p-5 lg-form" (ngSubmit)="addUser()">
+            <!-- Username -->
+            <div class="form-group">
+              <label for="editUserFormUsername">Username</label>
+              <input type="text" formControlName="username" id="addUserFormUsername" class="form-control"
+                     placeholder="Username">
+            </div>
+            <!-- Password -->
+            <div class="form-group">
+              <label for="editUserFormUsername">Password</label>
+              <input type="password" formControlName="username" id="addUserFormPassword" class="form-control"
+                     placeholder="Password">
+            </div>
+            <!-- First Name -->
+            <div class="form-group">
+              <label for="editUserFormFirstName">First Name</label>
+              <input type="text" formControlName="first_name" id="addUserFormFirstName" class="form-control"
+                     placeholder="first_name">
+            </div>
+            <!-- Last Name -->
+            <div class="form-group">
+              <label for="editUserFormLastName">Last Name</label>
+              <input type="text" formControlName="last_name" id="addUserFormLastName" class="form-control"
+                     placeholder="first_name">
+            </div>
+            <!-- Email -->
+            <div class="form-group">
+              <label for="editUserFormEmail">Email</label>
+              <input type="email" formControlName="email" id="addUserFormEmail" class="form-control"
+                     placeholder="email">
+            </div>
 
-          <!-- User Type -->
-          <div class="form-group">
-            <label for="editUserFormType">User Type</label>
-            <select class="form-control" formControlName="user_type" id="addUserFormType">
-              <option *ngFor="let user_type of userTypes" [value]="user_type">{{user_type}}</option>
-            </select>
+            <!-- User Type -->
+            <div class="form-group">
+              <label for="editUserFormType">User Type</label>
+              <select class="form-control" formControlName="user_type" id="addUserFormType">
+                <option *ngFor="let user_type of userTypes" [value]="user_type">{{user_type}}</option>
+              </select>
+            </div>
+            <div *ngIf="addUserError" class="alert alert-danger">{{addUserError}}</div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                    (click)="addUserModal.hide()" mdbWavesEffect>Close
+            </button>
+            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                    (click)="addUser()">Add User
+            </button>
           </div>
-          <div *ngIf="addUserError" class="alert alert-danger">{{addUserError}}</div>
-        </form>
-        <div class="modal-footer">
-          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                  (click)="addUserModal.hide()" mdbWavesEffect>Close
-          </button>
-          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                  (click)="addUser()">Add User
-          </button>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+  <div mdbModal #resetPasswordModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+       aria-labelledby="Reset Password" aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="resetPasswordModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="resetPasswordModal">Reset
+            {{resetPasswordUser.first_name}}'s Password</h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="resetPasswordForm" class="text-center border border-light p-5 lg-form"
+                (ngSubmit)="addUser()">
+            <!-- Password -->
+            <div class="form-group">
+              <label for="editUserFormUsername">New Password</label>
+              <input type="password" formControlName="password" id="resetPassword" class="form-control"
+                     placeholder="Password">
+            </div>
+            <div *ngIf="resetPasswordError" class="alert alert-danger">{{resetPasswordError}}</div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                    (click)="resetPasswordModal.hide()" mdbWavesEffect>Close
+            </button>
+            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                    (click)="submitNewPassword()">Reset Password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
