@@ -1,3 +1,51 @@
-<p>
-  journal works!
-</p>
+<div>
+<h1>Journalize</h1>
+</div>
+
+<button type="button" mdbBtn color="secondary">
+  + Add New Entry +
+</button>
+<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">
+<table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
+  <thead>
+  <tr>
+    <th>Journal ID
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+
+    <th>Account Title
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>P.R.
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>Debit
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>Credit
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>Creator
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>Type
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>Status
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <!--<tr>-->
+    <!--<td>{{journal.journal_id}}</td>-->
+    <!--<td>{{journal.account_title}}</td>-->
+    <!--<td>{{user.first_name}}</td>-->
+    <!--<td>{{user.last_name}}</td>-->
+    <!--<td>{{user.email}}</td>-->
+    <!--<td>{{user.last_login}}</td>-->
+    <!--<td>{{user.password_expiration_date}}</td>-->
+    <!--<td>{{user.user_type}}</td>-->
+  <!--</tr>-->
+  </tbody>
+</table>
