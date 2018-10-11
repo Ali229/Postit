@@ -14,7 +14,9 @@ export class UserService {
   loggedIn: boolean;
   userID: string = "";
 
-  constructor(private http: HttpClient, private authService: AuthenticationService, private appService: AppService) {
+  constructor(private http: HttpClient,
+              private authService: AuthenticationService,
+              private appService: AppService) {
     this.userSubject = new Subject();
     this.userArraySubject = new Subject();
 
@@ -28,7 +30,7 @@ export class UserService {
 
     const user_id = localStorage.getItem('user_id');
     if (user_id) {
-      console.log("Setting user_id manually in user.service... Clean this up!");
+      console.log("Setting user_id manually in message.service... Clean this up!");
       this.userID = user_id;
       this.updateUser();
     }
@@ -90,7 +92,7 @@ export class UserService {
       'email': email,
       'user_type': user_type
     };
-    return this.http.post('http://markzeagler.com/postit-backend/user/new', body,
+    return this.http.post('http://markzeagler.com/postit-backend/message/new', body,
       this.authService.getPOSTPUTHeaders(body));
   }
 
@@ -99,7 +101,7 @@ export class UserService {
       'category': category,
       'value': value
     };
-    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, body,
+    return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, body,
       this.authService.getPOSTPUTHeaders(body));
   }
 
@@ -114,7 +116,7 @@ export class UserService {
       'category': 'password',
       'value': newPassword
     };
-    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, body,
+    return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, body,
       this.authService.getPOSTPUTHeaders(body));
   }
 }

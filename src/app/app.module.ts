@@ -11,13 +11,14 @@ import {AuthenticationService, UserService, AccountService} from './_services';
 import {NavbarComponent} from './navbar/navbar.component';
 import {AccountsComponent} from './accounts/accounts.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
-import {LoginData, User, Account} from './_models';
+import {User, Account} from './_models';
 import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
 import {AppService} from "./_services/app.service";
-import {AccountComponent} from './account/account.component'
-import {Transaction} from "./_models/transaction";;
-import { JournalComponent } from './journal/journal.component'
+import {AccountComponent} from './account/account.component';
+import {Transaction} from "./_models/transaction";
+import { JournalComponent } from './journal/journal.component';
+import { EventLogComponent } from './event-log/event-log.component';
 
 @NgModule({
   imports: [
@@ -35,11 +36,10 @@ import { JournalComponent } from './journal/journal.component'
     LoginComponent,
     NavbarComponent,
     AccountsComponent,
-    UsersComponent
-    ,
-    AccountComponent,
-    JournalComponent
-  ],
+    UsersComponent,
+    AccountComponent,
+    JournalComponent,
+    EventLogComponent ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

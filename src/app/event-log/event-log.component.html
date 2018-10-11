@@ -1,0 +1,32 @@
+<img *ngIf="messages.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
+<ng-template #showTable>
+  <div class="col-md-12">
+    <div class="md-form">
+      <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective
+             [mdbValidate]="false">
+      <label for="search">Search Event Log</label>
+    </div>
+  </div>
+
+  <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
+    <thead>
+    <tr>
+      <th class="th-sm clickable" (click)="sortBy('user_id')">User ID
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('message')">Message
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('timestamp')">Timestamp
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let message of filterBy()">
+      <td>{{message.user_id}}</td>
+      <td>{{message.message}}</td>
+      <td>{{message.timestamp}}</td>
+    </tr>
+    </tbody>
+  </table>
