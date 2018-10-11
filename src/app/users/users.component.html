@@ -80,7 +80,7 @@
             <div class="form-group">
               <label for="editUserFormUsername">Username</label>
               <input type="text" formControlName="username" id="editUserFormUsername" class="form-control"
-                     placeholder="Username">
+                     placeholder="Username" readonly>
             </div>
             <div *ngIf="editUserError" class="alert alert-danger">{{editUserError}}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"
