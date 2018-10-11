@@ -72,7 +72,7 @@ export class UserService {
   }
 
   register(username: string, first_name: string, last_name: string, email: string, password: string) {
-    return this.http.put('http://markzeagler.com/postit-backend/register', {
+    return this.http.post('http://markzeagler.com/postit-backend/register', {
       'username': username,
       'password': password,
       'first_name': first_name,
@@ -104,7 +104,7 @@ export class UserService {
   }
 
   forgotPassword(username: string) {
-    return this.http.put('http://markzeagler.com/postit-backend/forgotpassword', {
+    return this.http.post('http://markzeagler.com/postit-backend/forgotpassword', {
       'username': username
     });
   }
