@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let message of filterBy()">
+    <tr  [className]="message.message.includes('WARNING') ? 'warning-message' : ''" *ngFor="let message of filterBy()">
       <td>{{message.user_id}}</td>
       <td>{{message.message}}</td>
       <td>{{message.timestamp}}</td>
