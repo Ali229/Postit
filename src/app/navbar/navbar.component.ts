@@ -14,7 +14,14 @@ export class NavbarComponent implements OnInit {
 
   public active: string = 'Home';
   public availablePages: string[];
-  private adminPages: string[] = ['Home', 'Users', 'Accounts'];
+  private page_dictionary = {
+    'Home': 'home',
+    'Users': 'users',
+    'Accounts': 'accounts',
+    'Event Log': 'event-log',
+    'Journal': 'journal'
+  };
+  private adminPages: string[] = ['Home', 'Users', 'Accounts', 'Event Log'];
   private managerPages: string[] = ['Home', 'Accounts', 'Journal'];
   private userPages: string[] = ['Home', 'Accounts', 'Journal'];
   public username: string;
@@ -27,7 +34,7 @@ export class NavbarComponent implements OnInit {
               private router: Router,
               private app: AppComponent,
               private appService: AppService
-              ) {
+  ) {
     this.availablePages = this.userPages;
     this.active = appService.getActivePage();
     this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
@@ -50,7 +57,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    if(!localStorage.getItem('selected')) {
+    if (!localStorage.getItem('selected')) {
       localStorage.setItem('selected', 'Home')
     }
 
@@ -69,6 +76,6 @@ export class NavbarComponent implements OnInit {
   select(page: string) {
     this.active = page;
     localStorage.setItem('selected', page);
-    this.router.navigate(['./' + page.toLowerCase()]);
+    this.router.navigate(['./' + this.page_dictionary[page]]);
   }
 }

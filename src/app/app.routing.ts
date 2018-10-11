@@ -6,6 +6,7 @@ import {UsersComponent} from './users/users.component';
 import {NgModule} from "@angular/core";
 import {AccountComponent} from "./account/account.component";
 import {JournalComponent} from "./journal/journal.component";
+import {EventLogComponent} from "./event-log/event-log.component";
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'account/:account_id', component: AccountComponent},
   {path: 'journal', component: JournalComponent},
+  {path: 'event-log', component: EventLogComponent},
   // otherwise redirect to home
   {path: '**', redirectTo: '/login'}
 ];
