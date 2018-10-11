@@ -68,12 +68,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("this ran");
     this.submitted = true;
     this.authenticationService.login(this.emailFormEx.value, this.passwordFormEx.value)
       .subscribe(
         data => {
-          console.log("came here");
           if (data[0]) {
             this.router.navigate(['./home']);
           } else {
