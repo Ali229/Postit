@@ -201,7 +201,7 @@ export class UsersComponent implements OnInit {
     let controls = this.addUserForm.controls;
     this.userService.addUser(controls.username.value, controls.first_name.value, controls.last_name.value,
       controls.email.value, controls.password.value, controls.user_type.value).subscribe( response => {
-        console.log("Added")
+        this.addUserModal.hide();
     });
   }
 

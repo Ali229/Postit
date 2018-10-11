@@ -92,7 +92,7 @@ export class UserService {
       'email': email,
       'user_type': user_type
     };
-    return this.http.post('http://markzeagler.com/postit-backend/message/new', body,
+    return this.http.post('http://markzeagler.com/postit-backend/user/new', body,
       this.authService.getPOSTPUTHeaders(body));
   }
 
