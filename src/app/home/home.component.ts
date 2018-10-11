@@ -1,7 +1,8 @@
 ﻿import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, UserService} from '../_services';
+import {AccountService, AuthenticationService, UserService} from '../_services';
 import {AppComponent} from '../app.component';
 import {AppService} from "../_services/app.service";
+import {Account} from "../_models";
 
 // import { first } from 'rxjs/operators';
 
@@ -14,11 +15,13 @@ export class HomeComponent implements OnInit {
 
   private loggedIn: boolean;
   public userFirstName: string;
+  accounts: Account[];
 
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
               private appService: AppService,
-              private userService: UserService) {
+              private userService: UserService,
+              private accountService: AccountService) {
 
     this.authService.getVerifiedLoggedIn().subscribe(loggedIn => {
       this.loggedIn = loggedIn;
@@ -26,6 +29,10 @@ export class HomeComponent implements OnInit {
 
     this.userService.getCurrUser().subscribe(user => {
       this.userFirstName = user['first_name']
+    });
+
+    this.accountService.getAccountsSubject().subscribe( accounts => {
+      this.accounts = accounts;
     });
   }
 
