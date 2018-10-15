@@ -5,16 +5,16 @@
 //  background-color: transparent;
 //}
 
-::-webkit-scrollbar
-{
+::-webkit-scrollbar {
   width: 8px;
   background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb
-{
+::-webkit-scrollbar-thumb {
   background-color: #3f51b5;
 }
+
 body {
   overflow: hidden;
+  background-color: dimgray;
 }
