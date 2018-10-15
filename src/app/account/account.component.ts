@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {Account} from "../_models";
-import {AppService} from "../_services/app.service";
-import {AccountService, AuthenticationService} from "../_services";
-import {Transaction} from "../_models/transaction";
+import {Account, Transaction} from "../_models";
+import {AccountService, AuthenticationService, AppService} from "../_services";
 
 @Component({
   selector: 'app-account',
