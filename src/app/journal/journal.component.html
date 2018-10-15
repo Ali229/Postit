@@ -81,6 +81,13 @@
               <option *ngFor="let journal_type of journalTypes" [value]="journal_type">{{journal_type}}</option>
             </select>
           </div>
+          <!-- Add/Remove Debit Row -->
+          <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()" colspan="2">
+            - Remove Debit -
+          </button>
+          <button type="button" mdbBtn color="default" (click)="addDebitRow()" colspan="2">
+            + Add Debit +
+          </button>
           <!-- Debits -->
           <!-- TODO Change to a mat-table -->
           <h5>Debits</h5>
@@ -116,12 +123,12 @@
             </tr>
             </tbody>
           </table>
-          <!-- Add/Remove Debit Row -->
-          <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()" colspan="2">
-            - Remove Debit -
+          <!-- Add/Remove Credit Row -->
+          <button *ngIf="creditLines.length > 1" type="button" mdbBtn color="danger" (click)="removeCreditRow()">
+            - Remove Credit -
           </button>
-          <button type="button" mdbBtn color="default" (click)="addDebitRow()" colspan="2">
-            + Add Debit +
+          <button type="button" mdbBtn color="default" (click)="addCreditRow()">
+            + Add Credit +
           </button>
           <!-- Credits --->
           <!-- TODO Change to a mat-table -->
@@ -158,13 +165,6 @@
             </tr>
             </tbody>
           </table>
-          <!-- Add/Remove Credit Row -->
-          <button *ngIf="creditLines.length > 1" type="button" mdbBtn color="danger" (click)="removeCreditRow()">
-            - Remove Credit -
-          </button>
-          <button type="button" mdbBtn color="default" (click)="addCreditRow()">
-            + Add Credit +
-          </button>
 
           <div *ngIf="journalizeError" class="alert alert-danger">{{journalizeError}}</div>
         </form>
