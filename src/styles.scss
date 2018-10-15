@@ -11,10 +11,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
   background-color: #3f51b5;
 }
 
 body {
   overflow: hidden;
-  background-color: dimgray;
+  //background-color: dimgray;
 }
