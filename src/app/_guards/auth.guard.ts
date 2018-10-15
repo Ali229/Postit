@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.getLoggedIn()) {
-      console.log("User is logged in");
       // logged in so return true
       if(this.typePageMap[this.authService.getUserType()].includes(route.routeConfig.path)) {
         return true;
@@ -32,7 +31,6 @@ export class AuthGuard implements CanActivate {
       }
     } else {
       // not logged in so redirect to login page with the return url
-      console.log("User is not logged in");
       this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
       return false;
     }
