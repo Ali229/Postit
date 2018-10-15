@@ -7,17 +7,21 @@ import {NgModule} from "@angular/core";
 import {AccountComponent} from "./account/account.component";
 import {JournalComponent} from "./journal/journal.component";
 import {EventLogComponent} from "./event-log/event-log.component";
+import {AuthGuard} from "./_guards";
+import {AuthenticationService} from "./_services";
+
+let loggedIn: boolean = false;
 
 const appRoutes: Routes = [
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'accounts', component: AccountsComponent},
-  {path: 'users', component: UsersComponent},
-  {path: 'account/:account_id', component: AccountComponent},
-  {path: 'journal', component: JournalComponent},
-  {path: 'event-log', component: EventLogComponent},
-  // otherwise redirect to home
-  {path: '**', redirectTo: '/login'}
+  {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard]},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
+  {path: 'account/:account_id', component: AccountComponent, canActivate: [AuthGuard]},
+  {path: 'journal', component: JournalComponent, canActivate: [AuthGuard]},
+  {path: 'event-log', component: EventLogComponent, canActivate: [AuthGuard]},
+  // otherwise redirect to home if logged in or login if not
+  {path: '**', redirectTo: loggedIn ? '/home' : '/login'}
 ];
 
 @NgModule({
@@ -27,4 +31,11 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+  constructor(private authService: AuthenticationService) {
+    this.authService.getVerifiedLoggedIn().subscribe( isLoggedIn => {
+      loggedIn = isLoggedIn;
+    });
+  }
 }
+
+

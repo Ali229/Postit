@@ -13,7 +13,7 @@ import {Account} from "../_models";
 })
 export class HomeComponent implements OnInit {
 
-  private loggedIn: boolean;
+  private loggedIn: boolean = false;
   public userFirstName: string;
   accounts: Account[];
 

@@ -1,10 +1,10 @@
 ﻿<div *ngIf="padding; else loggedOut">
   <app-navbar></app-navbar>
   <div class="container">
-    <router-outlet (activate)="checkpage()"></router-outlet>
+    <router-outlet (activate)="checkPage()"></router-outlet>
   </div>
 </div>
 
 <ng-template #loggedOut>
-  <router-outlet (activate)="checkpage()"></router-outlet>
+  <router-outlet (activate)="checkPage()"></router-outlet>
 </ng-template>

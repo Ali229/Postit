@@ -11,8 +11,10 @@ export class UserService {
 
   userSubject: Subject<User>;
   userArraySubject: Subject<User[]>;
-  loggedIn: boolean;
+  loggedIn: boolean = false;
   userID: string = "";
+  isAdmin: boolean = false;
+  currUser: User;
 
   constructor(private http: HttpClient,
               private authService: AuthenticationService,
@@ -51,6 +53,7 @@ export class UserService {
       this.http.get<User>(`http://markzeagler.com/postit-backend/user/` + this.userID,
         this.authService.getGETHeaders()).subscribe((response: User) => {
         this.userSubject.next(response);
+        this.isAdmin = response['user_type']== 'admin';
       });
     }
   }
@@ -61,7 +64,7 @@ export class UserService {
   }
 
   updateUserArray() {
-    if (this.loggedIn) {
+    if (this.loggedIn && this.isAdmin) {
       this.http.get<User[]>(`http://markzeagler.com/postit-backend/user/all`,
         this.authService.getGETHeaders()).subscribe((response: User[]) => {
         this.userArraySubject.next(response['users']);

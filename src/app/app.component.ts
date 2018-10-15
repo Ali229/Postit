@@ -10,11 +10,11 @@ import {AppService} from './_services/app.service';
 
 export class AppComponent implements OnInit {
 
-  padding:boolean;
+  padding: boolean = false;
 
   constructor(private appService: AppService, private authService: AuthenticationService) {
-    this.appService.getActivePageSubject().subscribe( active_page => {
-      this.checkpage();
+    this.appService.getActivePageSubject().subscribe(active_page => {
+      this.checkPage();
     });
   }
 
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     this.authService.updateLoggedInVerification();
   }
 
-  checkpage() {
+  checkPage() {
     this.padding = this.appService.getActivePage() !== 'login';
   }
 }

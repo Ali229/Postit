@@ -3,4 +3,5 @@ export interface LoginData {
     user_id: number;
     passwd_time_remaining: number;
     last_login: string;
+    user_type: string;
 }

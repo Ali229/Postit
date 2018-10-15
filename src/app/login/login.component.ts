@@ -73,6 +73,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           if (data[0]) {
+            this.appService.setActivePage('home');
             this.router.navigate(['./home']);
           } else {
             this.loading = false;

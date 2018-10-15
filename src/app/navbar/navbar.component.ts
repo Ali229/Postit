@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService, UserService} from '../_services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from "rxjs";
 import {AppComponent} from '../app.component';
 import {AppService} from '../_services/app.service';
+import {AuthGuard} from "../_guards";
+import {User} from "../_models";
 
 @Component({
   selector: 'app-navbar',
@@ -14,30 +15,29 @@ export class NavbarComponent implements OnInit {
 
   public active: string = 'Home';
   public availablePages: string[];
-  private page_dictionary = {
-    'Home': 'home',
-    'Users': 'users',
-    'Accounts': 'accounts',
-    'Event Log': 'event-log',
-    'Journal': 'journal'
-  };
-  private adminPages: string[] = ['Home', 'Users', 'Accounts', 'Event Log'];
-  private managerPages: string[] = ['Home', 'Accounts', 'Journal'];
-  private userPages: string[] = ['Home', 'Accounts', 'Journal'];
   public username: string;
   public loggedIn: boolean = false;
-  public loggedInSubscription: Subscription;
+
+  readonly PAGE_DICTIONARY = {
+    'home': 'Home',
+    'users': 'Users',
+    'accounts': 'Accounts',
+    'event-log': 'Event Log',
+    'journal': 'Journal'
+  };
 
   constructor(private authService: AuthenticationService,
               private userService: UserService,
               private route: ActivatedRoute,
               private router: Router,
               private app: AppComponent,
-              private appService: AppService
-  ) {
-    this.availablePages = this.userPages;
-    this.active = appService.getActivePage();
-    this.loggedInSubscription = this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
+              private appService: AppService,
+              private authGuard: AuthGuard) {
+    this.appService.activePageSubject.subscribe(activePage => {
+      this.active = this.PAGE_DICTIONARY[activePage];
+    });
+
+    this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
       this.loggedIn = value;
       this.userService.updateUser();
       // Kinda messy like this, update later
@@ -46,36 +46,23 @@ export class NavbarComponent implements OnInit {
       });
     });
 
-    this.userService.getCurrUser().subscribe(response => {
-      let user_type = response['user_type'];
-      if (user_type == 'admin') {
-        this.availablePages = this.adminPages;
-      } else if (user_type == 'manager') {
-        this.availablePages = this.managerPages;
-      } else if (user_type == 'user') {
-        this.availablePages = this.userPages;
-      }
+    this.userService.getCurrUser().subscribe((user: User) => {
+      this.availablePages = this.authGuard.getAvailablePages(user);
     });
-
-    if (!localStorage.getItem('selected')) {
-      localStorage.setItem('selected', 'Home')
-    }
-
   }
 
   ngOnInit() {
-    this.select(localStorage.getItem('selected'))
+    if (localStorage.getItem('selected')) {
+      this.select(localStorage.getItem('selected'));
+    }
   }
 
   logout() {
-    this.app.checkpage();
     this.authService.logout();
-    this.loggedIn = false;
   }
 
   select(page: string) {
-    this.active = page;
-    localStorage.setItem('selected', page);
-    this.router.navigate(['./' + this.page_dictionary[page]]);
+    this.appService.setActivePage(page);
+    this.router.navigate(['./' + page]);
   }
 }
