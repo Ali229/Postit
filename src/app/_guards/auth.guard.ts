@@ -1,14 +1,14 @@
-﻿import {Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {User} from "../_models";
-import {AuthenticationService, UserService} from "../_services";
+import {AuthenticationService} from "../_services";
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
 
   public static readonly ADMIN_PAGES: string[] = ['home', 'users', 'accounts', 'event-log'];
-  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journal'];
-  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journal'];
+  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journal', 'account/:account_id'];
+  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journal', 'account/:account_id'];
   private readonly typePageMap;
 
   constructor(private router: Router,
