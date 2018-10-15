@@ -19,8 +19,16 @@ export class JournalComponent implements OnInit {
   journalizeError: string = '';
   accounts: Account[] = [];
   journalTypes: string[] = ['Regular', 'Adjusting'];
-  debitLines: Transaction[] = [new Transaction()];
-  creditLines: Transaction[] = [new Transaction()];
+  debitLines: Transaction[] = [new class implements Transaction {
+    account_id: number;
+    account_name: string;
+    amount: number;
+  }];
+  creditLines: Transaction[] = [new class implements Transaction {
+    account_id: number;
+    account_name: string;
+    amount: number;
+  }];
 
   constructor(private accountService: AccountService,
               private formBuilder: FormBuilder) {
@@ -55,21 +63,29 @@ export class JournalComponent implements OnInit {
   }
 
   addDebitRow() {
-    this.debitLines.push(new Transaction())
+    this.debitLines.push(new class implements Transaction {
+      account_id: number;
+      account_name: string;
+      amount: number;
+    })
   }
 
   removeDebitRow() {
-    if (this.debitLines.length > 1) {
+    if(this.debitLines.length > 1) {
       this.debitLines.pop();
     }
   }
 
   addCreditRow() {
-    this.creditLines.push(new Transaction())
+    this.creditLines.push(new class implements Transaction {
+      account_id: number;
+      account_name: string;
+      amount: number;
+    })
   }
 
   removeCreditRow() {
-    if (this.creditLines.length > 1) {
+    if(this.creditLines.length > 1) {
       this.creditLines.pop();
     }
   }
