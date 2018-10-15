@@ -1,18 +1,18 @@
 <div>
-<h1>Journalize</h1>
+  <h1>Journal</h1>
 </div>
 
-<button type="button" mdbBtn color="secondary">
+<button type="button" mdbBtn color="secondary" (click)="showJournalizeModal()">
   + Add New Entry +
 </button>
 <!--<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">-->
+<!-- TODO Change to a mat-table -->
 <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
   <thead>
   <tr>
     <th>Journal ID
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-
     <th>Account Title
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
@@ -37,15 +37,146 @@
   </tr>
   </thead>
   <tbody>
-  <!--<tr>-->
-    <!--<td>{{journal.journal_id}}</td>-->
-    <!--<td>{{journal.account_title}}</td>-->
-    <!--<td>{{message.first_name}}</td>-->
-    <!--<td>{{message.last_name}}</td>-->
-    <!--<td>{{message.email}}</td>-->
-    <!--<td>{{message.last_login}}</td>-->
-    <!--<td>{{message.password_expiration_date}}</td>-->
-    <!--<td>{{message.user_type}}</td>-->
-  <!--</tr>-->
+  <tr *ngFor="let journal of filterBy()" data-toggle="modal" data-target="#journalize-modal">
+    <td>{{journal.journal_id}}</td>
+    <td>{{journal.creator}}</td>
+    <td *ngFor="let transaction of journal.transactions"></td>
+    <td>{{journal.posting_ref}}</td>
+    <td>{{journal.journal_status}}</td>
+    <td>{{journal.description}}</td>
+  </tr>
   </tbody>
 </table>
+
+<!-- Journalize Modal -->
+<div mdbModal #journalizeModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Journalize" aria-hidden="true" style="overflow-y: auto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="journalizeModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="editUserModal">Journalize</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="journalizeForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="submitJournalization()">
+          <!-- Date -->
+          <!--- TODO Figure out why this keeps causing a crash -->
+          <!--<label for="journalizeDate">Date</label>-->
+          <!--<input matInput [matDatepicker]="myDatepicker" formControlName="date">-->
+          <!--<mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>-->
+          <!--<mat-datepicker #myDatepicker></mat-datepicker>-->
+          <!-- Description -->
+          <div class="form-group">
+            <label for="journalizeDescription">Description</label>
+            <input type="text" formControlName="description" id="journalizeDescription" class="form-control"
+                   placeholder="Description">
+          </div>
+          <!-- Journal Type -->
+          <div class="form-group">
+            <label for="journalizeType">Journal Type</label>
+            <select class="form-control" formControlName="journal_type" id="journalizeType">
+              <option *ngFor="let journal_type of journalTypes" [value]="journal_type">{{journal_type}}</option>
+            </select>
+          </div>
+          <!-- Debits -->
+          <!-- TODO Change to a mat-table -->
+          <h5>Debits</h5>
+          <table>
+            <thead>
+            <tr>
+              <th>
+                Account
+              </th>
+              <th>
+                Amount
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let debitLine of debitLines">
+              <!-- Debit Account -->
+              <td>
+                <div class="form-group">
+                  <select class="form-control" formControlName="debit_account" id="journalizeDebitAccount">
+                    <option *ngFor="let account of accounts" [value]="account.account_title">{{account.account_title}}
+                    </option>
+                  </select>
+                </div>
+              </td>
+              <!-- Debit Amount -->
+              <td>
+                <div class="form-group">
+                  <input type="text" formControlName="debit_amount" id="journalizeDebitAmount" class="form-control"
+                         placeholder="Debit Amount">
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Add/Remove Debit Row -->
+          <button type="button" mdbBtn color="danger" (click)="removeDebitRow()" colspan="2">
+            - Remove Debit -
+          </button>
+          <button type="button" mdbBtn color="default" (click)="addDebitRow()" colspan="2">
+            + Add Debit +
+          </button>
+          <!-- Credits --->
+          <!-- TODO Change to a mat-table -->
+          <h5>Credits</h5>
+          <table>
+            <thead>
+            <tr>
+              <th>
+                Account
+              </th>
+              <th>
+                Amount
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let creditLine of creditLines">
+              <!-- Credit Account -->
+              <td>
+                <div class="form-group">
+                  <select class="form-control" formControlName="credit_account" id="journalizeCreditAccount">
+                    <option *ngFor="let account of accounts" [value]="account.account_title">{{account.account_title}}
+                    </option>
+                  </select>
+                </div>
+              </td>
+              <!-- Credit Amount -->
+              <td>
+                <div class="form-group">
+                  <input type="text" formControlName="debit_amount" id="journalizeCreditAmount" class="form-control"
+                         placeholder="Credit Amount">
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Add/Remove Credit Row -->
+          <button type="button" mdbBtn color="danger" (click)="removeCreditRow()">
+            - Remove Credit -
+          </button>
+          <button type="button" mdbBtn color="default" (click)="addCreditRow()">
+            + Add Credit +
+          </button>
+
+          <div *ngIf="journalizeError" class="alert alert-danger">{{journalizeError}}</div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="journalizeModal.hide()" mdbWavesEffect>Close
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitJournalization()">Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,6 +19,7 @@ import {AccountComponent} from './account/account.component';
 import {Transaction} from "./_models/transaction";
 import { JournalComponent } from './journal/journal.component';
 import { EventLogComponent } from './event-log/event-log.component';
+import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";
 
 @NgModule({
   imports: [
@@ -28,7 +29,10 @@ import { EventLogComponent } from './event-log/event-log.component';
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatTableModule
   ],
   declarations: [
     AppComponent,
