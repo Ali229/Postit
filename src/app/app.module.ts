@@ -51,8 +51,7 @@ import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/
     UserService,
     AccountService,
     User,
-    Account,
-    Transaction
+    Account
   ],
   bootstrap: [AppComponent]
 })
