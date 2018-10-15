@@ -117,7 +117,7 @@
             </tbody>
           </table>
           <!-- Add/Remove Debit Row -->
-          <button type="button" mdbBtn color="danger" (click)="removeDebitRow()" colspan="2">
+          <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()" colspan="2">
             - Remove Debit -
           </button>
           <button type="button" mdbBtn color="default" (click)="addDebitRow()" colspan="2">
@@ -159,7 +159,7 @@
             </tbody>
           </table>
           <!-- Add/Remove Credit Row -->
-          <button type="button" mdbBtn color="danger" (click)="removeCreditRow()">
+          <button *ngIf="creditLines.length > 1" type="button" mdbBtn color="danger" (click)="removeCreditRow()">
             - Remove Credit -
           </button>
           <button type="button" mdbBtn color="default" (click)="addCreditRow()">
