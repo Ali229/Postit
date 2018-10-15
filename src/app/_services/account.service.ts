@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {Account} from "../_models";
+import {Account, JournalEntry, Transaction} from "../_models";
 import {AppService} from "./app.service";
 import {AuthenticationService} from "./authentication.service";
 
@@ -12,23 +12,28 @@ export class AccountService {
 
   private accountArraySubject: Subject<Account[]>;
   private accountSubject: Subject<Account>;
+  private journalSubject: Subject<JournalEntry[]>;
   private account: Account;
   private loggedIn: boolean = false;
 
   constructor(private http: HttpClient, private appService: AppService, private authService: AuthenticationService) {
     this.accountArraySubject = new Subject();
     this.accountSubject = new Subject();
+    this.journalSubject = new Subject();
 
     this.appService.getTimer().subscribe(() => {
-      this.updateAccounts();
-      if (this.account) {
-        this.updateAccount(this.account.account_id);
+      if (this.loggedIn) {
+        this.updateAccounts();
+        this.updateJournalEntries();
+        if (this.account) {
+          this.updateAccount(this.account.account_id);
+        }
       }
     });
 
     this.authService.getVerifiedLoggedIn().subscribe(response => {
       this.loggedIn = response;
-    })
+    });
   }
 
   updateAccounts() {
@@ -66,5 +71,28 @@ export class AccountService {
   getAccount(account_id: number) {
     this.updateAccount(account_id);
     return this.accountSubject;
+  }
+
+  journalize(journal_type: string, date: Date, transactions: Transaction[], description: string) {
+    let body = {
+      'transactions_list': transactions,
+      'date': date.toDateString(),
+      'description': description,
+      'journal_type': journal_type
+    };
+    console.log("Creating new journal:" );
+    console.log(body);
+    return this.http.post('http://markzeagler.com/postit-backend/journal/new', body, this.authService.getPOSTPUTHeaders(body));
+  }
+
+  getJournalSubject() {
+    return this.journalSubject;
+  }
+
+  updateJournalEntries() {
+    this.http.get('http://markzeagler.com/postit-backend/journal/all', this.authService.getGETHeaders()).subscribe(
+      (journalEntries: JournalEntry[]) => {
+        this.journalSubject.next(journalEntries['journal_entries']);
+      })
   }
 }

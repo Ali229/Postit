@@ -2,7 +2,7 @@
   <h1>Journal</h1>
 </div>
 
-<button type="button" mdbBtn color="secondary" (click)="showJournalizeModal()">
+<button type="button" mdbBtn color="default" (click)="showJournalizeModal()">
   + Add New Entry +
 </button>
 <!--<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">-->
@@ -11,9 +11,6 @@
   <thead>
   <tr>
     <th>Journal ID
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th>Account Title
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
     <th>P.R.
@@ -31,19 +28,26 @@
     <th>Type
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th>Status
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let journal of filterBy()" data-toggle="modal" data-target="#journalize-modal">
-    <td>{{journal.journal_id}}</td>
-    <td>{{journal.creator}}</td>
-    <td *ngFor="let transaction of journal.transactions"></td>
-    <td>{{journal.posting_ref}}</td>
-    <td>{{journal.journal_status}}</td>
-    <td>{{journal.description}}</td>
+  <tr *ngFor="let journal of filterBy()">
+    <td>{{journal.journal_entry_id}}</td>
+    <td>{{journal.posting_reference}}</td>
+    <!-- Debits -->
+    <td>
+      <div *ngFor="let transaction of journal.transactions">
+
+      </div>
+    </td>
+    <!-- Credits -->
+    <td>
+      <div *ngFor="let transaction of journal.transactions">
+
+      </div>
+    </td>
+    <td>{{journal.user_id}}</td>
+    <td>{{journal.type}}</td>
   </tr>
   </tbody>
 </table>
@@ -82,10 +86,10 @@
             </select>
           </div>
           <!-- Add/Remove Debit Row -->
-          <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()" colspan="2">
+          <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()">
             - Remove Debit -
           </button>
-          <button type="button" mdbBtn color="default" (click)="addDebitRow()" colspan="2">
+          <button type="button" mdbBtn color="default" (click)="addDebitRow()">
             + Add Debit +
           </button>
           <!-- Debits -->
@@ -107,8 +111,9 @@
               <!-- Debit Account -->
               <td>
                 <div class="form-group">
-                  <select class="form-control" formControlName="debit_account" id="journalizeDebitAccount">
-                    <option *ngFor="let account of accounts" [value]="account.account_title">{{account.account_title}}
+                  <select #account class="form-control" formControlName="debit_account" id="journalizeDebitAccount"
+                          (change)="setTransactionAccount(debitLine, account.value)">
+                    <option *ngFor="let account of accounts" [value]="account.account_id">{{account.account_title}}
                     </option>
                   </select>
                 </div>
@@ -116,8 +121,9 @@
               <!-- Debit Amount -->
               <td>
                 <div class="form-group">
-                  <input type="text" formControlName="debit_amount" id="journalizeDebitAmount" class="form-control"
-                         placeholder="Debit Amount">
+                  <input #amount type="text" formControlName="debit_amount" id="journalizeDebitAmount"
+                         class="form-control"
+                         placeholder="Debit Amount" (keyup)="setTransactionAmount(debitLine, amount.value)">
                 </div>
               </td>
             </tr>
@@ -149,8 +155,9 @@
               <!-- Credit Account -->
               <td>
                 <div class="form-group">
-                  <select class="form-control" formControlName="credit_account" id="journalizeCreditAccount">
-                    <option *ngFor="let account of accounts" [value]="account.account_title">{{account.account_title}}
+                  <select #account class="form-control" formControlName="credit_account" id="journalizeCreditAccount"
+                          (change)="setTransactionAccount(creditLine, account.value)">
+                    <option *ngFor="let account of accounts" [value]="account.account_id">{{account.account_title}}
                     </option>
                   </select>
                 </div>
@@ -158,8 +165,8 @@
               <!-- Credit Amount -->
               <td>
                 <div class="form-group">
-                  <input type="text" formControlName="debit_amount" id="journalizeCreditAmount" class="form-control"
-                         placeholder="Credit Amount">
+                  <input #amount type="text" formControlName="debit_amount" id="journalizeCreditAmount" class="form-control"
+                         placeholder="Credit Amount" (keyup)="setTransactionAmount(creditLine, amount.value)">
                 </div>
               </td>
             </tr>

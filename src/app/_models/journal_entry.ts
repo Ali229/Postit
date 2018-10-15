@@ -1,12 +1,12 @@
 import {Transaction} from "./journal_transaction";
 
 export class JournalEntry {
-  journal_id: number;
-  journal_type: string;
+  journal_entry_id: number;
+  type: string;
   date: string;
-  creator: string;
+  user_id: string;
   transactions: Transaction[];
-  posting_ref: number;
-  journal_status: string;
+  posting_reference: number;
+  status: string;
   description: string;
 }

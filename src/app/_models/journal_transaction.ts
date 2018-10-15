@@ -1,5 +1,8 @@
-export interface Transaction {
+export class Transaction {
   account_id: number;
-  account_name: string;
+  account_title: string;
   amount: number;
+
+  constructor() {
+  }
 }
