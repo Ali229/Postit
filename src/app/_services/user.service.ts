@@ -104,7 +104,7 @@ export class UserService {
       'category': category,
       'value': value
     };
-    return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, body,
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, body,
       this.authService.getPOSTPUTHeaders(body));
   }
 
@@ -119,7 +119,7 @@ export class UserService {
       'category': 'password',
       'value': newPassword
     };
-    return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, body,
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, body,
       this.authService.getPOSTPUTHeaders(body));
   }
 }

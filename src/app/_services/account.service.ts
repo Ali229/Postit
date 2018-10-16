@@ -9,7 +9,6 @@ import {AuthenticationService} from "./authentication.service";
   providedIn: 'root'
 })
 export class AccountService {
-
   private accountArraySubject: Subject<Account[]>;
   private accountSubject: Subject<Account>;
   private journalSubject: Subject<JournalEntry[]>;
