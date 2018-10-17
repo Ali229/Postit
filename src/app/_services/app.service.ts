@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {interval, Subject} from '../../../node_modules/rxjs';
+import {interval, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
