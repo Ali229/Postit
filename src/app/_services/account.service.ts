@@ -38,7 +38,7 @@ export class AccountService {
 
   updateAccounts() {
     if (this.loggedIn) {
-      this.http.get<Account[]>('http://markzeagler.com/postit-backend/account/all',
+      this.http.get<Account[]>('https://markzeagler.com/postit-backend/account/all',
         this.authService.getGETHeaders()).subscribe(response => {
         this.accountArraySubject.next(response['accounts']);
       });
@@ -56,12 +56,12 @@ export class AccountService {
       'normal_side': normal_side,
       'description': description
     };
-    return this.http.post('http://markzeagler.com/postit-backend/account/' + account_id, body,
+    return this.http.post('https://markzeagler.com/postit-backend/account/' + account_id, body,
       this.authService.getPOSTPUTHeaders(body));
   }
 
   updateAccount(account_id) {
-    this.http.get<any>('http://markzeagler.com/postit-backend/account/' + account_id.toString(),
+    this.http.get<any>('https://markzeagler.com/postit-backend/account/' + account_id.toString(),
       this.authService.getGETHeaders()).subscribe(response => {
       this.account = response['account'][0];
       this.accountSubject.next(response['account'][0]);
@@ -82,7 +82,7 @@ export class AccountService {
     };
     console.log("Creating new journal:" );
     console.log(body);
-    return this.http.post('http://markzeagler.com/postit-backend/journal/new', body, this.authService.getPOSTPUTHeaders(body));
+    return this.http.post('https://markzeagler.com/postit-backend/journal/new', body, this.authService.getPOSTPUTHeaders(body));
   }
 
   getJournalSubject() {
@@ -90,7 +90,7 @@ export class AccountService {
   }
 
   updateJournalEntries() {
-    this.http.get('http://markzeagler.com/postit-backend/journal/all', this.authService.getGETHeaders()).subscribe(
+    this.http.get('https://markzeagler.com/postit-backend/journal/all', this.authService.getGETHeaders()).subscribe(
       (journalEntries: JournalEntry[]) => {
         this.journalSubject.next(journalEntries['journal_entries']);
       })

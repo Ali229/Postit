@@ -48,7 +48,7 @@ export class EventLogService {
       } else {
         urlAddon = this.user_id.toString();
       }
-      this.http.get('http://markzeagler.com/postit-backend/eventlog/' + urlAddon, this.authService.getGETHeaders()).subscribe((messages: LogMessage[]) => {
+      this.http.get('https://markzeagler.com/postit-backend/eventlog/' + urlAddon, this.authService.getGETHeaders()).subscribe((messages: LogMessage[]) => {
         this.eventLogSubject.next(messages);
       })
     }

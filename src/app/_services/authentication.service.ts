@@ -74,7 +74,7 @@ export class AuthenticationService implements OnInit {
     localStorage.setItem('username', username);
     this.usernameSubject.next(username);
 
-    const requestResponse: Observable<any> = this.http.put<any>('http://markzeagler.com/postit-backend/signin', {
+    const requestResponse: Observable<any> = this.http.put<any>('https://markzeagler.com/postit-backend/signin', {
       username: username,
       password: this.encryptPassword(password)
     });
@@ -184,7 +184,7 @@ export class AuthenticationService implements OnInit {
   }
 
   updateLoggedInVerification() {
-    this.http.get<any>('http://postit.markzeagler.com/postit-backend/verify_logged_in',
+    this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in',
       this.getGETHeaders()).subscribe(response => {
       this.loggedIn = response;
       this.loggedInSubject.next(response);
