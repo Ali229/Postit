@@ -1,9 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../_models';
-import {AuthenticationService, UserService} from '../_services';
+import {AuthenticationService, UserService, AppService} from '../_services';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalDirective} from 'angular-bootstrap-md';
-import {AppService} from "../_services/app.service";
 
 @Component({
   selector: 'app-users',
@@ -16,7 +15,14 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
   sortValue: string;
   sortReverse: boolean = false;
-  filterValue: string;
+  userIDFilter: string;
+  usernameFilter: string;
+  firstNameFilter: string;
+  lastNameFilter: string;
+  emailFilter: string;
+  lastLoginFilter: string;
+  passwordExpireFilter: string;
+  userTypeFilter: string;
   userTypes: string[];
 
   // Edit User data
@@ -86,29 +92,20 @@ export class UsersComponent implements OnInit {
   }
 
   filterBy() {
-    if (!this.filterValue) {
-      return this.users;
-    } else {
-      const returnList: User[] = [];
-      this.users.forEach(user => {
-        if (user.user_type.includes(this.filterValue)) {
-          returnList.push(user);
-        } else if (user.username.includes(this.filterValue)) {
-          returnList.push(user);
-        } else if (user.first_name.includes(this.filterValue)) {
-          returnList.push(user);
-        } else if (user.last_name.includes(this.filterValue)) {
-          returnList.push(user);
-        } else if (user.email.includes(this.filterValue)) {
-          returnList.push(user);
-        } else if (user.last_login.includes(this.filterValue)) {
-          returnList.push(user);
-        } else if (user.password_expiration_date.includes(this.filterValue)) {
-          returnList.push(user);
-        }
-      });
-      return returnList;
-    }
+    const returnList: User[] = [];
+    this.users.forEach(user => {
+      if ((!this.userIDFilter || user.user_id.toString().includes(this.userIDFilter)) &&
+        (!this.usernameFilter || user.username.includes(this.usernameFilter)) &&
+        (!this.firstNameFilter || user.first_name.includes(this.firstNameFilter)) &&
+        (!this.lastNameFilter || user.last_name.includes(this.lastNameFilter)) &&
+        (!this.emailFilter || user.email.includes(this.emailFilter)) &&
+        (!this.lastLoginFilter || user.last_login.includes(this.lastLoginFilter)) &&
+        (!this.passwordExpireFilter || user.password_expiration_date.includes(this.passwordExpireFilter)) &&
+        (!this.userTypeFilter || user.user_type.includes(this.userTypeFilter))) {
+        returnList.push(user);
+      }
+    });
+    return returnList;
   }
 
   updateForm() {
@@ -175,7 +172,7 @@ export class UsersComponent implements OnInit {
     this.editUserModal.hide();
   }
 
-  clearError(){
+  clearError() {
     this.editUserError = null;
   }
 
@@ -200,8 +197,8 @@ export class UsersComponent implements OnInit {
     // TODO Validate fields
     let controls = this.addUserForm.controls;
     this.userService.addUser(controls.username.value, controls.first_name.value, controls.last_name.value,
-      controls.email.value, controls.password.value, controls.user_type.value).subscribe( response => {
-        this.addUserModal.hide();
+      controls.email.value, controls.password.value, controls.user_type.value).subscribe(response => {
+      this.addUserModal.hide();
     });
   }
 
@@ -212,7 +209,7 @@ export class UsersComponent implements OnInit {
 
   submitNewPassword() {
     let newPassword = this.resetPasswordForm.controls.password.value;
-    this.userService.resetPassword(this.resetPasswordUser.user_id, newPassword).subscribe( response => {
+    this.userService.resetPassword(this.resetPasswordUser.user_id, newPassword).subscribe(response => {
       console.log(response['message']);
       this.resetPasswordModal.hide();
     }, error => {

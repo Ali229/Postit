@@ -1,13 +1,6 @@
 <img *ngIf="users.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
   <h1>Users</h1>
-  <div class="col-md-12">
-    <div class="md-form">
-      <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective
-             [mdbValidate]="false">
-      <label for="search">Search Users</label>
-    </div>
-  </div>
 
   <!-- TODO Change to a mat-table -->
   <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
@@ -16,7 +9,6 @@
       <th class="th-sm clickable" (click)="sortBy('user_id')">User ID
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
-
       <th class="th-sm clickable" (click)="sortBy('username')">Username
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
@@ -37,6 +29,65 @@
       </th>
       <th class="th-sm clickable" (click)="sortBy('user_type')">User Type
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </tr>
+    <tr>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="userIDFilter" id="userIDSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="userIDSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="usernameFilter" id="usernameSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="usernameSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="firstNameFilter" id="firstNameSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="firstNameSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="lastNameFilter" id="lastNameSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="lastNameSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="emailFilter" id="emailSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="emailSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="lastLoginFilter" id="lastLoginSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="lastLoginSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="passwordExpireFilter" id="passwordExpirationSearch" class="form-control"
+                 mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="passwordExpirationSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="userTypeFilter" id="userTypeSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="userTypeSearch">Search</label>
+        </div>
+      </th>
     </tr>
     </thead>
     <tbody>
