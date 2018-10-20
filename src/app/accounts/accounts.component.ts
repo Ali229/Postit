@@ -13,7 +13,16 @@ export class AccountsComponent implements OnInit {
   accounts: Account[] = [];
   sortValue: string;
   sortReverse = false;
-  filterValue: string;
+  accountIdFilter: string;
+  accountTitleFilter: string;
+  balanceFilter: string;
+  normalSideFilter: string;
+  descriptionFilter: string;
+  dateCreatedFilter: string;
+  createdByFilter: string;
+  lastEditedFilter: string;
+  lastEditedByFilter: string;
+  isActiveFilter: string;
 
   constructor(private authService: AuthenticationService,
               private accountService: AccountService,
@@ -50,35 +59,22 @@ export class AccountsComponent implements OnInit {
   }
 
   filterBy() {
-    if (!this.filterValue) {
-      return this.accounts;
-    } else {
-      let returnList: Account[] = [];
-      this.accounts.forEach(account => {
-        if (account.account_id.toString().includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.account_title.includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.normal_side.includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.description.includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.balance.toString().includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.date_created.includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.created_by.toString().includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.last_edited_date.includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.last_edited_by.toString().includes(this.filterValue)) {
-          returnList.push(account);
-        } else if (account.is_active.includes(this.filterValue)) {
-          returnList.push(account);
-        }
-      });
-      return returnList;
-    }
+    let returnList: Account[] = [];
+    this.accounts.forEach(account => {
+      if ((!this.accountIdFilter || account.account_id.toString().includes(this.accountIdFilter)) &&
+        (!this.accountTitleFilter || account.account_title.toLowerCase().includes(this.accountTitleFilter.toLowerCase())) &&
+        (!this.balanceFilter || account.balance.toString().includes(this.balanceFilter)) &&
+        (!this.normalSideFilter || account.normal_side.includes(this.normalSideFilter)) &&
+        (!this.descriptionFilter || account.description.includes(this.descriptionFilter)) &&
+        (!this.dateCreatedFilter || account.date_created.includes(this.dateCreatedFilter)) &&
+        (!this.createdByFilter || account.created_by.toString().includes(this.createdByFilter)) &&
+        (!this.lastEditedFilter || account.last_edited_date.includes(this.lastEditedFilter)) &&
+        (!this.lastEditedByFilter || account.last_edited_by.includes(this.lastEditedByFilter)) &&
+        (!this.isActiveFilter || account.is_active.includes(this.isActiveFilter))) {
+        returnList.push(account);
+      }
+    });
+    return returnList;
   }
 
   updateAccountList() {

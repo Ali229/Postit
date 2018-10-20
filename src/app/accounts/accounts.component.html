@@ -1,13 +1,6 @@
 <img *ngIf="accounts.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
   <h1>Chart of Accounts</h1>
-  <div class="col-md-12">
-    <div class="md-form">
-      <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective
-             [mdbValidate]="false">
-      <label for="search">Search Accounts</label>
-    </div>
-  </div>
   <!-- TODO Change to a mat-table -->
   <table class="table table-hover table-striped table-bordered table-responsive-md">
     <thead>
@@ -41,6 +34,79 @@
       </th>
       <th class="th-sm clickable" (click)="sortBy('user_id')">Is Active
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="accountIdFilter" id="accountIdSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="accountIdSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="accountTitleFilter" id="accountTitleSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="accountTitleSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="balanceFilter" id="balanceSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="balanceSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="normalSideFilter" id="normalSideSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="normalSideSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="descriptionFilter" id="descriptionSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="descriptionSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="dateCreatedFilter" id="dateCreatedSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="dateCreatedSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="createdByFilter" id="createdBySearch" class="form-control"
+                 mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="createdBySearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="lastEditedFilter" id="lastEditedSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="lastEditedSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="lastEditedByFilter" id="lastEditedBySearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="lastEditedBySearch">Search</label>
+        </div>
+      </th>
+      <th> <!-- TODO Turn this into a dropdown? -->
+        <div class="md-form">
+          <input type="search" [(ngModel)]="isActiveFilter" id="isActiveSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="isActiveSearch">Search</label>
+        </div>
       </th>
     </tr>
     </thead>
