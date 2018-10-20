@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, AccountService} from '../_services';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AuthenticationService, AccountService, UserService} from '../_services';
 import {Account} from '../_models';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AppService} from "../_services/app.service";
+import {ModalDirective} from "angular-bootstrap-md";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-account',
@@ -24,11 +26,20 @@ export class AccountsComponent implements OnInit {
   lastEditedByFilter: string;
   isActiveFilter: string;
 
+  // Add Account
+  @ViewChild('addAccountModal') public addAccountModal: ModalDirective;
+  addAccountForm: FormGroup;
+  addAccountError: string = '';
+  normalSides: string[] = ['credit', 'debit'];
+  categories: string[] = [];
+  subcategories: string[] = [];
+
   constructor(private authService: AuthenticationService,
               private accountService: AccountService,
               private route: ActivatedRoute,
               private router: Router,
-              private appService: AppService) {
+              private appService: AppService,
+              private formBuilder: FormBuilder) {
     this.accountService.getAccountsSubject().subscribe((response: Account[]) => {
       this.accounts = response;
       this.accounts.sort((a, b) => {
@@ -38,6 +49,14 @@ export class AccountsComponent implements OnInit {
           return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
         }
       });
+    });
+    this.addAccountForm = this.formBuilder.group({
+      account_id: ['', Validators.required],
+      account_title: ['', Validators.required],
+      description: [''],
+      normal_side: ['', Validators.required],
+      category: ['', Validators.required],
+      subcategory: ['', Validators.required]
     });
   }
 
@@ -83,5 +102,17 @@ export class AccountsComponent implements OnInit {
 
   editAccount(account: Account) {
     this.router.navigate(['./account/' + account.account_id]);
+  }
+
+  showAddAccount() {
+    this.addAccountModal.show();
+  }
+
+  submitAccount() {
+
+  }
+
+  clearError() {
+    this.addAccountError = "";
   }
 }

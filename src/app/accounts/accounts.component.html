@@ -126,7 +126,110 @@
     </tbody>
   </table>
 
-  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>
+  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="showAddAccount()">
     + Add Account +
   </button>
 </ng-template>
+
+<div mdbModal #addAccountModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Edit User" aria-hidden="true" style="overflow-y: auto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addAccountModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="editUserModal">Create New Account</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addAccountForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="submitAccount()">
+          <!-- Account ID -->
+          <div class="form-group">
+            <label for="addAccountID">Account ID</label>
+            <input type="text" formControlName="account_id" id="addAccountID" class="form-control"
+                   placeholder="Account ID">
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Account Title -->
+          <div class="form-group">
+            <label for="addAccountTitle">Account Title</label>
+            <input type="text" formControlName="account_title" id="addAccountTitle" class="form-control"
+                   placeholder="Account Title">
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Account Category -->
+          <div class="form-group">
+            <label for="addAccountCategory">Account Category</label>
+            <select class="form-control" formControlName="category" id="addAccountCategory">
+              <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+            </select>
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Account Subcategory -->
+          <div class="form-group">
+            <label for="addAccountSubcategory">Account Subcategory</label>
+            <select class="form-control" formControlName="subcategory" id="addAccountSubcategory">
+              <option *ngFor="let subcategory of subcategories" [value]="subcategory">{{subcategory}}</option>
+            </select>
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Normal Side -->
+          <div class="form-group">
+            <label for="addAccountNormalSide">Normal Side</label>
+            <select class="form-control" formControlName="normal_side" id="addAccountNormalSide">
+              <option *ngFor="let side of normalSides" [value]="side">{{side}}</option>
+            </select>
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- Description -->
+          <div class="form-group">
+            <label for="addAccountDescription">Description</label>
+            <input type="text" formControlName="description" id="addAccountDescription" class="form-control"
+                   placeholder="Description">
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="clearError()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}</div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="addAccountModal.hide()" mdbWavesEffect>Close
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitAccount()">Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
