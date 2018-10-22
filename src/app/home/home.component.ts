@@ -10,6 +10,7 @@ import {Account} from "../_models";
 })
 export class HomeComponent implements OnInit {
   private loggedIn: boolean = false;
+  private animate = true;
   public userFirstName: string;
   // accounts: Account[];
   accounts: Account[] = [];
@@ -35,5 +36,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.appService.setActivePage('home');
     this.authService.updateLoggedInVerification();
+    this.animate = true;
   }
 }
