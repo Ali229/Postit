@@ -5,14 +5,17 @@
   margin-top: -100px;
   margin-left: -100px;
 }
+
 .card {
-  float:left;
-  display: block;
+  width: 300px;
+  height: 300px;
+  //float:left;
+  //display: block;
+  display: inline-block;
   padding: 20px 60px 5px 60px;
-  //align-items: center;
-  //width: 300px;
-  //height: 150px;
+  margin: 10px;
 }
+
 .card-img-top {
   width: 100px;
   height: 100px;

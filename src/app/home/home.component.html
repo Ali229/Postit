@@ -1,16 +1,16 @@
 ﻿<img *ngIf="accounts.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
-<h1 class="text-center">Welcome {{userFirstName}}!</h1>
+<!--<h1>Welcome {{userFirstName}}!</h1>-->
   <!-- Card -->
-  <div class="card">
+  <div class="card" *ngFor="let account of accounts">
     <!-- Card image -->
     <img class="card-img-top" src="./assets/charts/cash.png" alt="Card image cap">
     <!-- Card content -->
     <div class="card-body">
       <!-- Title -->
-      <h4 class="card-title"><a>{{accounts[0].account_title}}</a></h4>
+      <h4 class="card-title"><a>{{account.account_title}}</a></h4>
       <!-- Text -->
-      <p class="card-text">{{accounts[0].balance}}</p>
+      <p class="card-text">{{account.balance}}</p>
     </div>
   </div>
   <!-- Card -->
