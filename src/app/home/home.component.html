@@ -1,6 +1,6 @@
 ﻿<img *ngIf="accounts.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
-<!--<h1>Welcome {{userFirstName}}!</h1>-->
+<h1>Welcome {{userFirstName}}!</h1>
   <!-- Card -->
   <div class="card" *ngFor="let account of accounts">
     <!-- Card image -->
