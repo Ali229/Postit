@@ -1,10 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
-import {AccountService, AuthenticationService, UserService} from '../_services';
+import {AccountService, AuthenticationService, UserService, AppService} from '../_services';
 import {AppComponent} from '../app.component';
-import {AppService} from "../_services/app.service";
 import {Account} from "../_models";
-
-// import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'table-sort',
@@ -12,11 +9,10 @@ import {Account} from "../_models";
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   private loggedIn: boolean = false;
   public userFirstName: string;
-  accounts: Account[];
-
+  // accounts: Account[];
+  accounts: Account[] = [];
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
               private appService: AppService,
