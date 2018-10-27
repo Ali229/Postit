@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {JournalEntry, Account, Transaction} from "../_models";
-import {AccountService} from "../_services";
+import {AccountService, UserService} from "../_services";
 import {ModalDirective} from "angular-bootstrap-md";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-journal',
@@ -22,22 +23,35 @@ export class JournalComponent implements OnInit {
   debitLines: Transaction[] = [new Transaction()];
   creditLines: Transaction[] = [new Transaction()];
 
+  // Filters
+  journalIdFilter: string;
+  postingReferenceFilter: string;
+  transactionFilterRaw: string;
+  transactionFilterGroups: string[];
+  creatorFilter: string;
+  typeFilter: string;
+  statusFilter: string = 'new';
+  descriptionFilter: string;
+
   constructor(private accountService: AccountService,
               private formBuilder: FormBuilder) {
+              public router: Router) {
     this.accountService.getAccountsSubject().subscribe((accounts: Account[]) => {
       // Have to do this so the accounts in the modal aren't reset
-      for(let account of accounts) {
+      for (let account of accounts) {
         if (!this.accounts.includes(account)) {
           this.accounts.push(account);
         }
       }
-      for(let account of this.accounts) {
-        if(!accounts.includes(account)) {}
+      for (let account of this.accounts) {
+        if (!accounts.includes(account)) {
+        }
         let index = this.accounts.indexOf(account);
         this.accounts.slice(index, 1);
       }
     });
     this.accountService.updateAccounts();
+
 
     this.journalizeForm = this.formBuilder.group({
       // date: ['', Validators.required],
@@ -70,14 +84,14 @@ export class JournalComponent implements OnInit {
   submitJournalization() {
     console.log("Submitting journal entry");
     let transactionsList: Transaction[] = [];
-    for(let transaction of this.debitLines) {
-      if(transaction.amount <= 0) {
+    for (let transaction of this.debitLines) {
+      if (transaction.amount <= 0) {
         console.log("A debit line is 0 or negative")
       }
       transactionsList.push(transaction);
     }
     for (let transaction of this.creditLines) {
-      if(transaction.amount <= 0) {
+      if (transaction.amount <= 0) {
         console.log("A credit line is 0 or negative")
       }
       transaction.amount = transaction.amount * -1;
@@ -85,10 +99,10 @@ export class JournalComponent implements OnInit {
     }
     console.log(transactionsList);
     this.accountService.journalize(this.journalizeForm.controls.journal_type.value, new Date(), transactionsList,
-      this.journalizeForm.controls.description.value).subscribe( response => {
-        console.log(response);
+      this.journalizeForm.controls.description.value).subscribe(response => {
+      this.journalizeModal.hide();
     }, error => {
-        console.log(error)
+      console.log(error)
     });
   }
 
@@ -118,5 +132,9 @@ export class JournalComponent implements OnInit {
 
   setTransactionAccount(transaction: Transaction, account_id: string) {
     transaction.account_id = Number.parseInt(account_id);
+  }
+  openAccount(transaction: Transaction) {
+    console.log()
+    this.router.navigate(['./account/' + transaction.account_id.toString()]);
   }
 }

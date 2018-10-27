@@ -10,44 +10,112 @@
 <table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
   <thead>
   <tr>
-    <th>Journal ID
+    <th class="clickable">Journal ID
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th>P.R.
+    <th class="clickable">P.R.
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th>Debit
+    <th class="clickable">Transactions
+    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th class="clickable">Creator
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th>Credit
+    <th class="clickable">Type
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th>Creator
+    <th class="clickable">
+      Status
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th>Type
+    <th class="clickable">
+      Description
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
+  </tr>
+  <tr>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="journalIdFilter" id="journalIdSearch" class="form-control" mdbInputDirective
+               [mdbValidate]="false">
+        <label for="journalIdSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="postingReferenceFilter" id="postingReferenceSearch" class="form-control"
+               mdbInputDirective [mdbValidate]="false">
+        <label for="postingReferenceSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="transactionFilterRaw" id="transactionSearch" class="form-control"
+               mdbInputDirective [mdbValidate]="false">
+        <label for="postingReferenceSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="creatorFilter" id="creatorSearch" class="form-control" mdbInputDirective
+               [mdbValidate]="false">
+        <label for="creatorSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="typeFilter" id="typeSearch" class="form-control" mdbInputDirective
+               [mdbValidate]="false">
+        <label for="typeSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="statusFilter" id="statusSearch" class="form-control" mdbInputDirective
+               [mdbValidate]="false">
+        <label for="statusSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="descriptionFilter" id="descriptionSearch" class="form-control"
+               mdbInputDirective
+               [mdbValidate]="false">
+        <label for="descriptionSearch">Search</label>
+      </div>
+    </th>
+    <th></th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let journal of filterBy()">
     <td>{{journal.journal_entry_id}}</td>
     <td>{{journal.posting_reference}}</td>
-    <!-- Debits -->
-    <td>
-      <div *ngFor="let transaction of journal.transactions">
-
-      </div>
-    </td>
-    <!-- Credits -->
-    <td>
-      <div *ngFor="let transaction of journal.transactions">
-
-      </div>
-    </td>
+    <!-- Transactions -->
+    <table class="table table-striped table-bordered table-responsive-md table-sm">
+      <tbody>
+      <tr  *ngFor="let transaction of journal.transactions">
+        <!-- Amounts -->
+        <td>
+          <div class="clickable" (click)="openAccount(transaction)">
+            {{transaction.amount}}
+          </div>
+        </td>
+        <!-- Accounts -->
+        <td>
+          <div>
+            {{transaction.account_title}}
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
     <td>{{journal.user_id}}</td>
     <td>{{journal.type}}</td>
+    <td>{{journal.status}}</td>
+    <td>{{journal.description}}</td>
   </tr>
   </tbody>
 </table>
@@ -81,7 +149,6 @@
             + Add Debit +
           </button>
           <!-- Debits -->
-          <!-- TODO Change to a mat-table -->
           <h5>Debits</h5>
           <table>
             <thead>
@@ -125,7 +192,6 @@
             + Add Credit +
           </button>
           <!-- Credits --->
-          <!-- TODO Change to a mat-table -->
           <h5>Credits</h5>
           <table>
             <thead>
@@ -153,7 +219,8 @@
               <!-- Credit Amount -->
               <td>
                 <div class="form-group">
-                  <input #amount type="text" formControlName="debit_amount" id="journalizeCreditAmount" class="form-control"
+                  <input #amount type="text" formControlName="debit_amount" id="journalizeCreditAmount"
+                         class="form-control"
                          placeholder="Credit Amount" (keyup)="setTransactionAmount(creditLine, amount.value)">
                 </div>
               </td>
