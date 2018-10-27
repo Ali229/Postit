@@ -34,7 +34,7 @@ export class JournalComponent implements OnInit {
   descriptionFilter: string;
 
   constructor(private accountService: AccountService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
               public router: Router) {
     this.accountService.getAccountsSubject().subscribe((accounts: Account[]) => {
       // Have to do this so the accounts in the modal aren't reset
