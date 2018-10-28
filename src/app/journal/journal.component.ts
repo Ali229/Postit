@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class JournalComponent implements OnInit {
 
   journalEntries: JournalEntry[] = [];
+  userType: string;
 
   // Journalize Modal
   @ViewChild('journalizeModal') public journalizeModal: ModalDirective;
@@ -33,9 +34,20 @@ export class JournalComponent implements OnInit {
   statusFilter: string = 'pending';
   descriptionFilter: string;
 
+  // Reject Modal
+  @ViewChild('rejectModal') public rejectModal: ModalDirective;
+  rejectForm: FormGroup;
+  rejectionError: string;
+  rejectingJournalEntry: JournalEntry;
+
   constructor(private accountService: AccountService,
               private formBuilder: FormBuilder,
+              private userService: UserService,
               public router: Router) {
+    this.userService.getCurrUser().subscribe(user => {
+      this.userType = user.user_type;
+    });
+
     this.accountService.getAccountsSubject().subscribe((accounts: Account[]) => {
       // Have to do this so the accounts in the modal aren't reset
       for (let account of accounts) {
@@ -52,6 +64,10 @@ export class JournalComponent implements OnInit {
     });
     this.accountService.updateAccounts();
 
+    this.accountService.getJournalSubject().subscribe((journalEntries: JournalEntry[]) => {
+      this.journalEntries = journalEntries;
+    });
+    this.accountService.updateJournalEntries();
 
     this.journalizeForm = this.formBuilder.group({
       // date: ['', Validators.required],
@@ -63,11 +79,10 @@ export class JournalComponent implements OnInit {
       credit_amount: ['', Validators.required]
     });
 
-    this.accountService.getJournalSubject().subscribe((journalEntries: JournalEntry[]) => {
-      this.journalEntries = journalEntries;
+    this.rejectForm = this.formBuilder.group({
+      reason: ['', Validators.required]
     });
 
-    this.accountService.updateJournalEntries();
   }
 
   ngOnInit() {
@@ -133,6 +148,28 @@ export class JournalComponent implements OnInit {
   setTransactionAccount(transaction: Transaction, account_id: string) {
     transaction.account_id = Number.parseInt(account_id);
   }
+
+  openRejectionReasonModal(journalEntry: JournalEntry) {
+    this.rejectingJournalEntry = journalEntry;
+    this.rejectModal.show();
+  }
+
+  submitRejection() {
+    this.accountService.rejectJournalEntry(this.rejectingJournalEntry, this.rejectForm.controls.reason.value);
+  }
+
+  postJournalEntry(journalEntry: JournalEntry) {
+    this.accountService.postJournalEntry(journalEntry).subscribe( response => {
+      this.accountService.updateAccounts();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  openFileModal(journalEntry: JournalEntry) {
+
+  }
+
   openAccount(transaction: Transaction) {
     console.log()
     this.router.navigate(['./account/' + transaction.account_id.toString()]);

@@ -1,21 +1,26 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Account, JournalEntry, Transaction} from "../_models";
 import {AppService} from "./app.service";
 import {AuthenticationService} from "./authentication.service";
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
-  private accountArraySubject: Subject<Account[]>;
-  private accountSubject: Subject<Account>;
-  private journalSubject: Subject<JournalEntry[]>;
+export class AccountService implements OnInit {
+  private readonly accountArraySubject: Subject<Account[]>;
+  private readonly accountSubject: Subject<Account>;
+  private readonly journalSubject: Subject<JournalEntry[]>;
   private account: Account;
   private loggedIn: boolean = false;
+  private userType: string;
 
-  constructor(private http: HttpClient, private appService: AppService, private authService: AuthenticationService) {
+  constructor(private http: HttpClient,
+              private appService: AppService,
+              private authService: AuthenticationService,
+              private userService: UserService) {
     this.accountArraySubject = new Subject();
     this.accountSubject = new Subject();
     this.journalSubject = new Subject();
@@ -33,6 +38,14 @@ export class AccountService {
     this.authService.getVerifiedLoggedIn().subscribe(response => {
       this.loggedIn = response;
     });
+
+    this.userService.getCurrUser().subscribe(user => {
+      this.userType = user.user_type;
+    });
+  }
+
+  ngOnInit() {
+
   }
 
   updateAccounts() {
@@ -79,7 +92,7 @@ export class AccountService {
       'description': description,
       'journal_type': journal_type
     };
-    console.log("Creating new journal:" );
+    console.log("Creating new journal:");
     console.log(body);
     return this.http.post('https://markzeagler.com/postit-backend/journal/new', body, this.authService.getPOSTPUTHeaders(body));
   }
@@ -89,9 +102,40 @@ export class AccountService {
   }
 
   updateJournalEntries() {
-    this.http.get('https://markzeagler.com/postit-backend/journal/all', this.authService.getGETHeaders()).subscribe(
-      (journalEntries: JournalEntry[]) => {
-        this.journalSubject.next(journalEntries['journal_entries']);
+    if (this.userType == 'manager' || this.userType == 'user') {
+      this.http.get('https://markzeagler.com/postit-backend/journal/all', this.authService.getGETHeaders()).subscribe(
+        (journalEntries: JournalEntry[]) => {
+          this.journalSubject.next(journalEntries['journal_entries']);
+        });
+    }
+  }
+
+  postJournalEntry(journalEntry: JournalEntry) {
+    console.log("Posting journal entry to " + 'https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString());
+    let body = {
+      'category': 'status',
+      'value': 'posted'
+    };
+    return this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), body, this.authService.getPOSTPUTHeaders(body));
+  }
+
+  rejectJournalEntry(journalEntry: JournalEntry, rejectionReason: string) {
+    let rejectBody = {
+      'category': 'status',
+      'value': 'rejected'
+    };
+    this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), rejectBody, this.authService.getPOSTPUTHeaders(rejectBody)).subscribe(response => {
+      let reasonBody = {
+        'category': 'description',
+        'value': journalEntry.description + '\n\nREJECTION REASON:' + rejectionReason
+      };
+      this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), reasonBody, this.authService.getPOSTPUTHeaders(reasonBody)).subscribe( response => {
+
+      }, error => {
+        console.log(error)
       })
+    }, error => {
+      console.log(error)
+    })
   }
 }
