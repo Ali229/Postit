@@ -172,7 +172,7 @@
               (click)="openFileModal(journal)">Files
       </button>
     </td>
-    <td *ngIf="userType == 'manager'">
+    <td *ngIf="userType == 'manager' && journal.status == 'pending'">
       <button type="button" class="btn btn-outline-success btn-sm waves-effect" (click)="postJournalEntry(journal)">
         Accept
       </button>
