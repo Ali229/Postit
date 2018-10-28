@@ -30,7 +30,7 @@ export class JournalComponent implements OnInit {
   transactionFilterGroups: string[];
   creatorFilter: string;
   typeFilter: string;
-  statusFilter: string = 'new';
+  statusFilter: string = 'pending';
   descriptionFilter: string;
 
   constructor(private accountService: AccountService,
@@ -136,5 +136,21 @@ export class JournalComponent implements OnInit {
   openAccount(transaction: Transaction) {
     console.log()
     this.router.navigate(['./account/' + transaction.account_id.toString()]);
+  }
+
+  getAccountName(transaction: Transaction) {
+    if (transaction.amount > 0) {
+      return transaction.account_title;
+    } else {
+      return "\t" + transaction.account_title;
+    }
+  }
+
+  getAmount(transaction: Transaction) {
+    if (transaction.amount > 0) {
+      return "$" + transaction.amount.toString();
+    } else {
+      return "\t$" + (transaction.amount * -1).toString();
+    }
   }
 }

@@ -7,7 +7,7 @@
 </button>
 <!--<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">-->
 <!-- TODO Change to a mat-table -->
-<table class="table table-hover table-striped table-bordered table-responsive-md table-sm">
+<table class="table table-responsive table-sm">
   <thead>
   <tr>
     <th class="clickable">Journal ID
@@ -16,8 +16,11 @@
     <th class="clickable">P.R.
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable">Transactions
-    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    <th class="clickable">Date
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th class="clickable" width="500px">Transactions
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
     <th class="clickable">Creator
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
@@ -29,9 +32,18 @@
       Status
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable">
+    <th class="clickable" width="500px">
       Description
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
+    <th>
+      Posting Manager
+    </th>
+    <th>
+      Source Files
+    </th>
+    <th>
+      Actions
     </th>
   </tr>
   <tr>
@@ -45,6 +57,13 @@
     <th>
       <div class="md-form">
         <input type="search" [(ngModel)]="postingReferenceFilter" id="postingReferenceSearch" class="form-control"
+               mdbInputDirective [mdbValidate]="false">
+        <label for="postingReferenceSearch">Search</label>
+      </div>
+    </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="postingReferenceFilter" id="dateSearch" class="form-control"
                mdbInputDirective [mdbValidate]="false">
         <label for="postingReferenceSearch">Search</label>
       </div>
@@ -85,6 +104,14 @@
         <label for="descriptionSearch">Search</label>
       </div>
     </th>
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="descriptionFilter" id="postingManagerSearch" class="form-control"
+               mdbInputDirective
+               [mdbValidate]="false">
+        <label for="descriptionSearch">Search</label>
+      </div>
+    </th>
     <th></th>
     <th></th>
   </tr>
@@ -93,25 +120,48 @@
   <tr *ngFor="let journal of filterBy()">
     <td>{{journal.journal_entry_id}}</td>
     <td>{{journal.posting_reference}}</td>
+    <td>{{journal.date}}</td>
     <!-- Transactions -->
-    <table class="table table-striped table-bordered table-responsive-md table-sm">
-      <tbody>
-      <tr  *ngFor="let transaction of journal.transactions">
-        <!-- Amounts -->
-        <td>
-          <div class="clickable" (click)="openAccount(transaction)">
-            {{transaction.amount}}
+    <td>
+      <table class="table table-borderless table-responsive-md table-sm">
+        <tbody>
+        <tr *ngFor="let transaction of journal.transactions">
+          <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+          <!--<td width="400px" [align]="transaction.amount > 0 ? 'left' : 'right'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+          <!--<label class="clickable" (click)="openAccount(transaction)">-->
+          <!--{{transaction.account_title}}-->
+          <!--</label>-->
+          <!--</td>-->
+          <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+          <!--<td width="100px" [align]="transaction.amount > 0 ? 'left' : 'right'">-->
+          <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+          <!--</td>-->
+          <!--Accounts-->
+          <td width="400px" align="left"> <!-- [align]="transaction.amount > 0 ? 'left' : 'right'" -->
+            <div class="clickable data" (click)="openAccount(transaction)">
+            {{getAccountName(transaction)}}
           </div>
-        </td>
-        <!-- Accounts -->
-        <td>
-          <div>
-            {{transaction.account_title}}
+          </td>
+          <!-- Amounts -->
+          <td width="100px" align="left">
+          <div class="data">
+          {{getAmount(transaction)}}
           </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+          </td>
+          <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+          <!--<td width="400px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+          <!--<label class="clickable" (click)="openAccount(transaction)">-->
+          <!--{{transaction.account_title}}-->
+          <!--</label>-->
+          <!--</td>-->
+          <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+          <!--<td width="100px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'">-->
+          <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+          <!--</td>-->
+        </tr>
+        </tbody>
+      </table>
+    </td>
     <td>{{journal.user_id}}</td>
     <td>{{journal.type}}</td>
     <td>{{journal.status}}</td>
