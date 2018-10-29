@@ -134,8 +134,7 @@ export class AuthenticationService implements OnInit {
   }
 
   getAuthToken() {
-    this.authTokenSubject.next(localStorage.getItem('auth_token'));
-    return this.authTokenSubject;
+    return localStorage.getItem('auth_token');
   }
 
   getUserID() {
@@ -158,19 +157,36 @@ export class AuthenticationService implements OnInit {
     return this.lastLoginSubject;
   }
 
-  getGETHeaders() {
+  getGETJSONHeaders() {
     return {
-      'Cache-Control': 'no-cache',
-      'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*'
+      })
     };
   }
 
-  getPOSTPUTHeaders() {
+  getGETBlobHeaders() {
     return {
-      'Cache-Control': 'no-cache',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
-      'Access-Control-Allow-Origin': '*'
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
+        'Access-Control-Allow-Origin': '*',
+        'responseType': 'blob',
+        'Accept': '*/*'
+      })
+    };
+  }
+
+  getPOSTPUTJSONHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
+        'Access-Control-Allow-Origin': '*'
+      })
     };
   }
 
@@ -179,7 +195,7 @@ export class AuthenticationService implements OnInit {
   }
 
   updateLoggedInVerification() {
-    this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in').subscribe(response => {
+    this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in', this.getGETJSONHeaders()).subscribe(response => {
       this.loggedIn = response;
       this.loggedInSubject.next(response);
     });

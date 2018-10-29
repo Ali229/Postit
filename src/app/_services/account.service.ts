@@ -50,7 +50,7 @@ export class AccountService implements OnInit {
 
   updateAccounts() {
     if (this.loggedIn) {
-      this.http.get<Account[]>('https://markzeagler.com/postit-backend/account/all').subscribe(response => {
+      this.http.get<Account[]>('https://markzeagler.com/postit-backend/account/all', this.authService.getGETJSONHeaders()).subscribe(response => {
         this.accountArraySubject.next(response['accounts']);
       });
     }
@@ -66,11 +66,11 @@ export class AccountService implements OnInit {
       'account_title': account_title,
       'normal_side': normal_side,
       'description': description
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   updateAccount(account_id) {
-    this.http.get<any>('https://markzeagler.com/postit-backend/account/' + account_id.toString()).subscribe(response => {
+    this.http.get<any>('https://markzeagler.com/postit-backend/account/' + account_id.toString(), this.authService.getGETJSONHeaders()).subscribe(response => {
       this.account = response['account'][0];
       this.accountSubject.next(response['account'][0]);
     });
@@ -88,7 +88,7 @@ export class AccountService implements OnInit {
       'date': date.toDateString(),
       'description': description,
       'journal_type': journal_type
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   getJournalSubject() {
@@ -97,7 +97,7 @@ export class AccountService implements OnInit {
 
   updateJournalEntries() {
     if (this.userType == 'manager' || this.userType == 'user') {
-      this.http.get('https://markzeagler.com/postit-backend/journal/all').subscribe(
+      this.http.get('https://markzeagler.com/postit-backend/journal/all', this.authService.getGETJSONHeaders()).subscribe(
         (journalEntries: JournalEntry[]) => {
           this.journalSubject.next(journalEntries['journal_entries']);
         });
@@ -109,7 +109,7 @@ export class AccountService implements OnInit {
     return this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), {
       'category': 'status',
       'value': 'posted'
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   rejectJournalEntry(journalEntry: JournalEntry, rejectionReason: string) {
@@ -117,6 +117,6 @@ export class AccountService implements OnInit {
       'category': 'status',
       'value': 'rejected',
       'description': journalEntry.description + '\n\nREJECTION REASON:' + rejectionReason
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 }

@@ -50,7 +50,7 @@ export class UserService {
 
   updateUser() {
     if (this.loggedIn && this.userID != "") {
-      this.http.get<User>(`https://markzeagler.com/postit-backend/user/` + this.userID).subscribe((response: User) => {
+      this.http.get<User>(`https://markzeagler.com/postit-backend/user/` + this.userID, this.authService.getGETJSONHeaders()).subscribe((response: User) => {
         this.userSubject.next(response);
         this.isAdmin = response['user_type']== 'admin';
       });
@@ -64,14 +64,14 @@ export class UserService {
 
   updateUserArray() {
     if (this.loggedIn && this.isAdmin) {
-      this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/all`).subscribe((response: User[]) => {
+      this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/all`, this.authService.getGETJSONHeaders()).subscribe((response: User[]) => {
         this.userArraySubject.next(response['users']);
       });
     }
   }
 
   getUserTypes() {
-    return this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/info`);
+    return this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/info`, this.authService.getGETJSONHeaders());
   }
 
   register(username: string, first_name: string, last_name: string, email: string, password: string) {
@@ -81,7 +81,7 @@ export class UserService {
       'first_name': first_name,
       'last_name': last_name,
       'email': email
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   addUser(username: string, first_name: string, last_name: string, email: string, password: string, user_type: string) {
@@ -92,26 +92,26 @@ export class UserService {
       'last_name': last_name,
       'email': email,
       'user_type': user_type
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   editUser(user_id, category, value) {
     return this.http.put('https://markzeagler.com/postit-backend/message/' + user_id, {
       'category': category,
       'value': value
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   forgotPassword(username: string) {
     return this.http.post('https://markzeagler.com/postit-backend/forgotpassword', {
       'username': username
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   resetPassword(user_id: number, newPassword: string) {
     return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, {
       'category': 'password',
       'value': newPassword
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 }

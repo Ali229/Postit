@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routing';
-import {BasicAuthInterceptor, ErrorInterceptor} from './_helpers';
+import { ErrorInterceptor} from './_helpers';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
 import {AuthenticationService, UserService, AccountService, AppService} from './_services';
@@ -43,7 +43,6 @@ import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/
     JournalComponent,
     EventLogComponent ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
 
     AuthenticationService,
