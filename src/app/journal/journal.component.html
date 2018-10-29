@@ -372,13 +372,14 @@
             </tr>
             </tbody>
           </table>
+          
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitRejection()">Add File
+          </button>
         </form>
         <div class="modal-footer">
           <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                   (click)="fileModal.hide()" mdbWavesEffect>Close
-          </button>
-          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                  (click)="submitRejection()">Add File
           </button>
         </div>
       </div>
