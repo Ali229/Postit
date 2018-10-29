@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {AccountService, AuthenticationService, UserService, AppService} from '../_services';
 import {AppComponent} from '../app.component';
-import {Account} from "../_models";
+import {Account} from '../_models';
 
 @Component({
   selector: 'table-sort',
@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   public userFirstName: string;
   // accounts: Account[];
   accounts: Account[] = [];
+
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
               private appService: AppService,
@@ -25,10 +26,10 @@ export class HomeComponent implements OnInit {
     });
 
     this.userService.getCurrUser().subscribe(user => {
-      this.userFirstName = user['first_name']
+      this.userFirstName = user['first_name'];
     });
 
-    this.accountService.getAccountsSubject().subscribe( accounts => {
+    this.accountService.getAccountsSubject().subscribe(accounts => {
       this.accounts = accounts;
     });
   }
@@ -38,4 +39,5 @@ export class HomeComponent implements OnInit {
     this.authService.updateLoggedInVerification();
     this.animate = true;
   }
+
 }
