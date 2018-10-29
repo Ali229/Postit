@@ -11,6 +11,17 @@ export class BasicAuthInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (localStorage['auth_token'] != '') {
+      if (request.method === 'GET') {
+        request = request.clone({
+          setHeaders: this.authService.getGETHeaders()
+        });
+      } else {
+        request = request.clone({
+          setHeaders: this.authService.getPOSTPUTHeaders()
+        });
+      }
+    }
     return next.handle(request);
   }
 }

@@ -160,22 +160,17 @@ export class AuthenticationService implements OnInit {
 
   getGETHeaders() {
     return {
-      headers: new HttpHeaders({
-        'Cache-Control': 'no-cache',
-        'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
-      })
+      'Cache-Control': 'no-cache',
+      'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
     };
   }
 
-  getPOSTPUTHeaders(body) {
+  getPOSTPUTHeaders() {
     return {
-      headers: new HttpHeaders({
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
-        'Content-Length': body.toString().length,
-        'Access-Control-Allow-Origin': '*'
-      })
+      'Cache-Control': 'no-cache',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
+      'Access-Control-Allow-Origin': '*'
     };
   }
 
@@ -184,8 +179,7 @@ export class AuthenticationService implements OnInit {
   }
 
   updateLoggedInVerification() {
-    this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in',
-      this.getGETHeaders()).subscribe(response => {
+    this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in').subscribe(response => {
       this.loggedIn = response;
       this.loggedInSubject.next(response);
     });

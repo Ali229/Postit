@@ -50,8 +50,7 @@ export class AccountService implements OnInit {
 
   updateAccounts() {
     if (this.loggedIn) {
-      this.http.get<Account[]>('https://markzeagler.com/postit-backend/account/all',
-        this.authService.getGETHeaders()).subscribe(response => {
+      this.http.get<Account[]>('https://markzeagler.com/postit-backend/account/all').subscribe(response => {
         this.accountArraySubject.next(response['accounts']);
       });
     }
@@ -63,18 +62,15 @@ export class AccountService implements OnInit {
   }
 
   createAccount(account_id: number, account_title: string, normal_side: string, description: string) {
-    let body = {
+    return this.http.post('https://markzeagler.com/postit-backend/account/' + account_id, {
       'account_title': account_title,
       'normal_side': normal_side,
       'description': description
-    };
-    return this.http.post('https://markzeagler.com/postit-backend/account/' + account_id, body,
-      this.authService.getPOSTPUTHeaders(body));
+    });
   }
 
   updateAccount(account_id) {
-    this.http.get<any>('https://markzeagler.com/postit-backend/account/' + account_id.toString(),
-      this.authService.getGETHeaders()).subscribe(response => {
+    this.http.get<any>('https://markzeagler.com/postit-backend/account/' + account_id.toString()).subscribe(response => {
       this.account = response['account'][0];
       this.accountSubject.next(response['account'][0]);
     });
@@ -86,15 +82,13 @@ export class AccountService implements OnInit {
   }
 
   journalize(journal_type: string, date: Date, transactions: Transaction[], description: string) {
-    let body = {
+    console.log("Creating new journal:");
+    return this.http.post('https://markzeagler.com/postit-backend/journal/new', {
       'transactions_list': transactions,
       'date': date.toDateString(),
       'description': description,
       'journal_type': journal_type
-    };
-    console.log("Creating new journal:");
-    console.log(body);
-    return this.http.post('https://markzeagler.com/postit-backend/journal/new', body, this.authService.getPOSTPUTHeaders(body));
+    });
   }
 
   getJournalSubject() {
@@ -103,7 +97,7 @@ export class AccountService implements OnInit {
 
   updateJournalEntries() {
     if (this.userType == 'manager' || this.userType == 'user') {
-      this.http.get('https://markzeagler.com/postit-backend/journal/all', this.authService.getGETHeaders()).subscribe(
+      this.http.get('https://markzeagler.com/postit-backend/journal/all').subscribe(
         (journalEntries: JournalEntry[]) => {
           this.journalSubject.next(journalEntries['journal_entries']);
         });
@@ -112,30 +106,17 @@ export class AccountService implements OnInit {
 
   postJournalEntry(journalEntry: JournalEntry) {
     console.log("Posting journal entry to " + 'https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString());
-    let body = {
+    return this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), {
       'category': 'status',
       'value': 'posted'
-    };
-    return this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), body, this.authService.getPOSTPUTHeaders(body));
+    });
   }
 
   rejectJournalEntry(journalEntry: JournalEntry, rejectionReason: string) {
-    let rejectBody = {
+    return this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), {
       'category': 'status',
-      'value': 'rejected'
-    };
-    this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), rejectBody, this.authService.getPOSTPUTHeaders(rejectBody)).subscribe(response => {
-      let reasonBody = {
-        'category': 'description',
-        'value': journalEntry.description + '\n\nREJECTION REASON:' + rejectionReason
-      };
-      this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), reasonBody, this.authService.getPOSTPUTHeaders(reasonBody)).subscribe( response => {
-
-      }, error => {
-        console.log(error)
-      })
-    }, error => {
-      console.log(error)
-    })
+      'value': 'rejected',
+      'description': journalEntry.description + '\n\nREJECTION REASON:' + rejectionReason
+    });
   }
 }
