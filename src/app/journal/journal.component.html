@@ -361,6 +361,18 @@
       <div class="modal-body">
         <form class="text-center border border-light p-5 lg-form">
           <table class="table table-responsive table-sm">
+            <thead>
+            <tr>
+              <td>
+                <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">
+              </td>
+              <td>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="uploadFile()">Upload File
+                </button>
+              </td>
+            </tr>
+            </thead>
             <tbody>
             <tr *ngFor="let filename of filesList">
               <td>{{filename}}</td>
@@ -372,10 +384,6 @@
             </tr>
             </tbody>
           </table>
-          <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">
-          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                  (click)="uploadFile()">Upload File
-          </button>
         </form>
         <div class="modal-footer">
           <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
