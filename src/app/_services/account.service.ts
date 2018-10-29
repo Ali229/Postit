@@ -126,5 +126,11 @@ export class AccountService implements OnInit {
 
   getJournalEntryFile(journalEntry: JournalEntry, filename: string) {
     window.open('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id.toString() + '/' + filename + '/' + this.authService.getAuthToken(), '_blank');
-    // return this.http.get<any>('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id.toString() + '/' + filename, this.authService.getGETBlobHeaders());
   }
+
+  uploadJournalEntryFile(journalEntry: JournalEntry, file: File) {
+    let formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id + '/', formData, this.authService.getPOSTPUTFileHeaders())
+  }
+}

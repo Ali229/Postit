@@ -190,6 +190,17 @@ export class AuthenticationService implements OnInit {
     };
   }
 
+  getPOSTPUTFileHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache',
+        // 'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + localStorage.getItem('auth_token'),
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+  }
+
   encryptPassword(password: string) {
     return password; // TODO Actually do something here later. Encode/encrypt it... do something that's lossy
   }

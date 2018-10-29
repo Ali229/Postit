@@ -372,9 +372,9 @@
             </tr>
             </tbody>
           </table>
-          
+          <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">
           <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                  (click)="submitRejection()">Add File
+                  (click)="uploadFile()">Upload File
           </button>
         </form>
         <div class="modal-footer">

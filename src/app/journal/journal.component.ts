@@ -45,6 +45,7 @@ export class JournalComponent implements OnInit {
   displayingJournalFiles: JournalEntry;
   loadingFilesList: boolean = true;
   filesList: string[];
+  selectedFiles: File[];
 
   constructor(private accountService: AccountService,
               private formBuilder: FormBuilder,
@@ -204,5 +205,19 @@ export class JournalComponent implements OnInit {
 
   downloadFile(filename: string) {
     this.accountService.getJournalEntryFile(this.displayingJournalFiles, filename);
+  }
+
+  fileChange(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  uploadFile() {
+    for(let i = 0; i < this.selectedFiles.length; i++) {
+      this.accountService.uploadJournalEntryFile(this.displayingJournalFiles, this.selectedFiles[i]).subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.log(error);
+      });
+    }
   }
 }
