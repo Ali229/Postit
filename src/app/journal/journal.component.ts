@@ -40,6 +40,12 @@ export class JournalComponent implements OnInit {
   rejectionError: string;
   rejectingJournalEntry: JournalEntry;
 
+  // File Modal
+  @ViewChild('fileModal') public fileModal: ModalDirective;
+  displayingJournalFiles: JournalEntry;
+  loadingFilesList: boolean = true;
+  filesList: string[];
+
   constructor(private accountService: AccountService,
               private formBuilder: FormBuilder,
               private userService: UserService,
@@ -167,11 +173,16 @@ export class JournalComponent implements OnInit {
   }
 
   openFileModal(journalEntry: JournalEntry) {
-
+    this.loadingFilesList = true;
+    this.displayingJournalFiles = journalEntry;
+    this.accountService.getJournalEntryFilesList(journalEntry).subscribe( response => {
+      this.filesList = response['filenames'];
+      this.loadingFilesList = false;
+    });
+    this.fileModal.show();
   }
 
   openAccount(transaction: Transaction) {
-    console.log()
     this.router.navigate(['./account/' + transaction.account_id.toString()]);
   }
 
@@ -189,5 +200,36 @@ export class JournalComponent implements OnInit {
     } else {
       return "\t$" + (transaction.amount * -1).toString();
     }
+  }
+
+  downloadFile(filename: string) {
+    this.accountService.getJournalEntryFile(this.displayingJournalFiles, filename).subscribe( response => {
+      // https://stackoverflow.com/questions/52154874/angular-6-downloading-file-from-rest-api
+      // It is necessary to create a new blob object with mime-type explicitly set
+      // otherwise only Chrome works like it should
+      var newBlob = new Blob([response], { type: "*/*" });
+
+      // IE doesn't allow using a blob object directly as link href
+      // instead it is necessary to use msSaveOrOpenBlob
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(newBlob);
+        return;
+      }
+
+      // For other browsers:
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob);
+
+      var link = document.createElement('a');
+      link.href = data;
+      link.download = "Je kar.pdf";
+      // this is necessary as link.click() does not work on the latest firefox
+      link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+
+      setTimeout(function () {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data);
+      }, 100);
+    })
   }
 }

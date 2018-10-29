@@ -119,4 +119,12 @@ export class AccountService implements OnInit {
       'description': journalEntry.description + '\n\nREJECTION REASON:' + rejectionReason
     }, this.authService.getPOSTPUTJSONHeaders());
   }
-}
+
+  getJournalEntryFilesList(journalEntry: JournalEntry) {
+    return this.http.get('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id.toString() + '/', this.authService.getGETJSONHeaders());
+  }
+
+  getJournalEntryFile(journalEntry: JournalEntry, filename: string) {
+    window.open('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id.toString() + '/' + filename + '/' + this.authService.getAuthToken(), '_blank');
+    // return this.http.get<any>('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id.toString() + '/' + filename, this.authService.getGETBlobHeaders());
+  }
