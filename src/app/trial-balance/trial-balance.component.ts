@@ -23,7 +23,7 @@ export class TrialBalanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appService.setActivePage('accounts');
+    this.appService.setActivePage('trial-balance');
     this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.updateAccountList();
   }
