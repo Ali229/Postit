@@ -118,7 +118,7 @@
       <td>{{account.normal_side}}</td>
       <td>{{account.description}}</td>
       <td>{{account.date_created}}</td>
-      <td>{{account.created_by}}</td>
+      <td>{{(account.created_by | number:'6.0-0').toString().replace(',', '')}}</td>
       <td>{{account.last_edited_date}}</td>
       <td>{{account.last_edited_by}}</td>
       <td>{{account.is_active}}</td>
