@@ -197,9 +197,9 @@ export class JournalComponent implements OnInit {
 
   getAmount(transaction: Transaction) {
     if (transaction.amount > 0) {
-      return "$" + transaction.amount.toFixed(2).toString();
+      return '$' + transaction.amount.toFixed(2).toString() + '\t';
     } else {
-      return "\t$" + (transaction.amount * -1).toFixed(2).toString();
+      return '$' + (transaction.amount * -1).toFixed(2).toString();
     }
   }
 
