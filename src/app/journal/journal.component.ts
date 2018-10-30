@@ -3,7 +3,7 @@ import {JournalEntry, Account, Transaction} from "../_models";
 import {AccountService, UserService} from "../_services";
 import {ModalDirective} from "angular-bootstrap-md";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-journal',
@@ -14,6 +14,8 @@ export class JournalComponent implements OnInit {
 
   journalEntries: JournalEntry[] = [];
   userType: string;
+  sortValue: string;
+  sortReverse: boolean;
 
   // Journalize Modal
   @ViewChild('journalizeModal') public journalizeModal: ModalDirective;
@@ -73,6 +75,13 @@ export class JournalComponent implements OnInit {
 
     this.accountService.getJournalSubject().subscribe((journalEntries: JournalEntry[]) => {
       this.journalEntries = journalEntries;
+      this.journalEntries.sort((a, b) => {
+        if (!this.sortReverse) {
+          return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
+        } else {
+          return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
+        }
+      });
     });
     this.accountService.updateJournalEntries();
 
@@ -99,6 +108,16 @@ export class JournalComponent implements OnInit {
     return this.journalEntries;
   }
 
+  sortBy(value: string) {
+    if (this.sortValue === value) {
+      this.sortReverse = !this.sortReverse;
+    } else {
+      this.sortReverse = false;
+    }
+    this.sortValue = value;
+    this.accountService.updateJournalEntries();
+  }
+
   showJournalizeModal() {
     this.journalizeModal.show();
   }
@@ -120,7 +139,7 @@ export class JournalComponent implements OnInit {
       transactionsList.push(transaction);
     }
     console.log(transactionsList);
-    this.accountService.journalize(this.journalizeForm.controls.journal_type.value, new Date(), transactionsList,
+    this.accountService.journalize(this.journalizeForm.controls.journal_type.value.toString().toLowerCase(), new Date(), transactionsList,
       this.journalizeForm.controls.description.value).subscribe(response => {
       this.journalizeModal.hide();
     }, error => {
@@ -166,7 +185,7 @@ export class JournalComponent implements OnInit {
   }
 
   postJournalEntry(journalEntry: JournalEntry) {
-    this.accountService.postJournalEntry(journalEntry).subscribe( response => {
+    this.accountService.postJournalEntry(journalEntry).subscribe(response => {
       this.accountService.updateAccounts();
     }, error => {
       console.log(error);
@@ -176,7 +195,7 @@ export class JournalComponent implements OnInit {
   openFileModal(journalEntry: JournalEntry) {
     this.loadingFilesList = true;
     this.displayingJournalFiles = journalEntry;
-    this.accountService.getJournalEntryFilesList(journalEntry).subscribe( response => {
+    this.accountService.getJournalEntryFilesList(journalEntry).subscribe(response => {
       this.filesList = response['filenames'];
       this.loadingFilesList = false;
     });
@@ -212,7 +231,7 @@ export class JournalComponent implements OnInit {
   }
 
   uploadFile() {
-    for(let i = 0; i < this.selectedFiles.length; i++) {
+    for (let i = 0; i < this.selectedFiles.length; i++) {
       this.accountService.uploadJournalEntryFile(this.displayingJournalFiles, this.selectedFiles[i]).subscribe(response => {
         console.log(response);
       }, error => {

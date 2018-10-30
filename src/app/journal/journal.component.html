@@ -10,29 +10,27 @@
 <table class="table table-responsive table-sm">
   <thead>
   <tr>
-    <th class="clickable">Journal ID
+    <th class="clickable" (click)="sortBy('journal_entry_id')" width="500px">Journal ID
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable">P.R.
+    <th class="clickable" (click)="sortBy('posting_reference')" width="100px">P.R.
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable">Date
+    <th class="clickable" (click)="sortBy('date')" width="150px">Date
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable" width="500px">Transactions
+    <th class="clickable" width="500px">Transactions</th>
+    <th class="clickable" (click)="sortBy('user_id')">Creator
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable">Creator
+    <th class="clickable" (click)="sortBy('type')" width="200px">Type
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable">Type
-      <i class="fa fa-sort float-right" aria-hidden="true"></i>
-    </th>
-    <th class="clickable">
+    <th class="clickable" (click)="sortBy('status')" width="200px">
       Status
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable" width="500px">
+    <th class="clickable" (click)="sortBy('description')" width="500px">
       Description
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
