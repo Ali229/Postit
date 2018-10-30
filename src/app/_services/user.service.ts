@@ -32,7 +32,7 @@ export class UserService {
 
     const user_id = localStorage.getItem('user_id');
     if (user_id) {
-      console.log("Setting user_id manually in message.service... Clean this up!");
+      console.log("Setting user_id manually in user.service... Clean this up!");
       this.userID = user_id;
       this.updateUser();
     }
@@ -96,7 +96,7 @@ export class UserService {
   }
 
   editUser(user_id, category, value) {
-    return this.http.put('https://markzeagler.com/postit-backend/message/' + user_id, {
+    return this.http.put('https://markzeagler.com/postit-backend/user/' + user_id, {
       'category': category,
       'value': value
     }, this.authService.getPOSTPUTJSONHeaders());
@@ -109,7 +109,7 @@ export class UserService {
   }
 
   resetPassword(user_id: number, newPassword: string) {
-    return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, {
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, {
       'category': 'password',
       'value': newPassword
     }, this.authService.getPOSTPUTJSONHeaders());
