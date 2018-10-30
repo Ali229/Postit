@@ -2,45 +2,53 @@
 .form-control {
   padding: 8px;
 }
+
 ///**************************************** Input Boxes ****************************************/
 .fc {
   width: 100% !important;
 }
+
 /**************************************** Heading ********************************************/
 .lg-h1 {
-    margin-bottom: 20px;
- }
+  margin-bottom: 20px;
+}
+
 /**************************************** Submit Button **************************************/
 .lg-btn {
-    width: 200px;
+  width: 200px;
 }
+
 /**************************************** Logo ***********************************************/
 .i1 {
-    margin-bottom: 20px;
-    width: 273px;
-    height: 100px;
+  margin-bottom: 20px;
+  width: 273px;
+  height: 100px;
 }
+
 /**************************************** Parent Container ***********************************/
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 /**************************************** Main Form ******************************************/
 .lg-form {
-    min-height: 450px;
-    width: 450px;
-    margin: auto;
-    text-align: center!important;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 15px;
-    padding: 30px 20px 10px 10px;
+  min-height: 450px;
+  width: 450px;
+  margin: auto;
+  text-align: center !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+  padding: 30px 20px 10px 10px;
   background-color: white;
 }
+
 .md-form {
   text-align: left;
 }
+
 .container {
   overflow: auto;
 }
