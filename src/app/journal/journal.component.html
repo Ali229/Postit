@@ -160,7 +160,7 @@
         </tbody>
       </table>
     </td>
-    <td>{{journal.user_id}}</td>
+    <td>{{(journal.user_id | number:'6.0-0').toString().replace(',', '')}}</td>
     <td>{{journal.type}}</td>
     <td>{{journal.status}}</td>
     <td>{{journal.description}}</td>
