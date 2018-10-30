@@ -9,6 +9,7 @@ import {JournalComponent} from "./journal/journal.component";
 import {EventLogComponent} from "./event-log/event-log.component";
 import {AuthGuard} from "./_guards";
 import {AuthenticationService} from "./_services";
+import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 
 let loggedIn: boolean = false;
 
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   {path: 'account/:account_id', component: AccountComponent, canActivate: [AuthGuard]},
   {path: 'journal', component: JournalComponent, canActivate: [AuthGuard]},
   {path: 'event-log', component: EventLogComponent, canActivate: [AuthGuard]},
+  {path: 'trial-balance', component: TrialBalanceComponent, canActivate: [AuthGuard]},
   // otherwise redirect to home if logged in or login if not
   {path: '**', redirectTo: loggedIn ? '/home' : '/login'}
 ];

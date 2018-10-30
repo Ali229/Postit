@@ -7,8 +7,8 @@ import {AuthenticationService} from "../_services";
 export class AuthGuard implements CanActivate {
 
   public static readonly ADMIN_PAGES: string[] = ['home', 'users', 'accounts', 'event-log'];
-  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journal', 'account/:account_id'];
-  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journal', 'account/:account_id'];
+  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journal', 'account/:account_id', 'trial-balance'];
+  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journal', 'account/:account_id', 'trial-balance'];
   private readonly typePageMap;
 
   constructor(private router: Router,

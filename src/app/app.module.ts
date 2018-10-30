@@ -17,7 +17,8 @@ import {UsersComponent} from './users/users.component';
 import {AccountComponent} from './account/account.component';
 import { JournalComponent } from './journal/journal.component';
 import { EventLogComponent } from './event-log/event-log.component';
-import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";
+import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";;
+import { TrialBalanceComponent } from './trial-balance/trial-balance.component'
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/
     UsersComponent,
     AccountComponent,
     JournalComponent,
-    EventLogComponent ],
+    EventLogComponent ,
+    TrialBalanceComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
 

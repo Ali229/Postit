@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, UserService} from '../_services';
+import {AuthenticationService, UserService, AppService} from '../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppComponent} from '../app.component';
-import {AppService} from '../_services/app.service';
 import {AuthGuard} from "../_guards";
 import {User} from "../_models";
 
@@ -23,7 +22,8 @@ export class NavbarComponent implements OnInit {
     'users': 'Users',
     'accounts': 'Accounts',
     'event-log': 'Event Log',
-    'journal': 'Journal'
+    'journal': 'Journal',
+    'trial-balance': 'Trial Balance'
   };
 
   constructor(private authService: AuthenticationService,
