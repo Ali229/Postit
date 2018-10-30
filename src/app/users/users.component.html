@@ -94,7 +94,7 @@
     <tr
       [className]="user.forgot_password ? 'forgot_password clickable-row clickable waves-light' : 'clickable-row clickable waves-light'"
       *ngFor="let user of filterBy()" data-toggle="modal" data-target="#register-modal">
-      <td (click)="editUser(user)">{{user.user_id}}</td>
+      <td (click)="editUser(user)">{{(user.user_id | number:'6.0-0').toString().replace(',', '')}}</td>
       <td (click)="editUser(user)">{{user.username}}</td>
       <td (click)="editUser(user)">{{user.first_name}}</td>
       <td (click)="editUser(user)">{{user.last_name}}</td>
