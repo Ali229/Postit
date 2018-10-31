@@ -38,13 +38,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="clickable" *ngFor="let transaction of transactions">
+  <tr class="clickable" *ngFor="let transaction of account.transactions">
     <td>{{transaction.date}}</td>
     <td>{{transaction.description}}</td>
     <td>{{transaction.posting_reference}}</td>
-    <td>${{transaction.debit_amount.toFixed(2)}}</td>
-    <td>${{transaction.credit_amount.toFixed(2)}}</td>
-    <td>${{transaction.balance.toFixed(2)}}</td>
+    <td>{{transaction.amount > 0 ? '$' + transaction.amount.toFixed(2) : ''}}</td>
+    <td>{{transaction.amount < 0 ? '$' + transaction.amount.toFixed(2): ''}}</td>
+    <!--<td>{{transaction.balance.toFixed(2)}}</td>-->
   </tr>
   </tbody>
 </table>
