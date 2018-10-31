@@ -43,7 +43,7 @@
     <td>{{transaction.description}}</td>
     <td>{{transaction.posting_reference}}</td>
     <td>{{transaction.amount > 0 ? '$' + transaction.amount.toFixed(2) : ''}}</td>
-    <td>{{transaction.amount < 0 ? '$' + transaction.amount.toFixed(2): ''}}</td>
+    <td>{{transaction.amount < 0 ? '$' + (transaction.amount * -1).toFixed(2): ''}}</td>
     <!--<td>{{transaction.balance.toFixed(2)}}</td>-->
   </tr>
   </tbody>
