@@ -187,7 +187,7 @@
 <!-- Journalize Modal -->
 <div mdbModal #journalizeModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="Journalize" aria-hidden="true" style="overflow-y: auto">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close pull-right" aria-label="Close" (click)="journalizeModal.hide()">
@@ -205,15 +205,16 @@
               <option *ngFor="let journal_type of journalTypes" [value]="journal_type">{{journal_type}}</option>
             </select>
           </div>
-          <!-- Add/Remove Debit Row -->
-          <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()">
-            - Remove Debit -
-          </button>
-          <button type="button" mdbBtn color="default" (click)="addDebitRow()">
-            + Add Debit +
-          </button>
+
           <!-- Debits -->
-          <h5>Debits</h5>
+          <h5>Debits
+            <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()">
+              Remove Debit
+            </button>
+            <button type="button" mdbBtn color="default" (click)="addDebitRow()">
+              Add Debit
+            </button>
+          </h5>
           <table>
             <thead>
             <tr>
@@ -248,15 +249,15 @@
             </tr>
             </tbody>
           </table>
-          <!-- Add/Remove Credit Row -->
-          <button *ngIf="creditLines.length > 1" type="button" mdbBtn color="danger" (click)="removeCreditRow()">
-            - Remove Credit -
-          </button>
-          <button type="button" mdbBtn color="default" (click)="addCreditRow()">
-            + Add Credit +
-          </button>
           <!-- Credits --->
-          <h5>Credits</h5>
+          <h5>Credits
+            <button *ngIf="creditLines.length > 1" type="button" mdbBtn color="danger" (click)="removeCreditRow()">
+              Remove Credit
+            </button>
+            <button type="button" mdbBtn color="default" (click)="addCreditRow()">
+              Add Credit
+            </button>
+          </h5>
           <table>
             <thead>
             <tr>
