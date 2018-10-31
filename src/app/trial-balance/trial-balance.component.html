@@ -20,12 +20,12 @@
     <tr  *ngFor="let account of accounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
       <td align="right">{{account.normal_side == 'debit'? '$' + account.balance.toFixed(2) : ''}}</td>
-      <td align="right">{{account.normal_side == 'credit'? '$' + account.balance.toFixed(2) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit'? '$' + (account.balance * -1).toFixed(2) : ''}}</td>
     </tr>
     <tr>
       <td><strong>Total</strong></td>
       <td><strong>${{getDebitSum().toFixed(2)}}</strong></td>
-      <td><strong>${{getCreditSum().toFixed(2)}}</strong></td>
+      <td><strong>${{(getCreditSum() * -1).toFixed(2)}}</strong></td>
     </tr>
     </tbody>
   </table>
