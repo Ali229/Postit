@@ -1,10 +1,13 @@
-<div>
-  <h1>Journal</h1>
+<div class="top">
+  <h1>Journal
+    <button class="float-right" mdbBtn type="button" color="indigo" (click)="showJournalizeModal()" mdbWavesEffect>
+      <mdb-icon icon="plus-square-o" class="mr-1"></mdb-icon>
+      Add Entry
+    </button>
+  </h1>
+
 </div>
 
-<button type="button" mdbBtn color="default" (click)="showJournalizeModal()">
-  + Add New Entry +
-</button>
 <!--<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">-->
 <!-- TODO Change to a mat-table -->
 <table class="table table-responsive table-sm">
@@ -137,14 +140,14 @@
           <!--Accounts-->
           <td width="400px" align="left"> <!-- [align]="transaction.amount > 0 ? 'left' : 'right'" -->
             <div class="clickable data" (click)="openAccount(transaction)">
-            {{getAccountName(transaction)}}
-          </div>
+              {{getAccountName(transaction)}}
+            </div>
           </td>
           <!-- Amounts -->
           <td width="100px" align="right">
-          <div class="data">
-          {{getAmount(transaction)}}
-          </div>
+            <div class="data">
+              {{getAmount(transaction)}}
+            </div>
           </td>
           <!--&lt;!&ndash; Accounts &ndash;&gt;-->
           <!--<td width="400px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
