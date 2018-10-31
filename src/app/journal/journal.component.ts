@@ -236,7 +236,7 @@ export class JournalComponent implements OnInit {
   uploadFile() {
     for (let i = 0; i < this.selectedFiles.length; i++) {
       this.accountService.uploadJournalEntryFile(this.displayingJournalFiles, this.selectedFiles[i]).subscribe(response => {
-        console.log(response);
+        this.fileModal.hide();
       }, error => {
         console.log(error);
       });
