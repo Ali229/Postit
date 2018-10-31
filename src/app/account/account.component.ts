@@ -34,8 +34,4 @@ export class AccountComponent implements OnInit {
 
   }
 
-  abs(value: number) {
-    return Math.abs(value);
-  }
-
 }
