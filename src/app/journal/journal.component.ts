@@ -16,6 +16,7 @@ export class JournalComponent implements OnInit {
   userType: string;
   sortValue: string;
   sortReverse: boolean;
+  loading:boolean = false;
 
   // Journalize Modal
   @ViewChild('journalizeModal') public journalizeModal: ModalDirective;
@@ -74,6 +75,7 @@ export class JournalComponent implements OnInit {
     this.accountService.updateAccounts();
 
     this.accountService.getJournalSubject().subscribe((journalEntries: JournalEntry[]) => {
+      this.loading = false;
       this.journalEntries = journalEntries;
       this.journalEntries.sort((a, b) => {
         if (!this.sortReverse) {
@@ -102,6 +104,7 @@ export class JournalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loading = true;
   }
 
   filterBy() {

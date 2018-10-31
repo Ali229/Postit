@@ -1,3 +1,5 @@
+<img *ngIf="loading === true; else showTable" class="centered" src="./assets/table_loading.svg">
+<ng-template #showTable>
 <div class="top">
   <h1>Journal
     <button class="float-right" mdbBtn type="button" color="indigo" (click)="showJournalizeModal()" mdbWavesEffect>
@@ -7,15 +9,15 @@
   </h1>
 </div>
 
-<!--<img *ngIf="users.length === 0" class="centered" src="./src/assets/table_loading.svg">-->
+
 <!-- TODO Change to a mat-table -->
-<table class="table table-responsive table-sm table-striped table-bordered">
+<table class="table table-responsive table-striped table-bordered" width="2000px">
   <thead>
   <tr>
-    <th class="clickable" (click)="sortBy('journal_entry_id')" width="500px">Journal ID
+    <th class="clickable" (click)="sortBy('journal_entry_id')" width="20%">Journal ID
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable" (click)="sortBy('posting_reference')" width="100px">P.R.
+    <th class="clickable" (click)="sortBy('posting_reference')" width="50%">P.R.
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
     <th class="clickable" (click)="sortBy('date')" width="150px">Date
@@ -183,7 +185,7 @@
   </tr>
   </tbody>
 </table>
-
+</ng-template>
 <!-- Journalize Modal -->
 <div mdbModal #journalizeModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="Journalize" aria-hidden="true" style="overflow-y: auto">
