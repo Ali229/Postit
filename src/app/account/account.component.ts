@@ -12,8 +12,8 @@ export class AccountComponent implements OnInit {
 
   account_id: number;
   account: Account;
-  transactions: Transaction[];
   filterValue: string;
+  balanceMap: Map<Transaction, number> = new Map();
 
   constructor(private activatedRoute: ActivatedRoute,
               private appService: AppService,
@@ -26,7 +26,15 @@ export class AccountComponent implements OnInit {
     this.account_id = parseInt(this.activatedRoute.snapshot.params.account_id);
     this.appService.setActivePage('account/' + this.account_id);
     this.accountService.getAccount(this.account_id).subscribe((response: Account) => {
+      this.balanceMap.clear();
       this.account = response;
+      let runningBalance = 0;
+      if(this.account) {
+        for (let i = 0; i < this.account.transactions.length; i++) {
+          runningBalance += this.account.transactions[i].amount;
+          this.balanceMap.set(this.account.transactions[i], runningBalance);
+        }
+      }
     });
   }
 
