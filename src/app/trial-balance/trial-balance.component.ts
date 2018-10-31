@@ -18,8 +18,8 @@ export class TrialBalanceComponent implements OnInit {
               private router: Router,
               private appService: AppService) {
     this.accountService.getAccountsSubject().subscribe((response: Account[]) => {
+      this.accounts = [];
       response.forEach(account => {
-        this.accounts = [];
         if(account.balance != 0) {
           this.accounts.push(account)
         }
