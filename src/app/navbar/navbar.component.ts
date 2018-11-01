@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     'users': 'Users',
     'accounts': 'CoA',
     'event-log': 'Event Log',
-    'journal': 'Journal',
+    'journal': 'Journals',
     'trial-balance': 'Trial Balance'
   };
 
