@@ -11,19 +11,19 @@
 
 
 <!-- TODO Change to a mat-table -->
-<table class="table table-responsive table-striped table-bordered" width="2000px">
+<table class="table table-responsive table-striped table-bordered">
   <thead>
   <tr>
-    <th class="clickable" (click)="sortBy('journal_entry_id')" width="20%">Journal ID
+    <th class="clickable" (click)="sortBy('journal_entry_id')" width="100px">Journal ID
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable" (click)="sortBy('posting_reference')" width="50%">P.R.
+    <th class="clickable" (click)="sortBy('posting_reference')" width="300px">P.R.
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
     <th class="clickable" (click)="sortBy('date')" width="150px">Date
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
-    <th class="clickable" width="500px">Transactions</th>
+    <th class="clickable" width="0px">Transactions</th>
     <!--<th class="clickable" (click)="sortBy('user_id')">Creator-->
       <!--<i class="fa fa-sort float-right" aria-hidden="true"></i>-->
     <!--</th>-->
@@ -378,7 +378,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let filename of filesList">
-              <td>{{filename}}</td>
+              <td style="padding-top: 20px">{{filename}}</td>
               <td>
                 <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
                         (click)="downloadFile(filename)">View File
