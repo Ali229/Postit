@@ -146,7 +146,7 @@ export class JournalComponent implements OnInit {
       this.journalizeForm.controls.description.value).subscribe(response => {
       this.journalizeModal.hide();
     }, error => {
-      console.log(error)
+      console.log(error);
     });
   }
 
