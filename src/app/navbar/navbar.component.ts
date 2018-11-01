@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   readonly PAGE_DICTIONARY = {
     'home': 'Home',
     'users': 'Users',
-    'accounts': 'CoA',
+    'accounts': 'COA',
     'event-log': 'Event Log',
     'journal': 'Journals',
     'trial-balance': 'Trial Balance'

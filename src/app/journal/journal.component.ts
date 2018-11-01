@@ -36,6 +36,7 @@ export class JournalComponent implements OnInit {
   typeFilter: string;
   statusFilter: string = 'pending';
   descriptionFilter: string;
+  dateFilter: string;
 
   // Reject Modal
   @ViewChild('rejectModal') public rejectModal: ModalDirective;

@@ -14,9 +14,9 @@
 <table class="table table-responsive table-striped table-bordered" width="2000px">
   <thead>
   <tr>
-    <!--<th class="clickable" (click)="sortBy('journal_entry_id')" width="20%">Journal ID-->
-      <!--<i class="fa fa-sort float-right" aria-hidden="true"></i>-->
-    <!--</th>-->
+    <th class="clickable" (click)="sortBy('journal_entry_id')" width="20%">Journal ID
+      <i class="fa fa-sort float-right" aria-hidden="true"></i>
+    </th>
     <th class="clickable" (click)="sortBy('posting_reference')" width="50%">P.R.
       <i class="fa fa-sort float-right" aria-hidden="true"></i>
     </th>
@@ -49,13 +49,13 @@
     </th>
   </tr>
   <tr>
-    <!--<th>-->
-      <!--<div class="md-form">-->
-        <!--<input type="search" [(ngModel)]="journalIdFilter" id="journalIdSearch" class="form-control" mdbInputDirective-->
-               <!--[mdbValidate]="false">-->
-        <!--<label for="journalIdSearch">Search</label>-->
-      <!--</div>-->
-    <!--</th>-->
+    <th>
+      <div class="md-form">
+        <input type="search" [(ngModel)]="journalIdFilter" id="journalIdSearch" class="form-control" mdbInputDirective
+               [mdbValidate]="false">
+        <label for="journalIdSearch">Search</label>
+      </div>
+    </th>
     <th>
       <div class="md-form">
         <input type="search" [(ngModel)]="postingReferenceFilter" id="postingReferenceSearch" class="form-control"
@@ -65,9 +65,9 @@
     </th>
     <th>
       <div class="md-form">
-        <input type="search" [(ngModel)]="postingReferenceFilter" id="dateSearch" class="form-control"
+        <input type="search" [(ngModel)]="dateFilter" id="dateSearch" class="form-control"
                mdbInputDirective [mdbValidate]="false">
-        <label for="postingReferenceSearch">Search</label>
+        <label for="dateSearch">Search</label>
       </div>
     </th>
     <th>
@@ -120,7 +120,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let journal of filterBy()">
-    <!--<td>{{journal.journal_entry_id}}</td>-->
+    <td>{{journal.journal_entry_id}}</td>
     <td>{{journal.posting_reference}}</td>
     <td>{{journal.date}}</td>
     <!-- Transactions -->
