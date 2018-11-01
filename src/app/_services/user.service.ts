@@ -32,7 +32,7 @@ export class UserService {
 
     const user_id = localStorage.getItem('user_id');
     if (user_id) {
-      console.log("Setting user_id manually in user.service... Clean this up!");
+      //console.log("Setting user_id manually in user.service... Clean this up!");
       this.userID = user_id;
       this.updateUser();
     }
