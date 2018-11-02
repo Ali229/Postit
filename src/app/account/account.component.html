@@ -1,6 +1,6 @@
-<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-        routerLink="/accounts" style="text-align: left">
-  << Back to Chart of Accounts
+<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect *ngIf="referer"
+        (click)="back()" style="text-align: left">
+  << Back to {{referer}}
 </button>
 
 <h1 *ngIf="account">{{account.account_title}}</h1>

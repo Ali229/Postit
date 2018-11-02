@@ -103,7 +103,7 @@ export class AccountsComponent implements OnInit {
   }
 
   editAccount(account: Account) {
-    this.router.navigate(['./account/' + account.account_id]);
+    this.router.navigate(['./account/' + account.account_id], {queryParams: {returnUrl: 'accounts'}});
   }
 
   showAddAccount() {
