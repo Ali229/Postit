@@ -5,7 +5,6 @@ import {first} from 'rxjs/operators';
 import {LoginData} from '../_models';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AppService} from "./app.service";
-import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -208,6 +207,11 @@ export class AuthenticationService implements OnInit {
   updateLoggedInVerification() {
     this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in', this.getGETJSONHeaders()).subscribe(response => {
       this.loggedIn = response;
+      // Pretty crude, but works for now
+      if(!this.loggedIn && this.appService.getActivePage() != 'login') {
+        console.log('Logging out');
+        this.logout();
+      }
       this.loggedInSubject.next(response);
     });
   }
