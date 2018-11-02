@@ -1,8 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AuthenticationService, AccountService, UserService} from '../_services';
+import {AuthenticationService, AccountService, AppService} from '../_services';
 import {Account} from '../_models';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AppService} from "../_services/app.service";
 import {ModalDirective} from "angular-bootstrap-md";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -32,7 +31,8 @@ export class AccountsComponent implements OnInit {
   addAccountError: string = '';
   normalSides: string[] = ['credit', 'debit'];
   categories: string[] = [];
-  subcategories: string[] = [];
+  subcategories: Map<string, string[]> = new Map();
+  availableSubcategories: string[] = [];
 
   constructor(private authService: AuthenticationService,
               private accountService: AccountService,
@@ -58,6 +58,8 @@ export class AccountsComponent implements OnInit {
       category: ['', Validators.required],
       subcategory: ['', Validators.required]
     });
+
+    this.categories.push('');
   }
 
   ngOnInit() {
@@ -105,14 +107,26 @@ export class AccountsComponent implements OnInit {
   }
 
   showAddAccount() {
+    this.categories = this.accountService.getCategories();
+    this.subcategories = this.accountService.getSubcategories();
     this.addAccountModal.show();
   }
 
   submitAccount() {
-
+    let controls = this.addAccountForm.controls;
+    this.accountService.createAccount(controls.account_id.value, controls.account_title.value, controls.normal_side.value,
+      controls.description.value, controls.category.value, controls.subcategory.value).subscribe(response => {
+      this.addAccountModal.hide();
+    }, error => {
+      console.log(error);
+    });
   }
 
   clearError() {
     this.addAccountError = "";
+  }
+
+  updateCategory() {
+    this.availableSubcategories = this.subcategories[this.addAccountForm.controls.category.value];
   }
 }

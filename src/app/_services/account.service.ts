@@ -16,6 +16,8 @@ export class AccountService implements OnInit {
   private account: Account;
   private loggedIn: boolean = false;
   private userType: string;
+  private categories: string[];
+  private subcategories: Map<string, string[]>;
 
   constructor(private http: HttpClient,
               private appService: AppService,
@@ -42,6 +44,11 @@ export class AccountService implements OnInit {
     this.userService.getCurrUser().subscribe(user => {
       this.userType = user.user_type;
     });
+
+    this.http.get('https://markzeagler.com/postit-backend/account/categories', this.authService.getGETJSONHeaders()).subscribe(response => {
+      this.categories = response['categories'];
+      this.subcategories = response['subcategories'];
+    });
   }
 
   ngOnInit() {
@@ -61,11 +68,13 @@ export class AccountService implements OnInit {
     return this.accountArraySubject;
   }
 
-  createAccount(account_id: number, account_title: string, normal_side: string, description: string) {
+  createAccount(account_id: number, account_title: string, normal_side: string, description: string, category: string, subcategory: string) {
     return this.http.post('https://markzeagler.com/postit-backend/account/' + account_id, {
       'account_title': account_title,
       'normal_side': normal_side,
-      'description': description
+      'description': description,
+      'category': category,
+      'subcategory': subcategory
     }, this.authService.getPOSTPUTJSONHeaders());
   }
 
@@ -132,5 +141,13 @@ export class AccountService implements OnInit {
     let formData: FormData = new FormData();
     formData.append('file', file, file.name);
     return this.http.post('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id + '/', formData, this.authService.getPOSTPUTFileHeaders())
+  }
+
+  getCategories() {
+    return this.categories;
+  }
+
+  getSubcategories() {
+    return this.subcategories;
   }
 }
