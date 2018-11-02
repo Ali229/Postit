@@ -209,7 +209,6 @@ export class AuthenticationService implements OnInit {
       this.loggedIn = response;
       // Pretty crude, but works for now
       if(!this.loggedIn && this.appService.getActivePage() != 'login') {
-        console.log('Logging out');
         this.logout();
       }
       this.loggedInSubject.next(response);
