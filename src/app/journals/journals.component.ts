@@ -203,7 +203,7 @@ export class JournalsComponent implements OnInit {
   }
 
   openAccount(transaction: Transaction) {
-    this.router.navigate(['./account/' + transaction.account_id.toString()], {queryParams: {returnUrl: 'journal'}});
+    this.router.navigate(['./account/' + transaction.account_id.toString()], {queryParams: {returnUrl: 'journals'}});
   }
 
   getAccountName(transaction: Transaction) {
