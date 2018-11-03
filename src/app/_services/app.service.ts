@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {HostListener, Injectable} from '@angular/core';
 import {interval, Subject} from 'rxjs';
 
 @Injectable({
@@ -7,8 +7,10 @@ import {interval, Subject} from 'rxjs';
 export class AppService {
 
   timer = interval(5000);
+  timerSubject: Subject<number>;
   activePageSubject: Subject<string>;
   private activePageStorageName: string = 'active_page';
+  isActive: boolean = true;
 
   constructor() {
     this.activePageSubject = new Subject();
@@ -16,10 +18,24 @@ export class AppService {
     if (activePage) {
       this.activePageSubject.next(activePage);
     }
+    this.timerSubject = new Subject<number>();
+    this.timer.subscribe( value => {
+      if(this.isActive) {
+        this.timerSubject.next(value);
+      }
+    });
+  }
+
+  setFocus() {
+    this.isActive = true;
+  }
+
+  setBlur() {
+    this.isActive = false;
   }
 
   getTimer() {
-    return this.timer;
+    return this.timerSubject;
   }
 
   setActivePage(activePage: string) {

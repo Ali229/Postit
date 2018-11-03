@@ -1,4 +1,4 @@
-﻿import {Component, OnInit} from '@angular/core';
+﻿import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthenticationService, AppService} from './_services';
 
 @Component({
@@ -23,5 +23,15 @@ export class AppComponent implements OnInit {
 
   checkPage() {
     this.padding = this.appService.getActivePage() !== 'login';
+  }
+
+  @HostListener('window:focus', ['$event'])
+  setFocus() {
+    this.appService.setFocus();
+  }
+
+  @HostListener('window:blur', ['$event'])
+  setBlur() {
+    this.appService.setBlur();
   }
 }
