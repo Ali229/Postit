@@ -14,7 +14,7 @@ export class JournalsComponent implements OnInit {
 
   journalEntries: JournalEntry[] = [];
   userType: string;
-  sortValue: string = 'date';
+  sortValue: string = 'journal_entry_id';
   sortReverse: boolean = false;
   loading:boolean = false;
 
