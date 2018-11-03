@@ -5,7 +5,7 @@ import {AccountsComponent} from './accounts/accounts.component';
 import {UsersComponent} from './users/users.component';
 import {NgModule} from "@angular/core";
 import {AccountComponent} from "./account/account.component";
-import {JournalComponent} from "./journal/journal.component";
+import {JournalsComponent} from "./journals/journals.component";
 import {EventLogComponent} from "./event-log/event-log.component";
 import {AuthGuard} from "./_guards";
 import {AuthenticationService} from "./_services";
@@ -19,7 +19,7 @@ const appRoutes: Routes = [
   {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard]},
   {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
   {path: 'account/:account_id', component: AccountComponent, canActivate: [AuthGuard]},
-  {path: 'journal', component: JournalComponent, canActivate: [AuthGuard]},
+  {path: 'journals', component: JournalsComponent, canActivate: [AuthGuard]},
   {path: 'event-log', component: EventLogComponent, canActivate: [AuthGuard]},
   {path: 'trial-balance', component: TrialBalanceComponent, canActivate: [AuthGuard]},
   // otherwise redirect to home if logged in or login if not

@@ -6,11 +6,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-journal',
-  templateUrl: './journal.component.html',
-  styleUrls: ['./journal.component.scss']
+  selector: 'app-journals',
+  templateUrl: './journals.component.html',
+  styleUrls: ['./journals.component.scss']
 })
-export class JournalComponent implements OnInit {
+export class JournalsComponent implements OnInit {
 
   journalEntries: JournalEntry[] = [];
   userType: string;
@@ -127,7 +127,7 @@ export class JournalComponent implements OnInit {
   }
 
   submitJournalization() {
-    console.log("Submitting journal entry");
+    console.log("Submitting journals entry");
     let transactionsList: Transaction[] = [];
     for (let transaction of this.debitLines) {
       if (transaction.amount <= 0) {

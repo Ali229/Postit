@@ -1,4 +1,4 @@
-﻿import {NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -15,7 +15,7 @@ import {User, Account, Transaction} from './_models';
 import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
 import {AccountComponent} from './account/account.component';
-import { JournalComponent } from './journal/journal.component';
+import { JournalsComponent } from './journals/journals.component';
 import { EventLogComponent } from './event-log/event-log.component';
 import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";;
 import { TrialBalanceComponent } from './trial-balance/trial-balance.component'
@@ -41,7 +41,7 @@ import { TrialBalanceComponent } from './trial-balance/trial-balance.component'
     AccountsComponent,
     UsersComponent,
     AccountComponent,
-    JournalComponent,
+    JournalsComponent,
     EventLogComponent ,
     TrialBalanceComponent],
   providers: [

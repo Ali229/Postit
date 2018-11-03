@@ -1,7 +1,7 @@
 <img *ngIf="loading === true; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
   <div class="top">
-    <h1>Journal
+    <h1>Journals
       <button class="float-right" mdbBtn type="button" color="indigo" (click)="showJournalizeModal()" mdbWavesEffect>
         <mdb-icon icon="plus-square-o" class="mr-1"></mdb-icon>
         Journalize
@@ -164,7 +164,7 @@
           </tbody>
         </table>
       </td>
-      <!--<td>{{(journal.user_id | number:'6.0-0').toString().replace(',', '')}}</td>-->
+      <!--<td>{{(journals.user_id | number:'6.0-0').toString().replace(',', '')}}</td>-->
       <td>{{journal.type}}</td>
       <td>{{journal.status}}</td>
       <td>{{journal.description}}</td>
