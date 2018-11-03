@@ -109,7 +109,19 @@ export class JournalsComponent implements OnInit {
   }
 
   filterBy() {
-    return this.journalEntries;
+    let returnList: JournalEntry[] = [];
+    this.journalEntries.forEach(journalEntry => {
+      if ((!this.journalIdFilter || journalEntry.journal_entry_id.toString().includes(this.journalIdFilter)) &&
+        (!this.postingReferenceFilter || journalEntry.posting_reference.toString().includes(this.postingReferenceFilter.toLowerCase())) &&
+        (!this.creatorFilter || journalEntry.user_id.toString().includes(this.creatorFilter)) &&
+        (!this.typeFilter || journalEntry.type.includes(this.typeFilter)) &&
+        (!this.descriptionFilter || journalEntry.description.includes(this.descriptionFilter)) &&
+        (!this.statusFilter || journalEntry.status.includes(this.statusFilter)) &&
+        (!this.dateFilter || journalEntry.date.includes(this.dateFilter)) ) {
+        returnList.push(journalEntry);
+      }
+    });
+    return returnList;
   }
 
   sortBy(value: string) {
