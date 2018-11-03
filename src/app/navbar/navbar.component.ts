@@ -42,6 +42,10 @@ export class NavbarComponent implements OnInit {
       this.userService.updateUser();
     });
 
+    this.authService.getUserNameSubject().subscribe( username => {
+      this.username = username;
+    });
+
     this.userService.getCurrUser().subscribe((user: User) => {
       this.availablePages = this.authGuard.getAvailablePages(user);
       this.username = user.username;
