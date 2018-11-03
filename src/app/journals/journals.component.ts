@@ -197,12 +197,8 @@ export class JournalsComponent implements OnInit {
   }
 
   openFileModal(journalEntry: JournalEntry) {
-    this.loadingFilesList = true;
     this.displayingJournalFiles = journalEntry;
-    this.accountService.getJournalEntryFilesList(journalEntry).subscribe(response => {
-      this.filesList = response['filenames'];
-      this.loadingFilesList = false;
-    });
+    this.updateFileList();
     this.fileModal.show();
   }
 
@@ -237,10 +233,18 @@ export class JournalsComponent implements OnInit {
   uploadFile() {
     for (let i = 0; i < this.selectedFiles.length; i++) {
       this.accountService.uploadJournalEntryFile(this.displayingJournalFiles, this.selectedFiles[i]).subscribe(response => {
-        this.fileModal.hide();
+        this.updateFileList();
       }, error => {
         console.log(error);
       });
     }
+  }
+
+  updateFileList() {
+    this.loadingFilesList = true;
+    this.accountService.getJournalEntryFilesList(this.displayingJournalFiles).subscribe( response => {
+      this.filesList = response['filenames'];
+      this.loadingFilesList = false;
+    });
   }
 }
