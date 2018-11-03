@@ -13,20 +13,22 @@ export class AuthenticationService implements OnInit {
 
   private readonly loggedInSubject: Subject<boolean>;
   private readonly usernameSubject: Subject<string>;
-  private readonly userIdSubject: Subject<string>;
+  private readonly userIdSubject: Subject<number>;
   private readonly authTokenSubject: Subject<string>;
   private readonly passwdTimeRemainingSubject: Subject<string>;
   private readonly lastLoginSubject: Subject<string>;
   private loggedIn: boolean = false;
   private userType: string = "";
+  private userId: number;
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
               private appService: AppService) {
     // Try to load locally stored data
-    let user_id = localStorage.getItem('user_id');
-    this.loggedIn = !!user_id;
+    this.userId = Number.parseInt(localStorage.getItem('user_id'));
+    this.loggedIn = !!this.userId;
+    console.log(this.loggedIn ? 'logged in' : 'not logged in');
     let username = localStorage.getItem('username');
     let authToken = localStorage.getItem('auth_token');
     let passwdTimeRemaining = localStorage.getItem('passwd_time_remaining');
@@ -42,8 +44,8 @@ export class AuthenticationService implements OnInit {
     this.lastLoginSubject = new Subject();
 
     // Pass data to subjects as appropriate
-    if (user_id) {
-      this.userIdSubject.next(user_id);
+    if (this.userId) {
+      this.userIdSubject.next(this.userId);
     }
     this.loggedInSubject.next(this.loggedIn);
     if (username) {
@@ -94,7 +96,7 @@ export class AuthenticationService implements OnInit {
 
         // Pass information to subjects
         this.usernameSubject.next(username);
-        this.userIdSubject.next(response['user_id'].toString());
+        this.userIdSubject.next(response['user_id']);
         this.authTokenSubject.next(response['auth_token']);
         this.passwdTimeRemainingSubject.next(['passwd_time_remaining'].toString());
         this.lastLoginSubject.next(response['last_login']);
@@ -123,7 +125,7 @@ export class AuthenticationService implements OnInit {
     // Pass information to subjects
     this.loggedInSubject.next(false);
     this.usernameSubject.next("");
-    this.userIdSubject.next("");
+    this.userIdSubject.next(-1);
     this.authTokenSubject.next("");
     this.passwdTimeRemainingSubject.next("");
     this.lastLoginSubject.next("");
@@ -136,22 +138,22 @@ export class AuthenticationService implements OnInit {
     return localStorage.getItem('auth_token');
   }
 
-  getUserID() {
-    this.userIdSubject.next(localStorage.getItem('user_id'));
+  getUserIDSubject() {
+    this.userIdSubject.next(Number.parseInt(localStorage.getItem('user_id')));
     return this.userIdSubject;
   }
 
-  getUserName() {
+  getUserNameSubject() {
     this.usernameSubject.next(localStorage.getItem('username'));
     return this.usernameSubject;
   }
 
-  getPasswdDaysRemaining() {
+  getPasswdDaysRemainingSubject() {
     this.passwdTimeRemainingSubject.next(localStorage.getItem('passwd_time_remaining'));
     return this.passwdTimeRemainingSubject;
   }
 
-  getLastLogin() {
+  getLastLoginSubject() {
     this.lastLoginSubject.next(localStorage.getItem('last_login'));
     return this.lastLoginSubject;
   }
@@ -215,15 +217,19 @@ export class AuthenticationService implements OnInit {
     });
   }
 
-  getVerifiedLoggedIn() {
+  getLoggedInSubject() {
     return this.loggedInSubject;
   }
 
-  getLoggedIn() {
+  isLoggedIn() {
     return this.loggedIn;
   }
 
   getUserType() {
     return this.userType;
+  }
+
+  getUserID() {
+    return this.userId;
   }
 }

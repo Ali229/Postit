@@ -12,9 +12,7 @@ import {HttpClient} from "@angular/common/http";
 export class EventLogService {
 
   eventLogSubject: Subject<LogMessage[]>;
-  loggedIn: boolean = false;
   user_id: number;
-  user_type: string;
 
   constructor(private authService: AuthenticationService,
               private appService: AppService,
@@ -22,13 +20,8 @@ export class EventLogService {
               private http: HttpClient) {
     this.eventLogSubject = new Subject();
 
-    this.authService.getVerifiedLoggedIn().subscribe(loggedIn => {
-      this.loggedIn = loggedIn;
-    });
-
     this.userService.getCurrUser().subscribe(user => {
       this.user_id = user.user_id;
-      this.user_type = user.user_type;
     });
 
     this.appService.getTimer().subscribe(() => {
@@ -41,9 +34,9 @@ export class EventLogService {
   }
 
   updateEventLog() {
-    if (this.loggedIn && this.user_id && this.user_type) {
+    if (this.authService.isLoggedIn() && this.user_id && this.authService.getUserType()) {
       let urlAddon;
-      if (this.user_type == 'admin') {
+      if (this.authService.getUserType() == 'admin') {
         urlAddon = 'all';
       } else {
         urlAddon = this.user_id.toString();

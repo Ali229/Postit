@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
               private userService: UserService,
               private accountService: AccountService) {
 
-    this.authService.getVerifiedLoggedIn().subscribe(loggedIn => {
+    this.authService.getLoggedInSubject().subscribe(loggedIn => {
       this.loggedIn = loggedIn;
     });
 

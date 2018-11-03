@@ -14,8 +14,6 @@ export class AccountService implements OnInit {
   private readonly accountSubject: Subject<Account>;
   private readonly journalSubject: Subject<JournalEntry[]>;
   private account: Account;
-  private loggedIn: boolean = false;
-  private userType: string;
   private categories: string[];
   private subcategories: Map<string, string[]>;
 
@@ -28,21 +26,13 @@ export class AccountService implements OnInit {
     this.journalSubject = new Subject();
 
     this.appService.getTimer().subscribe(() => {
-      if (this.loggedIn) {
+      if (this.authService.isLoggedIn()) {
         this.updateAccounts();
         this.updateJournalEntries();
         if (this.account) {
           this.updateAccount(this.account.account_id);
         }
       }
-    });
-
-    this.authService.getVerifiedLoggedIn().subscribe(response => {
-      this.loggedIn = response;
-    });
-
-    this.userService.getCurrUser().subscribe(user => {
-      this.userType = user.user_type;
     });
 
     this.http.get('https://markzeagler.com/postit-backend/account/categories', this.authService.getGETJSONHeaders()).subscribe(response => {
@@ -56,7 +46,7 @@ export class AccountService implements OnInit {
   }
 
   updateAccounts() {
-    if (this.loggedIn) {
+    if (this.authService.isLoggedIn()) {
       this.http.get<Account[]>('https://markzeagler.com/postit-backend/account/all', this.authService.getGETJSONHeaders()).subscribe(response => {
         this.accountArraySubject.next(response['accounts']);
       });
@@ -91,7 +81,6 @@ export class AccountService implements OnInit {
   }
 
   journalize(journal_type: string, date: Date, transactions: Transaction[], description: string) {
-    console.log("Creating new journal:");
     return this.http.post('https://markzeagler.com/postit-backend/journal/new', {
       'transactions_list': transactions,
       'date': date.toDateString(),
@@ -105,7 +94,7 @@ export class AccountService implements OnInit {
   }
 
   updateJournalEntries() {
-    if (this.userType == 'manager' || this.userType == 'user') {
+    if (this.authService.getUserType() == 'manager' || this.authService.getUserType() == 'user') {
       this.http.get('https://markzeagler.com/postit-backend/journal/all', this.authService.getGETJSONHeaders()).subscribe(
         (journalEntries: JournalEntry[]) => {
           this.journalSubject.next(journalEntries['journal_entries']);
@@ -114,7 +103,6 @@ export class AccountService implements OnInit {
   }
 
   postJournalEntry(journalEntry: JournalEntry) {
-    console.log("Posting journal entry to " + 'https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString());
     return this.http.put('https://markzeagler.com/postit-backend/journal/' + journalEntry.journal_entry_id.toString(), {
       'category': 'status',
       'value': 'posted'

@@ -37,23 +37,24 @@ export class NavbarComponent implements OnInit {
       this.active = this.PAGE_DICTIONARY[activePage];
     });
 
-    this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
+    this.authService.getLoggedInSubject().subscribe((value: boolean) => {
       this.loggedIn = value;
       this.userService.updateUser();
-      // Kinda messy like this, update later
-      this.authService.getUserName().subscribe(data => {
-        this.username = data;
-      });
     });
 
     this.userService.getCurrUser().subscribe((user: User) => {
       this.availablePages = this.authGuard.getAvailablePages(user);
+      this.username = user.username;
     });
   }
 
   ngOnInit() {
     if (localStorage.getItem('selected')) {
       this.select(localStorage.getItem('selected'));
+    }
+
+    if(this.authService.isLoggedIn()) {
+      this.userService.updateUser();
     }
   }
 
@@ -62,6 +63,7 @@ export class NavbarComponent implements OnInit {
   }
 
   select(page: string) {
+    localStorage.setItem('selected', page);
     this.appService.setActivePage(page);
     this.router.navigate(['./' + page]);
   }

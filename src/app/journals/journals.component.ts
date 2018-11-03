@@ -14,8 +14,8 @@ export class JournalsComponent implements OnInit {
 
   journalEntries: JournalEntry[] = [];
   userType: string;
-  sortValue: string;
-  sortReverse: boolean;
+  sortValue: string = 'date';
+  sortReverse: boolean = false;
   loading:boolean = false;
 
   // Journalize Modal
@@ -73,7 +73,6 @@ export class JournalsComponent implements OnInit {
         this.accounts.slice(index, 1);
       }
     });
-    this.accountService.updateAccounts();
 
     this.accountService.getJournalSubject().subscribe((journalEntries: JournalEntry[]) => {
       this.loading = false;
@@ -86,7 +85,6 @@ export class JournalsComponent implements OnInit {
         }
       });
     });
-    this.accountService.updateJournalEntries();
 
     this.journalizeForm = this.formBuilder.group({
       // date: ['', Validators.required],
@@ -106,6 +104,8 @@ export class JournalsComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.accountService.updateAccounts();
+    this.accountService.updateJournalEntries();
   }
 
   filterBy() {

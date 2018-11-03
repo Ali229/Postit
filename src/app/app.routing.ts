@@ -34,7 +34,7 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
   constructor(private authService: AuthenticationService) {
-    this.authService.getVerifiedLoggedIn().subscribe( isLoggedIn => {
+    this.authService.getLoggedInSubject().subscribe(isLoggedIn => {
       loggedIn = isLoggedIn;
     });
   }
