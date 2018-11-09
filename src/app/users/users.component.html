@@ -1,6 +1,13 @@
 <img *ngIf="users.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
-  <h1>Users</h1>
+  <div class="top">
+    <h1>Users
+      <button class="float-right" mdbBtn type="button" color="indigo" (click)="showAddUser()" mdbWavesEffect>
+        <mdb-icon icon="plus-square-o" class="mr-1"></mdb-icon>
+        Add Entry
+      </button>
+    </h1>
+  </div>
 
   <!-- TODO Change to a mat-table -->
   <table class="table table-hover table-striped table-bordered table-responsive-md">
@@ -94,7 +101,7 @@
     <tr
       [className]="user.forgot_password ? 'forgot_password clickable-row clickable waves-light' : 'clickable-row clickable waves-light'"
       *ngFor="let user of filterBy()" data-toggle="modal" data-target="#register-modal">
-      <td (click)="editUser(user)">{{user.user_id}}</td>
+      <td (click)="editUser(user)">{{(user.user_id | number:'6.0-0').toString().replace(',', '')}}</td>
       <td (click)="editUser(user)">{{user.username}}</td>
       <td (click)="editUser(user)">{{user.first_name}}</td>
       <td (click)="editUser(user)">{{user.last_name}}</td>
@@ -112,9 +119,6 @@
     </tbody>
   </table>
 
-  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="showAddUser()">
-    + Add User +
-  </button>
 
   <div mdbModal #editUserModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
        aria-labelledby="Edit User" aria-hidden="true" style="overflow-y: auto">

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, UserService} from '../_services';
+import {AuthenticationService, UserService, AppService} from '../_services';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppComponent} from '../app.component';
-import {AppService} from '../_services/app.service';
 import {AuthGuard} from "../_guards";
 import {User} from "../_models";
 
@@ -21,9 +20,10 @@ export class NavbarComponent implements OnInit {
   readonly PAGE_DICTIONARY = {
     'home': 'Home',
     'users': 'Users',
-    'accounts': 'Accounts',
+    'accounts': 'COA',
     'event-log': 'Event Log',
-    'journal': 'Journal'
+    'journals': 'Journals',
+    'trial-balance': 'Trial Balance'
   };
 
   constructor(private authService: AuthenticationService,
@@ -37,23 +37,28 @@ export class NavbarComponent implements OnInit {
       this.active = this.PAGE_DICTIONARY[activePage];
     });
 
-    this.authService.getVerifiedLoggedIn().subscribe((value: boolean) => {
+    this.authService.getLoggedInSubject().subscribe((value: boolean) => {
       this.loggedIn = value;
       this.userService.updateUser();
-      // Kinda messy like this, update later
-      this.authService.getUserName().subscribe(data => {
-        this.username = data;
-      });
+    });
+
+    this.authService.getUserNameSubject().subscribe( username => {
+      this.username = username;
     });
 
     this.userService.getCurrUser().subscribe((user: User) => {
       this.availablePages = this.authGuard.getAvailablePages(user);
+      this.username = user.username;
     });
   }
 
   ngOnInit() {
     if (localStorage.getItem('selected')) {
       this.select(localStorage.getItem('selected'));
+    }
+
+    if(this.authService.isLoggedIn()) {
+      this.userService.updateUser();
     }
   }
 
@@ -62,6 +67,7 @@ export class NavbarComponent implements OnInit {
   }
 
   select(page: string) {
+    localStorage.setItem('selected', page);
     this.appService.setActivePage(page);
     this.router.navigate(['./' + page]);
   }

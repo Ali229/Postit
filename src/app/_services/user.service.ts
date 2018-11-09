@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {User} from '../_models';
@@ -7,14 +7,11 @@ import {Subject} from 'rxjs';
 import {AppService} from "./app.service";
 
 @Injectable({providedIn: 'root'})
-export class UserService {
+export class UserService implements OnInit {
 
   userSubject: Subject<User>;
   userArraySubject: Subject<User[]>;
-  loggedIn: boolean = false;
-  userID: string = "";
   isAdmin: boolean = false;
-  currUser: User;
 
   constructor(private http: HttpClient,
               private authService: AuthenticationService,
@@ -22,25 +19,17 @@ export class UserService {
     this.userSubject = new Subject();
     this.userArraySubject = new Subject();
 
-    this.authService.getVerifiedLoggedIn().subscribe(response => {
-      this.loggedIn = response;
-    });
-    this.authService.getUserID().subscribe(response => {
-      this.userID = response;
+    this.authService.getUserIDSubject().subscribe(response => {
       this.updateUser();
     });
-
-    const user_id = localStorage.getItem('user_id');
-    if (user_id) {
-      console.log("Setting user_id manually in message.service... Clean this up!");
-      this.userID = user_id;
-      this.updateUser();
-    }
 
     this.appService.getTimer().subscribe(() => {
       this.updateUserArray();
       this.updateUser();
     });
+  }
+
+  ngOnInit() {
   }
 
   getCurrUser() {
@@ -49,9 +38,8 @@ export class UserService {
   }
 
   updateUser() {
-    if (this.loggedIn && this.userID != "") {
-      this.http.get<User>(`https://markzeagler.com/postit-backend/user/` + this.userID,
-        this.authService.getGETHeaders()).subscribe((response: User) => {
+    if (this.authService.isLoggedIn() && this.authService.getUserID() > 0) {
+      this.http.get<User>(`https://markzeagler.com/postit-backend/user/` + this.authService.getUserID().toString(), this.authService.getGETJSONHeaders()).subscribe((response: User) => {
         this.userSubject.next(response);
         this.isAdmin = response['user_type']== 'admin';
       });
@@ -64,16 +52,15 @@ export class UserService {
   }
 
   updateUserArray() {
-    if (this.loggedIn && this.isAdmin) {
-      this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/all`,
-        this.authService.getGETHeaders()).subscribe((response: User[]) => {
+    if (this.authService.isLoggedIn() && this.isAdmin) {
+      this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/all`, this.authService.getGETJSONHeaders()).subscribe((response: User[]) => {
         this.userArraySubject.next(response['users']);
       });
     }
   }
 
   getUserTypes() {
-    return this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/info`);
+    return this.http.get<User[]>(`https://markzeagler.com/postit-backend/user/info`, this.authService.getGETJSONHeaders());
   }
 
   register(username: string, first_name: string, last_name: string, email: string, password: string) {
@@ -83,43 +70,37 @@ export class UserService {
       'first_name': first_name,
       'last_name': last_name,
       'email': email
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   addUser(username: string, first_name: string, last_name: string, email: string, password: string, user_type: string) {
-    let body = {
+    return this.http.post('https://markzeagler.com/postit-backend/user/new', {
       'username': username,
       'password': password,
       'first_name': first_name,
       'last_name': last_name,
       'email': email,
       'user_type': user_type
-    };
-    return this.http.post('https://markzeagler.com/postit-backend/user/new', body,
-      this.authService.getPOSTPUTHeaders(body));
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   editUser(user_id, category, value) {
-    let body = {
+    return this.http.put('https://markzeagler.com/postit-backend/user/' + user_id, {
       'category': category,
       'value': value
-    };
-    return this.http.put('https://markzeagler.com/postit-backend/message/' + user_id, body,
-      this.authService.getPOSTPUTHeaders(body));
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   forgotPassword(username: string) {
     return this.http.post('https://markzeagler.com/postit-backend/forgotpassword', {
       'username': username
-    });
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 
   resetPassword(user_id: number, newPassword: string) {
-    let body = {
+    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, {
       'category': 'password',
       'value': newPassword
-    };
-    return this.http.put('http://markzeagler.com/postit-backend/message/' + user_id, body,
-      this.authService.getPOSTPUTHeaders(body));
+    }, this.authService.getPOSTPUTJSONHeaders());
   }
 }

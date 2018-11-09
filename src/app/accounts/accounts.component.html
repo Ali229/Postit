@@ -1,37 +1,44 @@
 <img *ngIf="accounts.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
 <ng-template #showTable>
-  <h1>Chart of Accounts</h1>
+  <div class="top">
+    <h1>Chart of Accounts
+      <button class="float-right" mdbBtn type="button" color="indigo" (click)="showAddAccount()" mdbWavesEffect>
+        <mdb-icon icon="plus-square-o" class="mr-1"></mdb-icon>
+        Create Account
+      </button>
+    </h1>
+  </div>
   <!-- TODO Change to a mat-table -->
   <table class="table table-hover table-striped table-bordered table-responsive-md">
     <thead>
     <tr>
-      <th class="th-sm clickable" (click)="sortBy('account_id')">Account ID
+      <th class="th-sm clickable" (click)="sortBy('account_id')">Account No.
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
-      <th class="th-sm clickable" (click)="sortBy('account_title')">Account Title
+      <th class="th-sm clickable" (click)="sortBy('account_title')">Account
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
       </th>
       <th class="th-sm clickable" (click)="sortBy('balance')">Balance
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
       </th>
-      <th class="th-sm clickable" (click)="sortBy('normal_side')">Normal Side
-        <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
-      </th>
+      <!--<th class="th-sm clickable" (click)="sortBy('normal_side')">Normal Side-->
+        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--</th>-->
       <th class="th-sm clickable" (click)="sortBy('description')">Description
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
       </th>
-      <th class="th-sm clickable" (click)="sortBy('date_created')">Date Created
-        <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
-      </th>
-      <th class="th-sm clickable" (click)="sortBy('created_by')">Created By (User ID)
-        <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
-      </th>
-      <th class="th-sm clickable" (click)="sortBy('last_edited_date')">Last Edited
-        <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
-      </th>
-      <th class="th-sm clickable" (click)="sortBy('user_id')">Last Edited By
-        <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
-      </th>
+      <!--<th class="th-sm clickable" (click)="sortBy('date_created')">Date Created-->
+        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--</th>-->
+      <!--<th class="th-sm clickable" (click)="sortBy('created_by')">Created By (User ID)-->
+        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--</th>-->
+      <!--<th class="th-sm clickable" (click)="sortBy('last_edited_date')">Last Edited-->
+        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--</th>-->
+      <!--<th class="th-sm clickable" (click)="sortBy('user_id')">Last Edited By-->
+        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--</th>-->
       <th class="th-sm clickable" (click)="sortBy('user_id')">Is Active
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
       </th>
@@ -58,13 +65,13 @@
           <label for="balanceSearch">Search</label>
         </div>
       </th>
-      <th>
-        <div class="md-form">
-          <input type="search" [(ngModel)]="normalSideFilter" id="normalSideSearch" class="form-control" mdbInputDirective
-                 [mdbValidate]="false">
-          <label for="normalSideSearch">Search</label>
-        </div>
-      </th>
+      <!--<th>-->
+        <!--<div class="md-form">-->
+          <!--<input type="search" [(ngModel)]="normalSideFilter" id="normalSideSearch" class="form-control" mdbInputDirective-->
+                 <!--[mdbValidate]="false">-->
+          <!--<label for="normalSideSearch">Search</label>-->
+        <!--</div>-->
+      <!--</th>-->
       <th>
         <div class="md-form">
           <input type="search" [(ngModel)]="descriptionFilter" id="descriptionSearch" class="form-control" mdbInputDirective
@@ -72,35 +79,35 @@
           <label for="descriptionSearch">Search</label>
         </div>
       </th>
-      <th>
-        <div class="md-form">
-          <input type="search" [(ngModel)]="dateCreatedFilter" id="dateCreatedSearch" class="form-control" mdbInputDirective
-                 [mdbValidate]="false">
-          <label for="dateCreatedSearch">Search</label>
-        </div>
-      </th>
-      <th>
-        <div class="md-form">
-          <input type="search" [(ngModel)]="createdByFilter" id="createdBySearch" class="form-control"
-                 mdbInputDirective
-                 [mdbValidate]="false">
-          <label for="createdBySearch">Search</label>
-        </div>
-      </th>
-      <th>
-        <div class="md-form">
-          <input type="search" [(ngModel)]="lastEditedFilter" id="lastEditedSearch" class="form-control" mdbInputDirective
-                 [mdbValidate]="false">
-          <label for="lastEditedSearch">Search</label>
-        </div>
-      </th>
-      <th>
-        <div class="md-form">
-          <input type="search" [(ngModel)]="lastEditedByFilter" id="lastEditedBySearch" class="form-control" mdbInputDirective
-                 [mdbValidate]="false">
-          <label for="lastEditedBySearch">Search</label>
-        </div>
-      </th>
+      <!--<th>-->
+        <!--<div class="md-form">-->
+          <!--<input type="search" [(ngModel)]="dateCreatedFilter" id="dateCreatedSearch" class="form-control" mdbInputDirective-->
+                 <!--[mdbValidate]="false">-->
+          <!--<label for="dateCreatedSearch">Search</label>-->
+        <!--</div>-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--<div class="md-form">-->
+          <!--<input type="search" [(ngModel)]="createdByFilter" id="createdBySearch" class="form-control"-->
+                 <!--mdbInputDirective-->
+                 <!--[mdbValidate]="false">-->
+          <!--<label for="createdBySearch">Search</label>-->
+        <!--</div>-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--<div class="md-form">-->
+          <!--<input type="search" [(ngModel)]="lastEditedFilter" id="lastEditedSearch" class="form-control" mdbInputDirective-->
+                 <!--[mdbValidate]="false">-->
+          <!--<label for="lastEditedSearch">Search</label>-->
+        <!--</div>-->
+      <!--</th>-->
+      <!--<th>-->
+        <!--<div class="md-form">-->
+          <!--<input type="search" [(ngModel)]="lastEditedByFilter" id="lastEditedBySearch" class="form-control" mdbInputDirective-->
+                 <!--[mdbValidate]="false">-->
+          <!--<label for="lastEditedBySearch">Search</label>-->
+        <!--</div>-->
+      <!--</th>-->
       <th> <!-- TODO Turn this into a dropdown? -->
         <div class="md-form">
           <input type="search" [(ngModel)]="isActiveFilter" id="isActiveSearch" class="form-control" mdbInputDirective
@@ -112,23 +119,19 @@
     </thead>
     <tbody>
     <tr class="clickable" *ngFor="let account of filterBy()" (click)="editAccount(account)">
-      <td>{{account.account_id}}</td>
-      <td>{{account.account_title}}</td>
-      <td>${{account.balance.toFixed(2)}}</td>
-      <td>{{account.normal_side}}</td>
-      <td>{{account.description}}</td>
-      <td>{{account.date_created}}</td>
-      <td>{{account.created_by}}</td>
-      <td>{{account.last_edited_date}}</td>
-      <td>{{account.last_edited_by}}</td>
+      <td align="left">{{account.account_id}}</td>
+      <td align="left">{{account.account_title}}</td>
+      <td align="left">${{(account.normal_side == 'debit' ? account.balance : account.balance * -1).toFixed(2)}}</td>
+      <!--<td>{{account.normal_side}}</td>-->
+      <td align="left">{{account.description}}</td>
+      <!--<td>{{account.date_created}}</td>-->
+      <!--<td>{{(account.created_by | number:'6.0-0').toString().replace(',', '')}}</td>-->
+      <!--<td>{{account.last_edited_date}}</td>-->
+      <!--<td>{{account.last_edited_by}}</td>-->
       <td>{{account.is_active}}</td>
     </tr>
     </tbody>
   </table>
-
-  <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="showAddAccount()">
-    + Add Account +
-  </button>
 </ng-template>
 
 <div mdbModal #addAccountModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
@@ -171,7 +174,7 @@
           <!-- Account Category -->
           <div class="form-group">
             <label for="addAccountCategory">Account Category</label>
-            <select class="form-control" formControlName="category" id="addAccountCategory">
+            <select class="form-control" formControlName="category" id="addAccountCategory" (change)="updateCategory()">
               <option *ngFor="let category of categories" [value]="category">{{category}}</option>
             </select>
           </div>
@@ -185,7 +188,7 @@
           <div class="form-group">
             <label for="addAccountSubcategory">Account Subcategory</label>
             <select class="form-control" formControlName="subcategory" id="addAccountSubcategory">
-              <option *ngFor="let subcategory of subcategories" [value]="subcategory">{{subcategory}}</option>
+              <option *ngFor="let subcategory of availableSubcategories" [value]="subcategory">{{subcategory}}</option>
             </select>
           </div>
           <div *ngIf="addAccountError" class="alert alert-danger">{{addAccountError}}
@@ -226,7 +229,7 @@
                   (click)="addAccountModal.hide()" mdbWavesEffect>Close
           </button>
           <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                  (click)="submitAccount()">Save changes
+                  (click)="submitAccount()">Create Account
           </button>
         </div>
       </div>

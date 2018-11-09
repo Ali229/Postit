@@ -1,10 +1,10 @@
-﻿import {NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routing';
-import {BasicAuthInterceptor, ErrorInterceptor} from './_helpers';
+import { ErrorInterceptor} from './_helpers';
 import {HomeComponent} from './home';
 import {LoginComponent} from './login';
 import {AuthenticationService, UserService, AccountService, AppService} from './_services';
@@ -15,9 +15,10 @@ import {User, Account, Transaction} from './_models';
 import {CommonModule} from '@angular/common';
 import {UsersComponent} from './users/users.component';
 import {AccountComponent} from './account/account.component';
-import { JournalComponent } from './journal/journal.component';
+import { JournalsComponent } from './journals/journals.component';
 import { EventLogComponent } from './event-log/event-log.component';
-import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";
+import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";;
+import { TrialBalanceComponent } from './trial-balance/trial-balance.component'
 
 @NgModule({
   imports: [
@@ -40,10 +41,10 @@ import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/
     AccountsComponent,
     UsersComponent,
     AccountComponent,
-    JournalComponent,
-    EventLogComponent ],
+    JournalsComponent,
+    EventLogComponent ,
+    TrialBalanceComponent],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
 
     AuthenticationService,

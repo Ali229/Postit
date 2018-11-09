@@ -1,0 +1,32 @@
+<img *ngIf="accounts.length === 0; else showTable" class="centered" src="./assets/table_loading.svg">
+<ng-template #showTable>
+  <!-- TODO Change to a mat-table -->
+  <table class="table table-hover table-striped table-bordered table-responsive-md">
+    <thead>
+    <tr>
+      <th colspan="3">
+        <h4><strong>PostIt Inc.</strong></h4>
+        <h4><strong>Trial Balance</strong></h4>
+        <h4><strong>As of {{getDate() | date: 'mediumDate'}}</strong></h4
+        ></th>
+    </tr>
+    <tr>
+      <th class="th-sm">Account Title</th>
+      <th class="th-sm">Debit</th>
+      <th class="th-sm">Credit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let account of accounts">
+      <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
+      <td align="right">{{account.normal_side == 'debit'? '$' + account.balance.toFixed(2) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit'? '$' + (account.balance * -1).toFixed(2) : ''}}</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong>${{getDebitSum().toFixed(2)}}</strong></td>
+      <td><strong>${{(getCreditSum() * -1).toFixed(2)}}</strong></td>
+    </tr>
+    </tbody>
+  </table>
+</ng-template>

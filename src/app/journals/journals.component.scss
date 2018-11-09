@@ -1,12 +1,18 @@
-.clickable:hover {
-  cursor:pointer;
-}
 .centered {
   position: fixed;
   top: 50%;
   left: 50%;
   margin-top: -100px;
   margin-left: -100px;
+}
+.clickable:hover {
+  cursor:pointer;
+}
+.data {
+  white-space: pre;
+}
+.lg-form {
+  display: inline-block;
 }
 .top {
   padding-bottom: 40px;

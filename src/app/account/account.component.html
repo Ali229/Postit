@@ -1,6 +1,6 @@
-<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-        routerLink="/accounts" style="text-align: left">
-  << Back to Chart of Accounts
+<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect *ngIf="referer"
+        (click)="back()" style="text-align: left">
+  << Back to {{referer}}
 </button>
 
 <h1 *ngIf="account">{{account.account_title}}</h1>
@@ -38,13 +38,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="clickable" *ngFor="let transaction of transactions">
+  <tr class="clickable" *ngFor="let transaction of account.transactions">
     <td>{{transaction.date}}</td>
     <td>{{transaction.description}}</td>
     <td>{{transaction.posting_reference}}</td>
-    <td>${{transaction.debit_amount.toFixed(2)}}</td>
-    <td>${{transaction.credit_amount.toFixed(2)}}</td>
-    <td>${{transaction.balance.toFixed(2)}}</td>
+    <td>{{transaction.amount > 0 ? '$' + transaction.amount.toFixed(2) : ''}}</td>
+    <td>{{transaction.amount < 0 ? '$' + (transaction.amount * -1).toFixed(2): ''}}</td>
+    <td>{{(account.normal_side == 'debit' ? balanceMap.get(transaction) : balanceMap.get(transaction) * -1).toFixed(2)}}</td>
   </tr>
   </tbody>
 </table>

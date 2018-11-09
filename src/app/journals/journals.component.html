@@ -1,0 +1,399 @@
+<img *ngIf="loading === true; else showTable" class="centered" src="./assets/table_loading.svg">
+<ng-template #showTable>
+  <div class="top">
+    <h1>Journals
+      <button class="float-right" mdbBtn type="button" color="indigo" (click)="showJournalizeModal()" mdbWavesEffect>
+        <mdb-icon icon="plus-square-o" class="mr-1"></mdb-icon>
+        Journalize
+      </button>
+    </h1>
+  </div>
+
+
+  <!-- TODO Change to a mat-table -->
+  <table class="table table-responsive table-striped table-bordered">
+    <thead>
+    <tr>
+      <th class="clickable" (click)="sortBy('journal_entry_id')" width="100px">Journal ID
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="clickable" (click)="sortBy('posting_reference')" width="300px">P.R.
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="clickable" (click)="sortBy('date')" width="150px">Date
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="clickable" width="0px">Transactions</th>
+      <!--<th class="clickable" (click)="sortBy('user_id')">Creator-->
+      <!--<i class="fa fa-sort float-right" aria-hidden="true"></i>-->
+      <!--</th>-->
+      <th class="clickable" (click)="sortBy('type')" width="200px">Type
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="clickable" (click)="sortBy('status')" width="200px">
+        Status
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="clickable" (click)="sortBy('description')" width="500px">
+        Description
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <!--<th>-->
+      <!--Posting Manager-->
+      <!--</th>-->
+      <th>
+        Source Files
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+    <tr>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="journalIdFilter" id="journalIdSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="journalIdSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="postingReferenceFilter" id="postingReferenceSearch" class="form-control"
+                 mdbInputDirective [mdbValidate]="false">
+          <label for="postingReferenceSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="dateFilter" id="dateSearch" class="form-control"
+                 mdbInputDirective [mdbValidate]="false">
+          <label for="dateSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="transactionFilterRaw" id="transactionSearch" class="form-control"
+                 mdbInputDirective [mdbValidate]="false">
+          <label for="postingReferenceSearch">Search</label>
+        </div>
+      </th>
+      <!--<th>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="creatorFilter" id="creatorSearch" class="form-control" mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="creatorSearch">Search</label>-->
+      <!--</div>-->
+      <!--</th>-->
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="typeFilter" id="typeSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="typeSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="statusFilter" id="statusSearch" class="form-control" mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="statusSearch">Search</label>
+        </div>
+      </th>
+      <th>
+        <div class="md-form">
+          <input type="search" [(ngModel)]="descriptionFilter" id="descriptionSearch" class="form-control"
+                 mdbInputDirective
+                 [mdbValidate]="false">
+          <label for="descriptionSearch">Search</label>
+        </div>
+      </th>
+      <!--<th>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="descriptionFilter" id="postingManagerSearch" class="form-control"-->
+      <!--mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="descriptionSearch">Search</label>-->
+      <!--</div>-->
+      <!--</th>-->
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let journal of filterBy()">
+      <td>{{journal.journal_entry_id}}</td>
+      <td>{{journal.posting_reference}}</td>
+      <td>{{journal.date}}</td>
+      <!-- Transactions -->
+      <td>
+        <table class="table table-borderless table-responsive-md table-sm">
+          <tbody>
+          <tr *ngFor="let transaction of journal.transactions">
+            <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+            <!--<td width="400px" [align]="transaction.amount > 0 ? 'left' : 'right'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+            <!--<label class="clickable" (click)="openAccount(transaction)">-->
+            <!--{{transaction.account_title}}-->
+            <!--</label>-->
+            <!--</td>-->
+            <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+            <!--<td width="100px" [align]="transaction.amount > 0 ? 'left' : 'right'">-->
+            <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+            <!--</td>-->
+            <!--Accounts-->
+            <td width="400px" align="left"> <!-- [align]="transaction.amount > 0 ? 'left' : 'right'" -->
+              <div class="clickable data" (click)="openAccount(transaction)">
+                {{getAccountName(transaction)}}
+              </div>
+            </td>
+            <!-- Amounts -->
+            <td width="100px" align="right">
+              <div class="data">
+                {{getAmount(transaction)}}
+              </div>
+            </td>
+            <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+            <!--<td width="400px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+            <!--<label class="clickable" (click)="openAccount(transaction)">-->
+            <!--{{transaction.account_title}}-->
+            <!--</label>-->
+            <!--</td>-->
+            <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+            <!--<td width="100px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'">-->
+            <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+            <!--</td>-->
+          </tr>
+          </tbody>
+        </table>
+      </td>
+      <!--<td>{{(journals.user_id | number:'6.0-0').toString().replace(',', '')}}</td>-->
+      <td>{{journal.type}}</td>
+      <td>{{journal.status}}</td>
+      <td>{{journal.description}}</td>
+      <!--<td></td>-->
+      <td>
+        <button type="button" class="btn btn-outline-primary btn-sm waves-effect"
+                (click)="openFileModal(journal)">Files
+        </button>
+      </td>
+      <td *ngIf="userType == 'manager' && journal.status == 'pending'">
+        <button type="button" class="btn btn-outline-success btn-sm waves-effect" (click)="postJournalEntry(journal)">
+          Accept
+        </button>
+        <button type="button" class="btn btn-outline-danger btn-sm waves-effect"
+                (click)="openRejectionReasonModal(journal)">Reject
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</ng-template>
+<!-- Journalize Modal -->
+<div mdbModal #journalizeModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Journalize" aria-hidden="true" style="overflow-y: auto">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="journalizeModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="editUserModal">Journalize</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="journalizeForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="submitJournalization()">
+          <!-- Journal Type -->
+          <div class="form-group">
+            <label for="journalizeType">Journal Type</label>
+            <select class="form-control" formControlName="journal_type" id="journalizeType">
+              <option *ngFor="let journal_type of journalTypes" [value]="journal_type">{{journal_type}}</option>
+            </select>
+          </div>
+
+          <!-- Debits -->
+          <h5>Debits
+            <button *ngIf="debitLines.length > 1" type="button" mdbBtn color="danger" (click)="removeDebitRow()">
+              Remove Debit
+            </button>
+            <button type="button" mdbBtn color="default" (click)="addDebitRow()">
+              Add Debit
+            </button>
+          </h5>
+          <table>
+            <thead>
+            <tr>
+              <th>
+                Account
+              </th>
+              <th>
+                Amount
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let debitLine of debitLines">
+              <!-- Debit Account -->
+              <td>
+                <div class="form-group">
+                  <select #account class="form-control" formControlName="debit_account" id="journalizeDebitAccount"
+                          (change)="setTransactionAccount(debitLine, account.value)">
+                    <option *ngFor="let account of accounts" [value]="account.account_id">{{account.account_title}}
+                    </option>
+                  </select>
+                </div>
+              </td>
+              <!-- Debit Amount -->
+              <td>
+                <div class="form-group">
+                  <input #amount type="text" formControlName="debit_amount" id="journalizeDebitAmount"
+                         class="form-control"
+                         placeholder="Debit Amount" (keyup)="setTransactionAmount(debitLine, amount.value)">
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Credits --->
+          <h5>Credits
+            <button *ngIf="creditLines.length > 1" type="button" mdbBtn color="danger" (click)="removeCreditRow()">
+              Remove Credit
+            </button>
+            <button type="button" mdbBtn color="default" (click)="addCreditRow()">
+              Add Credit
+            </button>
+          </h5>
+          <table>
+            <thead>
+            <tr>
+              <th>
+                Account
+              </th>
+              <th>
+                Amount
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let creditLine of creditLines">
+              <!-- Credit Account -->
+              <td>
+                <div class="form-group">
+                  <select #account class="form-control" formControlName="credit_account" id="journalizeCreditAccount"
+                          (change)="setTransactionAccount(creditLine, account.value)">
+                    <option *ngFor="let account of accounts" [value]="account.account_id">{{account.account_title}}
+                    </option>
+                  </select>
+                </div>
+              </td>
+              <!-- Credit Amount -->
+              <td>
+                <div class="form-group">
+                  <input #amount type="text" formControlName="debit_amount" id="journalizeCreditAmount"
+                         class="form-control"
+                         placeholder="Credit Amount" (keyup)="setTransactionAmount(creditLine, amount.value)">
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Description -->
+          <div class="form-group">
+            <label for="journalizeDescription">Description</label>
+            <input type="text" formControlName="description" id="journalizeDescription" class="form-control"
+                   placeholder="Description">
+          </div>
+          <div *ngIf="journalizeError" class="alert alert-danger">{{journalizeError}}</div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="journalizeModal.hide()" mdbWavesEffect>Close
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitJournalization()">Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reject Reason Modal -->
+<div mdbModal #rejectModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="Reject Reason" aria-hidden="true" style="overflow-y: auto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="rejectModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="rejectModal">Rejection Reason</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="rejectForm" class="text-center border border-light p-5 lg-form"
+              (ngSubmit)="submitJournalization()">
+          <!-- Rejection Reason -->
+          <div class="form-group">
+            <label for="rejectionReason">Rejection Reason</label>
+            <input type="text" formControlName="reason" id="rejectionReason" class="form-control"
+                   placeholder="Reason for rejection">
+          </div>
+          <div *ngIf="rejectionError" class="alert alert-danger">{{rejectionError}}</div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="rejectModal.hide()" mdbWavesEffect>Cancel
+          </button>
+          <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                  (click)="submitRejection()">Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- File Modal -->
+<div mdbModal #fileModal="mdbModal" class="modal fade files" tabindex="-1" role="dialog"
+     aria-labelledby="Source Files" aria-hidden="true" style="overflow-y: auto">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="fileModal.hide(); filesList = null;">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="fileModal">Source Files</h4>
+      </div>
+      <div class="modal-body">
+        <form class="text-center border border-light p-5 lg-form">
+          <table class="table table-responsive table-sm">
+            <thead>
+            <tr>
+              <td>
+                <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">
+              </td>
+              <td>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="uploadFile()">Upload File
+                </button>
+              </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let filename of filesList">
+              <td style="padding-top: 20px">{{filename}}</td>
+              <td>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="downloadFile(filename)">View File
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                  (click)="fileModal.hide()" mdbWavesEffect>Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
