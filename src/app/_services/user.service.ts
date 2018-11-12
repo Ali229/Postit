@@ -98,7 +98,7 @@ export class UserService implements OnInit {
   }
 
   resetPassword(user_id: number, newPassword: string) {
-    return this.http.put('http://markzeagler.com/postit-backend/user/' + user_id, {
+    return this.http.put('https://markzeagler.com/postit-backend/user/' + user_id, {
       'category': 'password',
       'value': newPassword
     }, this.authService.getPOSTPUTJSONHeaders());

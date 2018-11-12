@@ -83,6 +83,8 @@ export class AuthenticationService implements OnInit {
     const loginResponseSubject = new Subject();
 
     requestResponse.pipe(first()).subscribe((response: LoginData) => {
+        console.log(response);
+
         // Set internally stored data
         this.loggedIn = true;
         this.userType = response['user_type'];
@@ -210,7 +212,7 @@ export class AuthenticationService implements OnInit {
     this.http.get<any>('https://postit.markzeagler.com/postit-backend/verify_logged_in', this.getGETJSONHeaders()).subscribe(response => {
       this.loggedIn = response;
       // Pretty crude, but works for now
-      if(!this.loggedIn && this.appService.getActivePage() != 'login') {
+      if (!this.loggedIn && this.appService.getActivePage() != 'login') {
         this.logout();
       }
       this.loggedInSubject.next(response);
@@ -226,10 +228,10 @@ export class AuthenticationService implements OnInit {
   }
 
   getUserType() {
-    return this.userType;
+    return localStorage.getItem('user_type');
   }
 
   getUserID() {
-    return this.userId;
+    return localStorage.getItem('user_id');
   }
 }
