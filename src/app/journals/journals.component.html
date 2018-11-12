@@ -44,7 +44,7 @@
       <th>
         Source Files
       </th>
-      <th>
+      <th *ngIf="user_type == 'manager'">
         Actions
       </th>
     </tr>
@@ -115,7 +115,7 @@
       <!--</div>-->
       <!--</th>-->
       <th></th>
-      <th></th>
+      <th *ngIf="user_type == 'manager'"></th>
     </tr>
     </thead>
     <tbody>
