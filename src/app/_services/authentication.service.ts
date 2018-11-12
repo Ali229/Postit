@@ -18,22 +18,18 @@ export class AuthenticationService implements OnInit {
   private readonly passwdTimeRemainingSubject: Subject<string>;
   private readonly lastLoginSubject: Subject<string>;
   private loggedIn: boolean = false;
-  private userType: string = "";
-  private userId: number;
 
   constructor(private http: HttpClient,
               private route: ActivatedRoute,
               private router: Router,
               private appService: AppService) {
     // Try to load locally stored data
-    this.userId = Number.parseInt(localStorage.getItem('user_id'));
-    this.loggedIn = !!this.userId;
+    this.loggedIn = !!localStorage.getItem('user_id');
     console.log(this.loggedIn ? 'logged in' : 'not logged in');
     let username = localStorage.getItem('username');
     let authToken = localStorage.getItem('auth_token');
     let passwdTimeRemaining = localStorage.getItem('passwd_time_remaining');
     let lastLogin = localStorage.getItem('last_login');
-    this.userType = localStorage.getItem('user_type');
 
     // Create subjects
     this.loggedInSubject = new Subject();
@@ -44,8 +40,8 @@ export class AuthenticationService implements OnInit {
     this.lastLoginSubject = new Subject();
 
     // Pass data to subjects as appropriate
-    if (this.userId) {
-      this.userIdSubject.next(this.userId);
+    if (localStorage.getItem('user_id')) {
+      this.userIdSubject.next(Number.parseInt(localStorage.getItem('user_id')));
     }
     this.loggedInSubject.next(this.loggedIn);
     if (username) {
@@ -87,7 +83,6 @@ export class AuthenticationService implements OnInit {
 
         // Set internally stored data
         this.loggedIn = true;
-        this.userType = response['user_type'];
 
         // Set local storage data
         localStorage.setItem('user_id', response['user_id'].toString());
