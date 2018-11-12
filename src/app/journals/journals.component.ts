@@ -16,7 +16,7 @@ export class JournalsComponent implements OnInit {
   userType: string;
   sortValue: string = 'journal_entry_id';
   sortReverse: boolean = false;
-  loading:boolean = false;
+  loading: boolean = false;
 
   // Journalize Modal
   @ViewChild('journalizeModal') public journalizeModal: ModalDirective;
@@ -117,7 +117,7 @@ export class JournalsComponent implements OnInit {
         (!this.typeFilter || journalEntry.type.includes(this.typeFilter)) &&
         (!this.descriptionFilter || journalEntry.description.includes(this.descriptionFilter)) &&
         (!this.statusFilter || journalEntry.status.includes(this.statusFilter)) &&
-        (!this.dateFilter || journalEntry.date.includes(this.dateFilter)) ) {
+        (!this.dateFilter || journalEntry.date.includes(this.dateFilter))) {
         returnList.push(journalEntry);
       }
     });
@@ -197,7 +197,12 @@ export class JournalsComponent implements OnInit {
   }
 
   submitRejection() {
-    this.accountService.rejectJournalEntry(this.rejectingJournalEntry, this.rejectForm.controls.reason.value);
+    this.accountService.rejectJournalEntry(this.rejectingJournalEntry, this.rejectForm.controls.reason.value).subscribe(response => {
+      this.rejectModal.hide();
+      this.accountService.updateJournalEntries();
+    }, error => {
+      console.log(error);
+    });
   }
 
   postJournalEntry(journalEntry: JournalEntry) {
@@ -254,7 +259,7 @@ export class JournalsComponent implements OnInit {
 
   updateFileList() {
     this.loadingFilesList = true;
-    this.accountService.getJournalEntryFilesList(this.displayingJournalFiles).subscribe( response => {
+    this.accountService.getJournalEntryFilesList(this.displayingJournalFiles).subscribe(response => {
       this.filesList = response['filenames'];
       this.loadingFilesList = false;
     });
