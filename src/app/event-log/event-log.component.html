@@ -18,6 +18,12 @@
       <th class="th-sm clickable" (click)="sortBy('message')">Message
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
+      <th class="th-sm clickable" (click)="sortBy('message')">Precondition
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
+      <th class="th-sm clickable" (click)="sortBy('message')">Postcondition
+        <i class="fa fa-sort float-right" aria-hidden="true"></i>
+      </th>
       <th class="th-sm clickable" (click)="sortBy('timestamp')">Timestamp
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
@@ -27,6 +33,8 @@
     <tr [className]="message.message.includes('WARNING') ? 'warning-message' : ''" *ngFor="let message of filterBy()">
       <td>{{message.user_id}}</td>
       <td>{{message.message}}</td>
+      <td>{{message.precondition}}</td>
+      <td>{{message.postcondition}}</td>
       <td>{{message.timestamp}}</td>
     </tr>
     </tbody>

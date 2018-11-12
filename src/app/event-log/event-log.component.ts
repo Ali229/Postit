@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LogMessage} from "../_models/log_messages";
 import {EventLogService} from "../_services/event-log.service";
-import {User} from "../_models";
 
 @Component({
   selector: 'app-event-log',
