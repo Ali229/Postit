@@ -1,11 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import {first} from 'rxjs/operators';
-import {AuthenticationService, UserService} from '../_services';
-import {NavbarComponent} from "../navbar/navbar.component";
+import {AuthenticationService, UserService, AppService} from '../_services';
 import {ModalDirective} from "angular-bootstrap-md";
-import {AppService} from "../_services/app.service";
 @Component({
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.scss']
@@ -112,10 +109,10 @@ export class LoginComponent implements OnInit {
 
   submitRegister() {
     this.userService.register(this.registerForm.controls.username.value,
-      this.registerForm.controls.password.value,
       this.registerForm.controls.first_name.value,
       this.registerForm.controls.last_name.value,
-      this.registerForm.controls.email.value).subscribe(response => {
+      this.registerForm.controls.email.value,
+      this.registerForm.controls.password.value).subscribe(response => {
       this.registerMessage = response['message'];
     }, error => {
       this.registerError = error.error.message;

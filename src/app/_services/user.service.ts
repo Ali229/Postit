@@ -38,10 +38,10 @@ export class UserService implements OnInit {
   }
 
   updateUser() {
-    if (this.authService.isLoggedIn() && this.authService.getUserID() > 0) {
+    if (this.authService.isLoggedIn() && Number.parseInt(this.authService.getUserID()) > 0) {
       this.http.get<User>(`https://markzeagler.com/postit-backend/user/` + this.authService.getUserID().toString(), this.authService.getGETJSONHeaders()).subscribe((response: User) => {
         this.userSubject.next(response);
-        this.isAdmin = response['user_type']== 'admin';
+        this.isAdmin = response['user_type'] == 'admin';
       });
     }
   }
