@@ -24,7 +24,8 @@
         <i class="fa fa-sort float-right" aria-hidden="true"></i>
       </th>
       <th class="clickable" width="0px">Accounts</th>
-      <th class="clickable" width="0px">Amounts</th>
+      <th class="clickable" width="0px">Debits</th>
+      <th class="clickable" width="0px">Credits</th>
       <!--<th class="clickable" (click)="sortBy('user_id')">Creator-->
       <!--<i class="fa fa-sort float-right" aria-hidden="true"></i>-->
       <!--</th>-->
@@ -73,11 +74,12 @@
       </th>
       <th>
         <!--<div class="md-form">-->
-          <!--<input type="search" [(ngModel)]="transactionFilterRaw" id="transactionSearch" class="form-control"-->
-                 <!--mdbInputDirective [mdbValidate]="false">-->
-          <!--<label for="postingReferenceSearch">Search</label>-->
+        <!--<input type="search" [(ngModel)]="transactionFilterRaw" id="transactionSearch" class="form-control"-->
+        <!--mdbInputDirective [mdbValidate]="false">-->
+        <!--<label for="postingReferenceSearch">Search</label>-->
         <!--</div>-->
       </th>
+      <th></th>
       <th></th>
       <!--<th>-->
       <!--<div class="md-form">-->
@@ -127,39 +129,39 @@
       <td>{{journal.date}}</td>
       <!-- Transactions -->
       <td>
-      <table class="table table-borderless table-responsive-md table-sm">
-        <tbody>
-        <tr *ngFor="let transaction of journal.transactions">
-          <!--&lt;!&ndash; Accounts &ndash;&gt;-->
-          <!--<td width="400px" [align]="transaction.amount > 0 ? 'left' : 'right'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
-          <!--<label class="clickable" (click)="openAccount(transaction)">-->
-          <!--{{transaction.account_title}}-->
-          <!--</label>-->
-          <!--</td>-->
-          <!--&lt;!&ndash; Amounts &ndash;&gt;-->
-          <!--<td width="100px" [align]="transaction.amount > 0 ? 'left' : 'right'">-->
-          <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
-          <!--</td>-->
-          <!--Accounts-->
-          <td width="400px" align="left"> <!-- [align]="transaction.amount > 0 ? 'left' : 'right'" -->
-            <div class="clickable data" (click)="openAccount(transaction)">
-              {{getAccountName(transaction)}}
-            </div>
-          </td>
-          <!--&lt;!&ndash; Accounts &ndash;&gt;-->
-          <!--<td width="400px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
-          <!--<label class="clickable" (click)="openAccount(transaction)">-->
-          <!--{{transaction.account_title}}-->
-          <!--</label>-->
-          <!--</td>-->
-          <!--&lt;!&ndash; Amounts &ndash;&gt;-->
-          <!--<td width="100px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'">-->
-          <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
-          <!--</td>-->
-        </tr>
-        </tbody>
-      </table>
-    </td>
+        <table class="table table-borderless table-responsive-md table-sm">
+          <tbody>
+          <tr *ngFor="let transaction of journal.transactions">
+            <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+            <!--<td width="400px" [align]="transaction.amount > 0 ? 'left' : 'right'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+            <!--<label class="clickable" (click)="openAccount(transaction)">-->
+            <!--{{transaction.account_title}}-->
+            <!--</label>-->
+            <!--</td>-->
+            <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+            <!--<td width="100px" [align]="transaction.amount > 0 ? 'left' : 'right'">-->
+            <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+            <!--</td>-->
+            <!--Accounts-->
+            <td width="400px" align="left"> <!-- [align]="transaction.amount > 0 ? 'left' : 'right'" -->
+              <div class="clickable data" (click)="openAccount(transaction)">
+                {{getAccountName(transaction)}}
+              </div>
+            </td>
+            <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+            <!--<td width="400px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+            <!--<label class="clickable" (click)="openAccount(transaction)">-->
+            <!--{{transaction.account_title}}-->
+            <!--</label>-->
+            <!--</td>-->
+            <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+            <!--<td width="100px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'">-->
+            <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+            <!--</td>-->
+          </tr>
+          </tbody>
+        </table>
+      </td>
       <td>
         <table class="table table-borderless table-responsive-md table-sm">
           <tbody>
@@ -177,7 +179,41 @@
             <!-- Amounts -->
             <td width="100px" align="right">
               <div class="data">
-                {{getAmount(transaction)}}
+                {{transaction.amount > 0 ? transaction.amount : ' '}}
+              </div>
+            </td>
+            <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+            <!--<td width="400px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+            <!--<label class="clickable" (click)="openAccount(transaction)">-->
+            <!--{{transaction.account_title}}-->
+            <!--</label>-->
+            <!--</td>-->
+            <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+            <!--<td width="100px" align="left" [class]="transaction.amount > 0 ? '' : 'indent'">-->
+            <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+            <!--</td>-->
+          </tr>
+          </tbody>
+        </table>
+      </td>
+      <td>
+        <table class="table table-borderless table-responsive-md table-sm">
+          <tbody>
+          <tr *ngFor="let transaction of journal.transactions">
+            <!--&lt;!&ndash; Accounts &ndash;&gt;-->
+            <!--<td width="400px" [align]="transaction.amount > 0 ? 'left' : 'right'"> &lt;!&ndash; [align]="transaction.amount > 0 ? 'left' : 'right'" &ndash;&gt;-->
+            <!--<label class="clickable" (click)="openAccount(transaction)">-->
+            <!--{{transaction.account_title}}-->
+            <!--</label>-->
+            <!--</td>-->
+            <!--&lt;!&ndash; Amounts &ndash;&gt;-->
+            <!--<td width="100px" [align]="transaction.amount > 0 ? 'left' : 'right'">-->
+            <!--${{transaction.amount < 0 ? transaction.amount * -1 : transaction.amount}}-->
+            <!--</td>-->
+            <!-- Amounts -->
+            <td width="100px" align="right">
+              <div class="data">
+                {{transaction.amount < 0 ? transaction.amount * -1 : ' '}}
               </div>
             </td>
             <!--&lt;!&ndash; Accounts &ndash;&gt;-->
