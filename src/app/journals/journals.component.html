@@ -179,7 +179,7 @@
             <!-- Amounts -->
             <td width="100px" align="right">
               <div class="data">
-                {{transaction.amount > 0 ? transaction.amount : ' '}}
+                {{transaction.amount > 0 ? '$' + transaction.amount.toFixed(2) : ' '}}
               </div>
             </td>
             <!--&lt;!&ndash; Accounts &ndash;&gt;-->
@@ -213,7 +213,7 @@
             <!-- Amounts -->
             <td width="100px" align="right">
               <div class="data">
-                {{transaction.amount < 0 ? transaction.amount * -1 : ' '}}
+                {{transaction.amount < 0 ? '$' + (transaction.amount * -1).toFixed(2) : ' '}}
               </div>
             </td>
             <!--&lt;!&ndash; Accounts &ndash;&gt;-->
