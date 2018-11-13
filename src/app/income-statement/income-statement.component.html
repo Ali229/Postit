@@ -1,0 +1,40 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-dark indigo" [containerInside]="true"
+            *ngIf="loggedIn">
+  <!-- Navbar brand -->
+  <mdb-navbar-brand class="logo view overlay">
+    <a class="navbar-brand pull-left" (click)="select('home')"><img class="logo-image" src="./assets/nav-logo.svg"
+                                                                    alt="logo"/></a>
+  </mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto pull-right">
+      <li *ngFor="let page of availablePages" [className]="active == PAGE_DICTIONARY[page] ? 'active' : ''"
+          class="nav-item">
+        <a class="nav-link" (click)="select(page)">{{PAGE_DICTIONARY[page]}}
+          <div [className]="active == PAGE_DICTIONARY[page] ? 'active' : ''"><span class="sr-only">(current)</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav pull-xs-right nav-flex-icons">
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">
+          <img class="user_icon" src="./assets/user_icon_white.png" alt="user_icon">&nbsp;&nbsp;&nbsp;{{username}}<span
+          class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/">Update Account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="/">Preferences</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+        </div>
+      </li>
+      <!--<li><button mdbBtn class="waves-light lg-btn btn-danger" mdbWavesEffect (click)="logout()">Logout</button></li>-->
+    </ul>
+  </links>
+
+</mdb-navbar>
+<!--/.Navbar-->

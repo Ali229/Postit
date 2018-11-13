@@ -23,7 +23,8 @@ export class NavbarComponent implements OnInit {
     'accounts': 'COA',
     'event-log': 'Event Log',
     'journals': 'Journals',
-    'trial-balance': 'Trial Balance'
+    'trial-balance': 'Trial Balance',
+    'income-statement': 'Income Statement'
   };
 
   constructor(private authService: AuthenticationService,
