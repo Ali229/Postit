@@ -19,13 +19,13 @@
     <tbody>
     <tr  *ngFor="let account of accounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'debit'? '$' + account.balance.toFixed(2) : ''}}</td>
-      <td align="right">{{account.normal_side == 'credit'? '$' + (account.balance * -1).toFixed(2) : ''}}</td>
+      <td align="right">{{account.normal_side == 'debit'? (account.balance | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit'? ((account.balance * -1) | currency ) : ''}}</td>
     </tr>
     <tr>
       <td><strong>Total</strong></td>
-      <td><strong>${{getDebitSum().toFixed(2)}}</strong></td>
-      <td><strong>${{(getCreditSum() * -1).toFixed(2)}}</strong></td>
+      <td><strong>{{getDebitSum() | currency}}</strong></td>
+      <td><strong>{{(getCreditSum() * -1) | currency}}</strong></td>
     </tr>
     </tbody>
   </table>

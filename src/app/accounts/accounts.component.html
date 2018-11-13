@@ -121,7 +121,7 @@
     <tr class="clickable" *ngFor="let account of filterBy()" (click)="editAccount(account)">
       <td align="left">{{account.account_id}}</td>
       <td align="left">{{account.account_title}}</td>
-      <td align="left">${{(account.normal_side == 'debit' ? account.balance : account.balance * -1).toFixed(2)}}</td>
+      <td align="left">{{(account.normal_side == 'debit' ? account.balance : account.balance * -1) | currency}}</td>
       <!--<td>{{account.normal_side}}</td>-->
       <td align="left">{{account.description}}</td>
       <!--<td>{{account.date_created}}</td>-->
