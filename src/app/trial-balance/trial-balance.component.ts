@@ -24,6 +24,9 @@ export class TrialBalanceComponent implements OnInit {
           this.accounts.push(account)
         }
       });
+      this.accounts.sort( (a, b) => {
+        return a['account_id'] - b['account_id'];
+      })
     });
   }
 
