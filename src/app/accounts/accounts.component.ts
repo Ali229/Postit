@@ -34,7 +34,7 @@ export class AccountsComponent implements OnInit {
   subcategories: Map<string, string[]> = new Map();
   availableSubcategories: string[] = [];
 
-  constructor(private authService: AuthenticationService,
+  constructor(public authService: AuthenticationService,
               private accountService: AccountService,
               private route: ActivatedRoute,
               private router: Router,

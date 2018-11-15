@@ -2,7 +2,8 @@
 <ng-template #showTable>
   <div class="top">
     <h1>Chart of Accounts
-      <button class="float-right" mdbBtn type="button" color="indigo" (click)="showAddAccount()" mdbWavesEffect>
+      <button class="float-right" mdbBtn type="button" color="indigo" (click)="showAddAccount()" mdbWavesEffect
+              *ngIf="authService.getUserType() == 'admin' || authService.getUserType() == 'manager'">
         <mdb-icon icon="plus-square-o" class="mr-1"></mdb-icon>
         Create Account
       </button>
@@ -22,22 +23,22 @@
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
       </th>
       <!--<th class="th-sm clickable" (click)="sortBy('normal_side')">Normal Side-->
-        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
       <!--</th>-->
       <th class="th-sm clickable" (click)="sortBy('description')">Description
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
       </th>
       <!--<th class="th-sm clickable" (click)="sortBy('date_created')">Date Created-->
-        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
       <!--</th>-->
       <!--<th class="th-sm clickable" (click)="sortBy('created_by')">Created By (User ID)-->
-        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
       <!--</th>-->
       <!--<th class="th-sm clickable" (click)="sortBy('last_edited_date')">Last Edited-->
-        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
       <!--</th>-->
       <!--<th class="th-sm clickable" (click)="sortBy('user_id')">Last Edited By-->
-        <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
+      <!--<i class="fa fa-sort float-right clickable" aria-hidden="true"></i>-->
       <!--</th>-->
       <th class="th-sm clickable" (click)="sortBy('user_id')">Is Active
         <i class="fa fa-sort float-right clickable" aria-hidden="true"></i>
@@ -53,7 +54,8 @@
       </th>
       <th>
         <div class="md-form">
-          <input type="search" [(ngModel)]="accountTitleFilter" id="accountTitleSearch" class="form-control" mdbInputDirective
+          <input type="search" [(ngModel)]="accountTitleFilter" id="accountTitleSearch" class="form-control"
+                 mdbInputDirective
                  [mdbValidate]="false">
           <label for="accountTitleSearch">Search</label>
         </div>
@@ -66,47 +68,48 @@
         </div>
       </th>
       <!--<th>-->
-        <!--<div class="md-form">-->
-          <!--<input type="search" [(ngModel)]="normalSideFilter" id="normalSideSearch" class="form-control" mdbInputDirective-->
-                 <!--[mdbValidate]="false">-->
-          <!--<label for="normalSideSearch">Search</label>-->
-        <!--</div>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="normalSideFilter" id="normalSideSearch" class="form-control" mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="normalSideSearch">Search</label>-->
+      <!--</div>-->
       <!--</th>-->
       <th>
         <div class="md-form">
-          <input type="search" [(ngModel)]="descriptionFilter" id="descriptionSearch" class="form-control" mdbInputDirective
+          <input type="search" [(ngModel)]="descriptionFilter" id="descriptionSearch" class="form-control"
+                 mdbInputDirective
                  [mdbValidate]="false">
           <label for="descriptionSearch">Search</label>
         </div>
       </th>
       <!--<th>-->
-        <!--<div class="md-form">-->
-          <!--<input type="search" [(ngModel)]="dateCreatedFilter" id="dateCreatedSearch" class="form-control" mdbInputDirective-->
-                 <!--[mdbValidate]="false">-->
-          <!--<label for="dateCreatedSearch">Search</label>-->
-        <!--</div>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="dateCreatedFilter" id="dateCreatedSearch" class="form-control" mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="dateCreatedSearch">Search</label>-->
+      <!--</div>-->
       <!--</th>-->
       <!--<th>-->
-        <!--<div class="md-form">-->
-          <!--<input type="search" [(ngModel)]="createdByFilter" id="createdBySearch" class="form-control"-->
-                 <!--mdbInputDirective-->
-                 <!--[mdbValidate]="false">-->
-          <!--<label for="createdBySearch">Search</label>-->
-        <!--</div>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="createdByFilter" id="createdBySearch" class="form-control"-->
+      <!--mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="createdBySearch">Search</label>-->
+      <!--</div>-->
       <!--</th>-->
       <!--<th>-->
-        <!--<div class="md-form">-->
-          <!--<input type="search" [(ngModel)]="lastEditedFilter" id="lastEditedSearch" class="form-control" mdbInputDirective-->
-                 <!--[mdbValidate]="false">-->
-          <!--<label for="lastEditedSearch">Search</label>-->
-        <!--</div>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="lastEditedFilter" id="lastEditedSearch" class="form-control" mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="lastEditedSearch">Search</label>-->
+      <!--</div>-->
       <!--</th>-->
       <!--<th>-->
-        <!--<div class="md-form">-->
-          <!--<input type="search" [(ngModel)]="lastEditedByFilter" id="lastEditedBySearch" class="form-control" mdbInputDirective-->
-                 <!--[mdbValidate]="false">-->
-          <!--<label for="lastEditedBySearch">Search</label>-->
-        <!--</div>-->
+      <!--<div class="md-form">-->
+      <!--<input type="search" [(ngModel)]="lastEditedByFilter" id="lastEditedBySearch" class="form-control" mdbInputDirective-->
+      <!--[mdbValidate]="false">-->
+      <!--<label for="lastEditedBySearch">Search</label>-->
+      <!--</div>-->
       <!--</th>-->
       <th> <!-- TODO Turn this into a dropdown? -->
         <div class="md-form">
