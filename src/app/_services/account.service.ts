@@ -70,8 +70,8 @@ export class AccountService implements OnInit {
 
   updateAccount(account_id) {
     this.http.get<any>('https://markzeagler.com/postit-backend/account/' + account_id.toString(), this.authService.getGETJSONHeaders()).subscribe(response => {
-      this.account = response['account'][0];
-      this.accountSubject.next(response['account'][0]);
+      this.account = response['account'];
+      this.accountSubject.next(response['account']);
     });
   }
 
