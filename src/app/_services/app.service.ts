@@ -50,4 +50,12 @@ export class AppService {
   getActivePageSubject() {
     return this.activePageSubject;
   }
+
+  stringCompare(value1: string, value2: string, sortReverse: boolean) {
+    return ('' + value1).localeCompare(value2) * (sortReverse ? 1 : -1);
+  }
+
+  numberCompare(value1: number, value2: number, sortReverse: boolean) {
+    return (value1 - value2 ) * (sortReverse ? 1 : -1);
+  }
 }

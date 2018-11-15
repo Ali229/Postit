@@ -12,7 +12,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class AccountsComponent implements OnInit {
   accounts: Account[] = [];
-  sortValue: string;
+  sortValue: string = 'account_id';
   sortReverse = false;
   accountIdFilter: string;
   accountTitleFilter: string;
@@ -43,10 +43,10 @@ export class AccountsComponent implements OnInit {
     this.accountService.getAccountsSubject().subscribe((response: Account[]) => {
       this.accounts = response;
       this.accounts.sort((a, b) => {
-        if (!this.sortReverse) {
-          return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
+        if (this.sortValue == 'account_id' || this.sortValue == 'balance') {
+          return this.appService.numberCompare(a[this.sortValue], b[this.sortValue], this.sortReverse)
         } else {
-          return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
+          return this.appService.stringCompare(a[this.sortValue], b[this.sortValue], this.sortReverse)
         }
       });
     });

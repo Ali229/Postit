@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
 
   // User Table data
   users: User[] = [];
-  sortValue: string;
+  sortValue: string = 'user_id';
   sortReverse: boolean = false;
   userIDFilter: string;
   usernameFilter: string;
@@ -49,10 +49,10 @@ export class UsersComponent implements OnInit {
     this.userService.getUserArray().subscribe(response => {
       this.users = response;
       this.users.sort((a, b) => {
-        if (!this.sortReverse) {
-          return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
+        if (this.sortValue == 'user_id') {
+          return this.appService.numberCompare(a[this.sortValue], b[this.sortValue], this.sortReverse)
         } else {
-          return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
+          return this.appService.stringCompare(a[this.sortValue], b[this.sortValue], this.sortReverse)
         }
       });
     });

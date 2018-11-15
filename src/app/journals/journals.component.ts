@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {JournalEntry, Account, Transaction} from "../_models";
-import {AccountService, UserService} from "../_services";
+import {AccountService, AppService, UserService} from "../_services";
 import {ModalDirective} from "angular-bootstrap-md";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -14,8 +14,8 @@ export class JournalsComponent implements OnInit {
 
   journalEntries: JournalEntry[] = [];
   userType: string;
-  sortValue: string = 'journal_entry_id';
-  sortReverse: boolean = false;
+  sortValue: string = 'date';
+  sortReverse: boolean = true;
   loading: boolean = false;
 
   // Journalize Modal
@@ -23,7 +23,7 @@ export class JournalsComponent implements OnInit {
   journalizeForm: FormGroup;
   journalizeError: string = '';
   accounts: Account[] = [];
-  journalTypes: string[] = ['Regular', 'Adjusting'];
+  journalTypes: string[] = ['Regular', 'Adjusting', 'Closing'];
   debitLines: Transaction[] = [new Transaction()];
   creditLines: Transaction[] = [new Transaction()];
 
@@ -52,6 +52,7 @@ export class JournalsComponent implements OnInit {
   selectedFiles: File[];
 
   constructor(private accountService: AccountService,
+              private appService: AppService,
               private formBuilder: FormBuilder,
               private userService: UserService,
               public router: Router) {
@@ -78,10 +79,10 @@ export class JournalsComponent implements OnInit {
       this.loading = false;
       this.journalEntries = journalEntries;
       this.journalEntries.sort((a, b) => {
-        if (!this.sortReverse) {
-          return ('' + a[this.sortValue]).localeCompare(b[this.sortValue]);
+        if (this.sortValue == 'journal_entry_id') {
+          return this.appService.numberCompare(a[this.sortValue], b[this.sortValue], this.sortReverse)
         } else {
-          return ('' + b[this.sortValue]).localeCompare(a[this.sortValue]);
+          return this.appService.stringCompare(a[this.sortValue], b[this.sortValue], this.sortReverse)
         }
       });
     });
