@@ -5,6 +5,10 @@
 
 <h1 *ngIf="account">{{account.account_title}}</h1>
 
+<div *ngIf="chart">
+  <canvas id="canvas">{{ chart }}</canvas>
+</div>
+
 <div class="col-md-12">
   <div class="md-form">
     <input type="search" [(ngModel)]="filterValue" id="search" class="form-control" mdbInputDirective

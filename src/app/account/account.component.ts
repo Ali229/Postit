@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Account, Transaction} from "../_models";
 import {AccountService, AuthenticationService, AppService} from "../_services";
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-account',
@@ -15,6 +16,11 @@ export class AccountComponent implements OnInit {
   filterValue: string;
   balanceMap: Map<Transaction, number> = new Map();
   referer: string;
+
+  // Chart
+  chart: Chart;
+  chartDates: string[] = [];
+  chartBalances: number[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -32,12 +38,42 @@ export class AccountComponent implements OnInit {
       this.balanceMap.clear();
       this.account = response;
       let runningBalance = 0;
+      this.chartDates = [];
+      this.chartBalances = [];
       if(this.account) {
         for (let i = 0; i < this.account.transactions.length; i++) {
           runningBalance += this.account.transactions[i].amount;
           this.balanceMap.set(this.account.transactions[i], runningBalance);
+          this.chartDates.push(this.account.transactions[i].date);
+          this.chartBalances.push(runningBalance);
         }
       }
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: this.chartDates,
+          datasets: [
+            {
+              data: this.chartBalances,
+              borderColor: '#3cba9f',
+              fill: false
+            }
+          ]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }]
+          }
+        }
+      })
     });
   }
 
