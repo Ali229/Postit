@@ -50,13 +50,13 @@ export class AccountComponent implements OnInit {
       }
       this.chart = new Chart('canvas', {
         type: 'line',
-        data: {
+          data: {
           labels: this.chartDates,
           datasets: [
             {
               data: this.chartBalances,
               borderColor: '#3cba9f',
-              fill: false
+              fill: true
             }
           ]
         },
@@ -71,6 +71,9 @@ export class AccountComponent implements OnInit {
             yAxes: [{
               display: true
             }]
+          },
+          animation: {
+            duration: 0
           }
         }
       })
