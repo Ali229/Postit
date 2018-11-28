@@ -3,20 +3,49 @@
   <div class="top">
     <h1>Welcome {{userFirstName}}!</h1>
   </div>
-  <!-- Card -->
   <div class="animated fadeIn slow">
-    <div class="card" *ngFor="let account of accounts">
-      <!-- Card image -->
-      <img class="card-img-top" src="./assets/charts/cash.png" alt="Card image cap">
-      <!-- Card content -->
-      <div class="card-body">
-        <!-- Title -->
-        <h4 class="card-title">{{account.account_title}}</h4>
-        <!-- Text -->
-        <h4 class="card-text">{{account.balance | currency}}</h4>
-      </div>
-    </div>
+    <table mdbTable>
+      <tbody>
+      <td class="card-css">
+        <mdb-card dark="true">
+          <div class="view overlay waves-light" mdbWavesEffect>
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <mdb-card-body class="elegant-color white-text">
+            <mdb-card-title>
+              <h4>Current Ratio</h4>
+            </mdb-card-title>
+
+            <hr class="hr-light">
+            <mdb-card-text class="white-text">
+              <h5>5%</h5>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </td>
+      <td class="card-css">
+        <mdb-card dark="true">
+          <div class="view overlay waves-light" mdbWavesEffect>
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <mdb-card-body class="elegant-color white-text">
+            <mdb-card-title>
+              <h4>Return On Assets</h4>
+            </mdb-card-title>
+
+            <hr class="hr-light">
+            <mdb-card-text class="white-text">
+              <h5>3%</h5>
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </td>
+      </tbody>
+    </table>
   </div>
-  <!-- Card -->
 </ng-template>
 
