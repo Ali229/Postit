@@ -12,8 +12,8 @@ export class HomeComponent implements OnInit {
   private loggedIn: boolean = false;
   private animate = true;
   public userFirstName: string;
-  // accounts: Account[];
   accounts: Account[] = [];
+  currentRatio = 0;
 
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
 
     this.accountService.getAccountsSubject().subscribe(accounts => {
       this.accounts = accounts;
+      this.getCurrentRatio();
     });
   }
 
@@ -40,4 +41,16 @@ export class HomeComponent implements OnInit {
     this.animate = true;
   }
 
+  getCurrentRatio() {
+    var totalAssets = 0;
+    var totalLiabilities = 0;
+    for (let account of this.accounts) {
+      if (account.account_id.toString().charAt(0) == '1') {
+        totalAssets += account.balance;
+      } else if (account.account_id.toString().charAt(0) == '2') {
+        totalLiabilities += account.balance;
+      }
+    }
+    this.currentRatio = Math.round(totalAssets / totalLiabilities);
+  }
 }

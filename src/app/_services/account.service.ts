@@ -1,10 +1,10 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {Account, JournalEntry, Transaction} from "../_models";
-import {AppService} from "./app.service";
-import {AuthenticationService} from "./authentication.service";
-import {UserService} from "./user.service";
+import {Subject} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Account, JournalEntry, Transaction} from '../_models';
+import {AppService} from './app.service';
+import {AuthenticationService} from './authentication.service';
+import {UserService} from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -128,7 +128,7 @@ export class AccountService implements OnInit {
   uploadJournalEntryFile(journalEntry: JournalEntry, file: File) {
     let formData: FormData = new FormData();
     formData.append('file', file, file.name);
-    return this.http.post('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id + '/', formData, this.authService.getPOSTPUTFileHeaders())
+    return this.http.post('https://markzeagler.com/postit-backend/files/' + journalEntry.journal_entry_id + '/', formData, this.authService.getPOSTPUTFileHeaders());
   }
 
   getCategories() {
