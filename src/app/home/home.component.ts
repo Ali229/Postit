@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   currentRatio = 0;
   returnOnAssets = 0;
   returnOnEquity = 0;
-
+  debtRatio = 0;
   totalAssets = 0;
   totalLiabilities = 0;
   totalExpenses = 0;
@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
       this.getCurrentRatio();
       this.getReturnOnAssets();
       this.getReturnOnEquity();
+      this.getDebtRatio();
     });
   }
 
@@ -73,6 +74,10 @@ export class HomeComponent implements OnInit {
 
   getCurrentRatio() {
     this.currentRatio = Math.round(this.totalAssets / this.totalLiabilities);
+  }
+
+  getDebtRatio() {
+    this.debtRatio = Math.round(this.totalLiabilities / this.totalAssets);
   }
 
   getReturnOnAssets() {
