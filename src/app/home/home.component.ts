@@ -9,21 +9,24 @@ import {Account} from '../_models';
   styleUrls: ['home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
   private loggedIn: boolean = false;
   private animate = true;
   public userFirstName: string;
   accounts: Account[] = [];
-
+  ran = false;
   currentRatio = 0;
   returnOnAssets = 0;
   returnOnEquity = 0;
   debtRatio = 0;
+
   totalAssets = 0;
   totalLiabilities = 0;
   totalExpenses = 0;
   totalRevenue = 0;
   totalEquity = 0;
   totalNetIncome = 0;
+  totalCash = 0;
 
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
@@ -41,11 +44,14 @@ export class HomeComponent implements OnInit {
 
     this.accountService.getAccountsSubject().subscribe(accounts => {
       this.accounts = accounts;
-      this.getTotals();
-      this.getCurrentRatio();
-      this.getReturnOnAssets();
-      this.getReturnOnEquity();
-      this.getDebtRatio();
+      if (this.ran == false) {
+        this.getTotals();
+        this.getCurrentRatio();
+        this.getReturnOnAssets();
+        this.getReturnOnEquity();
+        this.getDebtRatio();
+      }
+      this.ran = true;
     });
   }
 
@@ -58,10 +64,14 @@ export class HomeComponent implements OnInit {
   getTotals() {
     for (let account of this.accounts) {
       if (account.account_id.toString().charAt(0) == '1') {
+        if (account.account_id == 100001) {
+          this.totalCash += account.balance;
+        }
         this.totalAssets += account.balance;
       } else if (account.account_id.toString().charAt(0) == '2') {
         this.totalLiabilities += account.balance;
       } else if (account.account_id.toString().charAt(0) == '3') {
+        console.log(account.account_title);
         this.totalEquity += account.balance;
       } else if (account.account_id.toString().charAt(0) == '4') {
         this.totalRevenue += account.balance;
@@ -69,6 +79,7 @@ export class HomeComponent implements OnInit {
         this.totalExpenses += account.balance;
       }
     }
+    console.log(this.totalCash);
     this.totalNetIncome = this.totalRevenue - this.totalExpenses;
   }
 
@@ -87,4 +98,37 @@ export class HomeComponent implements OnInit {
   getReturnOnEquity() {
     this.returnOnEquity = Math.round(this.totalNetIncome / this.totalEquity);
   }
+
+  //======================================== Chart ========================================//
+  public chartType: string = 'bar';
+
+  public chartDatasets: Array<any> = [
+    {data: [this.currentRatio, this.returnOnAssets, this.returnOnEquity, this.debtRatio], label: 'Percentage'},
+  ];
+
+  public chartLabels: Array<any> = ['Current Ratio', 'Return On Assets', 'Return On Equity', 'Debt Ratio'];
+
+  public chartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(220,220,220,0.2)',
+      borderColor: 'rgba(220,220,220,1)',
+      borderWidth: 2,
+      pointBackgroundColor: 'rgba(220,220,220,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(220,220,220,1)'
+    }
+  ];
+
+  public chartOptions: any = {
+    responsive: true
+  };
+
+  public chartClicked(e: any): void {
+  }
+
+  public chartHovered(e: any): void {
+  }
+
+  //======================================== Chart ========================================//
 }

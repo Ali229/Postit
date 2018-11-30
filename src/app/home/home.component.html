@@ -3,6 +3,20 @@
   <div class="top">
     <h1>Welcome {{userFirstName}}!</h1>
   </div>
+  <div class="graph" *ngIf="ran">
+    <div style="display: block">
+      <canvas mdbChart
+              [chartType]="chartType"
+              [datasets]="chartDatasets"
+              [labels]="chartLabels"
+              [colors]="chartColors"
+              [options]="chartOptions"
+              [legend]="true"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+      </canvas>
+    </div>
+  </div>
   <div class="animated fadeIn slow">
     <table mdbTable>
       <tbody>
@@ -45,6 +59,8 @@
             </mdb-card-body>
           </mdb-card>
         </td>
+      </tr>
+      <tr>
         <td class="card-css">
           <mdb-card dark="true">
             <div class="view overlay waves-light" mdbWavesEffect>
@@ -64,8 +80,6 @@
             </mdb-card-body>
           </mdb-card>
         </td>
-      </tr>
-      <tr>
         <td class="card-css">
           <mdb-card dark="true">
             <div class="view overlay waves-light" mdbWavesEffect>
