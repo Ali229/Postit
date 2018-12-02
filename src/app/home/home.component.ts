@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   returnOnAssets = 0;
   returnOnEquity = 0;
   debtRatio = 0;
+  quickRatio = 0;
 
   totalAssets = 0;
   totalLiabilities = 0;
@@ -26,7 +27,9 @@ export class HomeComponent implements OnInit {
   totalRevenue = 0;
   totalEquity = 0;
   totalNetIncome = 0;
-  totalCash = 0;
+  totalSales = 0;
+  totalAssetTurnOver = 0;
+  totalInventory = 0;
 
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
@@ -50,6 +53,8 @@ export class HomeComponent implements OnInit {
         this.getReturnOnAssets();
         this.getReturnOnEquity();
         this.getDebtRatio();
+        this.getAssetTurnOver();
+        this.getQuickRatio();
       }
       this.ran = true;
     });
@@ -64,8 +69,8 @@ export class HomeComponent implements OnInit {
   getTotals() {
     for (let account of this.accounts) {
       if (account.account_id.toString().charAt(0) == '1') {
-        if (account.account_id == 100001) {
-          this.totalCash += account.balance;
+        if (account.account_title == 'Merchandise Inventory') {
+          this.totalInventory += account.balance;
         }
         this.totalAssets += account.balance;
       } else if (account.account_id.toString().charAt(0) == '2') {
@@ -74,12 +79,14 @@ export class HomeComponent implements OnInit {
         console.log(account.account_title);
         this.totalEquity += account.balance;
       } else if (account.account_id.toString().charAt(0) == '4') {
+        if (account.account_title == 'Sales') {
+          this.totalSales += account.balance;
+        }
         this.totalRevenue += account.balance;
       } else if (account.account_id.toString().charAt(0) == '5') {
         this.totalExpenses += account.balance;
       }
     }
-    console.log(this.totalCash);
     this.totalNetIncome = this.totalRevenue - this.totalExpenses;
   }
 
@@ -97,6 +104,14 @@ export class HomeComponent implements OnInit {
 
   getReturnOnEquity() {
     this.returnOnEquity = Math.round(this.totalNetIncome / this.totalEquity);
+  }
+
+  getAssetTurnOver() {
+    this.totalAssetTurnOver = Math.round(this.totalSales / this.totalAssets);
+  }
+
+  getQuickRatio() {
+    this.quickRatio = Math.round((this.totalAssets - this.totalInventory) / this.totalLiabilities);
   }
 
   //======================================== Chart ========================================//
