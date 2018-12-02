@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit {
 
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(220,220,220,0.2)',
+      backgroundColor: '#404040',
       borderColor: 'rgba(220,220,220,1)',
       borderWidth: 2,
       pointBackgroundColor: 'rgba(220,220,220,1)',
