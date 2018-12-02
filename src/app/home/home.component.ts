@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit {
   totalAssetTurnOver = 0;
   totalInventory = 0;
 
+  public chartDatasets: Array<any> = [];
+
   constructor(private authService: AuthenticationService,
               private app: AppComponent,
               private appService: AppService,
@@ -57,6 +59,12 @@ export class HomeComponent implements OnInit {
         this.getQuickRatio();
       }
       this.ran = true;
+      this.chartDatasets = [
+        {
+          data: [this.currentRatio, this.returnOnAssets, this.totalAssetTurnOver, this.returnOnEquity, this.debtRatio, this.quickRatio],
+          label: 'Percentage'
+        }
+      ];
     });
   }
 
@@ -64,6 +72,7 @@ export class HomeComponent implements OnInit {
     this.appService.setActivePage('home');
     this.authService.updateLoggedInVerification();
     this.animate = true;
+    this.returnOnAssets = 20;
   }
 
   getTotals() {
@@ -117,11 +126,11 @@ export class HomeComponent implements OnInit {
   //======================================== Chart ========================================//
   public chartType: string = 'bar';
 
-  public chartDatasets: Array<any> = [
-    {data: [this.currentRatio, this.returnOnAssets, this.returnOnEquity, this.debtRatio], label: 'Percentage'},
-  ];
+  // public chartDatasets: Array<any> = [
+  //   {data: [this.currentRatio, this.returnOnAssets, this.returnOnEquity, this.debtRatio], label: 'Percentage'}
+  // ];
 
-  public chartLabels: Array<any> = ['Current Ratio', 'Return On Assets', 'Return On Equity', 'Debt Ratio'];
+  public chartLabels: Array<any> = ['Current Ratio', 'Return On Assets', 'Asset Turnover', 'Return On Equity', 'Debt Ratio', 'Quick Ratio'];
 
   public chartColors: Array<any> = [
     {
