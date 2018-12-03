@@ -79,7 +79,6 @@ export class NavbarComponent implements OnInit {
   }
 
   getNavigablePages(pageList) {
-    console.log("Got Called!!!");
     return pageList.slice(1);
   }
 }

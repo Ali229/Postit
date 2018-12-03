@@ -12,14 +12,18 @@
     <!-- Links -->
     <ul class="navbar-nav mr-auto pull-right">
       <ng-container *ngFor="let page of availablePages">
+
+        <!-- If it's just a link -->
         <ng-container *ngIf="PAGE_DICTIONARY[page]">
-          <li [class]="'nav-item' + this.active == this.PAGE_DICTIONARY[page] ? ' active' : ''">
-            <a class='nav-link waves-light' (click)="select(page)" mdbWavesEffect>{{PAGE_DICTIONARY[page]}}
+          <li class="'nav-item'"  mdbWavesEffect [routerLink]="['./' + page]" routerLinkActive="active">
+            <a class='nav-link waves-light' (click)="select(page)" mdbWavesEffect [routerLink]="['./' + page]" routerLinkActive="active">{{PAGE_DICTIONARY[page]}}
               <div [class]="active == PAGE_DICTIONARY[page] ? 'active' : ''"><span class="sr-only">(current)</span>
               </div>
             </a>
           </li>
         </ng-container>
+
+        <!-- If it's a dropdown -->
         <ng-container *ngIf="isArray(page)">
           <li class='nav-item dropdown' dropdown>
             <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
