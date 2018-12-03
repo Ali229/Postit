@@ -24,7 +24,8 @@ export class NavbarComponent implements OnInit {
     'event-log': 'Event Log',
     'journals': 'Journals',
     'trial-balance': 'Trial Balance',
-    'income-statement': 'Income Statement'
+    'income-statement': 'Income Statement',
+    'financial-statements': 'Financial Statements'
   };
 
   constructor(private authService: AuthenticationService,
@@ -43,7 +44,7 @@ export class NavbarComponent implements OnInit {
       this.userService.updateUser();
     });
 
-    this.authService.getUserNameSubject().subscribe( username => {
+    this.authService.getUserNameSubject().subscribe(username => {
       this.username = username;
     });
 
@@ -58,7 +59,7 @@ export class NavbarComponent implements OnInit {
       this.select(localStorage.getItem('selected'));
     }
 
-    if(this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn()) {
       this.userService.updateUser();
     }
   }
@@ -71,5 +72,14 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('selected', page);
     this.appService.setActivePage(page);
     this.router.navigate(['./' + page]);
+  }
+
+  isArray(obj) {
+    return Array.isArray(obj);
+  }
+
+  getNavigablePages(pageList) {
+    console.log("Got Called!!!");
+    return pageList.slice(1);
   }
 }

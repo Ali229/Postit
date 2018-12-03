@@ -7,8 +7,8 @@ import {AuthenticationService} from "../_services";
 export class AuthGuard implements CanActivate {
 
   public static readonly ADMIN_PAGES: string[] = ['home', 'users', 'accounts', 'event-log'];
-  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journals', 'trial-balance', 'account/:account_id', 'income-statement'];
-  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journals', 'trial-balance', 'account/:account_id', 'income-statement'];
+  public static readonly MANAGER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance']];
+  public static readonly USER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance']];
   private readonly typePageMap;
 
   constructor(private router: Router,
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isLoggedIn()) {
       // logged in so return true
-      if (this.typePageMap[this.authService.getUserType()].includes(route.routeConfig.path)) {
+      if (this.inArray(this.typePageMap[this.authService.getUserType()], route.routeConfig.path)) {
         return true;
       } else {
         this.router.navigate(['/home'], {queryParams: {returnUrl: state.url}});
@@ -38,5 +38,17 @@ export class AuthGuard implements CanActivate {
 
   getAvailablePages(user: User) {
     return this.typePageMap[user.user_type]
+  }
+
+  inArray(array, value) {
+    for(let arrayValue of array) {
+      if(Array.isArray(arrayValue)) {
+        return this.inArray(arrayValue, value);
+      }
+      if(arrayValue === value) {
+        return true;
+      }
+    }
+    return false;
   }
 }
