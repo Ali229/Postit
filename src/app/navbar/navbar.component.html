@@ -13,7 +13,7 @@
     <ul class="navbar-nav mr-auto pull-right">
       <li *ngFor="let page of availablePages" [className]="active == PAGE_DICTIONARY[page] ? 'active' : ''"
           class="nav-item">
-        <a class="nav-link" (click)="select(page)">{{PAGE_DICTIONARY[page]}}
+        <a class="nav-link" (click)="select(page)" *ngIf="PAGE_DICTIONARY[page]">{{PAGE_DICTIONARY[page]}}
           <div [className]="active == PAGE_DICTIONARY[page] ? 'active' : ''"><span class="sr-only">(current)</span>
           </div>
         </a>
