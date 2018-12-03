@@ -35,7 +35,7 @@
 
               <hr class="hr-light">
               <mdb-card-text class="white-text">
-                <h5>{{currentRatio}}%</h5>
+                <h5>{{currentRatio > 100 ? 100 : currentRatio}}%</h5>
               </mdb-card-text>
             </mdb-card-body>
           </mdb-card>
@@ -54,7 +54,7 @@
 
               <hr class="hr-light">
               <mdb-card-text class="white-text">
-                <h5>{{returnOnAssets}}%</h5>
+                <h5>{{returnOnAssets > 100 ? 100 : returnOnAssets}}%</h5>
               </mdb-card-text>
             </mdb-card-body>
           </mdb-card>
@@ -73,7 +73,7 @@
 
               <hr class="hr-light">
               <mdb-card-text class="white-text">
-                <h5>{{totalAssetTurnOver}}%</h5>
+                <h5>{{totalAssetTurnOver > 100 ? 100 : totalAssetTurnOver}}%</h5>
               </mdb-card-text>
             </mdb-card-body>
           </mdb-card>
@@ -94,7 +94,7 @@
 
               <hr class="hr-light">
               <mdb-card-text class="white-text">
-                <h5>{{returnOnEquity}}%</h5>
+                <h5>{{returnOnEquity > 100 ? 100 : returnOnEquity}}%</h5>
               </mdb-card-text>
             </mdb-card-body>
           </mdb-card>
@@ -113,7 +113,7 @@
 
               <hr class="hr-light">
               <mdb-card-text class="white-text">
-                <h5>{{debtRatio}}%</h5>
+                <h5>{{debtRatio > 100 ? 100 : debtRatio}}%</h5>
               </mdb-card-text>
             </mdb-card-body>
           </mdb-card>
@@ -132,7 +132,7 @@
 
               <hr class="hr-light">
               <mdb-card-text class="white-text">
-                <h5>{{quickRatio}}%</h5>
+                <h5>{{quickRatio > 100 ? 100 : quickRatio}}%</h5>
               </mdb-card-text>
             </mdb-card-body>
           </mdb-card>

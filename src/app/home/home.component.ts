@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
       this.ran = true;
       this.chartDatasets = [
         {
-          data: [this.currentRatio, this.returnOnAssets, this.totalAssetTurnOver, this.returnOnEquity, this.debtRatio, this.quickRatio],
+          data: [this.currentRatio > 100 ? 100 : this.currentRatio, this.returnOnAssets > 100 ? 100 : this.returnOnAssets, this.totalAssetTurnOver > 100 ? 100 : this.totalAssetTurnOver, this.returnOnEquity > 100 ? 100 : this.returnOnEquity, this.debtRatio > 100 ? 100 : this.debtRatio, this.quickRatio > 100 ? 100 : this.quickRatio],
           label: 'Percentage'
         }
       ];
@@ -83,17 +83,17 @@ export class HomeComponent implements OnInit {
         }
         this.totalAssets += account.balance;
       } else if (account.account_id.toString().charAt(0) == '2') {
-        this.totalLiabilities += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
+        this.totalLiabilities += (account.balance * (account.normal_side == 'debit' ? 1 : -1));
       } else if (account.account_id.toString().charAt(0) == '3') {
         console.log(account.account_title);
-        this.totalEquity += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
+        this.totalEquity += (account.balance * (account.normal_side == 'debit' ? 1 : -1));
       } else if (account.account_id.toString().charAt(0) == '4') {
         if (account.account_title == 'Sales') {
-          this.totalSales += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
+          this.totalSales += (account.balance * (account.normal_side == 'debit' ? 1 : -1));
         }
-        this.totalRevenue += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
+        this.totalRevenue += (account.balance * (account.normal_side == 'debit' ? 1 : -1));
       } else if (account.account_id.toString().charAt(0) == '5') {
-        this.totalExpenses += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
+        this.totalExpenses += (account.balance * (account.normal_side == 'debit' ? 1 : -1));
       }
     }
     this.totalNetIncome = this.totalRevenue - this.totalExpenses;
@@ -112,11 +112,11 @@ export class HomeComponent implements OnInit {
   }
 
   getReturnOnEquity() {
-    this.returnOnEquity = Math.round(this.totalNetIncome / this.totalEquity );
+    this.returnOnEquity = Math.round(this.totalNetIncome / this.totalEquity);
   }
 
   getAssetTurnOver() {
-    this.totalAssetTurnOver = Math.round(this.totalSales / this.totalAssets );
+    this.totalAssetTurnOver = Math.round(this.totalSales / this.totalAssets);
   }
 
   getQuickRatio() {
@@ -141,6 +141,15 @@ export class HomeComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(220,220,220,1)'
+    },
+    {
+      backgroundColor: 'rgba(151,187,205,0.2)',
+      borderColor: 'rgba(151,187,205,1)',
+      borderWidth: 2,
+      pointBackgroundColor: 'rgba(151,187,205,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(151,187,205,1)'
     }
   ];
 
