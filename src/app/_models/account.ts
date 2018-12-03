@@ -12,4 +12,6 @@ export class Account {
   last_edited_by: string;
   is_active: string;
   transactions: Transaction[];
+  category: string;
+  subcategory: string;
 }

@@ -7,8 +7,8 @@ import {AuthenticationService} from "../_services";
 export class AuthGuard implements CanActivate {
 
   public static readonly ADMIN_PAGES: string[] = ['home', 'users', 'accounts', 'event-log'];
-  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journals', 'trial-balance', 'account/:account_id'];
-  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journals', 'trial-balance', 'account/:account_id'];
+  public static readonly MANAGER_PAGES: string[] = ['home', 'accounts', 'journals', 'trial-balance', 'account/:account_id', 'income-statement'];
+  public static readonly USER_PAGES: string[] = ['home', 'accounts', 'journals', 'trial-balance', 'account/:account_id', 'income-statement'];
   private readonly typePageMap;
 
   constructor(private router: Router,
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isLoggedIn()) {
       // logged in so return true
-      if(this.typePageMap[this.authService.getUserType()].includes(route.routeConfig.path)) {
+      if (this.typePageMap[this.authService.getUserType()].includes(route.routeConfig.path)) {
         return true;
       } else {
         this.router.navigate(['/home'], {queryParams: {returnUrl: state.url}});
