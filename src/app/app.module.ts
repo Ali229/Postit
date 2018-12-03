@@ -19,7 +19,6 @@ import {JournalsComponent} from './journals/journals.component';
 import {EventLogComponent} from './event-log/event-log.component';
 import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/material";
 import {TrialBalanceComponent} from './trial-balance/trial-balance.component';
-import {JournalComponent} from './journal/journal.component'
 import {IncomeStatementComponent} from "./income-statement/income-statement.component";
 import { RetainedEarningsComponent } from './retained-earnings/retained-earnings.component';
 import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
@@ -48,7 +47,6 @@ import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
     JournalsComponent,
     EventLogComponent,
     TrialBalanceComponent,
-    JournalComponent,
     IncomeStatementComponent,
     RetainedEarningsComponent,
     BalanceSheetComponent],
