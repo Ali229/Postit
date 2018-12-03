@@ -65,6 +65,6 @@ export class TrialBalanceComponent implements OnInit {
   }
 
   openAccount(account: Account){
-    this.router.navigate(['./account/' + account.account_id], {queryParams: {returnUrl: 'event-log'}})
+    this.router.navigate(['./account/' + account.account_id], {queryParams: {returnUrl: 'trial-balance'}})
   }
 }
