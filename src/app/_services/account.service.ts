@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Account, JournalEntry, Transaction} from '../_models';
 import {AppService} from './app.service';
 import {AuthenticationService} from './authentication.service';
-import {UserService} from './user.service';
+import {DatePipe} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,7 @@ export class AccountService implements OnInit {
 
   constructor(private http: HttpClient,
               private appService: AppService,
-              private authService: AuthenticationService,
-              private userService: UserService) {
+              private authService: AuthenticationService) {
     this.accountArraySubject = new Subject();
     this.accountSubject = new Subject();
     this.journalSubject = new Subject();
@@ -83,7 +82,7 @@ export class AccountService implements OnInit {
   journalize(journal_type: string, date: Date, transactions: Transaction[], description: string) {
     return this.http.post('https://markzeagler.com/postit-backend/journal/new', {
       'transactions_list': transactions,
-      'date': date.toDateString(),
+      'date': new DatePipe('en-US').transform(date, 'dd-MMM-yyyy'),
       'description': description,
       'journal_type': journal_type
     }, this.authService.getPOSTPUTJSONHeaders());
