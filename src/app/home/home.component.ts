@@ -83,17 +83,17 @@ export class HomeComponent implements OnInit {
         }
         this.totalAssets += account.balance;
       } else if (account.account_id.toString().charAt(0) == '2') {
-        this.totalLiabilities += account.balance;
+        this.totalLiabilities += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
       } else if (account.account_id.toString().charAt(0) == '3') {
         console.log(account.account_title);
-        this.totalEquity += account.balance;
+        this.totalEquity += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
       } else if (account.account_id.toString().charAt(0) == '4') {
         if (account.account_title == 'Sales') {
-          this.totalSales += account.balance;
+          this.totalSales += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
         }
-        this.totalRevenue += account.balance;
+        this.totalRevenue += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
       } else if (account.account_id.toString().charAt(0) == '5') {
-        this.totalExpenses += account.balance;
+        this.totalExpenses += (account.balance * (account.normal_side == 'debit' ? 1 : -1 ));
       }
     }
     this.totalNetIncome = this.totalRevenue - this.totalExpenses;
@@ -112,11 +112,11 @@ export class HomeComponent implements OnInit {
   }
 
   getReturnOnEquity() {
-    this.returnOnEquity = Math.round(this.totalNetIncome / this.totalEquity);
+    this.returnOnEquity = Math.round(this.totalNetIncome / this.totalEquity );
   }
 
   getAssetTurnOver() {
-    this.totalAssetTurnOver = Math.round(this.totalSales / this.totalAssets);
+    this.totalAssetTurnOver = Math.round(this.totalSales / this.totalAssets );
   }
 
   getQuickRatio() {
