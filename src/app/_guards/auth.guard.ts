@@ -7,8 +7,8 @@ import {AuthenticationService} from "../_services";
 export class AuthGuard implements CanActivate {
 
   public static readonly ADMIN_PAGES: string[] = ['home', 'users', 'accounts', 'event-log'];
-  public static readonly MANAGER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance']];
-  public static readonly USER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance']];
+  public static readonly MANAGER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance', 'retained-earnings', 'balance-sheet']];
+  public static readonly USER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance', 'retained-earnings', 'balance-sheet']];
   private readonly typePageMap;
 
   constructor(private router: Router,
@@ -41,11 +41,11 @@ export class AuthGuard implements CanActivate {
   }
 
   inArray(array, value) {
-    for(let arrayValue of array) {
-      if(Array.isArray(arrayValue)) {
+    for (let arrayValue of array) {
+      if (Array.isArray(arrayValue)) {
         return this.inArray(arrayValue, value);
       }
-      if(arrayValue === value) {
+      if (arrayValue === value) {
         return true;
       }
     }

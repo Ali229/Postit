@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
 import {Account} from "../_models";
-import {AccountService, AuthenticationService, AppService} from "../_services";
-import {Chart} from 'chart.js';
+import {AccountService, AppService, AuthenticationService} from "../_services";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-income-statement',
-  templateUrl: './income-statement.component.html',
-  styleUrls: ['./income-statement.component.scss']
+  selector: 'app-retained-earnings',
+  templateUrl: './retained-earnings.component.html',
+  styleUrls: ['./retained-earnings.component.scss']
 })
-export class IncomeStatementComponent implements OnInit {
+export class RetainedEarningsComponent implements OnInit {
+
 
   revenueAccounts: Account[] = [];
   expenseAccounts: Account[] = [];
@@ -83,4 +83,5 @@ export class IncomeStatementComponent implements OnInit {
   openAccount(account: Account) {
     this.router.navigate(['./account/' + account.account_id], {queryParams: {returnUrl: 'income-statement'}})
   }
+
 }

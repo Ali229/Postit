@@ -21,6 +21,8 @@ import {MatDatepickerModule, MatFormFieldModule, MatTableModule} from "@angular/
 import {TrialBalanceComponent} from './trial-balance/trial-balance.component';
 import {JournalComponent} from './journal/journal.component'
 import {IncomeStatementComponent} from "./income-statement/income-statement.component";
+import { RetainedEarningsComponent } from './retained-earnings/retained-earnings.component';
+import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
 
 @NgModule({
   imports: [
@@ -47,7 +49,9 @@ import {IncomeStatementComponent} from "./income-statement/income-statement.comp
     EventLogComponent,
     TrialBalanceComponent,
     JournalComponent,
-    IncomeStatementComponent],
+    IncomeStatementComponent,
+    RetainedEarningsComponent,
+    BalanceSheetComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
 

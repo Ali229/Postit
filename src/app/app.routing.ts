@@ -11,6 +11,8 @@ import {AuthGuard} from "./_guards";
 import {AuthenticationService} from "./_services";
 import {TrialBalanceComponent} from "./trial-balance/trial-balance.component";
 import {IncomeStatementComponent} from "./income-statement/income-statement.component";
+import {RetainedEarningsComponent} from "./retained-earnings/retained-earnings.component";
+import {BalanceSheetComponent} from "./balance-sheet/balance-sheet.component";
 
 let loggedIn: boolean = false;
 
@@ -24,6 +26,8 @@ const appRoutes: Routes = [
   {path: 'event-log', component: EventLogComponent, canActivate: [AuthGuard]},
   {path: 'trial-balance', component: TrialBalanceComponent, canActivate: [AuthGuard]},
   {path: 'income-statement', component: IncomeStatementComponent, canActivate: [AuthGuard]},
+  {path: 'retained-earnings', component: RetainedEarningsComponent, canActivate: [AuthGuard]},
+  {path: 'balance-sheet', component: BalanceSheetComponent, canActivate: [AuthGuard]},
   // otherwise redirect to home if logged in or login if not
   {path: '**', redirectTo: loggedIn ? '/home' : '/login'}
 ];

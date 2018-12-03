@@ -25,7 +25,9 @@ export class NavbarComponent implements OnInit {
     'journals': 'Journals',
     'trial-balance': 'Trial Balance',
     'income-statement': 'Income Statement',
-    'financial-statements': 'Financial Statements'
+    'financial-statements': 'Financial Statements',
+    'retained-earnings': 'Retained Earnings',
+    'balance-sheet': 'Balance Sheet'
   };
 
   constructor(private authService: AuthenticationService,
