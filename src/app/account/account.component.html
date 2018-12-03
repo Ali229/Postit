@@ -1,6 +1,6 @@
-<button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect *ngIf="referer"
+<button type="button" mdbBtn color="indigo" class="relative waves-light float-right" mdbWavesEffect *ngIf="referer"
         (click)="back()" style="text-align: left">
-  << Back to {{referer}}
+  Back to {{referer}}
 </button>
 
 <h1 *ngIf="account">{{account.account_title}}</h1>
@@ -46,8 +46,8 @@
     <td>{{transaction.date}}</td>
     <td>{{transaction.description}}</td>
     <td>{{transaction.posting_reference}}</td>
-    <td>{{transaction.amount > 0 ? ( transaction.amount | currency) : ''}}</td>
-    <td>{{transaction.amount < 0 ? ((transaction.amount * -1) | currency ): ''}}</td>
+    <td>{{transaction.amount > 0 ? (transaction.amount | currency) : ''}}</td>
+    <td>{{transaction.amount < 0 ? ((transaction.amount * -1) | currency) : ''}}</td>
     <td>{{(account.normal_side == 'debit' ? balanceMap.get(transaction) : balanceMap.get(transaction) *
       -1) | currency}}
     </td>
