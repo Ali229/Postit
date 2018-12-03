@@ -1,45 +1,44 @@
-<img *ngIf="revenueAccounts.length === 0 && expenseAccounts.length === 0; else showTable" class="centered"
-     src="./assets/table_loading.svg">
-<ng-template #showTable>
-  <!-- TODO Change to a mat-table -->
-  <table class="table table-hover table-striped table-bordered table-responsive-md">
-    <thead>
-    <tr>
-      <th colspan="3">
-        <h4><strong>PostIt Inc.</strong></h4>
-        <h4><strong>Statement of Retained Earnings</strong></h4>
-        <h4><strong>For the Year Ended December 31, {{getDate() | date: 'y'}}</strong></h4></th>
-    </tr>
-    <tr>
-      <!--<th class="th-sm">Account Title</th>-->
-      <!--<th class="th-sm">Debit</th>-->
-    </tr>
-    </thead>
-    <tbody>
-    <tr><td align="left" colspan="2"><strong>Revenue</strong></td></tr>
-    <tr *ngFor="let account of revenueAccounts">
-      <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit'? ((account.balance * -1) | currency ) : ''}}</td>
-    </tr>
-    <tr>
-      <td align="left"><strong>Total Revenue</strong></td>
-      <td align="right"><strong>{{getRevenueSum() * -1 | currency}}</strong></td>
-    </tr>
-    <tr><td colspan="2"></td></tr>
-    <tr><td align="left" colspan="2"><strong>Expenses</strong></td></tr>
-    <tr *ngFor="let account of expenseAccounts">
-      <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'debit'? (account.balance | currency) : ''}}</td>
-    </tr>
-    <tr>
-      <td align="left"><strong>Total Expenses</strong></td>
-      <td align="right"><strong>{{(getExpenseSum()) | currency}}</strong></td>
-    </tr>
-    <tr><td colspan="2"></td></tr>
-    <tr>
-      <td><strong>Net Profit/Loss</strong></td>
-      <td><strong>{{(getRevenueSum() + getExpenseSum()) * -1 | currency}}</strong></td>
-    </tr>
-    </tbody>
-  </table>
-</ng-template>
+<table class="table table-hover table-striped table-bordered table-responsive-md">
+  <thead>
+  <tr>
+    <th colspan="3">
+      <h4><strong>PostIt Inc.</strong></h4>
+      <h4><strong>Statement of Retained Earnings</strong></h4>
+      <h4><strong>For the Year Ended December 31, {{getDate() | date: 'y'}}</strong></h4></th>
+  </tr>
+  <tr>
+    <!--<th class="th-sm">Account Title</th>-->
+    <!--<th class="th-sm">Debit</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td align="left">Retained earnings at January 1, {{getDate() | date: 'y'}}</td>
+    <td>{{oldRetainedEarnings()}}</td>
+  </tr>
+  <tr>
+    <td align="left">Add: net income earned in {{getDate() | date: 'y'}}</td>
+    <td>{{netIncome()}}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td align="left">Subtotal</td>
+    <td>{{oldRetainedEarnings() + netIncome()}}</td>
+  </tr>
+  <tr>
+    <td align="left">Less: dividends declared in {{getDate() | date: 'y'}}</td>
+    <td>{{netDividends()}}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td align="left">Retained earnings at December 31, {{getDate() | date: 'y'}}</td>
+    <td>{{oldRetainedEarnings() + netIncome() - netDividends()}}</td>
+  </tr>
+  </tbody>
+</table>

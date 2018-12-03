@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Account} from "../_models";
+import {Account, Transaction} from "../_models";
 import {AccountService, AppService, AuthenticationService} from "../_services";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-retained-earnings',
@@ -10,9 +11,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class RetainedEarningsComponent implements OnInit {
 
-
-  revenueAccounts: Account[] = [];
-  expenseAccounts: Account[] = [];
+  oldTransactions: Transaction[] = [];
+  newRevenue: Transaction[] = [];
+  newDividends: Transaction[] = [];
 
   constructor(private authService: AuthenticationService,
               private accountService: AccountService,
@@ -21,67 +22,84 @@ export class RetainedEarningsComponent implements OnInit {
               private appService: AppService) {
     this.accountService.getAccountsSubject().subscribe((response: Account[]) => {
 
-      this.revenueAccounts = [];
-      this.expenseAccounts = [];
+      this.oldTransactions = [];
+      this.newRevenue = [];
+      this.newDividends = [];
 
       response.forEach(account => {
-        if (account.balance != 0) {
-          if (account.category == 'Revenue') {
-            this.revenueAccounts.push(account)
-          } else if (account.category == 'Expenses') {
-            this.expenseAccounts.push(account)
+
+        if(account.normal_side == 'credit') {
+          account.transactions.forEach(transaction => {
+            transaction.amount = transaction.amount * -1;
+          });
+        }
+
+        if (account.category == 'Revenue') {
+          if (account.transactions) {
+            account.transactions.forEach(transaction => {
+              if (this.isNew(transaction)) {
+                this.newRevenue.push(transaction);
+              } else {
+                this.oldTransactions.push(transaction);
+              }
+            })
+          }
+        } else if (account.category == 'Expenses') {
+          if (account.transactions) {
+            account.transactions.forEach(transaction => {
+              if (this.isNew(transaction)) {
+                this.newDividends.push(transaction);
+              } else {
+                this.oldTransactions.push(transaction);
+              }
+            })
           }
         }
       });
-
-      this.revenueAccounts.sort((a, b) => {
-        return a['account_id'] - b['account_id'];
-      });
-
-      this.expenseAccounts.sort((a, b) => {
-        return a['account_id'] - b['account_id'];
-      });
-
-      // debugger;
     });
   }
 
+  isNew(transaction: Transaction) {
+    return transaction.date.substring(7) === new DatePipe('en-US').transform(this.getDate(), 'y');
+  }
+
   ngOnInit() {
-    this.appService.setActivePage('income-statement');
+    this.appService.setActivePage('retained-earnings');
     this.authService.updateLoggedInVerification(); // This should automatically route if it fails
     this.updateAccountList();
   }
 
   updateAccountList() {
-    // this.accountService.updateAccounts();
+    this.accountService.updateAccounts();
   }
+
 
   getDate() {
     return Date.now();
   }
 
-  getRevenueSum() {
-    let sum: number = 0;
-    this.revenueAccounts.forEach(account => {
-      if (account.normal_side == 'credit') {
-        sum += account.balance;
-      }
+  oldRetainedEarnings() {
+    let sum = 0;
+    this.oldTransactions.forEach( transaction => {
+      sum += transaction.amount;
     });
     return sum;
   }
 
-  getExpenseSum() {
-    let sum: number = 0;
-    this.expenseAccounts.forEach(account => {
-      if (account.normal_side == 'debit') {
-        sum += account.balance;
-      }
+  netIncome() {
+    let sum = 0;
+    this.newRevenue.forEach( transaction => {
+      sum += transaction.amount;
     });
-    return sum;
+    return sum * -1;
   }
 
-  openAccount(account: Account) {
-    this.router.navigate(['./account/' + account.account_id], {queryParams: {returnUrl: 'income-statement'}})
+  netDividends() {
+    let sum = 0;
+    this.newDividends.forEach( transaction => {
+      sum += transaction.amount;
+    });
+    return sum;
   }
 
 }

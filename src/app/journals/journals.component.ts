@@ -159,6 +159,7 @@ export class JournalsComponent implements OnInit {
     this.accountService.journalize(this.journalizeForm.controls.journal_type.value.toString().toLowerCase(), new Date(), transactionsList,
       this.journalizeForm.controls.description.value).subscribe(response => {
       this.journalizeModal.hide();
+      this.accountService.updateJournalEntries();
     }, error => {
       console.log(error);
     });
@@ -209,6 +210,7 @@ export class JournalsComponent implements OnInit {
   postJournalEntry(journalEntry: JournalEntry) {
     this.accountService.postJournalEntry(journalEntry).subscribe(response => {
       this.accountService.updateAccounts();
+      this.accountService.updateJournalEntries();
     }, error => {
       console.log(error);
     });
