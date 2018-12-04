@@ -154,7 +154,15 @@ export class HomeComponent implements OnInit {
   ];
 
   public chartOptions: any = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 100
+        }
+      }]
+    }
   };
 
   public chartClicked(e: any): void {
