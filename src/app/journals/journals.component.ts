@@ -216,6 +216,13 @@ export class JournalsComponent implements OnInit {
     });
   }
 
+  postAllEntries() {
+    this.journalEntries.forEach(journalEntry => {
+      if (journalEntry.status == 'pending') {
+        this.postJournalEntry(journalEntry);
+      }
+    })
+  }
   openFileModal(journalEntry: JournalEntry) {
     this.displayingJournalFiles = journalEntry;
     this.updateFileList();
