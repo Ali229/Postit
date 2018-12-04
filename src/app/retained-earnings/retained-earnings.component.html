@@ -14,7 +14,7 @@
   <tbody>
   <tr>
     <td align="left">Retained earnings at January 1, {{getDate() | date: 'y'}}</td>
-    <td>{{oldRetainedEarnings()}}</td>
+    <td>{{oldRetainedEarnings() | currency}}</td>
   </tr>
   <tr>
     <td align="left">Add: net income earned in {{getDate() | date: 'y'}}</td>
