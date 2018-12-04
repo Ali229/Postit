@@ -21,11 +21,11 @@
     </tr>
     <tr *ngFor="let account of assetAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'debit' ? (account.balance | currency ) : ''}}</td>
+      <td align="right">{{account.normal_side == 'debit' ? (account.balance | currency) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Assets</strong></td>
-      <td align="right"><strong>{{getAssetSum() | currency}}</strong></td>
+      <td align="right"><strong><u>{{getAssetSum() | currency}}</u></strong></td>
     </tr>
     <tr>
       <td colspan="2"></td>
@@ -35,11 +35,11 @@
     </tr>
     <tr *ngFor="let account of liabilityAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit'? (account.balance * -1 | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit' ? (account.balance * -1 | currency) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Liabilities</strong></td>
-      <td align="right"><strong>{{(getLiabilitySum() * -1) | currency}}</strong></td>
+      <td align="right"><strong><u>{{(getLiabilitySum() * -1) | currency}}</u></strong></td>
     </tr>
     <tr>
       <td colspan="2"></td>
@@ -49,11 +49,11 @@
     </tr>
     <tr *ngFor="let account of equityAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit'? (account.balance * -1 | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit' ? (account.balance * -1 | currency) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Equities</strong></td>
-      <td align="right"><strong>{{(getEquitySum() * -1) | currency}}</strong></td>
+      <td align="right"><strong><u>{{(getEquitySum() * -1) | currency}}</u></strong></td>
     </tr>
     </tbody>
   </table>

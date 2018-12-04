@@ -16,29 +16,37 @@
     </tr>
     </thead>
     <tbody>
-    <tr><td align="left" colspan="2"><strong>Revenue</strong></td></tr>
+    <tr>
+      <td align="left" colspan="2"><strong>Revenue</strong></td>
+    </tr>
     <tr *ngFor="let account of revenueAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit'? ((account.balance * -1) | currency ) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit' ? ((account.balance * -1) | currency) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Revenue</strong></td>
       <td align="right"><strong>{{getRevenueSum() * -1 | currency}}</strong></td>
     </tr>
-    <tr><td colspan="2"></td></tr>
-    <tr><td align="left" colspan="2"><strong>Expenses</strong></td></tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td align="left" colspan="2"><strong>Expenses</strong></td>
+    </tr>
     <tr *ngFor="let account of expenseAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'debit'? (account.balance | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'debit' ? (account.balance | currency) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Expenses</strong></td>
       <td align="right"><strong>{{(getExpenseSum()) | currency}}</strong></td>
     </tr>
-    <tr><td colspan="2"></td></tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
     <tr>
       <td><strong>Net Profit/Loss</strong></td>
-      <td><strong>{{(getRevenueSum() + getExpenseSum()) * -1 | currency}}</strong></td>
+      <td><strong><u>{{(getRevenueSum() + getExpenseSum()) * -1 | currency}}</u></strong></td>
     </tr>
     </tbody>
   </table>
