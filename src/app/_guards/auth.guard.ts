@@ -7,7 +7,7 @@ import {AuthenticationService} from "../_services";
 export class AuthGuard implements CanActivate {
 
   public static readonly ADMIN_PAGES: string[] = ['home', 'users', 'accounts', 'event-log'];
-  public static readonly MANAGER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance', 'retained-earnings', 'balance-sheet']];
+  public static readonly MANAGER_PAGES = ['home', 'accounts', 'journals', 'event-log', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance', 'retained-earnings', 'balance-sheet']];
   public static readonly USER_PAGES = ['home', 'accounts', 'journals', 'account/:account_id', ['financial-statements', 'income-statement', 'trial-balance', 'retained-earnings', 'balance-sheet']];
   private readonly typePageMap;
 
