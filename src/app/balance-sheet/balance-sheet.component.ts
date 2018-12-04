@@ -31,7 +31,7 @@ export class BalanceSheetComponent implements OnInit {
             this.assetAccounts.push(account)
           } else if (account.category == 'Liabilities') {
             this.liabilityAccounts.push(account)
-          }else if (account.category == 'Owners Equity') {
+          }else if (account.category == 'Owner\'s Equity') {
             this.equityAccounts.push(account)
           }
         }
