@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, AccountService} from '../_services';
+import {AuthenticationService, AccountService, AppService} from '../_services';
 import {Account} from '../_models';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AppService} from "../_services/app.service";
 
 @Component({
   selector: 'app-trial-balance',
