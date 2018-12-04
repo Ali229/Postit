@@ -35,12 +35,7 @@ export class EventLogService {
 
   updateEventLog() {
     if (this.authService.isLoggedIn() && this.user_id && this.authService.getUserType()) {
-      let urlAddon;
-      if (this.authService.getUserType() == 'admin') {
-        urlAddon = 'all';
-      } else {
-        urlAddon = this.user_id.toString();
-      }
+      let urlAddon = 'all';
       this.http.get('https://markzeagler.com/postit-backend/eventlog/' + urlAddon, this.authService.getGETJSONHeaders()).subscribe((messages: LogMessage[]) => {
         this.eventLogSubject.next(messages);
       })
