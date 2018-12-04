@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
         data => {
           if (data[0]) {
             this.appService.setActivePage('home');
+            localStorage.setItem('selected', 'home');
             this.router.navigate(['./home']);
           } else {
             this.loading = false;
