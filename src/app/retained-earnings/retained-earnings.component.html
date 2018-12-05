@@ -38,7 +38,7 @@
   </tr>
   <tr>
     <td align="left">Retained earnings at December 31, {{getDate() | date: 'y'}}</td>
-    <td><u>{{oldRetainedEarnings() + netIncome() - netDividends() | currency}}</u></td>
+    <td><div class="double">{{oldRetainedEarnings() + netIncome() - netDividends() | currency}}</div></td>
   </tr>
   </tbody>
 </table>

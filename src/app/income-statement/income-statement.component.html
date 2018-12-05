@@ -46,7 +46,9 @@
     </tr>
     <tr>
       <td><strong>Net Profit/Loss</strong></td>
-      <td><strong><u>{{(getRevenueSum() + getExpenseSum()) * -1 | currency}}</u></strong></td>
+      <td><strong>
+        <div class="double">{{(getRevenueSum() + getExpenseSum()) * -1 | currency}}</div>
+      </strong></td>
     </tr>
     </tbody>
   </table>

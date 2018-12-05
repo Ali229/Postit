@@ -25,7 +25,9 @@
     </tr>
     <tr>
       <td align="left"><strong>Total Assets</strong></td>
-      <td align="right"><strong><u>{{getAssetSum() | currency}}</u></strong></td>
+      <td align="right"><strong>
+        <div class="double">{{getAssetSum() | currency}}</div>
+      </strong></td>
     </tr>
     <tr>
       <td colspan="2"></td>
@@ -39,7 +41,9 @@
     </tr>
     <tr>
       <td align="left"><strong>Total Liabilities</strong></td>
-      <td align="right"><strong><u>{{(getLiabilitySum() * -1) | currency}}</u></strong></td>
+      <td align="right"><strong>
+        <div class="double">{{(getLiabilitySum() * -1) | currency}}</div>
+      </strong></td>
     </tr>
     <tr>
       <td colspan="2"></td>
@@ -53,7 +57,10 @@
     </tr>
     <tr>
       <td align="left"><strong>Total Equities</strong></td>
-      <td align="right"><strong><u>{{(getEquitySum() * -1) | currency}}</u></strong></td>
+
+      <td align="right"><strong>
+        <div class="double">{{(getEquitySum() * -1) | currency}}</div>
+      </strong></td>
     </tr>
     </tbody>
   </table>
