@@ -21,7 +21,7 @@
     </tr>
     <tr *ngFor="let account of assetAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'debit' ? (account.balance | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'debit' ? (account.balance) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Assets</strong></td>
@@ -37,7 +37,7 @@
     </tr>
     <tr *ngFor="let account of liabilityAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit' ? (account.balance * -1 | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit' ? (account.balance * -1) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Liabilities</strong></td>
@@ -53,7 +53,7 @@
     </tr>
     <tr *ngFor="let account of equityAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit' ? (account.balance * -1 | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit' ? (account.balance * -1) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Equities</strong></td>

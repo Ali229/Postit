@@ -18,7 +18,7 @@
   </tr>
   <tr>
     <td align="left">Add: net income earned in {{getDate() | date: 'y'}}</td>
-    <td>{{netIncome() | currency}}</td>
+    <td>{{netIncome()}}</td>
   </tr>
   <tr>
     <td></td>
@@ -26,11 +26,11 @@
   </tr>
   <tr>
     <td align="left">Subtotal</td>
-    <td>{{oldRetainedEarnings() + netIncome() | currency}}</td>
+    <td>{{oldRetainedEarnings() + netIncome()}}</td>
   </tr>
   <tr>
     <td align="left">Less: dividends declared in {{getDate() | date: 'y'}}</td>
-    <td>{{netDividends() | currency}}</td>
+    <td>{{netDividends()}}</td>
   </tr>
   <tr>
     <td></td>
@@ -38,7 +38,9 @@
   </tr>
   <tr>
     <td align="left">Retained earnings at December 31, {{getDate() | date: 'y'}}</td>
-    <td><div class="double">{{oldRetainedEarnings() + netIncome() - netDividends() | currency}}</div></td>
+    <td>
+      <div class="double">{{oldRetainedEarnings() + netIncome() - netDividends() | currency}}</div>
+    </td>
   </tr>
   </tbody>
 </table>

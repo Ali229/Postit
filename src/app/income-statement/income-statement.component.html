@@ -21,7 +21,7 @@
     </tr>
     <tr *ngFor="let account of revenueAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'credit' ? ((account.balance * -1) | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'credit' ? ((account.balance * -1)) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Revenue</strong></td>
@@ -35,7 +35,7 @@
     </tr>
     <tr *ngFor="let account of expenseAccounts">
       <td align="left" class="clickable" (click)="openAccount(account)">{{account.account_title}}</td>
-      <td align="right">{{account.normal_side == 'debit' ? (account.balance | currency) : ''}}</td>
+      <td align="right">{{account.normal_side == 'debit' ? (account.balance) : ''}}</td>
     </tr>
     <tr>
       <td align="left"><strong>Total Expenses</strong></td>
